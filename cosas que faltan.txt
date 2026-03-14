@@ -1,0 +1,21 @@
+1) los filtros no se aplican bien 
+2) el orden y la vista no se aplican bien 
+3) no hay lista de favoritos 
+4) no se puede agregar al carrito desde catalogo 
+5) validar el cupon 
+6) precio unitario en el carrito y factura
+7) no se puede conectar a la base de datos
+8) login no marca error si no esta registrado 
+9) no aparece en la base de datos el usuario , cuando se registra 
+10) imagenes 
+11)nosotros
+12)contacto 
+13) enlaces del pie de pagina 
+14)probar el chekut 
+15) descargar pdf y imprimir factura
+16 )sello de verifiacion Código de verificación, Simulación de QR que funcionen 
+17) validar login para continuar con google o facebook
+18) enlace de producto en catalogo 
+19) contador dinamico de carrito 
+20) funcione los botones de resolucion y colores del producto
+21) botones de redes sociales en producto 
