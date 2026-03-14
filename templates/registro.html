@@ -19,9 +19,9 @@
       --error: #e63946;
       --success: #2dc653;
     }
- 
+
     * { margin: 0; padding: 0; box-sizing: border-box; }
- 
+
     body {
       background: var(--bg);
       color: var(--white);
@@ -30,7 +30,7 @@
       display: grid;
       grid-template-columns: 1fr 1fr;
     }
- 
+
     /* ── LADO IZQUIERDO ── */
     .left-panel {
       background: var(--bg2);
@@ -43,7 +43,7 @@
       position: relative;
       overflow: hidden;
     }
- 
+
     .left-panel::before {
       content: '';
       position: absolute;
@@ -52,7 +52,7 @@
       background: radial-gradient(circle, rgba(0,102,255,0.12) 0%, transparent 70%);
       pointer-events: none;
     }
- 
+
     .bg-grid {
       position: absolute;
       inset: 0;
@@ -62,14 +62,14 @@
       background-size: 40px 40px;
       pointer-events: none;
     }
- 
+
     .left-content {
       position: relative;
       z-index: 2;
       text-align: center;
       max-width: 400px;
     }
- 
+
     .logo {
       font-family: 'Rajdhani', sans-serif;
       font-size: 2rem;
@@ -80,16 +80,16 @@
       display: block;
       margin-bottom: 48px;
     }
- 
+
     .logo span { color: var(--blue); }
- 
+
     .rocket-icon {
       font-size: 5rem;
       margin-bottom: 28px;
       display: block;
       filter: drop-shadow(0 0 20px rgba(0,102,255,0.4));
     }
- 
+
     .left-content h2 {
       font-family: 'Rajdhani', sans-serif;
       font-size: 1.8rem;
@@ -97,29 +97,29 @@
       margin-bottom: 14px;
       letter-spacing: 1px;
     }
- 
+
     .left-content h2 span { color: var(--blue); }
- 
+
     .left-content p {
       color: var(--gray);
       font-size: 0.88rem;
       line-height: 1.8;
       margin-bottom: 36px;
     }
- 
+
     .steps {
       display: flex;
       flex-direction: column;
       gap: 16px;
       text-align: left;
     }
- 
+
     .step {
       display: flex;
       align-items: flex-start;
       gap: 14px;
     }
- 
+
     .step-num {
       background: var(--blue);
       color: #fff;
@@ -134,19 +134,19 @@
       flex-shrink: 0;
       margin-top: 2px;
     }
- 
+
     .step-text strong {
       display: block;
       font-size: 0.85rem;
       color: var(--white);
       margin-bottom: 3px;
     }
- 
+
     .step-text span {
       font-size: 0.78rem;
       color: var(--gray);
     }
- 
+
     /* ── LADO DERECHO ── */
     .right-panel {
       display: flex;
@@ -156,17 +156,17 @@
       padding: 60px;
       overflow-y: auto;
     }
- 
+
     .form-container {
       width: 100%;
       max-width: 440px;
       animation: fadeUp 0.6s ease both;
     }
- 
+
     .form-header {
       margin-bottom: 32px;
     }
- 
+
     .form-tag {
       font-size: 0.7rem;
       letter-spacing: 3px;
@@ -174,36 +174,36 @@
       color: var(--blue);
       margin-bottom: 10px;
     }
- 
+
     .form-header h1 {
       font-family: 'Rajdhani', sans-serif;
       font-size: 2rem;
       font-weight: 700;
       letter-spacing: 1px;
     }
- 
+
     .form-header p {
       color: var(--gray);
       font-size: 0.85rem;
       margin-top: 8px;
     }
- 
+
     .form-header p a {
       color: var(--blue);
       text-decoration: none;
     }
- 
+
     .form-header p a:hover { color: var(--cyan); }
- 
+
     /* Campos en fila */
     .form-row {
       display: grid;
       grid-template-columns: 1fr 1fr;
       gap: 14px;
     }
- 
+
     .form-group { margin-bottom: 18px; }
- 
+
     .form-label {
       display: block;
       font-size: 0.76rem;
@@ -212,9 +212,9 @@
       color: var(--gray);
       margin-bottom: 7px;
     }
- 
+
     .input-wrapper { position: relative; }
- 
+
     .input-icon {
       position: absolute;
       left: 13px;
@@ -223,7 +223,7 @@
       font-size: 0.95rem;
       pointer-events: none;
     }
- 
+
     .form-input {
       width: 100%;
       background: var(--card-bg);
@@ -235,17 +235,17 @@
       font-family: 'Inter', sans-serif;
       transition: border-color 0.2s, box-shadow 0.2s;
     }
- 
+
     .form-input:focus {
       outline: none;
       border-color: var(--blue);
       box-shadow: 0 0 0 3px rgba(0,102,255,0.1);
     }
- 
+
     .form-input::placeholder { color: var(--gray); }
     .form-input.error { border-color: var(--error); }
     .form-input.success { border-color: var(--success); }
- 
+
     .toggle-password {
       position: absolute;
       right: 13px;
@@ -257,19 +257,19 @@
       cursor: pointer;
       font-size: 0.95rem;
     }
- 
+
     .error-msg {
       font-size: 0.7rem;
       color: var(--error);
       margin-top: 5px;
       display: none;
     }
- 
+
     /* Indicador de fortaleza de contraseña */
     .password-strength {
       margin-top: 8px;
     }
- 
+
     .strength-bar {
       height: 3px;
       background: var(--border);
@@ -277,19 +277,19 @@
       overflow: hidden;
       margin-bottom: 5px;
     }
- 
+
     .strength-fill {
       height: 100%;
       width: 0%;
       transition: width 0.3s, background 0.3s;
       border-radius: 2px;
     }
- 
+
     .strength-text {
       font-size: 0.7rem;
       color: var(--gray);
     }
- 
+
     /* Términos */
     .terms-check {
       display: flex;
@@ -298,7 +298,7 @@
       margin-bottom: 24px;
       cursor: pointer;
     }
- 
+
     .terms-check input {
       accent-color: var(--blue);
       width: 15px;
@@ -307,19 +307,19 @@
       margin-top: 2px;
       flex-shrink: 0;
     }
- 
+
     .terms-check label {
       font-size: 0.8rem;
       color: var(--gray);
       cursor: pointer;
       line-height: 1.5;
     }
- 
+
     .terms-check label a {
       color: var(--blue);
       text-decoration: none;
     }
- 
+
     .btn-register {
       width: 100%;
       background: var(--blue);
@@ -336,32 +336,32 @@
       transition: all 0.2s;
       margin-bottom: 20px;
     }
- 
+
     .btn-register:hover {
       background: var(--blue-glow);
       transform: translateY(-1px);
       box-shadow: 0 8px 20px rgba(0,102,255,0.3);
     }
- 
+
     .login-link {
       text-align: center;
       font-size: 0.83rem;
       color: var(--gray);
     }
- 
+
     .login-link a {
       color: var(--blue);
       text-decoration: none;
       font-weight: 500;
     }
- 
+
     .login-link a:hover { color: var(--cyan); }
- 
+
     @keyframes fadeUp {
       from { opacity: 0; transform: translateY(20px); }
       to   { opacity: 1; transform: translateY(0); }
     }
- 
+
     @media (max-width: 768px) {
       body { grid-template-columns: 1fr; }
       .left-panel { display: none; }
@@ -371,7 +371,7 @@
   </style>
 </head>
 <body>
- 
+
   <!-- LADO IZQUIERDO -->
   <div class="left-panel">
     <div class="bg-grid"></div>
@@ -405,17 +405,17 @@
       </div>
     </div>
   </div>
- 
+
   <!-- LADO DERECHO -->
   <div class="right-panel">
     <div class="form-container">
- 
+
       <div class="form-header">
         <div class="form-tag">// Registro</div>
         <h1>Crear Cuenta</h1>
         <p>¿Ya tienes cuenta? <a href="login.html">Inicia sesión</a></p>
       </div>
- 
+
       <!-- Nombres -->
       <div class="form-row">
         <div class="form-group">
@@ -435,7 +435,7 @@
           <div class="error-msg" id="apellidoError">Campo requerido</div>
         </div>
       </div>
- 
+
       <!-- Correo -->
       <div class="form-group">
         <label class="form-label">Correo Electrónico</label>
@@ -445,7 +445,7 @@
         </div>
         <div class="error-msg" id="emailError">Ingresa un correo válido</div>
       </div>
- 
+
       <!-- Teléfono -->
       <div class="form-group">
         <label class="form-label">Teléfono</label>
@@ -454,7 +454,7 @@
           <input type="tel" class="form-input" id="telefono" placeholder="+504 0000-0000"/>
         </div>
       </div>
- 
+
       <!-- Contraseña -->
       <div class="form-group">
         <label class="form-label">Contraseña</label>
@@ -471,7 +471,7 @@
         </div>
         <div class="error-msg" id="passError">Mínimo 8 caracteres</div>
       </div>
- 
+
       <!-- Confirmar contraseña -->
       <div class="form-group">
         <label class="form-label">Confirmar Contraseña</label>
@@ -482,7 +482,7 @@
         </div>
         <div class="error-msg" id="confirmError">Las contraseñas no coinciden</div>
       </div>
- 
+
       <!-- Términos -->
       <div class="terms-check">
         <input type="checkbox" id="terms"/>
@@ -490,33 +490,33 @@
           Acepto los <a href="#">Términos y Condiciones</a> y la <a href="#">Política de Privacidad</a> de SecureVision
         </label>
       </div>
- 
+
       <button class="btn-register" onclick="handleRegister()">Crear Cuenta</button>
- 
+
       <div class="login-link">
         ¿Ya tienes cuenta? <a href="login.html">Inicia sesión aquí</a>
       </div>
- 
+
     </div>
   </div>
- 
+
   <script>
     function togglePass(id) {
       const input = document.getElementById(id);
       input.type = input.type === 'password' ? 'text' : 'password';
     }
- 
+
     function checkStrength() {
       const pass = document.getElementById('password').value;
       const fill = document.getElementById('strengthFill');
       const text = document.getElementById('strengthText');
- 
+
       let strength = 0;
       if (pass.length >= 8) strength++;
       if (/[A-Z]/.test(pass)) strength++;
       if (/[0-9]/.test(pass)) strength++;
       if (/[^A-Za-z0-9]/.test(pass)) strength++;
- 
+
       const levels = [
         { width: '0%',   color: '',            label: 'Ingresa una contraseña' },
         { width: '25%',  color: '#e63946',      label: 'Débil' },
@@ -524,24 +524,24 @@
         { width: '75%',  color: '#f4c430',      label: 'Buena' },
         { width: '100%', color: '#2dc653',      label: '¡Excelente!' },
       ];
- 
+
       const level = pass.length === 0 ? 0 : strength;
       fill.style.width = levels[level].width;
       fill.style.background = levels[level].color;
       text.textContent = levels[level].label;
       text.style.color = levels[level].color || 'var(--gray)';
     }
- 
+
     function handleRegister() {
       let valid = true;
- 
+
       const fields = [
         { id: 'nombre',  errorId: 'nombreError',   check: v => v.trim().length > 0 },
         { id: 'apellido',errorId: 'apellidoError', check: v => v.trim().length > 0 },
         { id: 'email',   errorId: 'emailError',    check: v => v.includes('@') && v.includes('.') },
         { id: 'password',errorId: 'passError',     check: v => v.length >= 8 },
       ];
- 
+
       fields.forEach(f => {
         const input = document.getElementById(f.id);
         const error = document.getElementById(f.errorId);
@@ -555,7 +555,7 @@
           error.style.display = 'none';
         }
       });
- 
+
       // Confirmar contraseña
       const pass = document.getElementById('password').value;
       const confirm = document.getElementById('confirmPass').value;
@@ -567,19 +567,19 @@
         document.getElementById('confirmPass').classList.remove('error');
         document.getElementById('confirmError').style.display = 'none';
       }
- 
+
       // Términos
       if (!document.getElementById('terms').checked) {
         alert('Debes aceptar los términos y condiciones');
         valid = false;
       }
- 
+
       if (valid) {
         // Por ahora redirige al login (cuando haya backend guardará en BD)
         window.location.href = 'login.html';
       }
     }
   </script>
- 
+
 </body>
 </html>

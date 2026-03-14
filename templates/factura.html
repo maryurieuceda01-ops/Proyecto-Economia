@@ -18,15 +18,15 @@
       --border: rgba(0, 102, 255, 0.2);
       --success: #2dc653;
     }
- 
+
     * { margin: 0; padding: 0; box-sizing: border-box; }
- 
+
     body {
       background: var(--bg);
       color: var(--white);
       font-family: 'Inter', sans-serif;
     }
- 
+
     /* ── NAVBAR ── */
     nav {
       display: flex;
@@ -36,7 +36,7 @@
       background: rgba(8, 8, 16, 0.95);
       border-bottom: 1px solid var(--border);
     }
- 
+
     .logo {
       font-family: 'Rajdhani', sans-serif;
       font-size: 1.6rem;
@@ -45,11 +45,11 @@
       color: var(--white);
       text-decoration: none;
     }
- 
+
     .logo span { color: var(--blue); }
- 
+
     .nav-actions { display: flex; gap: 12px; }
- 
+
     .btn-action {
       display: flex;
       align-items: center;
@@ -64,38 +64,38 @@
       transition: all 0.2s;
       text-decoration: none;
     }
- 
+
     .btn-print {
       background: var(--blue);
       color: #fff;
       border: none;
     }
- 
+
     .btn-print:hover { background: var(--blue-glow); }
- 
+
     .btn-download {
       background: transparent;
       color: var(--white);
       border: 1px solid var(--border);
     }
- 
+
     .btn-download:hover { border-color: var(--blue); color: var(--blue); }
- 
+
     .btn-home {
       background: transparent;
       color: var(--gray);
       border: 1px solid var(--border);
     }
- 
+
     .btn-home:hover { border-color: var(--blue); color: var(--white); }
- 
+
     /* ── PÁGINA ── */
     .page-wrapper {
       padding: 40px 60px 80px;
       max-width: 1000px;
       margin: 0 auto;
     }
- 
+
     /* Estado del pedido */
     .order-status {
       background: rgba(45, 198, 83, 0.08);
@@ -107,21 +107,21 @@
       gap: 14px;
       margin-bottom: 32px;
     }
- 
+
     .status-icon { font-size: 1.8rem; }
- 
+
     .status-text strong {
       display: block;
       color: var(--success);
       font-size: 0.9rem;
       margin-bottom: 3px;
     }
- 
+
     .status-text span {
       font-size: 0.78rem;
       color: var(--gray);
     }
- 
+
     /* ── FACTURA ── */
     .invoice {
       background: var(--card-bg);
@@ -129,7 +129,7 @@
       border-radius: 8px;
       overflow: hidden;
     }
- 
+
     /* Encabezado de la factura */
     .invoice-header {
       background: linear-gradient(135deg, #0a0a1a 0%, #0d1533 50%, #0a0a1a 100%);
@@ -141,7 +141,7 @@
       position: relative;
       overflow: hidden;
     }
- 
+
     .invoice-header::before {
       content: '';
       position: absolute;
@@ -150,7 +150,7 @@
       background: radial-gradient(circle, rgba(0,102,255,0.12) 0%, transparent 70%);
       pointer-events: none;
     }
- 
+
     .invoice-brand .inv-logo {
       font-family: 'Rajdhani', sans-serif;
       font-size: 2rem;
@@ -160,17 +160,17 @@
       display: block;
       margin-bottom: 8px;
     }
- 
+
     .invoice-brand .inv-logo span { color: var(--blue); }
- 
+
     .invoice-brand p {
       font-size: 0.78rem;
       color: var(--gray);
       line-height: 1.7;
     }
- 
+
     .invoice-meta { text-align: right; }
- 
+
     .invoice-title {
       font-family: 'Rajdhani', sans-serif;
       font-size: 2.5rem;
@@ -180,7 +180,7 @@
       opacity: 0.15;
       margin-bottom: 16px;
     }
- 
+
     .invoice-number {
       font-family: 'Rajdhani', sans-serif;
       font-size: 1.4rem;
@@ -189,13 +189,13 @@
       letter-spacing: 2px;
       margin-bottom: 8px;
     }
- 
+
     .invoice-date {
       font-size: 0.78rem;
       color: var(--gray);
       margin-bottom: 4px;
     }
- 
+
     .invoice-status-badge {
       display: inline-block;
       background: rgba(45,198,83,0.15);
@@ -208,7 +208,7 @@
       border-radius: 20px;
       margin-top: 10px;
     }
- 
+
     /* Info cliente y empresa */
     .invoice-parties {
       display: grid;
@@ -216,15 +216,15 @@
       gap: 0;
       border-bottom: 1px solid var(--border);
     }
- 
+
     .party {
       padding: 28px 40px;
     }
- 
+
     .party:first-child {
       border-right: 1px solid var(--border);
     }
- 
+
     .party-label {
       font-size: 0.68rem;
       letter-spacing: 3px;
@@ -232,35 +232,35 @@
       color: var(--blue);
       margin-bottom: 14px;
     }
- 
+
     .party-name {
       font-family: 'Rajdhani', sans-serif;
       font-size: 1.1rem;
       font-weight: 600;
       margin-bottom: 8px;
     }
- 
+
     .party p {
       font-size: 0.8rem;
       color: var(--gray);
       line-height: 1.8;
     }
- 
+
     /* Tabla de productos */
     .invoice-table-wrapper {
       padding: 0 40px;
       border-bottom: 1px solid var(--border);
     }
- 
+
     table {
       width: 100%;
       border-collapse: collapse;
     }
- 
+
     thead tr {
       border-bottom: 1px solid var(--border);
     }
- 
+
     thead th {
       padding: 16px 12px;
       text-align: left;
@@ -270,35 +270,35 @@
       color: var(--gray);
       font-weight: 500;
     }
- 
+
     thead th:last-child { text-align: right; }
     thead th:nth-child(3),
     thead th:nth-child(4) { text-align: center; }
- 
+
     tbody tr {
       border-bottom: 1px solid rgba(0,102,255,0.08);
       transition: background 0.15s;
     }
- 
+
     tbody tr:hover { background: rgba(0,102,255,0.04); }
     tbody tr:last-child { border-bottom: none; }
- 
+
     tbody td {
       padding: 18px 12px;
       font-size: 0.84rem;
       vertical-align: middle;
     }
- 
+
     tbody td:last-child { text-align: right; }
     tbody td:nth-child(3),
     tbody td:nth-child(4) { text-align: center; }
- 
+
     .product-cell {
       display: flex;
       align-items: center;
       gap: 14px;
     }
- 
+
     .product-thumb {
       width: 44px; height: 44px;
       background: var(--bg);
@@ -310,31 +310,31 @@
       font-size: 1.4rem;
       flex-shrink: 0;
     }
- 
+
     .product-cell-info .product-cell-name {
       font-weight: 500;
       margin-bottom: 3px;
     }
- 
+
     .product-cell-info .product-cell-sku {
       font-size: 0.7rem;
       color: var(--gray);
       letter-spacing: 1px;
     }
- 
+
     .price-cell {
       font-family: 'Rajdhani', sans-serif;
       font-size: 1rem;
       font-weight: 600;
     }
- 
+
     .total-cell {
       font-family: 'Rajdhani', sans-serif;
       font-size: 1.05rem;
       font-weight: 700;
       color: var(--cyan);
     }
- 
+
     /* Totales */
     .invoice-totals {
       display: flex;
@@ -342,11 +342,11 @@
       padding: 28px 40px;
       border-bottom: 1px solid var(--border);
     }
- 
+
     .totals-box {
       width: 320px;
     }
- 
+
     .totals-row {
       display: flex;
       justify-content: space-between;
@@ -354,18 +354,18 @@
       font-size: 0.84rem;
       border-bottom: 1px solid rgba(0,102,255,0.08);
     }
- 
+
     .totals-row:last-child { border-bottom: none; }
- 
+
     .totals-row .label { color: var(--gray); }
- 
+
     .totals-row.grand-total {
       padding-top: 14px;
       margin-top: 6px;
       border-top: 2px solid var(--border);
       border-bottom: none;
     }
- 
+
     .totals-row.grand-total .label {
       font-family: 'Rajdhani', sans-serif;
       font-size: 1rem;
@@ -374,14 +374,14 @@
       text-transform: uppercase;
       color: var(--white);
     }
- 
+
     .totals-row.grand-total .value {
       font-family: 'Rajdhani', sans-serif;
       font-size: 1.5rem;
       font-weight: 700;
       color: var(--cyan);
     }
- 
+
     /* Notas y pago */
     .invoice-footer-section {
       display: grid;
@@ -389,15 +389,15 @@
       gap: 0;
       border-bottom: 1px solid var(--border);
     }
- 
+
     .invoice-footer-col {
       padding: 28px 40px;
     }
- 
+
     .invoice-footer-col:first-child {
       border-right: 1px solid var(--border);
     }
- 
+
     .footer-col-title {
       font-size: 0.7rem;
       letter-spacing: 3px;
@@ -405,7 +405,7 @@
       color: var(--blue);
       margin-bottom: 14px;
     }
- 
+
     .payment-method-info {
       display: flex;
       align-items: center;
@@ -415,26 +415,26 @@
       border-radius: 5px;
       padding: 14px;
     }
- 
+
     .payment-method-info .pm-icon { font-size: 1.5rem; }
- 
+
     .payment-method-info .pm-details strong {
       display: block;
       font-size: 0.85rem;
       margin-bottom: 2px;
     }
- 
+
     .payment-method-info .pm-details span {
       font-size: 0.72rem;
       color: var(--success);
     }
- 
+
     .notes-text {
       font-size: 0.8rem;
       color: var(--gray);
       line-height: 1.8;
     }
- 
+
     /* QR / Sello */
     .invoice-stamp {
       padding: 28px 40px;
@@ -442,14 +442,14 @@
       align-items: center;
       justify-content: space-between;
     }
- 
+
     .stamp-left p {
       font-size: 0.75rem;
       color: var(--gray);
       line-height: 1.8;
       max-width: 340px;
     }
- 
+
     .qr-placeholder {
       width: 80px; height: 80px;
       background: var(--bg);
@@ -461,10 +461,10 @@
       justify-content: center;
       gap: 4px;
     }
- 
+
     .qr-placeholder span { font-size: 2rem; }
     .qr-placeholder p { font-size: 0.55rem; color: var(--gray); letter-spacing: 1px; }
- 
+
     /* ── ACCIONES POST-FACTURA ── */
     .post-actions {
       display: flex;
@@ -473,7 +473,7 @@
       justify-content: center;
       flex-wrap: wrap;
     }
- 
+
     .post-action-btn {
       display: flex;
       align-items: center;
@@ -488,23 +488,23 @@
       transition: all 0.2s;
       text-decoration: none;
     }
- 
+
     .post-action-btn.primary {
       background: var(--blue);
       color: #fff;
       border: none;
     }
- 
+
     .post-action-btn.primary:hover { background: var(--blue-glow); }
- 
+
     .post-action-btn.secondary {
       background: transparent;
       color: var(--white);
       border: 1px solid var(--border);
     }
- 
+
     .post-action-btn.secondary:hover { border-color: var(--blue); color: var(--blue); }
- 
+
     /* ── PRINT STYLES ── */
     @media print {
       nav, .order-status, .post-actions { display: none !important; }
@@ -522,7 +522,7 @@
         --cyan: #0066ff;
       }
     }
- 
+
     /* ── RESPONSIVE ── */
     @media (max-width: 768px) {
       nav { padding: 14px 20px; }
@@ -543,7 +543,7 @@
   </style>
 </head>
 <body>
- 
+
   <!-- NAVBAR -->
   <nav>
     <a href="index.html" class="logo">SECURE<span>VISION</span></a>
@@ -553,9 +553,9 @@
       <a href="index.html" class="btn-action btn-home">🏠 Inicio</a>
     </div>
   </nav>
- 
+
   <div class="page-wrapper">
- 
+
     <!-- Estado del pedido -->
     <div class="order-status">
       <span class="status-icon">✅</span>
@@ -564,10 +564,10 @@
         <span>Recibirás tu pedido en 5-10 días hábiles. Se ha enviado una copia al correo registrado.</span>
       </div>
     </div>
- 
+
     <!-- FACTURA -->
     <div class="invoice" id="invoiceToPrint">
- 
+
       <!-- Encabezado -->
       <div class="invoice-header">
         <div class="invoice-brand">
@@ -587,7 +587,7 @@
           <div class="invoice-status-badge">✓ Pagado</div>
         </div>
       </div>
- 
+
       <!-- Datos de facturación -->
       <div class="invoice-parties">
         <div class="party">
@@ -611,7 +611,7 @@
           </p>
         </div>
       </div>
- 
+
       <!-- Tabla de productos -->
       <div class="invoice-table-wrapper">
         <table>
@@ -673,7 +673,7 @@
           </tbody>
         </table>
       </div>
- 
+
       <!-- Totales -->
       <div class="invoice-totals">
         <div class="totals-box">
@@ -699,7 +699,7 @@
           </div>
         </div>
       </div>
- 
+
       <!-- Notas y método de pago -->
       <div class="invoice-footer-section">
         <div class="invoice-footer-col">
@@ -719,7 +719,7 @@
           </p>
         </div>
       </div>
- 
+
       <!-- Sello y QR -->
       <div class="invoice-stamp">
         <div class="stamp-left">
@@ -734,9 +734,9 @@
           <p>QR VERIFY</p>
         </div>
       </div>
- 
+
     </div>
- 
+
     <!-- Acciones post factura -->
     <div class="post-actions">
       <button class="post-action-btn primary" onclick="window.print()">🖨️ Imprimir Factura</button>
@@ -744,25 +744,25 @@
       <a href="catalogo.html" class="post-action-btn secondary">🛍️ Seguir Comprando</a>
       <a href="index.html" class="post-action-btn secondary">🏠 Ir al Inicio</a>
     </div>
- 
+
   </div>
- 
+
   <script>
     // Fecha actual
     const months = ['enero','febrero','marzo','abril','mayo','junio','julio','agosto','septiembre','octubre','noviembre','diciembre'];
     const now = new Date();
     document.getElementById('invoiceDate').textContent =
       `${now.getDate()} de ${months[now.getMonth()]}, ${now.getFullYear()}`;
- 
+
     // Número de factura aleatorio
     const invoiceNum = '#SV-' + Math.floor(10000 + Math.random() * 90000);
     document.getElementById('invoiceNum').textContent = invoiceNum;
- 
+
     // Descargar como PDF usando la impresión del navegador
     function downloadPDF() {
       window.print();
     }
   </script>
- 
+
 </body>
 </html>

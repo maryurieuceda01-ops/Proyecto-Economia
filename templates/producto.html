@@ -1,0 +1,1175 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Cámara IP 4K Exterior | SecureVision</title>
+  <link href="https://fonts.googleapis.com/css2?family=Rajdhani:wght@400;600;700&family=Inter:wght@300;400;500&display=swap" rel="stylesheet"/>
+  <style>
+    :root {
+      --bg: #080810;
+      --bg2: #0d0d1a;
+      --blue: #0066ff;
+      --blue-glow: #0044cc;
+      --cyan: #00cfff;
+      --white: #f0f4ff;
+      --gray: #8890aa;
+      --card-bg: #10101e;
+      --border: rgba(0, 102, 255, 0.2);
+      --error: #e63946;
+      --success: #2dc653;
+    }
+
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+
+    body {
+      background: var(--bg);
+      color: var(--white);
+      font-family: 'Inter', sans-serif;
+    }
+
+    /* ── NAVBAR ── */
+    nav {
+      position: fixed;
+      top: 0; left: 0; right: 0;
+      z-index: 100;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 18px 60px;
+      background: rgba(8, 8, 16, 0.95);
+      backdrop-filter: blur(12px);
+      border-bottom: 1px solid var(--border);
+    }
+
+    .logo {
+      font-family: 'Rajdhani', sans-serif;
+      font-size: 1.6rem;
+      font-weight: 700;
+      letter-spacing: 2px;
+      color: var(--white);
+      text-decoration: none;
+    }
+
+    .logo span { color: var(--blue); }
+
+    .nav-links {
+      display: flex;
+      gap: 36px;
+      list-style: none;
+    }
+
+    .nav-links a {
+      text-decoration: none;
+      color: var(--gray);
+      font-size: 0.85rem;
+      letter-spacing: 1px;
+      text-transform: uppercase;
+      transition: color 0.2s;
+    }
+
+    .nav-links a:hover { color: var(--white); }
+
+    .nav-actions { display: flex; align-items: center; gap: 16px; }
+
+    .cart-icon {
+      position: relative;
+      cursor: pointer;
+      color: var(--gray);
+      font-size: 1.2rem;
+      transition: color 0.2s;
+    }
+
+    .cart-icon:hover { color: var(--white); }
+
+    .cart-badge {
+      position: absolute;
+      top: -6px; right: -8px;
+      background: var(--blue);
+      color: #fff;
+      font-size: 0.6rem;
+      width: 16px; height: 16px;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .btn-nav {
+      background: var(--blue);
+      color: #fff;
+      border: none;
+      padding: 9px 22px;
+      border-radius: 4px;
+      font-size: 0.82rem;
+      letter-spacing: 1px;
+      text-transform: uppercase;
+      cursor: pointer;
+      text-decoration: none;
+      transition: background 0.2s;
+    }
+
+    .btn-nav:hover { background: var(--blue-glow); }
+
+    /* ── BREADCRUMB ── */
+    .breadcrumb-bar {
+      padding: 90px 60px 20px;
+      background: var(--bg2);
+      border-bottom: 1px solid var(--border);
+    }
+
+    .breadcrumb {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      font-size: 0.78rem;
+      color: var(--gray);
+    }
+
+    .breadcrumb a {
+      color: var(--gray);
+      text-decoration: none;
+      transition: color 0.2s;
+    }
+
+    .breadcrumb a:hover { color: var(--blue); }
+    .breadcrumb span { color: var(--white); }
+
+    /* ── LAYOUT PRODUCTO ── */
+    .product-layout {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 50px;
+      padding: 50px 60px;
+      max-width: 1300px;
+      margin: 0 auto;
+    }
+
+    /* ── GALERÍA ── */
+    .gallery-section { position: sticky; top: 100px; height: fit-content; }
+
+    .main-image {
+      width: 100%;
+      aspect-ratio: 1;
+      background: var(--card-bg);
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 8rem;
+      margin-bottom: 14px;
+      position: relative;
+      overflow: hidden;
+      transition: border-color 0.2s;
+    }
+
+    .main-image:hover { border-color: rgba(0,102,255,0.4); }
+
+    .image-badge {
+      position: absolute;
+      top: 16px; left: 16px;
+      background: var(--error);
+      color: #fff;
+      font-size: 0.7rem;
+      letter-spacing: 1px;
+      text-transform: uppercase;
+      padding: 5px 12px;
+      border-radius: 2px;
+    }
+
+    .image-badge.new { background: var(--success); }
+
+    .thumbnails {
+      display: flex;
+      gap: 10px;
+    }
+
+    .thumb {
+      flex: 1;
+      aspect-ratio: 1;
+      background: var(--card-bg);
+      border: 1px solid var(--border);
+      border-radius: 5px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1.8rem;
+      cursor: pointer;
+      transition: all 0.2s;
+    }
+
+    .thumb:hover, .thumb.active {
+      border-color: var(--blue);
+      background: rgba(0,102,255,0.08);
+    }
+
+    /* ── INFO PRODUCTO ── */
+    .product-info-section { padding-top: 8px; }
+
+    .product-category-tag {
+      font-size: 0.7rem;
+      letter-spacing: 3px;
+      text-transform: uppercase;
+      color: var(--blue);
+      margin-bottom: 12px;
+    }
+
+    .product-title {
+      font-family: 'Rajdhani', sans-serif;
+      font-size: 2rem;
+      font-weight: 700;
+      line-height: 1.2;
+      letter-spacing: 1px;
+      margin-bottom: 16px;
+    }
+
+    /* Rating */
+    .rating-row {
+      display: flex;
+      align-items: center;
+      gap: 14px;
+      margin-bottom: 20px;
+    }
+
+    .stars { color: #f4c430; font-size: 1rem; letter-spacing: 2px; }
+
+    .rating-score {
+      font-family: 'Rajdhani', sans-serif;
+      font-size: 1rem;
+      font-weight: 700;
+    }
+
+    .rating-count {
+      font-size: 0.78rem;
+      color: var(--gray);
+    }
+
+    .rating-divider {
+      width: 1px; height: 16px;
+      background: var(--border);
+    }
+
+    .stock-badge {
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      font-size: 0.78rem;
+      color: var(--success);
+    }
+
+    .stock-dot {
+      width: 7px; height: 7px;
+      background: var(--success);
+      border-radius: 50%;
+      animation: pulse 2s infinite;
+    }
+
+    @keyframes pulse {
+      0%, 100% { opacity: 1; }
+      50% { opacity: 0.4; }
+    }
+
+    /* Precio */
+    .price-section {
+      background: var(--card-bg);
+      border: 1px solid var(--border);
+      border-radius: 6px;
+      padding: 20px;
+      margin-bottom: 24px;
+    }
+
+    .price-main {
+      font-family: 'Rajdhani', sans-serif;
+      font-size: 2.4rem;
+      font-weight: 700;
+      color: var(--cyan);
+    }
+
+    .price-old {
+      font-size: 1rem;
+      color: var(--gray);
+      text-decoration: line-through;
+      margin-left: 10px;
+    }
+
+    .price-save {
+      display: inline-block;
+      background: rgba(45,198,83,0.15);
+      border: 1px solid rgba(45,198,83,0.3);
+      color: var(--success);
+      font-size: 0.72rem;
+      letter-spacing: 1px;
+      padding: 3px 10px;
+      border-radius: 2px;
+      margin-left: 10px;
+    }
+
+    .price-note {
+      font-size: 0.75rem;
+      color: var(--gray);
+      margin-top: 8px;
+    }
+
+    /* Variantes */
+    .variants-section { margin-bottom: 22px; }
+
+    .variants-label {
+      font-size: 0.75rem;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+      color: var(--gray);
+      margin-bottom: 10px;
+    }
+
+    .variants-label strong { color: var(--white); }
+
+    .variant-btns {
+      display: flex;
+      gap: 10px;
+      flex-wrap: wrap;
+    }
+
+    .variant-btn {
+      background: var(--card-bg);
+      border: 1px solid var(--border);
+      color: var(--gray);
+      padding: 8px 18px;
+      border-radius: 4px;
+      font-size: 0.8rem;
+      cursor: pointer;
+      font-family: 'Inter', sans-serif;
+      transition: all 0.2s;
+    }
+
+    .variant-btn:hover, .variant-btn.active {
+      border-color: var(--blue);
+      color: var(--white);
+      background: rgba(0,102,255,0.1);
+    }
+
+    /* Cantidad y botones */
+    .purchase-section {
+      display: flex;
+      gap: 12px;
+      margin-bottom: 22px;
+      align-items: center;
+    }
+
+    .quantity-control {
+      display: flex;
+      align-items: center;
+      border: 1px solid var(--border);
+      border-radius: 4px;
+      overflow: hidden;
+    }
+
+    .qty-btn {
+      background: var(--bg2);
+      border: none;
+      color: var(--white);
+      width: 40px; height: 48px;
+      cursor: pointer;
+      font-size: 1.1rem;
+      transition: background 0.2s;
+    }
+
+    .qty-btn:hover { background: rgba(0,102,255,0.15); }
+
+    .qty-value {
+      background: var(--card-bg);
+      color: var(--white);
+      width: 50px; height: 48px;
+      text-align: center;
+      font-size: 1rem;
+      border: none;
+      border-left: 1px solid var(--border);
+      border-right: 1px solid var(--border);
+      font-family: 'Inter', sans-serif;
+    }
+
+    .qty-value:focus { outline: none; }
+
+    .btn-add-cart {
+      flex: 1;
+      background: var(--blue);
+      color: #fff;
+      border: none;
+      padding: 14px 24px;
+      border-radius: 4px;
+      font-size: 0.88rem;
+      letter-spacing: 1.5px;
+      text-transform: uppercase;
+      cursor: pointer;
+      font-family: 'Inter', sans-serif;
+      font-weight: 500;
+      transition: all 0.2s;
+    }
+
+    .btn-add-cart:hover {
+      background: var(--blue-glow);
+      transform: translateY(-1px);
+      box-shadow: 0 8px 20px rgba(0,102,255,0.3);
+    }
+
+    .btn-wishlist {
+      background: var(--card-bg);
+      border: 1px solid var(--border);
+      color: var(--gray);
+      width: 48px; height: 48px;
+      border-radius: 4px;
+      cursor: pointer;
+      font-size: 1.2rem;
+      transition: all 0.2s;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .btn-wishlist:hover {
+      border-color: var(--error);
+      color: var(--error);
+    }
+
+    .btn-buy-now {
+      width: 100%;
+      background: transparent;
+      border: 1px solid var(--blue);
+      color: var(--blue);
+      padding: 13px;
+      border-radius: 4px;
+      font-size: 0.88rem;
+      letter-spacing: 1.5px;
+      text-transform: uppercase;
+      cursor: pointer;
+      font-family: 'Inter', sans-serif;
+      transition: all 0.2s;
+      margin-bottom: 22px;
+      text-decoration: none;
+      display: block;
+      text-align: center;
+    }
+
+    .btn-buy-now:hover {
+      background: rgba(0,102,255,0.1);
+    }
+
+    /* Garantías */
+    .guarantees {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 10px;
+      margin-bottom: 24px;
+    }
+
+    .guarantee {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      background: var(--card-bg);
+      border: 1px solid var(--border);
+      border-radius: 5px;
+      padding: 12px;
+    }
+
+    .guarantee-icon { font-size: 1.2rem; }
+
+    .guarantee-text strong {
+      display: block;
+      font-size: 0.78rem;
+      margin-bottom: 2px;
+    }
+
+    .guarantee-text span {
+      font-size: 0.7rem;
+      color: var(--gray);
+    }
+
+    /* Compartir */
+    .share-row {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      padding-top: 20px;
+      border-top: 1px solid var(--border);
+    }
+
+    .share-label {
+      font-size: 0.75rem;
+      letter-spacing: 1px;
+      text-transform: uppercase;
+      color: var(--gray);
+    }
+
+    .share-btn {
+      background: var(--card-bg);
+      border: 1px solid var(--border);
+      color: var(--gray);
+      padding: 7px 14px;
+      border-radius: 3px;
+      font-size: 0.75rem;
+      cursor: pointer;
+      font-family: 'Inter', sans-serif;
+      transition: all 0.2s;
+    }
+
+    .share-btn:hover { border-color: var(--blue); color: var(--white); }
+
+    /* ── TABS DE DETALLES ── */
+    .details-section {
+      padding: 0 60px 60px;
+      max-width: 1300px;
+      margin: 0 auto;
+    }
+
+    .tabs {
+      display: flex;
+      gap: 0;
+      border-bottom: 1px solid var(--border);
+      margin-bottom: 36px;
+    }
+
+    .tab-btn {
+      background: transparent;
+      border: none;
+      border-bottom: 2px solid transparent;
+      color: var(--gray);
+      padding: 14px 28px;
+      font-size: 0.82rem;
+      letter-spacing: 1px;
+      text-transform: uppercase;
+      cursor: pointer;
+      font-family: 'Inter', sans-serif;
+      transition: all 0.2s;
+      margin-bottom: -1px;
+    }
+
+    .tab-btn:hover { color: var(--white); }
+
+    .tab-btn.active {
+      color: var(--white);
+      border-bottom-color: var(--blue);
+    }
+
+    .tab-content { display: none; }
+    .tab-content.active { display: block; }
+
+    /* Especificaciones */
+    .specs-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 12px;
+    }
+
+    .spec-item {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      background: var(--card-bg);
+      border: 1px solid var(--border);
+      border-radius: 5px;
+      padding: 14px 18px;
+    }
+
+    .spec-key {
+      font-size: 0.78rem;
+      color: var(--gray);
+      letter-spacing: 0.5px;
+    }
+
+    .spec-value {
+      font-size: 0.82rem;
+      font-weight: 500;
+      color: var(--white);
+      text-align: right;
+    }
+
+    /* Descripción */
+    .description-text {
+      font-size: 0.88rem;
+      color: var(--gray);
+      line-height: 1.9;
+      max-width: 800px;
+    }
+
+    .description-text p { margin-bottom: 16px; }
+
+    .feature-list {
+      list-style: none;
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+      margin-top: 20px;
+    }
+
+    .feature-list li {
+      display: flex;
+      align-items: flex-start;
+      gap: 10px;
+      font-size: 0.85rem;
+      color: var(--gray);
+    }
+
+    .feature-list li::before {
+      content: '✓';
+      color: var(--blue);
+      font-weight: 700;
+      flex-shrink: 0;
+    }
+
+    /* Reseñas */
+    .reviews-summary {
+      display: flex;
+      gap: 40px;
+      margin-bottom: 32px;
+      padding-bottom: 32px;
+      border-bottom: 1px solid var(--border);
+    }
+
+    .review-score {
+      text-align: center;
+    }
+
+    .review-score .big-score {
+      font-family: 'Rajdhani', sans-serif;
+      font-size: 4rem;
+      font-weight: 700;
+      color: var(--white);
+      line-height: 1;
+    }
+
+    .review-score .stars { font-size: 1.2rem; display: block; margin: 8px 0; }
+    .review-score .review-total { font-size: 0.78rem; color: var(--gray); }
+
+    .review-bars { flex: 1; }
+
+    .bar-row {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      margin-bottom: 8px;
+    }
+
+    .bar-label { font-size: 0.75rem; color: var(--gray); width: 30px; text-align: right; }
+
+    .bar-track {
+      flex: 1;
+      height: 6px;
+      background: var(--border);
+      border-radius: 3px;
+      overflow: hidden;
+    }
+
+    .bar-fill {
+      height: 100%;
+      background: var(--blue);
+      border-radius: 3px;
+    }
+
+    .bar-count { font-size: 0.72rem; color: var(--gray); width: 24px; }
+
+    .review-card {
+      background: var(--card-bg);
+      border: 1px solid var(--border);
+      border-radius: 6px;
+      padding: 22px;
+      margin-bottom: 14px;
+    }
+
+    .review-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-start;
+      margin-bottom: 12px;
+    }
+
+    .reviewer-name { font-weight: 500; font-size: 0.88rem; margin-bottom: 4px; }
+    .review-date { font-size: 0.72rem; color: var(--gray); }
+    .review-stars { color: #f4c430; font-size: 0.85rem; }
+
+    .review-text { font-size: 0.82rem; color: var(--gray); line-height: 1.7; }
+
+    /* ── PRODUCTOS RELACIONADOS ── */
+    .related-section {
+      padding: 0 60px 80px;
+    }
+
+    .section-tag {
+      font-size: 0.72rem;
+      letter-spacing: 3px;
+      text-transform: uppercase;
+      color: var(--blue);
+      margin-bottom: 10px;
+    }
+
+    .section-title {
+      font-family: 'Rajdhani', sans-serif;
+      font-size: 1.8rem;
+      font-weight: 700;
+      margin-bottom: 28px;
+    }
+
+    .section-title span { color: var(--blue); }
+
+    .related-grid {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 16px;
+    }
+
+    .related-card {
+      background: var(--card-bg);
+      border: 1px solid var(--border);
+      border-radius: 6px;
+      overflow: hidden;
+      transition: all 0.25s;
+      text-decoration: none;
+      color: var(--white);
+    }
+
+    .related-card:hover {
+      border-color: var(--blue);
+      transform: translateY(-3px);
+      box-shadow: 0 12px 30px rgba(0,102,255,0.12);
+    }
+
+    .related-img {
+      width: 100%;
+      aspect-ratio: 4/3;
+      background: #13131f;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 2.8rem;
+      border-bottom: 1px solid var(--border);
+    }
+
+    .related-info { padding: 14px; }
+
+    .related-name {
+      font-family: 'Rajdhani', sans-serif;
+      font-size: 0.95rem;
+      font-weight: 600;
+      margin-bottom: 6px;
+    }
+
+    .related-price {
+      font-family: 'Rajdhani', sans-serif;
+      font-size: 1.1rem;
+      font-weight: 700;
+      color: var(--cyan);
+    }
+
+    /* Toast notificación */
+    .toast {
+      position: fixed;
+      bottom: 30px;
+      right: 30px;
+      background: var(--card-bg);
+      border: 1px solid var(--success);
+      border-radius: 6px;
+      padding: 16px 20px;
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      font-size: 0.85rem;
+      z-index: 999;
+      transform: translateY(100px);
+      opacity: 0;
+      transition: all 0.3s;
+      box-shadow: 0 8px 24px rgba(0,0,0,0.3);
+    }
+
+    .toast.show { transform: translateY(0); opacity: 1; }
+    .toast-icon { font-size: 1.3rem; }
+
+    /* ── FOOTER ── */
+    footer {
+      background: var(--bg2);
+      border-top: 1px solid var(--border);
+      padding: 30px 60px;
+      text-align: center;
+    }
+
+    footer p { color: var(--gray); font-size: 0.78rem; }
+
+    /* ── RESPONSIVE ── */
+    @media (max-width: 900px) {
+      nav { padding: 16px 24px; }
+      .nav-links { display: none; }
+      .breadcrumb-bar { padding: 80px 24px 16px; }
+      .product-layout { grid-template-columns: 1fr; padding: 24px; gap: 30px; }
+      .gallery-section { position: static; }
+      .details-section { padding: 0 24px 40px; }
+      .specs-grid { grid-template-columns: 1fr; }
+      .related-section { padding: 0 24px 40px; }
+      .related-grid { grid-template-columns: repeat(2, 1fr); }
+      footer { padding: 24px; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- NAVBAR -->
+  <nav>
+    <a href="index.html" class="logo">SECURE<span>VISION</span></a>
+    <ul class="nav-links">
+      <li><a href="index.html">Inicio</a></li>
+      <li><a href="catalogo.html">Catálogo</a></li>
+      <li><a href="#">Nosotros</a></li>
+      <li><a href="#">Contacto</a></li>
+    </ul>
+    <div class="nav-actions">
+      <div class="cart-icon" onclick="window.location='carrito.html'">
+        🛒
+        <span class="cart-badge" id="cartCount">0</span>
+      </div>
+      <a href="login.html" class="btn-nav">Iniciar Sesión</a>
+    </div>
+  </nav>
+
+  <!-- BREADCRUMB -->
+  <div class="breadcrumb-bar">
+    <div class="breadcrumb">
+      <a href="index.html">Inicio</a> ›
+      <a href="catalogo.html">Catálogo</a> ›
+      <a href="catalogo.html">Cámaras CCTV</a> ›
+      <span>Cámara IP 4K Exterior Hikvision</span>
+    </div>
+  </div>
+
+  <!-- PRODUCTO -->
+  <div class="product-layout">
+
+    <!-- GALERÍA -->
+    <div class="gallery-section">
+      <div class="main-image" id="mainImg">
+        <span id="mainEmoji">📹</span>
+        <span class="image-badge new">Nuevo</span>
+      </div>
+      <div class="thumbnails">
+        <div class="thumb active" onclick="changeImg(this, '📹')">📹</div>
+        <div class="thumb" onclick="changeImg(this, '🔭')">🔭</div>
+        <div class="thumb" onclick="changeImg(this, '⚙️')">⚙️</div>
+        <div class="thumb" onclick="changeImg(this, '📦')">📦</div>
+      </div>
+    </div>
+
+    <!-- INFO -->
+    <div class="product-info-section">
+
+      <div class="product-category-tag">// Cámaras CCTV</div>
+      <h1 class="product-title">Cámara IP 4K Exterior Hikvision DS-2CD2T47G2</h1>
+
+      <div class="rating-row">
+        <span class="stars">★★★★★</span>
+        <span class="rating-score">4.9</span>
+        <span class="rating-count">(128 reseñas)</span>
+        <div class="rating-divider"></div>
+        <div class="stock-badge">
+          <div class="stock-dot"></div>
+          En stock (47 unidades)
+        </div>
+      </div>
+
+      <!-- Precio -->
+      <div class="price-section">
+        <div>
+          <span class="price-main">$89.99</span>
+          <span class="price-old">$109.99</span>
+          <span class="price-save">Ahorras $20</span>
+        </div>
+        <div class="price-note">💳 Precio incluye impuestos. Envío internacional gratuito.</div>
+      </div>
+
+      <!-- Variantes de resolución -->
+      <div class="variants-section">
+        <div class="variants-label">Resolución: <strong>4K (8MP)</strong></div>
+        <div class="variant-btns">
+          <button class="variant-btn">2MP (Full HD)</button>
+          <button class="variant-btn">4MP</button>
+          <button class="variant-btn active">8MP (4K)</button>
+          <button class="variant-btn">12MP</button>
+        </div>
+      </div>
+
+      <!-- Variantes de color -->
+      <div class="variants-section">
+        <div class="variants-label">Color: <strong>Blanco</strong></div>
+        <div class="variant-btns">
+          <button class="variant-btn active">⬜ Blanco</button>
+          <button class="variant-btn">⬛ Negro</button>
+          <button class="variant-btn">🔘 Gris</button>
+        </div>
+      </div>
+
+      <!-- Compra -->
+      <div class="purchase-section">
+        <div class="quantity-control">
+          <button class="qty-btn" onclick="changeQty(-1)">−</button>
+          <input class="qty-value" type="number" id="quantity" value="1" min="1" max="47"/>
+          <button class="qty-btn" onclick="changeQty(1)">+</button>
+        </div>
+        <button class="btn-add-cart" onclick="addToCart()">🛒 Agregar al Carrito</button>
+        <button class="btn-wishlist" onclick="toggleWishlist(this)">♡</button>
+      </div>
+
+      <a href="checkout.html" class="btn-buy-now">⚡ Comprar Ahora</a>
+
+      <!-- Garantías -->
+      <div class="guarantees">
+        <div class="guarantee">
+          <span class="guarantee-icon">🛡️</span>
+          <div class="guarantee-text">
+            <strong>Garantía 12 meses</strong>
+            <span>Cobertura total del fabricante</span>
+          </div>
+        </div>
+        <div class="guarantee">
+          <span class="guarantee-icon">🚚</span>
+          <div class="guarantee-text">
+            <strong>Envío gratis</strong>
+            <span>Entrega en 5-10 días hábiles</span>
+          </div>
+        </div>
+        <div class="guarantee">
+          <span class="guarantee-icon">↩️</span>
+          <div class="guarantee-text">
+            <strong>Devolución 30 días</strong>
+            <span>Sin preguntas, dinero de vuelta</span>
+          </div>
+        </div>
+        <div class="guarantee">
+          <span class="guarantee-icon">🔒</span>
+          <div class="guarantee-text">
+            <strong>Pago seguro</strong>
+            <span>Encriptación SSL 256-bit</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- Compartir -->
+      <div class="share-row">
+        <span class="share-label">Compartir:</span>
+        <button class="share-btn">📘 Facebook</button>
+        <button class="share-btn">🐦 Twitter</button>
+        <button class="share-btn">🔗 Copiar enlace</button>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- TABS DE DETALLES -->
+  <div class="details-section">
+    <div class="tabs">
+      <button class="tab-btn active" onclick="switchTab(this, 'descripcion')">Descripción</button>
+      <button class="tab-btn" onclick="switchTab(this, 'especificaciones')">Especificaciones</button>
+      <button class="tab-btn" onclick="switchTab(this, 'resenas')">Reseñas (128)</button>
+    </div>
+
+    <!-- Descripción -->
+    <div class="tab-content active" id="tab-descripcion">
+      <div class="description-text">
+        <p>La <strong style="color:var(--white)">Cámara IP 4K Exterior Hikvision DS-2CD2T47G2</strong> es una solución de videovigilancia de alta resolución diseñada para instalaciones exteriores que demandan la máxima calidad de imagen y confiabilidad operativa.</p>
+        <p>Con su sensor de 8 megapíxeles y resolución 4K real, captura cada detalle con una claridad excepcional, permitiendo identificar rostros, matrículas y objetos con precisión incluso al hacer zoom digital.</p>
+        <ul class="feature-list">
+          <li>Resolución 4K (3840×2160) para imágenes ultra nítidas</li>
+          <li>Visión nocturna infrarroja hasta 40 metros en completa oscuridad</li>
+          <li>Certificación IP67 — resistente a polvo y lluvia fuerte</li>
+          <li>Detección de movimiento con inteligencia artificial</li>
+          <li>Compatible con sistemas NVR Hikvision y software iVMS-4200</li>
+          <li>Acceso remoto desde smartphone con app Hik-Connect</li>
+          <li>Compresión H.265+ para ahorrar hasta 75% de espacio en disco</li>
+          <li>Temperatura de operación: -30°C a 60°C</li>
+        </ul>
+      </div>
+    </div>
+
+    <!-- Especificaciones -->
+    <div class="tab-content" id="tab-especificaciones">
+      <div class="specs-grid">
+        <div class="spec-item"><span class="spec-key">Resolución</span><span class="spec-value">4K / 8MP (3840×2160)</span></div>
+        <div class="spec-item"><span class="spec-key">Sensor</span><span class="spec-value">1/2.7" Progressive CMOS</span></div>
+        <div class="spec-item"><span class="spec-key">Lente</span><span class="spec-value">2.8mm / 4mm / 6mm (seleccionable)</span></div>
+        <div class="spec-item"><span class="spec-key">Visión nocturna</span><span class="spec-value">IR hasta 40 metros</span></div>
+        <div class="spec-item"><span class="spec-key">Protección</span><span class="spec-value">IP67 (polvo y agua)</span></div>
+        <div class="spec-item"><span class="spec-key">Compresión</span><span class="spec-value">H.265+ / H.265 / H.264+</span></div>
+        <div class="spec-item"><span class="spec-key">Frame rate</span><span class="spec-value">25fps @ 4K</span></div>
+        <div class="spec-item"><span class="spec-key">Alimentación</span><span class="spec-value">PoE (802.3af) / 12V DC</span></div>
+        <div class="spec-item"><span class="spec-key">Consumo</span><span class="spec-value">Max. 6.5W</span></div>
+        <div class="spec-item"><span class="spec-key">Temperatura</span><span class="spec-value">-30°C ~ 60°C</span></div>
+        <div class="spec-item"><span class="spec-key">Dimensiones</span><span class="spec-value">94.4 × 260.3mm</span></div>
+        <div class="spec-item"><span class="spec-key">Peso</span><span class="spec-value">590g</span></div>
+        <div class="spec-item"><span class="spec-key">Color</span><span class="spec-value">Blanco / Negro / Gris</span></div>
+        <div class="spec-item"><span class="spec-key">Garantía</span><span class="spec-value">12 meses oficial Hikvision</span></div>
+      </div>
+    </div>
+
+    <!-- Reseñas -->
+    <div class="tab-content" id="tab-resenas">
+      <div class="reviews-summary">
+        <div class="review-score">
+          <div class="big-score">4.9</div>
+          <span class="stars">★★★★★</span>
+          <div class="review-total">128 reseñas</div>
+        </div>
+        <div class="review-bars">
+          <div class="bar-row">
+            <span class="bar-label">5 ★</span>
+            <div class="bar-track"><div class="bar-fill" style="width:88%"></div></div>
+            <span class="bar-count">113</span>
+          </div>
+          <div class="bar-row">
+            <span class="bar-label">4 ★</span>
+            <div class="bar-track"><div class="bar-fill" style="width:9%"></div></div>
+            <span class="bar-count">11</span>
+          </div>
+          <div class="bar-row">
+            <span class="bar-label">3 ★</span>
+            <div class="bar-track"><div class="bar-fill" style="width:2%"></div></div>
+            <span class="bar-count">3</span>
+          </div>
+          <div class="bar-row">
+            <span class="bar-label">2 ★</span>
+            <div class="bar-track"><div class="bar-fill" style="width:1%"></div></div>
+            <span class="bar-count">1</span>
+          </div>
+          <div class="bar-row">
+            <span class="bar-label">1 ★</span>
+            <div class="bar-track"><div class="bar-fill" style="width:0%"></div></div>
+            <span class="bar-count">0</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="review-card">
+        <div class="review-header">
+          <div>
+            <div class="reviewer-name">Carlos M. — Honduras</div>
+            <div class="review-date">10 de marzo, 2026</div>
+          </div>
+          <div class="review-stars">★★★★★</div>
+        </div>
+        <div class="review-text">Excelente cámara, la imagen en 4K es increíble. La instalé en la entrada de mi negocio y la visión nocturna es muy buena. El proceso de compra fue rápido y el envío llegó en 7 días.</div>
+      </div>
+
+      <div class="review-card">
+        <div class="review-header">
+          <div>
+            <div class="reviewer-name">Ana R. — México</div>
+            <div class="review-date">5 de marzo, 2026</div>
+          </div>
+          <div class="review-stars">★★★★★</div>
+        </div>
+        <div class="review-text">Muy buena calidad de imagen. La app Hik-Connect funciona perfectamente, puedo ver mi casa desde cualquier lugar. Totalmente recomendada.</div>
+      </div>
+
+      <div class="review-card">
+        <div class="review-header">
+          <div>
+            <div class="reviewer-name">Jorge P. — Colombia</div>
+            <div class="review-date">28 de febrero, 2026</div>
+          </div>
+          <div class="review-stars">★★★★☆</div>
+        </div>
+        <div class="review-text">Buena cámara en general. La configuración inicial fue un poco técnica pero con el manual se resuelve. La imagen es nítida y resistente a la lluvia como dice la descripción.</div>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- PRODUCTOS RELACIONADOS -->
+  <div class="related-section">
+    <div class="section-tag">// También te puede gustar</div>
+    <h2 class="section-title">Productos <span>Relacionados</span></h2>
+    <div class="related-grid">
+      <a href="producto.html" class="related-card">
+        <div class="related-img">📷</div>
+        <div class="related-info">
+          <div class="related-name">Cámara Domo 2MP Interior</div>
+          <div class="related-price">$45.99</div>
+        </div>
+      </a>
+      <a href="producto.html" class="related-card">
+        <div class="related-img">🎥</div>
+        <div class="related-info">
+          <div class="related-name">Cámara PTZ 360° Zoom 30x</div>
+          <div class="related-price">$320.00</div>
+        </div>
+      </a>
+      <a href="producto.html" class="related-card">
+        <div class="related-img">🖥️</div>
+        <div class="related-info">
+          <div class="related-name">Monitor NVR 16 Canales</div>
+          <div class="related-price">$245.00</div>
+        </div>
+      </a>
+      <a href="producto.html" class="related-card">
+        <div class="related-img">🔌</div>
+        <div class="related-info">
+          <div class="related-name">Fuente 12V 10A con Respaldo</div>
+          <div class="related-price">$38.00</div>
+        </div>
+      </a>
+    </div>
+  </div>
+
+  <!-- FOOTER -->
+  <footer>
+    <p>© 2026 SecureVision. Todos los derechos reservados.</p>
+  </footer>
+
+  <!-- TOAST -->
+  <div class="toast" id="toast">
+    <span class="toast-icon">✅</span>
+    <span>Producto agregado al carrito</span>
+  </div>
+
+  <script>
+    function changeImg(thumb, emoji) {
+      document.querySelectorAll('.thumb').forEach(t => t.classList.remove('active'));
+      thumb.classList.add('active');
+      document.getElementById('mainEmoji').textContent = emoji;
+    }
+
+    function changeQty(delta) {
+      const input = document.getElementById('quantity');
+      let val = parseInt(input.value) + delta;
+      if (val < 1) val = 1;
+      if (val > 47) val = 47;
+      input.value = val;
+    }
+
+    function addToCart() {
+      const qty = document.getElementById('quantity').value;
+      const count = document.getElementById('cartCount');
+      count.textContent = parseInt(count.textContent) + parseInt(qty);
+
+      const toast = document.getElementById('toast');
+      toast.classList.add('show');
+      setTimeout(() => toast.classList.remove('show'), 3000);
+    }
+
+    function toggleWishlist(btn) {
+      btn.textContent = btn.textContent === '♡' ? '♥' : '♡';
+      btn.style.color = btn.textContent === '♥' ? '#e63946' : '';
+      btn.style.borderColor = btn.textContent === '♥' ? '#e63946' : '';
+    }
+
+    function switchTab(btn, tabId) {
+      document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
+      document.querySelectorAll('.tab-content').forEach(c => c.classList.remove('active'));
+      btn.classList.add('active');
+      document.getElementById('tab-' + tabId).classList.add('active');
+    }
+
+    document.querySelectorAll('.variant-btn').forEach(btn => {
+      btn.addEventListener('click', function() {
+        this.closest('.variant-btns').querySelectorAll('.variant-btn').forEach(b => b.classList.remove('active'));
+        this.classList.add('active');
+      });
+    });
+  </script>
+
+</body>
+</html>

@@ -19,15 +19,15 @@
       --error: #e63946;
       --success: #2dc653;
     }
- 
+
     * { margin: 0; padding: 0; box-sizing: border-box; }
- 
+
     body {
       background: var(--bg);
       color: var(--white);
       font-family: 'Inter', sans-serif;
     }
- 
+
     /* ── NAVBAR ── */
     nav {
       position: fixed;
@@ -41,7 +41,7 @@
       backdrop-filter: blur(12px);
       border-bottom: 1px solid var(--border);
     }
- 
+
     .logo {
       font-family: 'Rajdhani', sans-serif;
       font-size: 1.6rem;
@@ -50,16 +50,16 @@
       color: var(--white);
       text-decoration: none;
     }
- 
+
     .logo span { color: var(--blue); }
- 
+
     /* Pasos del checkout */
     .checkout-steps {
       display: flex;
       align-items: center;
       gap: 0;
     }
- 
+
     .step {
       display: flex;
       align-items: center;
@@ -69,10 +69,10 @@
       text-transform: uppercase;
       color: var(--gray);
     }
- 
+
     .step.active { color: var(--white); }
     .step.done { color: var(--success); }
- 
+
     .step-num {
       width: 26px; height: 26px;
       border-radius: 50%;
@@ -83,26 +83,26 @@
       font-size: 0.72rem;
       font-weight: 600;
     }
- 
+
     .step.active .step-num {
       background: var(--blue);
       border-color: var(--blue);
       color: #fff;
     }
- 
+
     .step.done .step-num {
       background: var(--success);
       border-color: var(--success);
       color: #fff;
     }
- 
+
     .step-divider {
       width: 40px;
       height: 1px;
       background: var(--border);
       margin: 0 8px;
     }
- 
+
     .secure-badge {
       display: flex;
       align-items: center;
@@ -110,14 +110,14 @@
       font-size: 0.75rem;
       color: var(--success);
     }
- 
+
     /* ── HEADER ── */
     .page-header {
       padding: 110px 60px 40px;
       background: var(--bg2);
       border-bottom: 1px solid var(--border);
     }
- 
+
     .page-header-tag {
       font-size: 0.72rem;
       letter-spacing: 3px;
@@ -125,15 +125,15 @@
       color: var(--blue);
       margin-bottom: 10px;
     }
- 
+
     .page-header h1 {
       font-family: 'Rajdhani', sans-serif;
       font-size: 2.2rem;
       font-weight: 700;
     }
- 
+
     .page-header h1 span { color: var(--blue); }
- 
+
     /* ── LAYOUT ── */
     .checkout-layout {
       display: grid;
@@ -143,7 +143,7 @@
       max-width: 1400px;
       margin: 0 auto;
     }
- 
+
     /* ── SECCIONES DEL FORMULARIO ── */
     .form-section {
       background: var(--card-bg);
@@ -152,7 +152,7 @@
       padding: 28px;
       margin-bottom: 20px;
     }
- 
+
     .section-header {
       display: flex;
       align-items: center;
@@ -161,7 +161,7 @@
       padding-bottom: 16px;
       border-bottom: 1px solid var(--border);
     }
- 
+
     .section-num {
       width: 30px; height: 30px;
       background: var(--blue);
@@ -174,7 +174,7 @@
       color: #fff;
       flex-shrink: 0;
     }
- 
+
     .section-title {
       font-family: 'Rajdhani', sans-serif;
       font-size: 1.1rem;
@@ -182,23 +182,23 @@
       letter-spacing: 1px;
       text-transform: uppercase;
     }
- 
+
     /* Grid de campos */
     .form-row {
       display: grid;
       grid-template-columns: 1fr 1fr;
       gap: 16px;
     }
- 
+
     .form-row-3 {
       display: grid;
       grid-template-columns: 1fr 1fr 1fr;
       gap: 16px;
     }
- 
+
     .form-group { margin-bottom: 16px; }
     .form-group.full { grid-column: 1 / -1; }
- 
+
     .form-label {
       display: block;
       font-size: 0.74rem;
@@ -207,11 +207,11 @@
       color: var(--gray);
       margin-bottom: 7px;
     }
- 
+
     .form-label .required { color: var(--error); margin-left: 2px; }
- 
+
     .input-wrapper { position: relative; }
- 
+
     .input-icon {
       position: absolute;
       left: 13px;
@@ -220,7 +220,7 @@
       font-size: 0.9rem;
       pointer-events: none;
     }
- 
+
     .form-input {
       width: 100%;
       background: var(--bg);
@@ -232,18 +232,18 @@
       font-family: 'Inter', sans-serif;
       transition: border-color 0.2s, box-shadow 0.2s;
     }
- 
+
     .form-input.no-icon { padding-left: 13px; }
- 
+
     .form-input:focus {
       outline: none;
       border-color: var(--blue);
       box-shadow: 0 0 0 3px rgba(0,102,255,0.1);
     }
- 
+
     .form-input::placeholder { color: var(--gray); }
     .form-input.error { border-color: var(--error); }
- 
+
     select.form-input {
       cursor: pointer;
       appearance: none;
@@ -252,16 +252,16 @@
       background-repeat: no-repeat;
       background-position: right 12px center;
     }
- 
+
     select.form-input option { background: var(--bg2); }
- 
+
     .error-msg {
       font-size: 0.7rem;
       color: var(--error);
       margin-top: 5px;
       display: none;
     }
- 
+
     /* ── MÉTODOS DE PAGO ── */
     .payment-options {
       display: flex;
@@ -269,7 +269,7 @@
       gap: 12px;
       margin-bottom: 20px;
     }
- 
+
     .payment-option {
       display: flex;
       align-items: center;
@@ -281,34 +281,34 @@
       cursor: pointer;
       transition: all 0.2s;
     }
- 
+
     .payment-option:hover { border-color: rgba(0,102,255,0.4); }
- 
+
     .payment-option.selected {
       border-color: var(--blue);
       background: rgba(0,102,255,0.08);
     }
- 
+
     .payment-option input[type="radio"] {
       accent-color: var(--blue);
       width: 16px;
       height: 16px;
       cursor: pointer;
     }
- 
+
     .payment-option-icon { font-size: 1.5rem; }
- 
+
     .payment-option-info strong {
       display: block;
       font-size: 0.88rem;
       margin-bottom: 2px;
     }
- 
+
     .payment-option-info span {
       font-size: 0.75rem;
       color: var(--gray);
     }
- 
+
     /* Campos de tarjeta */
     .card-fields {
       display: none;
@@ -316,13 +316,13 @@
       padding-top: 16px;
       border-top: 1px solid var(--border);
     }
- 
+
     .card-fields.show { display: block; }
- 
+
     .card-number-input {
       letter-spacing: 2px;
     }
- 
+
     /* ── RESUMEN LATERAL ── */
     .summary-card {
       background: var(--card-bg);
@@ -333,7 +333,7 @@
       top: 100px;
       height: fit-content;
     }
- 
+
     .summary-title {
       font-family: 'Rajdhani', sans-serif;
       font-size: 1rem;
@@ -343,7 +343,7 @@
       padding-bottom: 14px;
       border-bottom: 1px solid var(--border);
     }
- 
+
     .summary-item {
       display: flex;
       align-items: center;
@@ -352,9 +352,9 @@
       padding-bottom: 14px;
       border-bottom: 1px solid var(--border);
     }
- 
+
     .summary-item:last-of-type { border-bottom: none; margin-bottom: 0; }
- 
+
     .summary-item-img {
       width: 48px; height: 48px;
       background: var(--bg);
@@ -366,20 +366,20 @@
       font-size: 1.4rem;
       flex-shrink: 0;
     }
- 
+
     .summary-item-info { flex: 1; }
- 
+
     .summary-item-name {
       font-size: 0.82rem;
       font-weight: 500;
       margin-bottom: 3px;
     }
- 
+
     .summary-item-qty {
       font-size: 0.72rem;
       color: var(--gray);
     }
- 
+
     .summary-item-price {
       font-family: 'Rajdhani', sans-serif;
       font-size: 1rem;
@@ -387,43 +387,43 @@
       color: var(--cyan);
       white-space: nowrap;
     }
- 
+
     .summary-divider {
       height: 1px;
       background: var(--border);
       margin: 18px 0;
     }
- 
+
     .summary-row {
       display: flex;
       justify-content: space-between;
       font-size: 0.83rem;
       margin-bottom: 10px;
     }
- 
+
     .summary-row .label { color: var(--gray); }
- 
+
     .summary-total {
       display: flex;
       justify-content: space-between;
       align-items: center;
       margin: 18px 0 24px;
     }
- 
+
     .total-label {
       font-family: 'Rajdhani', sans-serif;
       font-size: 1rem;
       letter-spacing: 1px;
       text-transform: uppercase;
     }
- 
+
     .total-value {
       font-family: 'Rajdhani', sans-serif;
       font-size: 1.8rem;
       font-weight: 700;
       color: var(--cyan);
     }
- 
+
     .btn-place-order {
       width: 100%;
       background: var(--blue);
@@ -440,13 +440,13 @@
       transition: all 0.2s;
       margin-bottom: 14px;
     }
- 
+
     .btn-place-order:hover {
       background: var(--blue-glow);
       transform: translateY(-1px);
       box-shadow: 0 8px 20px rgba(0,102,255,0.3);
     }
- 
+
     .secure-msg {
       display: flex;
       align-items: center;
@@ -456,16 +456,16 @@
       color: var(--gray);
       margin-bottom: 16px;
     }
- 
+
     .terms-note {
       font-size: 0.72rem;
       color: var(--gray);
       text-align: center;
       line-height: 1.6;
     }
- 
+
     .terms-note a { color: var(--blue); text-decoration: none; }
- 
+
     /* ── MODAL ÉXITO ── */
     .modal-overlay {
       position: fixed;
@@ -477,9 +477,9 @@
       align-items: center;
       justify-content: center;
     }
- 
+
     .modal-overlay.show { display: flex; }
- 
+
     .modal {
       background: var(--card-bg);
       border: 1px solid var(--border);
@@ -490,25 +490,25 @@
       width: 90%;
       animation: popIn 0.4s ease;
     }
- 
+
     .modal-icon { font-size: 4rem; margin-bottom: 20px; }
- 
+
     .modal h2 {
       font-family: 'Rajdhani', sans-serif;
       font-size: 2rem;
       font-weight: 700;
       margin-bottom: 10px;
     }
- 
+
     .modal h2 span { color: var(--success); }
- 
+
     .modal p {
       color: var(--gray);
       font-size: 0.88rem;
       line-height: 1.7;
       margin-bottom: 28px;
     }
- 
+
     .order-number {
       background: var(--bg);
       border: 1px solid var(--border);
@@ -516,7 +516,7 @@
       padding: 14px;
       margin-bottom: 28px;
     }
- 
+
     .order-number span {
       font-size: 0.72rem;
       color: var(--gray);
@@ -525,20 +525,20 @@
       letter-spacing: 1px;
       text-transform: uppercase;
     }
- 
+
     .order-number strong {
       font-family: 'Rajdhani', sans-serif;
       font-size: 1.4rem;
       color: var(--cyan);
       letter-spacing: 3px;
     }
- 
+
     .modal-btns {
       display: flex;
       gap: 12px;
       justify-content: center;
     }
- 
+
     .btn-invoice {
       background: var(--blue);
       color: #fff;
@@ -553,9 +553,9 @@
       text-decoration: none;
       transition: background 0.2s;
     }
- 
+
     .btn-invoice:hover { background: var(--blue-glow); }
- 
+
     .btn-home {
       background: transparent;
       color: var(--white);
@@ -570,14 +570,14 @@
       text-decoration: none;
       transition: all 0.2s;
     }
- 
+
     .btn-home:hover { border-color: var(--blue); color: var(--blue); }
- 
+
     @keyframes popIn {
       from { opacity: 0; transform: scale(0.9); }
       to   { opacity: 1; transform: scale(1); }
     }
- 
+
     /* ── FOOTER ── */
     footer {
       background: var(--bg2);
@@ -586,9 +586,9 @@
       text-align: center;
       margin-top: 60px;
     }
- 
+
     footer p { color: var(--gray); font-size: 0.78rem; }
- 
+
     /* ── RESPONSIVE ── */
     @media (max-width: 900px) {
       nav { padding: 16px 24px; }
@@ -602,7 +602,7 @@
   </style>
 </head>
 <body>
- 
+
   <!-- NAVBAR -->
   <nav>
     <a href="index.html" class="logo">SECURE<span>VISION</span></a>
@@ -624,19 +624,19 @@
     </div>
     <div class="secure-badge">🔒 Pago Seguro</div>
   </nav>
- 
+
   <!-- HEADER -->
   <div class="page-header">
     <div class="page-header-tag">// Finalizar Compra</div>
     <h1>Datos de <span>Pago</span></h1>
   </div>
- 
+
   <!-- LAYOUT -->
   <div class="checkout-layout">
- 
+
     <!-- FORMULARIO -->
     <div>
- 
+
       <!-- 1. Información personal -->
       <div class="form-section">
         <div class="section-header">
@@ -680,7 +680,7 @@
           </div>
         </div>
       </div>
- 
+
       <!-- 2. Dirección de envío -->
       <div class="form-section">
         <div class="section-header">
@@ -736,16 +736,16 @@
           <textarea class="form-input no-icon" id="referencia" rows="2" placeholder="Ej: Casa color azul, portón negro..." style="resize:vertical; min-height:60px; padding: 12px;"></textarea>
         </div>
       </div>
- 
+
       <!-- 3. Método de pago -->
       <div class="form-section">
         <div class="section-header">
           <div class="section-num">3</div>
           <div class="section-title">Método de Pago</div>
         </div>
- 
+
         <div class="payment-options">
- 
+
           <label class="payment-option selected" onclick="selectPayment(this, 'card')">
             <input type="radio" name="payment" value="card" checked/>
             <span class="payment-option-icon">💳</span>
@@ -754,7 +754,7 @@
               <span>Visa, Mastercard, American Express</span>
             </div>
           </label>
- 
+
           <label class="payment-option" onclick="selectPayment(this, 'paypal')">
             <input type="radio" name="payment" value="paypal"/>
             <span class="payment-option-icon">🅿️</span>
@@ -763,7 +763,7 @@
               <span>Paga con tu cuenta PayPal</span>
             </div>
           </label>
- 
+
           <label class="payment-option" onclick="selectPayment(this, 'transfer')">
             <input type="radio" name="payment" value="transfer"/>
             <span class="payment-option-icon">🏦</span>
@@ -772,9 +772,9 @@
               <span>Te enviaremos los datos bancarios</span>
             </div>
           </label>
- 
+
         </div>
- 
+
         <!-- Campos de tarjeta -->
         <div class="card-fields show" id="cardFields">
           <div class="form-group">
@@ -807,16 +807,16 @@
             </div>
           </div>
         </div>
- 
+
       </div>
- 
+
     </div>
- 
+
     <!-- RESUMEN -->
     <div>
       <div class="summary-card">
         <div class="summary-title">Tu Pedido</div>
- 
+
         <div class="summary-item">
           <div class="summary-item-img">📹</div>
           <div class="summary-item-info">
@@ -825,7 +825,7 @@
           </div>
           <div class="summary-item-price">$89.99</div>
         </div>
- 
+
         <div class="summary-item">
           <div class="summary-item-img">👆</div>
           <div class="summary-item-info">
@@ -834,7 +834,7 @@
           </div>
           <div class="summary-item-price">$270.00</div>
         </div>
- 
+
         <div class="summary-item">
           <div class="summary-item-img">🔔</div>
           <div class="summary-item-info">
@@ -843,9 +843,9 @@
           </div>
           <div class="summary-item-price">$120.00</div>
         </div>
- 
+
         <div class="summary-divider"></div>
- 
+
         <div class="summary-row">
           <span class="label">Subtotal</span>
           <span>$479.99</span>
@@ -858,27 +858,27 @@
           <span class="label">Impuestos (15%)</span>
           <span>$72.00</span>
         </div>
- 
+
         <div class="summary-total">
           <span class="total-label">Total</span>
           <span class="total-value">$551.99</span>
         </div>
- 
+
         <button class="btn-place-order" onclick="placeOrder()">
           Confirmar Pedido 🔒
         </button>
- 
+
         <div class="secure-msg">🔒 Tus datos están protegidos con SSL</div>
- 
+
         <div class="terms-note">
           Al confirmar aceptas nuestros <a href="#">Términos de Servicio</a> y <a href="#">Política de Privacidad</a>
         </div>
- 
+
       </div>
     </div>
- 
+
   </div>
- 
+
   <!-- MODAL ÉXITO -->
   <div class="modal-overlay" id="successModal">
     <div class="modal">
@@ -895,30 +895,30 @@
       </div>
     </div>
   </div>
- 
+
   <!-- FOOTER -->
   <footer>
     <p>© 2026 SecureVision. Todos los derechos reservados.</p>
   </footer>
- 
+
   <script>
     function selectPayment(el, type) {
       document.querySelectorAll('.payment-option').forEach(o => o.classList.remove('selected'));
       el.classList.add('selected');
       document.getElementById('cardFields').className = 'card-fields' + (type === 'card' ? ' show' : '');
     }
- 
+
     function formatCard(input) {
       let val = input.value.replace(/\D/g, '').substring(0, 16);
       input.value = val.replace(/(.{4})/g, '$1 ').trim();
     }
- 
+
     function formatExpiry(input) {
       let val = input.value.replace(/\D/g, '').substring(0, 4);
       if (val.length >= 2) val = val.substring(0, 2) + '/' + val.substring(2);
       input.value = val;
     }
- 
+
     function placeOrder() {
       const fields = [
         { id: 'nombre',    errorId: 'nombreError',    check: v => v.trim().length > 0 },
@@ -929,7 +929,7 @@
         { id: 'direccion', errorId: 'direccionError', check: v => v.trim().length > 0 },
         { id: 'ciudad',    errorId: 'ciudadError',    check: v => v.trim().length > 0 },
       ];
- 
+
       let valid = true;
       fields.forEach(f => {
         const input = document.getElementById(f.id);
@@ -943,7 +943,7 @@
           error.style.display = 'none';
         }
       });
- 
+
       if (valid) {
         const orderNum = '#SV-' + Math.floor(10000 + Math.random() * 90000);
         document.getElementById('orderNum').textContent = orderNum;
@@ -951,6 +951,6 @@
       }
     }
   </script>
- 
+
 </body>
 </html>

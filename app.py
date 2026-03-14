@@ -1,0 +1,355 @@
+from flask import Flask, render_template, request, redirect, url_for, session, flash
+import sqlite3
+import os
+from datetime import datetime
+import random
+
+# ── CONFIGURACIÓN ──────────────────────────────────────────
+app = Flask(__name__)
+app.secret_key = 'securevision2026'
+
+BASE_DIR = os.path.dirname(os.path.abspath(__file__))
+DB_PATH  = os.path.join(BASE_DIR, 'database', 'tienda.db')
+
+
+# ── BASE DE DATOS ───────────────────────────────────────────
+def get_db():
+    conn = sqlite3.connect(DB_PATH)
+    conn.row_factory = sqlite3.Row
+    return conn
+
+
+def init_db():
+    conn = get_db()
+    cursor = conn.cursor()
+
+    cursor.execute('''
+        CREATE TABLE IF NOT EXISTS usuarios (
+            id        INTEGER PRIMARY KEY AUTOINCREMENT,
+            nombre    TEXT NOT NULL,
+            apellido  TEXT NOT NULL,
+            email     TEXT UNIQUE NOT NULL,
+            telefono  TEXT,
+            password  TEXT NOT NULL,
+            fecha     TEXT DEFAULT CURRENT_TIMESTAMP
+        )
+    ''')
+
+    cursor.execute('''
+        CREATE TABLE IF NOT EXISTS productos (
+            id          INTEGER PRIMARY KEY AUTOINCREMENT,
+            nombre      TEXT NOT NULL,
+            descripcion TEXT,
+            precio      REAL NOT NULL,
+            categoria   TEXT,
+            stock       INTEGER DEFAULT 0,
+            emoji       TEXT DEFAULT '📦',
+            sku         TEXT
+        )
+    ''')
+
+    cursor.execute('''
+        CREATE TABLE IF NOT EXISTS pedidos (
+            id          INTEGER PRIMARY KEY AUTOINCREMENT,
+            usuario_id  INTEGER,
+            numero      TEXT NOT NULL,
+            total       REAL NOT NULL,
+            estado      TEXT DEFAULT 'pagado',
+            fecha       TEXT DEFAULT CURRENT_TIMESTAMP,
+            nombre      TEXT,
+            email       TEXT,
+            direccion   TEXT,
+            ciudad      TEXT,
+            pais        TEXT,
+            FOREIGN KEY (usuario_id) REFERENCES usuarios(id)
+        )
+    ''')
+
+    cursor.execute('''
+        CREATE TABLE IF NOT EXISTS detalle_pedido (
+            id          INTEGER PRIMARY KEY AUTOINCREMENT,
+            pedido_id   INTEGER NOT NULL,
+            producto_id INTEGER,
+            nombre      TEXT NOT NULL,
+            precio      REAL NOT NULL,
+            cantidad    INTEGER NOT NULL,
+            subtotal    REAL NOT NULL,
+            FOREIGN KEY (pedido_id)   REFERENCES pedidos(id),
+            FOREIGN KEY (producto_id) REFERENCES productos(id)
+        )
+    ''')
+
+    cursor.execute('SELECT COUNT(*) FROM productos')
+    if cursor.fetchone()[0] == 0:
+        productos = [
+            ('Cámara IP 4K Exterior Hikvision', 'Visión nocturna 40m, IP67, detección IA', 89.99,  'camaras',    47, '📹', 'CAM-HIK-4K-01'),
+            ('Cámara Domo 2MP Interior Dahua',  'Full HD, gran angular 120°',              45.99,  'camaras',    30, '📷', 'CAM-DAH-2MP'),
+            ('Cámara PTZ 360° Zoom 30x',        'Seguimiento automático, IR 100m',         320.00, 'camaras',    12, '🎥', 'CAM-PTZ-30X'),
+            ('Monitor NVR 16 Canales',          'Pantalla 21", grabación continua',        245.00, 'monitores',  20, '🖥️', 'MON-NVR-16'),
+            ('Control Biométrico Facial',       'Reconocimiento facial + huella, WiFi',    135.00, 'biometricos',25, '👆', 'BIO-FAC-3000'),
+            ('Kit Alarma Inalámbrica 6 Zonas',  'Central + sensores + sirena, app móvil',  120.00, 'alarmas',    18, '🔔', 'ALR-KIT-6Z'),
+            ('Kit Cerca Eléctrica 500m',        'Energizador 5J, alarma integrada',        189.00, 'cercas',     10, '⚡', 'CER-KIT-500'),
+            ('Fuente 12V 10A con Respaldo',     'Para 8 cámaras, batería incluida',         38.00, 'fuentes',    50, '🔌', 'FUE-12V-10A'),
+        ]
+        cursor.executemany('''
+            INSERT INTO productos (nombre, descripcion, precio, categoria, stock, emoji, sku)
+            VALUES (?, ?, ?, ?, ?, ?, ?)
+        ''', productos)
+
+    conn.commit()
+    conn.close()
+    print('✅ Base de datos lista.')
+
+
+# ══════════════════════════════════════════════════════════════
+# ── RUTAS PRINCIPALES ─────────────────────────────────────────
+# ══════════════════════════════════════════════════════════════
+
+@app.route('/')
+def index():
+    conn = get_db()
+    productos = conn.execute('SELECT * FROM productos LIMIT 4').fetchall()
+    conn.close()
+    return render_template('index.html', productos=productos)
+
+
+@app.route('/catalogo')
+def catalogo():
+    categoria = request.args.get('categoria', 'todos')
+    conn = get_db()
+    if categoria == 'todos':
+        productos = conn.execute('SELECT * FROM productos').fetchall()
+    else:
+        productos = conn.execute(
+            'SELECT * FROM productos WHERE categoria = ?', (categoria,)
+        ).fetchall()
+    conn.close()
+    return render_template('catalogo.html', productos=productos, categoria=categoria)
+
+
+@app.route('/producto/<int:id>')
+def producto(id):
+    conn = get_db()
+    prod = conn.execute('SELECT * FROM productos WHERE id = ?', (id,)).fetchone()
+    if not prod:
+        return redirect(url_for('catalogo'))
+    relacionados = conn.execute(
+        'SELECT * FROM productos WHERE categoria = ? AND id != ? LIMIT 4',
+        (prod['categoria'], id)
+    ).fetchall()
+    conn.close()
+    return render_template('producto.html', producto=prod, relacionados=relacionados)
+
+
+@app.route('/login', methods=['GET', 'POST'])
+def login():
+    if request.method == 'POST':
+        email    = request.form['email']
+        password = request.form['password']
+        conn = get_db()
+        usuario = conn.execute(
+            'SELECT * FROM usuarios WHERE email = ? AND password = ?',
+            (email, password)
+        ).fetchone()
+        conn.close()
+        if usuario:
+            session['usuario_id']     = usuario['id']
+            session['usuario_nombre'] = usuario['nombre']
+            flash('¡Bienvenido de vuelta, ' + usuario['nombre'] + '!', 'success')
+            return redirect(url_for('index'))
+        else:
+            flash('Correo o contraseña incorrectos.', 'error')
+    return render_template('login.html')
+
+
+@app.route('/registro', methods=['GET', 'POST'])
+def registro():
+    if request.method == 'POST':
+        nombre   = request.form['nombre']
+        apellido = request.form['apellido']
+        email    = request.form['email']
+        telefono = request.form.get('telefono', '')
+        password = request.form['password']
+        conn = get_db()
+        try:
+            conn.execute('''
+                INSERT INTO usuarios (nombre, apellido, email, telefono, password)
+                VALUES (?, ?, ?, ?, ?)
+            ''', (nombre, apellido, email, telefono, password))
+            conn.commit()
+            flash('¡Cuenta creada exitosamente! Ya puedes iniciar sesión.', 'success')
+            return redirect(url_for('login'))
+        except sqlite3.IntegrityError:
+            flash('Ese correo ya está registrado.', 'error')
+        finally:
+            conn.close()
+    return render_template('registro.html')
+
+
+@app.route('/logout')
+def logout():
+    session.clear()
+    flash('Sesión cerrada correctamente.', 'success')
+    return redirect(url_for('index'))
+
+
+@app.route('/carrito')
+def carrito():
+    carrito = session.get('carrito', [])
+    subtotal  = sum(item['precio'] * item['cantidad'] for item in carrito)
+    impuestos = subtotal * 0.15
+    total     = subtotal + impuestos
+    return render_template('carrito.html',
+        carrito=carrito,
+        subtotal=round(subtotal, 2),
+        impuestos=round(impuestos, 2),
+        total=round(total, 2)
+    )
+
+
+@app.route('/agregar_carrito/<int:producto_id>', methods=['POST'])
+def agregar_carrito(producto_id):
+    cantidad = int(request.form.get('cantidad', 1))
+    conn = get_db()
+    prod = conn.execute('SELECT * FROM productos WHERE id = ?', (producto_id,)).fetchone()
+    conn.close()
+    if not prod:
+        return redirect(url_for('catalogo'))
+    carrito = session.get('carrito', [])
+    for item in carrito:
+        if item['id'] == producto_id:
+            item['cantidad'] += cantidad
+            session['carrito'] = carrito
+            flash(prod['nombre'] + ' actualizado en el carrito.', 'success')
+            return redirect(request.referrer or url_for('catalogo'))
+    carrito.append({
+        'id':        producto_id,
+        'nombre':    prod['nombre'],
+        'precio':    prod['precio'],
+        'emoji':     prod['emoji'],
+        'cantidad':  cantidad,
+        'categoria': prod['categoria']
+    })
+    session['carrito'] = carrito
+    flash(prod['nombre'] + ' agregado al carrito.', 'success')
+    return redirect(request.referrer or url_for('catalogo'))
+
+
+@app.route('/eliminar_carrito/<int:producto_id>')
+def eliminar_carrito(producto_id):
+    carrito = session.get('carrito', [])
+    carrito = [item for item in carrito if item['id'] != producto_id]
+    session['carrito'] = carrito
+    return redirect(url_for('carrito'))
+
+
+@app.route('/checkout', methods=['GET', 'POST'])
+def checkout():
+    carrito = session.get('carrito', [])
+    if not carrito:
+        return redirect(url_for('carrito'))
+    subtotal  = sum(item['precio'] * item['cantidad'] for item in carrito)
+    impuestos = subtotal * 0.15
+    total     = subtotal + impuestos
+    if request.method == 'POST':
+        nombre    = request.form['nombre']
+        apellido  = request.form['apellido']
+        email     = request.form['email']
+        telefono  = request.form['telefono']
+        pais      = request.form['pais']
+        direccion = request.form['direccion']
+        ciudad    = request.form['ciudad']
+        numero_pedido = '#SV-' + str(random.randint(10000, 99999))
+        conn   = get_db()
+        cursor = conn.cursor()
+        cursor.execute('''
+            INSERT INTO pedidos (usuario_id, numero, total, nombre, email, direccion, ciudad, pais)
+            VALUES (?, ?, ?, ?, ?, ?, ?, ?)
+        ''', (
+            session.get('usuario_id'), numero_pedido, round(total, 2),
+            nombre + ' ' + apellido, email, direccion, ciudad, pais
+        ))
+        pedido_id = cursor.lastrowid
+        for item in carrito:
+            cursor.execute('''
+                INSERT INTO detalle_pedido (pedido_id, producto_id, nombre, precio, cantidad, subtotal)
+                VALUES (?, ?, ?, ?, ?, ?)
+            ''', (pedido_id, item['id'], item['nombre'], item['precio'],
+                  item['cantidad'], item['precio'] * item['cantidad']))
+        conn.commit()
+        conn.close()
+        session['ultimo_pedido'] = {
+            'numero':    numero_pedido,
+            'nombre':    nombre + ' ' + apellido,
+            'email':     email,
+            'direccion': direccion,
+            'ciudad':    ciudad,
+            'pais':      pais,
+            'carrito':   carrito,
+            'subtotal':  round(subtotal, 2),
+            'impuestos': round(impuestos, 2),
+            'total':     round(total, 2),
+            'fecha':     datetime.now().strftime('%d de %B, %Y')
+        }
+        session['carrito'] = []
+        return redirect(url_for('factura'))
+    return render_template('checkout.html',
+        carrito=carrito,
+        subtotal=round(subtotal, 2),
+        impuestos=round(impuestos, 2),
+        total=round(total, 2)
+    )
+
+
+@app.route('/factura')
+def factura():
+    pedido = session.get('ultimo_pedido')
+    if not pedido:
+        return redirect(url_for('index'))
+    return render_template('factura.html', pedido=pedido)
+
+
+# ══════════════════════════════════════════════════════════════
+# ── RUTAS .HTML ───────────────────────────────────────────────
+# ── Permiten que los links href="pagina.html" funcionen       ─
+# ── sin cambiar nada en tus archivos HTML                     ─
+# ══════════════════════════════════════════════════════════════
+
+@app.route('/index.html')
+def index_html():
+    return redirect(url_for('index'))
+
+@app.route('/catalogo.html')
+def catalogo_html():
+    return redirect(url_for('catalogo'))
+
+@app.route('/producto.html')
+def producto_html():
+    return redirect(url_for('catalogo'))
+
+@app.route('/login.html')
+def login_html():
+    return redirect(url_for('login'))
+
+@app.route('/registro.html')
+def registro_html():
+    return redirect(url_for('registro'))
+
+@app.route('/carrito.html')
+def carrito_html():
+    return redirect(url_for('carrito'))
+
+@app.route('/checkout.html')
+def checkout_html():
+    return redirect(url_for('checkout'))
+
+@app.route('/factura.html')
+def factura_html():
+    return redirect(url_for('factura'))
+
+
+# ── INICIAR SERVIDOR ────────────────────────────────────────
+if __name__ == '__main__':
+    init_db()
+    print('🚀 SecureVision corriendo en http://127.0.0.1:5000')
+    app.run(debug=True)
