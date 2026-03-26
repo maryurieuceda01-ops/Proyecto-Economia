@@ -1,9 +1,3 @@
-1) los filtros no se aplican bien 
-2) el orden y la vista no se aplican bien 
-3) no hay lista de favoritos 
-4) no se puede agregar al carrito desde catalogo 
-5) validar el cupon 
-6) precio unitario en el carrito y factura
 7) no se puede conectar a la base de datos
 8) login no marca error si no esta registrado 
 9) no aparece en la base de datos el usuario , cuando se registra 
