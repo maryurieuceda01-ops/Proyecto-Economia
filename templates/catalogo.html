@@ -161,24 +161,32 @@
 </head>
 <body>
 
-  <nav>
-    <a href="#" class="logo">SECURE<span>VISION</span></a>
-    <ul class="nav-links">
-      <li><a href="#">Inicio</a></li>
-      <li><a href="#" class="active">Catálogo</a></li>
-      <li><a href="#">Nosotros</a></li>
-      <li><a href="#">Contacto</a></li>
-    </ul>
-    <div class="nav-actions">
-      <div class="action-icon" id="favModeBtn" onclick="toggleFavMode()" title="Ver Favoritos">
-        ❤ <span class="badge badge-fav" id="favBadge">0</span>
-      </div>
-      <div class="action-icon" onclick="toggleCart(true)">
-        🛒 <span class="badge badge-cart" id="cartBadge">0</span>
-      </div>
-      <a href="#" class="btn-nav">Iniciar Sesión</a>
+<nav>
+  <a href="{{ url_for('index') }}" class="logo">SECURE<span>VISION</span></a>
+  
+  <ul class="nav-links">
+    <li><a href="{{ url_for('index') }}">Inicio</a></li>
+    <li><a href="{{ url_for('catalogo') }}">Catálogo</a></li>
+    <li><a href="{{ url_for('nosotros') }}">Nosotros</a></li>
+    <li><a href="{{ url_for('contacto') }}">Contacto</a></li>
+  </ul>
+
+  <div class="nav-actions">
+    <div class="action-icon" id="favModeBtn" onclick="toggleFavMode()" title="Ver Favoritos">
+      ❤ <span class="badge badge-fav" id="favBadge">0</span>
     </div>
-  </nav>
+
+    <div class="action-icon" onclick="toggleCart(true)" style="cursor: pointer;">
+      🛒 <span class="badge badge-cart" id="cartBadge">{{ session.get('carrito', [])|length }}</span>
+    </div>
+
+    {% if session.get('usuario_nombre') %}
+      <a href="{{ url_for('logout') }}" class="btn-nav">Cerrar Sesión</a>
+    {% else %}
+      <a href="{{ url_for('login') }}" class="btn-nav">Iniciar Sesión</a>
+    {% endif %}
+  </div>
+</nav>
 
   <div class="cart-overlay" id="cartOverlay">
     <div class="cart-header">
@@ -196,12 +204,15 @@
       </div>
       <div id="couponMsg" class="coupon-msg"></div>
     </div>
-    <div class="cart-footer">
-      <div class="cart-summary-line"><span>Subtotal:</span><span id="cartSubtotal">0.00 HNL</span></div>
-      <div class="cart-summary-line" id="discountLine" style="display: none;"><span>Descuento:</span><span id="cartDiscount" class="discount-amt">-0.00 HNL</span></div>
-      <div class="cart-total-row"><span>Total:</span><span id="cartTotalPrice">0.00 HNL</span></div>
-      <button class="btn-checkout">Finalizar Compra</button>
-    </div>
+      <div class="cart-footer">
+        <div class="cart-summary-line"><span>Subtotal:</span><span id="cartSubtotal">0.00 HNL</span></div>
+        <div class="cart-summary-line" id="discountLine" style="display: none;"><span>Descuento:</span><span id="cartDiscount" class="discount-amt">-0.00 HNL</span></div>
+        <div class="cart-total-row"><span>Total:</span><span id="cartTotalPrice">0.00 HNL</span></div>
+        
+        <a href="{{ url_for('checkout') }}" style="text-decoration: none;">
+          <button class="btn-checkout">Finalizar Compra</button>
+        </a>
+      </div>
   </div>
 
   <div class="page-header">

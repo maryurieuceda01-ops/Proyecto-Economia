@@ -1,0 +1,351 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Nosotros | SecureVision</title>
+  <link href="https://fonts.googleapis.com/css2?family=Rajdhani:wght@400;600;700&family=Inter:wght@300;400;500&display=swap" rel="stylesheet"/>
+  <style>
+    :root {
+      --bg: #080810;
+      --bg2: #0d0d1a;
+      --blue: #0066ff;
+      --blue-glow: #0044cc;
+      --cyan: #00cfff;
+      --white: #f0f4ff;
+      --gray: #8890aa;
+      --card-bg: #10101e;
+      --border: rgba(0, 102, 255, 0.2);
+    }
+
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+
+    body {
+      background: var(--bg);
+      color: var(--white);
+      font-family: 'Inter', sans-serif;
+      overflow-x: hidden;
+    }
+
+    /* ── NAVBAR (Igual al Index) ── */
+    nav {
+      position: fixed;
+      top: 0; left: 0; right: 0;
+      z-index: 100;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 18px 60px;
+      background: rgba(8, 8, 16, 0.85);
+      backdrop-filter: blur(12px);
+      border-bottom: 1px solid var(--border);
+    }
+
+    .logo {
+      font-family: 'Rajdhani', sans-serif;
+      font-size: 1.6rem;
+      font-weight: 700;
+      letter-spacing: 2px;
+      color: var(--white);
+      text-decoration: none;
+    }
+
+    .logo span { color: var(--blue); }
+
+    .nav-links {
+      display: flex;
+      gap: 36px;
+      list-style: none;
+    }
+
+    .nav-links a {
+      text-decoration: none;
+      color: var(--gray);
+      font-size: 0.85rem;
+      letter-spacing: 1px;
+      text-transform: uppercase;
+      transition: color 0.2s;
+    }
+
+    .nav-links a:hover, .nav-links a.active { color: var(--white); }
+
+    .nav-actions {
+      display: flex;
+      align-items: center;
+      gap: 16px;
+    }
+
+    .btn-nav {
+      background: var(--blue);
+      color: #fff;
+      border: none;
+      padding: 9px 22px;
+      border-radius: 4px;
+      font-size: 0.82rem;
+      letter-spacing: 1px;
+      text-transform: uppercase;
+      cursor: pointer;
+      transition: background 0.2s;
+      text-decoration: none;
+    }
+
+    .cart-icon { position: relative; cursor: pointer; color: var(--gray); font-size: 1.2rem; }
+    .cart-badge {
+      position: absolute; top: -6px; right: -8px;
+      background: var(--blue); color: #fff; font-size: 0.6rem;
+      width: 16px; height: 16px; border-radius: 50%;
+      display: flex; align-items: center; justify-content: center;
+    }
+
+    /* ── HERO NOSOTROS ── */
+    .about-hero {
+      padding: 180px 60px 100px;
+      background: linear-gradient(to bottom, var(--bg), var(--bg2));
+      position: relative;
+      text-align: center;
+    }
+
+    .hero-grid {
+      position: absolute; inset: 0;
+      background-image: linear-gradient(rgba(0,102,255,0.04) 1px, transparent 1px), linear-gradient(90deg, rgba(0,102,255,0.04) 1px, transparent 1px);
+      background-size: 50px 50px;
+      pointer-events: none;
+    }
+
+    .about-hero h1 {
+      font-family: 'Rajdhani', sans-serif;
+      font-size: 3.5rem;
+      margin-bottom: 20px;
+    }
+
+    .about-hero h1 span { color: var(--blue); }
+
+    .about-hero p {
+      max-width: 700px;
+      margin: 0 auto;
+      color: var(--gray);
+      line-height: 1.8;
+      font-size: 1.1rem;
+    }
+
+    /* ── SECCIÓN HISTORIA / RESUMEN ── */
+    .section { padding: 90px 60px; }
+    .content-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 60px;
+      align-items: center;
+    }
+
+    .text-content h2 {
+      font-family: 'Rajdhani', sans-serif;
+      font-size: 2.2rem;
+      margin-bottom: 24px;
+    }
+
+    .text-content p {
+      color: var(--gray);
+      line-height: 1.8;
+      margin-bottom: 20px;
+    }
+
+    .experience-box {
+      background: var(--card-bg);
+      border: 1px solid var(--border);
+      padding: 40px;
+      border-radius: 8px;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .experience-box::after {
+      content: 'EST. 2011';
+      position: absolute;
+      bottom: -10px; right: 10px;
+      font-family: 'Rajdhani', sans-serif;
+      font-size: 5rem;
+      font-weight: 700;
+      opacity: 0.03;
+    }
+
+    /* ── MISION Y VISION ── */
+    .mv-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 30px;
+      margin-top: 50px;
+    }
+
+    .mv-card {
+      background: rgba(255,255,255,0.02);
+      border: 1px solid var(--border);
+      padding: 40px;
+      border-radius: 4px;
+      transition: 0.3s;
+    }
+
+    .mv-card:hover { border-color: var(--cyan); background: rgba(0,207,255,0.03); }
+
+    .mv-card h3 {
+      font-family: 'Rajdhani', sans-serif;
+      color: var(--cyan);
+      letter-spacing: 2px;
+      text-transform: uppercase;
+      margin-bottom: 15px;
+    }
+
+    /* ── STATS (Reutilizado del Index) ── */
+    .stats {
+      display: flex;
+      justify-content: center;
+      background: var(--bg2);
+      border-top: 1px solid var(--border);
+      border-bottom: 1px solid var(--border);
+    }
+
+    .stat { flex: 1; padding: 40px; text-align: center; border-right: 1px solid var(--border); }
+    .stat:last-child { border-right: none; }
+    .stat-number { font-family: 'Rajdhani', sans-serif; font-size: 2.5rem; font-weight: 700; color: var(--blue); }
+    .stat-label { font-size: 0.75rem; color: var(--gray); letter-spacing: 2px; text-transform: uppercase; }
+
+    /* ── FOOTER (Igual al Index) ── */
+    footer { background: var(--bg2); border-top: 1px solid var(--border); padding: 60px; }
+    .footer-grid { display: grid; grid-template-columns: 2fr 1fr 1fr 1fr; gap: 40px; margin-bottom: 40px; }
+    .footer-col h4 { font-family: 'Rajdhani', sans-serif; font-size: 0.85rem; letter-spacing: 2px; text-transform: uppercase; color: var(--white); margin-bottom: 18px; }
+    .footer-col ul { list-style: none; }
+    .footer-col ul li { margin-bottom: 10px; }
+    .footer-col ul li a { color: var(--gray); text-decoration: none; font-size: 0.82rem; transition: color 0.2s; }
+    .footer-col ul li a:hover { color: var(--blue); }
+    .footer-bottom { border-top: 1px solid var(--border); padding-top: 24px; display: flex; justify-content: space-between; align-items: center; }
+    .footer-bottom p { color: var(--gray); font-size: 0.75rem; }
+
+    @media (max-width: 900px) {
+      .content-grid, .mv-grid, .footer-grid { grid-template-columns: 1fr; }
+      nav { padding: 18px 24px; }
+      .nav-links { display: none; }
+      .section { padding: 60px 24px; }
+      .about-hero h1 { font-size: 2.5rem; }
+    }
+  </style>
+</head>
+<body>
+
+  <nav>
+    <a href="{{ url_for('index') }}" class="logo">SECURE<span>VISION</span></a>
+    
+    <ul class="nav-links">
+        <li><a href="{{ url_for('index') }}">Inicio</a></li>
+        <li><a href="{{ url_for('catalogo') }}">Catálogo</a></li>
+        <li><a href="{{ url_for('nosotros') }}">Nosotros</a></li>
+        <li><a href="{{ url_for('contacto') }}">Contacto</a></li>
+    </ul>
+
+    <div class="nav-actions">
+        <div class="cart-icon" onclick="window.location.href='{{ url_for('carrito') }}'" style="cursor: pointer;">
+            🛒
+            <span class="cart-badge">{{ session.get('carrito', [])|length }}</span>
+        </div>
+
+        {% if session.get('usuario_nombre') %}
+            <span class="user-welcome">Hola, {{ session['usuario_nombre'] }}</span>
+            <a href="{{ url_for('logout') }}" class="btn-nav">Cerrar Sesión</a>
+        {% else %}
+            <a href="{{ url_for('login') }}" class="btn-nav">Iniciar Sesión</a>
+        {% endif %}
+    </div>
+</nav>
+
+  <section class="about-hero">
+    <div class="hero-grid"></div>
+    <div style="position:relative; z-index:2">
+      <div style="color:var(--blue); letter-spacing:4px; text-transform:uppercase; font-size:0.75rem; margin-bottom:15px;">// Nuestra Trayectoria</div>
+      <h1>Líderes en <span>Seguridad Digital</span></h1>
+      <p>Desde nuestra fundación, hemos redefinido los estándares de protección, fusionando tecnología de vanguardia con soluciones accesibles para cada hogar y empresa.</p>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="content-grid">
+      <div class="text-content">
+        <h2>¿Qué <span>Hacemos?</span></h2>
+        <p>En <strong>SecureVision</strong>, no solo vendemos equipos; diseñamos ecosistemas de protección. Nos especializamos en la distribución de tecnología avanzada en CCTV, controles de acceso biométricos y sistemas de intrusión inteligentes.</p>
+        <p>Nacimos en el año <strong>2011</strong> con el firme propósito de democratizar la seguridad de alto nivel, permitiendo que tanto pequeños negocios como grandes corporaciones tengan el control total de sus espacios en tiempo real.</p>
+      </div>
+      <div class="experience-box">
+        <div style="font-family:'Rajdhani'; font-size:4rem; color:var(--cyan); font-weight:700;">15+</div>
+        <div style="letter-spacing:3px; text-transform:uppercase; color:var(--white); margin-top:-10px; margin-bottom:20px;">Años de Experiencia</div>
+        <p style="color:var(--gray); font-size:0.9rem;">Operando con los más altos estándares de calidad y certificaciones internacionales en el área de seguridad electrónica.</p>
+      </div>
+    </div>
+
+    <div class="mv-grid">
+      <div class="mv-card">
+        <h3>Nuestra Misión</h3>
+        <p style="color:var(--gray); line-height:1.7;">Proveer soluciones de seguridad integrales e innovadoras que garanticen la tranquilidad de nuestros clientes, apoyándonos en tecnología de punta y un soporte técnico excepcional disponible en todo momento.</p>
+      </div>
+      <div class="mv-card">
+        <h3>Nuestra Visión</h3>
+        <p style="color:var(--gray); line-height:1.7;">Convertirnos para el 2030 en la principal red de seguridad inteligente a nivel global, liderando la transición hacia ciudades conectadas y entornos protegidos por inteligencia artificial.</p>
+      </div>
+    </div>
+  </section>
+
+  <div class="stats">
+    <div class="stat">
+      <div class="stat-number">18+</div>
+      <div class="stat-label">Sedes Nacionales</div>
+    </div>
+    <div class="stat">
+      <div class="stat-number">250k</div>
+      <div class="stat-label">Dispositivos Activos</div>
+    </div>
+    <div class="stat">
+      <div class="stat-number">100%</div>
+      <div class="stat-label">Presencia Nacional</div>
+    </div>
+    <div class="stat">
+      <div class="stat-number">24/7</div>
+      <div class="stat-label">Monitoreo</div>
+    </div>
+  </div>
+
+  <footer>
+    <div class="footer-grid">
+      <div class="footer-brand">
+        <span class="logo">SECURE<span>VISION</span></span>
+        <p>Soluciones de seguridad electrónica profesional para hogares y empresas a nivel mundial.</p>
+      </div>
+      <div class="footer-col">
+        <h4>Productos</h4>
+        <ul>
+          <li><a href="#">Cámaras CCTV</a></li>
+          <li><a href="#">Monitores</a></li>
+          <li><a href="#">Alarmas</a></li>
+          <li><a href="#">Biométricos</a></li>
+        </ul>
+      </div>
+      <div class="footer-col">
+        <h4>Empresa</h4>
+        <ul>
+          <li><a href="nosotros.html">Nosotros</a></li>
+          <li><a href="#">Blog</a></li>
+          <li><a href="contacto.html">Contacto</a></li>
+        </ul>
+      </div>
+      <div class="footer-col">
+        <h4>Soporte</h4>
+        <ul>
+          <li><a href="#">Centro de ayuda</a></li>
+          <li><a href="#">Envíos</a></li>
+          <li><a href="#">Garantía</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <p>© 2026 SecureVision. Todos los derechos reservados.</p>
+      <p>Protegiendo tu futuro digital 💙</p>
+    </div>
+  </footer>
+
+</body>
+</html>

@@ -347,6 +347,22 @@ def checkout_html():
 def factura_html():
     return redirect(url_for('factura'))
 
+@app.route('/nosotros')
+def nosotros():
+    return render_template('nosotros.html')
+
+@app.route('/contacto')
+def contacto():
+    return render_template('contacto.html')
+
+@app.route('/nosotros.html')
+def nosotros_html():
+    return redirect(url_for('nosotros'))
+
+@app.route('/contacto.html')
+def contacto_html():
+    return redirect(url_for('contacto'))
+
 
 # ── INICIAR SERVIDOR ────────────────────────────────────────
 if __name__ == '__main__':

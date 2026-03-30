@@ -618,21 +618,29 @@
 
   <!-- NAVBAR -->
   <nav>
-    <div class="logo">SECURE<span>VISION</span></div>
+    <a href="{{ url_for('index') }}" class="logo" style="text-decoration: none;">SECURE<span>VISION</span></a>
+    
     <ul class="nav-links">
-      <li><a href="index.html">Inicio</a></li>
-      <li><a href="catalogo.html">Catálogo</a></li>
-      <li><a href="#">Nosotros</a></li>
-      <li><a href="#">Contacto</a></li>
+        <li><a href="{{ url_for('index') }}">Inicio</a></li>
+        <li><a href="{{ url_for('catalogo') }}">Catálogo</a></li>
+        <li><a href="{{ url_for('nosotros') }}">Nosotros</a></li>
+        <li><a href="{{ url_for('contacto') }}">Contacto</a></li>
     </ul>
+
     <div class="nav-actions">
-      <div class="cart-icon" onclick="window.location='carrito.html'">
-        🛒
-        <span class="cart-badge">0</span>
-      </div>
-      <a href="login.html" class="btn-nav">Iniciar Sesión</a>
+        <div class="cart-icon" onclick="window.location.href='{{ url_for('carrito') }}'" style="cursor: pointer;">
+            🛒
+            <span class="cart-badge">{{ session.get('carrito', [])|length }}</span>
+        </div>
+
+        {% if session.get('usuario_nombre') %}
+            <span class="user-welcome">Hola, {{ session['usuario_nombre'] }}</span>
+            <a href="{{ url_for('logout') }}" class="btn-nav">Cerrar Sesión</a>
+        {% else %}
+            <a href="{{ url_for('login') }}" class="btn-nav">Iniciar Sesión</a>
+        {% endif %}
     </div>
-  </nav>
+</nav>
 
   <!-- HERO -->
   <section class="hero">
