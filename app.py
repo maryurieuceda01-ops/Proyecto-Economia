@@ -14,15 +14,29 @@ DB_PATH  = os.path.join(BASE_DIR, 'database', 'tienda.db')
 
 # ── BASE DE DATOS ───────────────────────────────────────────
 def get_db():
-    conn = sqlite3.connect(DB_PATH)
-    conn.row_factory = sqlite3.Row
-    return conn
-
+    try:
+        conn = sqlite3.connect(DB_PATH)
+        conn.row_factory = sqlite3.Row
+        # Mensaje de verificación silencioso o log
+        return conn
+    except sqlite3.Error as e:
+        print(f"Error conectando a la base de datos: {e}")
+        return None
 
 def init_db():
+    # Verificamos si el archivo existe antes de intentar cualquier cosa
+    if os.path.exists(DB_PATH):
+        print(f"Conexión exitosa: Detectada base de datos en {DB_PATH}")
+    else:
+        print(f"Advertencia: No se encontró la DB en {DB_PATH}. Se creará una nueva.")
+
     conn = get_db()
+    if conn is None:
+        return
+
     cursor = conn.cursor()
 
+    # Mantenemos tus tablas tal cual
     cursor.execute('''
         CREATE TABLE IF NOT EXISTS usuarios (
             id        INTEGER PRIMARY KEY AUTOINCREMENT,
@@ -79,17 +93,18 @@ def init_db():
         )
     ''')
 
+    # Población de datos (solo si está vacía)
     cursor.execute('SELECT COUNT(*) FROM productos')
     if cursor.fetchone()[0] == 0:
         productos = [
             ('Cámara IP 4K Exterior Hikvision', 'Visión nocturna 40m, IP67, detección IA', 89.99,  'camaras',    47, '📹', 'CAM-HIK-4K-01'),
             ('Cámara Domo 2MP Interior Dahua',  'Full HD, gran angular 120°',              45.99,  'camaras',    30, '📷', 'CAM-DAH-2MP'),
-            ('Cámara PTZ 360° Zoom 30x',        'Seguimiento automático, IR 100m',         320.00, 'camaras',    12, '🎥', 'CAM-PTZ-30X'),
-            ('Monitor NVR 16 Canales',          'Pantalla 21", grabación continua',        245.00, 'monitores',  20, '🖥️', 'MON-NVR-16'),
-            ('Control Biométrico Facial',       'Reconocimiento facial + huella, WiFi',    135.00, 'biometricos',25, '👆', 'BIO-FAC-3000'),
-            ('Kit Alarma Inalámbrica 6 Zonas',  'Central + sensores + sirena, app móvil',  120.00, 'alarmas',    18, '🔔', 'ALR-KIT-6Z'),
-            ('Kit Cerca Eléctrica 500m',        'Energizador 5J, alarma integrada',        189.00, 'cercas',     10, '⚡', 'CER-KIT-500'),
-            ('Fuente 12V 10A con Respaldo',     'Para 8 cámaras, batería incluida',         38.00, 'fuentes',    50, '🔌', 'FUE-12V-10A'),
+            ('Cámara PTZ 360° Zoom 30x',         'Seguimiento automático, IR 100m',         320.00, 'camaras',    12, '🎥', 'CAM-PTZ-30X'),
+            ('Monitor NVR 16 Canales',           'Pantalla 21", grabación continua',        245.00, 'monitores',  20, '🖥️', 'MON-NVR-16'),
+            ('Control Biométrico Facial',        'Reconocimiento facial + huella, WiFi',    135.00, 'biometricos',25, '👆', 'BIO-FAC-3000'),
+            ('Kit Alarma Inalámbrica 6 Zonas',   'Central + sensores + sirena, app móvil',  120.00, 'alarmas',    18, '🔔', 'ALR-KIT-6Z'),
+            ('Kit Cerca Eléctrica 500m',         'Energizador 5J, alarma integrada',        189.00, 'cercas',     10, '⚡', 'CER-KIT-500'),
+            ('Fuente 12V 10A con Respaldo',      'Para 8 cámaras, batería incluida',         38.00, 'fuentes',    50, '🔌', 'FUE-12V-10A'),
         ]
         cursor.executemany('''
             INSERT INTO productos (nombre, descripcion, precio, categoria, stock, emoji, sku)
@@ -98,7 +113,7 @@ def init_db():
 
     conn.commit()
     conn.close()
-    print('✅ Base de datos lista.')
+    print('Base de datos verificada y lista para operar.')
 
 
 # ══════════════════════════════════════════════════════════════
@@ -115,16 +130,31 @@ def index():
 
 @app.route('/catalogo')
 def catalogo():
+    # Parámetros de búsqueda y página
     categoria = request.args.get('categoria', 'todos')
+    page = request.args.get('page', 1, type=int)
+    per_page = 16
+    offset = (page - 1) * per_page
+
     conn = get_db()
+    
+    # Lógica de filtrado y conteo para la paginación
     if categoria == 'todos':
-        productos = conn.execute('SELECT * FROM productos').fetchall()
+        total = conn.execute('SELECT COUNT(*) FROM productos').fetchone()[0]
+        productos = conn.execute('SELECT * FROM productos LIMIT ? OFFSET ?', (per_page, offset)).fetchall()
     else:
-        productos = conn.execute(
-            'SELECT * FROM productos WHERE categoria = ?', (categoria,)
-        ).fetchall()
+        total = conn.execute('SELECT COUNT(*) FROM productos WHERE categoria = ?', (categoria,)).fetchone()[0]
+        productos = conn.execute('SELECT * FROM productos WHERE categoria = ? LIMIT ? OFFSET ?', 
+                                 (categoria, per_page, offset)).fetchall()
     conn.close()
-    return render_template('catalogo.html', productos=productos, categoria=categoria)
+
+    total_pages = (total + per_page - 1) // per_page
+
+    return render_template('catalogo.html', 
+                           productos=productos, 
+                           categoria=categoria, 
+                           current_page=page, 
+                           total_pages=total_pages)
 
 
 @app.route('/producto/<int:id>')
@@ -367,5 +397,5 @@ def contacto_html():
 # ── INICIAR SERVIDOR ────────────────────────────────────────
 if __name__ == '__main__':
     init_db()
-    print('🚀 SecureVision corriendo en http://127.0.0.1:5000')
+    print('SecureVision corriendo en http://127.0.0.1:5000')
     app.run(debug=True)

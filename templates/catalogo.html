@@ -19,497 +19,268 @@
     }
 
     * { margin: 0; padding: 0; box-sizing: border-box; }
+    body { background: var(--bg); color: var(--white); font-family: 'Inter', sans-serif; overflow-x: hidden; }
 
-    body {
-      background: var(--bg);
-      color: var(--white);
-      font-family: 'Inter', sans-serif;
-      overflow-x: hidden;
-    }
-
+    /* ── NAVBAR ── */
     nav {
-      position: fixed;
-      top: 0; left: 0; right: 0;
-      z-index: 100;
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      padding: 18px 60px;
-      background: rgba(8, 8, 16, 0.95);
-      backdrop-filter: blur(12px);
-      border-bottom: 1px solid var(--border);
+      position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+      display: flex; align-items: center; justify-content: space-between;
+      padding: 18px 60px; background: rgba(8, 8, 16, 0.85);
+      backdrop-filter: blur(12px); border-bottom: 1px solid var(--border);
     }
-
-    .logo {
-      font-family: 'Rajdhani', sans-serif;
-      font-size: 1.6rem;
-      font-weight: 700;
-      letter-spacing: 2px;
-      color: var(--white);
-      text-decoration: none;
-    }
+    .logo { font-family: 'Rajdhani', sans-serif; font-size: 1.6rem; font-weight: 700; letter-spacing: 2px; color: var(--white); text-decoration: none; }
     .logo span { color: var(--blue); }
-
     .nav-links { display: flex; gap: 36px; list-style: none; }
     .nav-links a { text-decoration: none; color: var(--gray); font-size: 0.85rem; letter-spacing: 1px; text-transform: uppercase; transition: color 0.2s; }
-    .nav-links a:hover, .nav-links a.active { color: var(--white); }
+    .nav-links a:hover { color: var(--white); }
 
-    .nav-actions { display: flex; align-items: center; gap: 20px; }
-    
-    .action-icon { position: relative; cursor: pointer; color: var(--gray); font-size: 1.2rem; transition: color 0.2s; display: flex; align-items: center; }
-    .action-icon:hover { color: var(--white); }
-    .action-icon.active-filter { color: #e63946; }
-
-    .badge { position: absolute; top: -8px; right: -10px; color: #fff; font-size: 0.65rem; width: 18px; height: 18px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-weight: bold; }
-    .badge-fav { background: #e63946; }
-    .badge-cart { background: var(--blue); }
-
+    .nav-actions { display: flex; align-items: center; gap: 16px; }
     .btn-nav { background: var(--blue); color: #fff; border: none; padding: 9px 22px; border-radius: 4px; font-size: 0.82rem; letter-spacing: 1px; text-transform: uppercase; cursor: pointer; transition: background 0.2s; text-decoration: none; }
+    .btn-nav:hover { background: var(--blue-glow); }
+    .user-welcome { font-size: 0.8rem; color: var(--gray); }
 
-    
-    .page-header { padding: 120px 60px 50px; background: var(--bg2); border-bottom: 1px solid var(--border); position: relative; }
-    .page-header-tag { font-size: 0.72rem; letter-spacing: 3px; text-transform: uppercase; color: var(--blue); margin-bottom: 10px; }
-    .page-header h1 { font-family: 'Rajdhani', sans-serif; font-size: 2.5rem; font-weight: 700; }
+    .cart-icon { position: relative; cursor: pointer; color: var(--gray); font-size: 1.2rem; transition: color 0.2s; }
+    .cart-badge { position: absolute; top: -6px; right: -8px; background: var(--blue); color: #fff; font-size: 0.6rem; width: 16px; height: 16px; border-radius: 50%; display: flex; align-items: center; justify-content: center; }
+
+    /* ── CATALOGO LAYOUT ── */
+    .page-header { padding: 140px 60px 50px; background: var(--bg2); border-bottom: 1px solid var(--border); text-align: left; }
+    .page-header-tag { color: var(--blue); font-size: 0.72rem; letter-spacing: 3px; text-transform: uppercase; margin-bottom: 12px; }
+    .page-header h1 { font-family: 'Rajdhani', sans-serif; font-size: 2.8rem; font-weight: 700; }
     .page-header h1 span { color: var(--blue); }
-    .page-header p { color: var(--gray); font-size: 0.9rem; margin-top: 10px; }
 
     .catalog-layout { display: grid; grid-template-columns: 260px 1fr; min-height: 100vh; }
+    
+    /* ── SIDEBAR ── */
+    .sidebar { background: var(--bg2); border-right: 1px solid var(--border); padding: 36px 24px; position: sticky; top: 70px; height: calc(100vh - 70px); }
+    .sidebar-title { font-family: 'Rajdhani', sans-serif; font-size: 0.8rem; letter-spacing: 2px; color: var(--gray); text-transform: uppercase; margin-bottom: 16px; border-bottom: 1px solid var(--border); padding-bottom: 8px; }
+    .filter-btn { display: block; width: 100%; text-align: left; background: transparent; border: none; color: var(--gray); padding: 10px; cursor: pointer; transition: 0.2s; font-size: 0.85rem; border-radius: 4px; }
+    .filter-btn:hover, .filter-btn.active { color: var(--white); background: rgba(0, 102, 255, 0.1); }
 
- 
-    .sidebar { background: var(--bg2); border-right: 1px solid var(--border); padding: 36px 24px; position: sticky; top: 70px; height: calc(100vh - 70px); overflow-y: auto; }
-    .sidebar-section { margin-bottom: 32px; }
-    .sidebar-title { font-family: 'Rajdhani', sans-serif; font-size: 0.8rem; letter-spacing: 2px; text-transform: uppercase; color: var(--gray); margin-bottom: 16px; padding-bottom: 8px; border-bottom: 1px solid var(--border); }
-
-    .filter-btn { display: block; width: 100%; text-align: left; background: transparent; border: 1px solid transparent; color: var(--gray); padding: 10px 14px; border-radius: 4px; cursor: pointer; transition: all 0.2s; margin-bottom: 6px; font-family: 'Inter', sans-serif; }
-    .filter-btn:hover { color: var(--white); background: rgba(0,102,255,0.08); }
-    .filter-btn.active { color: var(--white); background: rgba(0,102,255,0.12); border-color: rgba(0,102,255,0.4); }
-
-    .price-inputs { display: flex; flex-direction: column; gap: 10px; margin-bottom: 12px; width: 100%; }
-    .price-input-group { display: flex; gap: 8px; width: 100%; }
-    .price-input { width: 50%; background: var(--card-bg); border: 1px solid var(--border); color: var(--white); padding: 8px 10px; border-radius: 4px; font-size: 0.8rem; outline: none; }
-    .price-input:focus { border-color: var(--blue); }
-    .btn-apply { background: var(--blue); color: #fff; border: none; padding: 10px; border-radius: 4px; cursor: pointer; width: 100%; text-transform: uppercase; font-family: 'Inter', sans-serif; font-size: 0.75rem; transition: background 0.2s; }
-
-    .checkbox-filter { display: flex; align-items: center; gap: 10px; margin-bottom: 10px; cursor: pointer; }
-    .checkbox-filter label { font-size: 0.82rem; color: var(--gray); cursor: pointer; }
-
-   
+    /* ── PRODUCTOS ── */
     .products-area { padding: 30px 40px; }
     .products-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(260px, 1fr)); gap: 24px; }
+    .product-card { background: var(--card-bg); border: 1px solid var(--border); border-radius: 6px; overflow: hidden; transition: 0.25s; display: flex; flex-direction: column; }
+    .product-card:hover { border-color: var(--blue); transform: translateY(-4px); box-shadow: 0 12px 32px rgba(0, 102, 255, 0.15); }
+    .product-img { height: 200px; background: #13131f; display: flex; align-items: center; justify-content: center; font-size: 3rem; border-bottom: 1px solid var(--border); position: relative; }
+    .product-info { padding: 18px; flex-grow: 1; display: flex; flex-direction: column; }
+    .product-name { font-family: 'Rajdhani', sans-serif; font-size: 1.1rem; font-weight: 600; margin-bottom: 8px; }
+    .product-price { color: var(--cyan); font-weight: 700; font-size: 1.2rem; font-family: 'Rajdhani'; margin-bottom: 15px; }
+    .btn-add { background: var(--blue); color: white; border: none; padding: 10px; border-radius: 4px; cursor: pointer; text-transform: uppercase; font-size: 0.75rem; width: 100%; margin-top: auto; font-weight: 600; transition: 0.2s; }
+    .btn-add:hover { background: var(--blue-glow); }
 
-    .product-card { background: var(--card-bg); border: 1px solid var(--border); border-radius: 6px; overflow: hidden; transition: all 0.25s; display: flex; flex-direction: column; height: 480px; }
-    .product-card:hover { border-color: var(--blue); transform: translateY(-4px); box-shadow: 0 16px 40px rgba(0,102,255,0.15); }
-
-    .product-img { width: 100%; height: 200px; background: #13131f; display: flex; align-items: center; justify-content: center; font-size: 3.2rem; position: relative; border-bottom: 1px solid var(--border); flex-shrink: 0; }
-    
-    .product-info { padding: 18px; display: flex; flex-direction: column; flex-grow: 1; }
-    .product-category { font-size: 0.68rem; color: var(--blue); text-transform: uppercase; margin-bottom: 6px; letter-spacing: 2px; }
-    .product-name { font-family: 'Rajdhani', sans-serif; font-weight: 600; font-size: 1rem; margin-bottom: 8px; height: 2.4em; overflow: hidden; }
-    .product-desc { font-size: 0.75rem; color: var(--gray); line-height: 1.5; margin-bottom: 14px; height: 4.5em; overflow: hidden; }
-
-    .product-footer { margin-top: auto; display: flex; justify-content: space-between; align-items: center; padding-top: 10px; border-top: 1px solid rgba(255,255,255,0.05); }
-    .product-price { color: var(--cyan); font-weight: 700; font-size: 1.15rem; font-family: 'Rajdhani'; }
-    .product-price-old { font-size: 0.75rem; color: var(--gray); text-decoration: line-through; margin-left: 5px; }
-
-    .btn-add { background: var(--blue); color: #fff; border: none; padding: 0 15px; height: 36px; border-radius: 3px; cursor: pointer; font-size: 0.72rem; text-transform: uppercase; transition: 0.2s; }
-
-    .product-badge { position: absolute; top: 12px; left: 12px; font-size: 0.62rem; padding: 4px 10px; border-radius: 2px; color: #fff; text-transform: uppercase; z-index: 2; }
-    .product-badge.nuevo { background: #2dc653; }
-    .product-badge.oferta { background: #e63946; }
-
-    .product-wishlist { position: absolute; top: 12px; right: 12px; cursor: pointer; background: rgba(8,8,16,0.7); width: 32px; height: 32px; border-radius: 50%; display: flex; align-items: center; justify-content: center; border: 1px solid var(--border); color: white; z-index: 2; transition: 0.2s; }
-    .product-wishlist.active { color: #e63946; border-color: #e63946; }
-
-    .toolbar { display: flex; justify-content: space-between; align-items: center; margin-bottom: 28px; padding-bottom: 20px; border-bottom: 1px solid var(--border); }
-    .search-bar { display: flex; align-items: center; background: var(--card-bg); border: 1px solid var(--border); padding: 8px 14px; border-radius: 4px; gap: 8px; }
-    .search-bar input { background: transparent; border: none; color: var(--white); outline: none; width: 200px; }
-
-   
-    .cart-overlay { position: fixed; top: 0; right: -400px; width: 400px; height: 100%; background: var(--bg2); border-left: 1px solid var(--border); z-index: 200; transition: right 0.3s ease; display: flex; flex-direction: column; box-shadow: -10px 0 30px rgba(0,0,0,0.5); }
+    /* ── SLIDE DEL CARRITO ── */
+    .cart-overlay { position: fixed; top: 0; right: -420px; width: 400px; height: 100%; background: var(--bg2); border-left: 1px solid var(--border); z-index: 200; transition: right 0.4s cubic-bezier(0.4, 0, 0.2, 1); display: flex; flex-direction: column; box-shadow: -10px 0 30px rgba(0,0,0,0.5); }
     .cart-overlay.open { right: 0; }
     .cart-header { padding: 24px; border-bottom: 1px solid var(--border); display: flex; justify-content: space-between; align-items: center; }
-    .cart-header h2 { font-family: 'Rajdhani', sans-serif; text-transform: uppercase; font-size: 1.2rem; }
-    .close-cart { cursor: pointer; font-size: 1.5rem; color: var(--gray); }
     .cart-items { flex-grow: 1; overflow-y: auto; padding: 20px; }
-    .cart-item { display: flex; gap: 15px; margin-bottom: 20px; padding-bottom: 15px; border-bottom: 1px solid rgba(255,255,255,0.05); }
-    .cart-item-img { width: 60px; height: 60px; background: #13131f; border-radius: 4px; display: flex; align-items: center; justify-content: center; font-size: 1.5rem; }
-    .cart-item-info { flex-grow: 1; }
-    .cart-item-name { font-size: 0.85rem; font-weight: 600; margin-bottom: 4px; }
-    .cart-item-price { color: var(--cyan); font-size: 0.8rem; font-family: 'Rajdhani'; }
-    .cart-item-actions { display: flex; align-items: center; gap: 10px; margin-top: 8px; }
-    .qty-btn { background: var(--card-bg); border: 1px solid var(--border); color: white; width: 24px; height: 24px; cursor: pointer; border-radius: 2px; }
-    .remove-item { color: #e63946; font-size: 0.7rem; cursor: pointer; text-transform: uppercase; margin-left: auto; }
+    .cart-footer { padding: 24px; background: #0a0a15; border-top: 1px solid var(--border); }
+    .btn-checkout { background: var(--blue); color: white; border: none; width: 100%; padding: 14px; border-radius: 4px; cursor: pointer; font-weight: 700; text-transform: uppercase; letter-spacing: 1px; }
 
-    .cart-coupon-sec { padding: 15px 20px; background: rgba(0,102,255,0.03); border-top: 1px solid var(--border); }
-    .coupon-input-group { display: flex; gap: 8px; margin-top: 8px; }
-    .coupon-input { flex-grow: 1; background: var(--bg); border: 1px solid var(--border); color: white; padding: 8px; border-radius: 4px; font-size: 0.8rem; text-transform: uppercase; }
-    .btn-coupon { background: transparent; border: 1px solid var(--blue); color: var(--blue); padding: 0 12px; border-radius: 4px; font-size: 0.7rem; cursor: pointer; text-transform: uppercase; }
-    .coupon-msg { font-size: 0.7rem; margin-top: 5px; display: none; }
-
-    .cart-footer { padding: 24px; border-top: 1px solid var(--border); background: #0a0a15; }
-    .cart-summary-line { display: flex; justify-content: space-between; margin-bottom: 8px; font-size: 0.85rem; color: var(--gray); }
-    .cart-total-row { display: flex; justify-content: space-between; margin-top: 12px; padding-top: 12px; border-top: 1px dashed var(--border); font-family: 'Rajdhani'; font-size: 1.3rem; font-weight: 700; }
-    .discount-amt { color: #2dc653; }
-    .btn-checkout { background: var(--blue); color: white; border: none; width: 100%; padding: 14px; border-radius: 4px; text-transform: uppercase; font-weight: 700; cursor: pointer; letter-spacing: 1px; margin-top: 15px; }
+    /* ── FOOTER ── */
+    footer { background: var(--bg2); border-top: 1px solid var(--border); padding: 60px; margin-top: 50px; }
+    .footer-grid { display: grid; grid-template-columns: 2fr 1fr 1fr 1fr; gap: 40px; margin-bottom: 40px; }
+    .footer-brand .logo { font-size: 1.4rem; margin-bottom: 16px; display: block; }
+    .footer-brand p { color: var(--gray); font-size: 0.82rem; line-height: 1.8; max-width: 260px; }
+    .footer-col h4 { font-family: 'Rajdhani', sans-serif; font-size: 0.85rem; letter-spacing: 2px; text-transform: uppercase; color: var(--white); margin-bottom: 18px; }
+    .footer-col ul { list-style: none; }
+    .footer-col ul li { margin-bottom: 10px; }
+    .footer-col ul li a { color: var(--gray); text-decoration: none; font-size: 0.82rem; transition: color 0.2s; }
+    .footer-col ul li a:hover { color: var(--blue); }
+    .footer-bottom { border-top: 1px solid var(--border); padding-top: 24px; display: flex; justify-content: space-between; align-items: center; }
+    .footer-bottom p { color: var(--gray); font-size: 0.75rem; letter-spacing: 1px; }
 
     @media (max-width: 900px) {
+      nav { padding: 16px 24px; }
+      .nav-links { display: none; }
       .catalog-layout { grid-template-columns: 1fr; }
       .sidebar { display: none; }
-      .cart-overlay { width: 100%; right: -100%; }
+      .footer-grid { grid-template-columns: 1fr 1fr; }
     }
   </style>
 </head>
 <body>
 
 <nav>
-  <a href="{{ url_for('index') }}" class="logo">SECURE<span>VISION</span></a>
-  
-  <ul class="nav-links">
-    <li><a href="{{ url_for('index') }}">Inicio</a></li>
-    <li><a href="{{ url_for('catalogo') }}">Catálogo</a></li>
-    <li><a href="{{ url_for('nosotros') }}">Nosotros</a></li>
-    <li><a href="{{ url_for('contacto') }}">Contacto</a></li>
-  </ul>
+    <a href="{{ url_for('index') }}" class="logo">SECURE<span>VISION</span></a>
+    
+    <ul class="nav-links">
+        <li><a href="{{ url_for('index') }}">Inicio</a></li>
+        <li><a href="{{ url_for('catalogo') }}">Catálogo</a></li>
+        <li><a href="{{ url_for('nosotros') }}">Nosotros</a></li>
+        <li><a href="{{ url_for('contacto') }}">Contacto</a></li>
+    </ul>
 
-  <div class="nav-actions">
-    <div class="action-icon" id="favModeBtn" onclick="toggleFavMode()" title="Ver Favoritos">
-      ❤ <span class="badge badge-fav" id="favBadge">0</span>
+    <div class="nav-actions">
+        <div class="cart-icon" onclick="toggleCart(true)">
+            🛒
+            <span class="cart-badge" id="cartBadgeMain">{{ session.get('carrito', [])|length }}</span>
+        </div>
+
+        {% if session.get('usuario_nombre') %}
+            <span class="user-welcome">Hola, {{ session['usuario_nombre'] }}</span>
+            <a href="{{ url_for('logout') }}" class="btn-nav">Cerrar Sesión</a>
+        {% else %}
+            <a href="{{ url_for('login') }}" class="btn-nav">Iniciar Sesión</a>
+        {% endif %}
     </div>
-
-    <div class="action-icon" onclick="toggleCart(true)" style="cursor: pointer;">
-      🛒 <span class="badge badge-cart" id="cartBadge">{{ session.get('carrito', [])|length }}</span>
-    </div>
-
-    {% if session.get('usuario_nombre') %}
-      <a href="{{ url_for('logout') }}" class="btn-nav">Cerrar Sesión</a>
-    {% else %}
-      <a href="{{ url_for('login') }}" class="btn-nav">Iniciar Sesión</a>
-    {% endif %}
-  </div>
 </nav>
 
-  <div class="cart-overlay" id="cartOverlay">
-    <div class="cart-header">
-      <h2>Tu <span>Carrito</span></h2>
-      <div class="close-cart" onclick="toggleCart(false)">×</div>
+<div class="cart-overlay" id="cartOverlay">
+  <div class="cart-header">
+    <h2 style="font-family: 'Rajdhani';">TU <span>CARRITO</span></h2>
+    <div onclick="toggleCart(false)" style="cursor: pointer; font-size: 1.5rem;">×</div>
+  </div>
+  <div class="cart-items" id="cartItemsList">
+    <p style="text-align: center; color: var(--gray); margin-top: 20px;">Tu carrito está vacío</p>
+  </div>
+  <div class="cart-footer">
+    <div style="display: flex; justify-content: space-between; margin-bottom: 15px;">
+      <span>Total:</span>
+      <span id="cartTotalPrice" style="color: var(--cyan); font-weight: 700; font-size: 1.2rem;">0.00 HNL</span>
     </div>
-    <div class="cart-items" id="cartItemsList">
-      <p style="text-align: center; color: var(--gray); margin-top: 40px;">Tu carrito está vacío</p>
-    </div>
-    <div class="cart-coupon-sec">
-      <div style="font-size: 0.75rem; color: var(--gray); text-transform: uppercase; letter-spacing: 1px;">¿Tienes un cupón?</div>
-      <div class="coupon-input-group">
-        <input type="text" id="couponInput" class="coupon-input" placeholder="CÓDIGO">
-        <button class="btn-coupon" onclick="validateCoupon()">Aplicar</button>
-      </div>
-      <div id="couponMsg" class="coupon-msg"></div>
-    </div>
-      <div class="cart-footer">
-        <div class="cart-summary-line"><span>Subtotal:</span><span id="cartSubtotal">0.00 HNL</span></div>
-        <div class="cart-summary-line" id="discountLine" style="display: none;"><span>Descuento:</span><span id="cartDiscount" class="discount-amt">-0.00 HNL</span></div>
-        <div class="cart-total-row"><span>Total:</span><span id="cartTotalPrice">0.00 HNL</span></div>
+    <button class="btn-checkout" onclick="window.location.href='{{ url_for('carrito') }}'">Ver Carrito Completo</button>
+  </div>
+</div>
+
+<div class="page-header">
+  <div class="page-header-tag">// Inventario 2026</div>
+  <h1>Todos los <span>Productos</span></h1>
+</div>
+
+<div class="catalog-layout">
+  <aside class="sidebar">
+    <div class="sidebar-title">Categorías</div>
+    <button class="filter-btn active">Todos los productos</button>
+    <button class="filter-btn">📹 Cámaras CCTV</button>
+    <button class="filter-btn">🔔 Alarmas</button>
+    <button class="filter-btn">🖥️ Monitores</button>
+    <button class="filter-btn">👆 Biométricos</button>
+  </aside>
+
+  <main class="products-area">
+    <div class="products-grid">
+      {% for producto in productos %}
+      <div class="product-card">
+        <div class="product-img">
+          <img src="{{ url_for('static', filename='images/' + producto.sku + '.jpg') }}" 
+               style="width: 100%; height: 100%; object-fit: cover;" 
+               onerror="this.style.display='none'">
+          <span style="position: absolute;">{{ producto.emoji }}</span>
+        </div>
         
-        <a href="{{ url_for('checkout') }}" style="text-decoration: none;">
-          <button class="btn-checkout">Finalizar Compra</button>
-        </a>
-      </div>
-  </div>
-
-  <div class="page-header">
-    <div class="page-header-tag">// Catálogo Profesional</div>
-    <h1 id="pageTitle">Todos nuestros <span>Productos</span></h1>
-    <p>Equipos de seguridad avanzada para cada necesidad.</p>
-  </div>
-
-  <div class="catalog-layout">
-    <aside class="sidebar">
-      <div class="sidebar-section">
-        <div class="sidebar-title">Categorías</div>
-        <button class="filter-btn active" onclick="filterCategory(this, 'todos')">Todos los productos</button>
-        <button class="filter-btn" onclick="filterCategory(this, 'camaras')">📹 Cámaras CCTV</button>
-        <button class="filter-btn" onclick="filterCategory(this, 'monitores')">🖥️ Monitores</button>
-        <button class="filter-btn" onclick="filterCategory(this, 'alarmas')">🔔 Alarmas</button>
-        <button class="filter-btn" onclick="filterCategory(this, 'biometricos')">👆 Biométricos</button>
-        <button class="filter-btn" onclick="filterCategory(this, 'cercas')">⚡ Cercas Eléctricas</button>
-        <button class="filter-btn" onclick="filterCategory(this, 'fuentes')">🔌 Fuentes de Poder</button>
-        <button class="filter-btn" onclick="filterCategory(this, 'almacenamiento')">💾 Almacenamiento</button>
-      </div>
-
-      <div class="sidebar-section">
-        <div class="sidebar-title">Precio (HNL)</div>
-        <div class="price-inputs">
-          <div class="price-input-group">
-            <input type="number" class="price-input" id="minPrice" placeholder="Min">
-            <input type="number" class="price-input" id="maxPrice" placeholder="Max">
-          </div>
-          <button class="btn-apply" onclick="applyFilters()">Aplicar Filtro</button>
+        <div class="product-info">
+          <div class="product-name">{{ producto.nombre }}</div>
+          <div class="product-price">{{ producto.precio }} HNL</div>
+          
+          <button class="btn-add" 
+                  onclick="addToCart('{{ producto.id }}', '{{ producto.nombre }}', {{ producto.precio }}, '{{ producto.emoji }}')">
+            + Agregar al carrito
+          </button>
         </div>
       </div>
+      {% endfor %}
+    </div>
+  </main>
+</div>
 
-      <div class="sidebar-section">
-        <div class="sidebar-title">Marca</div>
-        <div class="checkbox-filter"><input type="checkbox" class="brand-check" value="hikvision" id="h" onchange="applyFilters()"><label for="h">Hikvision</label></div>
-        <div class="checkbox-filter"><input type="checkbox" class="brand-check" value="dahua" id="d" onchange="applyFilters()"><label for="d">Dahua</label></div>
-        <div class="checkbox-filter"><input type="checkbox" class="brand-check" value="tp-link" id="t" onchange="applyFilters()"><label for="t">TP-Link</label></div>
-        <div class="checkbox-filter"><input type="checkbox" class="brand-check" value="uniview" id="u" onchange="applyFilters()"><label for="u">Uniview</label></div>
+<footer>
+    <div class="footer-grid">
+      <div class="footer-brand">
+        <span class="logo">SECURE<span style="color:var(--blue)">VISION</span></span>
+        <p>Soluciones de seguridad electrónica profesional para hogares y empresas a nivel mundial.</p>
       </div>
-
-      <div class="sidebar-section">
-        <div class="sidebar-title">Disponibilidad</div>
-        <div class="checkbox-filter"><input type="checkbox" id="onlySale" onchange="applyFilters()"><label for="onlySale">En oferta</label></div>
-        <div class="checkbox-filter"><input type="checkbox" id="onlyNew" onchange="applyFilters()"><label for="onlyNew">Nuevos</label></div>
+      <div class="footer-col">
+        <h4>Productos</h4>
+        <ul>
+          <li><a href="#">Cámaras CCTV</a></li>
+          <li><a href="#">Monitores</a></li>
+          <li><a href="#">Alarmas</a></li>
+          <li><a href="#">Biométricos</a></li>
+        </ul>
       </div>
-    </aside>
-
-    <main class="products-area">
-      <div class="toolbar">
-        <div class="results-count">Mostrando <span>0</span> de <span>10</span> productos</div>
-        <div class="search-bar">🔍 <input type="text" id="searchInput" placeholder="Buscar..."></div>
+      <div class="footer-col">
+        <h4>Empresa</h4>
+        <ul>
+          <li><a href="{{ url_for('nosotros') }}">Nosotros</a></li>
+          <li><a href="#">Blog</a></li>
+          <li><a href="{{ url_for('contacto') }}">Contacto</a></li>
+        </ul>
       </div>
-
-      <div class="products-grid" id="productsGrid">
-        <div class="product-card" data-id="1" data-category="camaras" data-brand="hikvision">
-          <div class="product-img">📹 <span class="product-badge nuevo">Nuevo</span> <div class="product-wishlist" onclick="toggleFav(this, 1)">♡</div></div>
-          <div class="product-info">
-            <div class="product-category">Cámaras CCTV</div>
-            <div class="product-name">Cámara IP 4K Exterior Hikvision</div>
-            <div class="product-desc">Visión nocturna 40m, IP67, detección de movimiento IA avanzada.</div>
-            <div class="product-footer">
-              <span class="product-price">8,400.00 HNL</span>
-              <button class="btn-add" onclick="addToCart(1, 'Cámara IP 4K Exterior', 8400, '📹')">+ Carrito</button>
-            </div>
-          </div>
-        </div>
-        <div class="product-card" data-id="2" data-category="camaras" data-brand="dahua">
-          <div class="product-img">📷 <span class="product-badge oferta">Oferta</span> <div class="product-wishlist" onclick="toggleFav(this, 2)">♡</div></div>
-          <div class="product-info">
-            <div class="product-category">Cámaras CCTV</div>
-            <div class="product-name">Cámara Domo 2MP Interior Dahua</div>
-            <div class="product-desc">Full HD, gran angular 120°, ideal para interiores y oficinas.</div>
-            <div class="product-footer">
-              <div><span class="product-price">1,800.00 HNL</span><span class="product-price-old">2,250.00 HNL</span></div>
-              <button class="btn-add" onclick="addToCart(2, 'Cámara Domo 2MP', 1800, '📷')">+ Carrito</button>
-            </div>
-          </div>
-        </div>
-        <div class="product-card" data-id="3" data-category="monitores" data-brand="hikvision">
-          <div class="product-img">🖥️ <div class="product-wishlist" onclick="toggleFav(this, 3)">♡</div></div>
-          <div class="product-info">
-            <div class="product-category">Monitores</div>
-            <div class="product-name">Monitor NVR 16 Canales Full HD</div>
-            <div class="product-desc">Pantalla 21", grabación continua, acceso remoto app.</div>
-            <div class="product-footer">
-              <span class="product-price">6,400.00 HNL</span>
-              <button class="btn-add" onclick="addToCart(3, 'Monitor NVR 16 Ch', 6400, '🖥️')">+ Carrito</button>
-            </div>
-          </div>
-        </div>
-        <div class="product-card" data-id="4" data-category="biometricos" data-brand="hikvision">
-          <div class="product-img">👆 <span class="product-badge oferta">Oferta</span> <div class="product-wishlist" onclick="toggleFav(this, 4)">♡</div></div>
-          <div class="product-info">
-            <div class="product-category">Biométricos</div>
-            <div class="product-name">Control Biométrico Facial + Huella</div>
-            <div class="product-desc">3000 usuarios, WiFi, reconocimiento en 0.3 seg.</div>
-            <div class="product-footer">
-              <div><span class="product-price">3,700.00 HNL</span><span class="product-price-old">4,890.00 HNL</span></div>
-              <button class="btn-add" onclick="addToCart(4, 'Biométrico Facial', 3700, '👆')">+ Carrito</button>
-            </div>
-          </div>
-        </div>
-        <div class="product-card" data-id="5" data-category="alarmas" data-brand="tp-link">
-          <div class="product-img">🔔 <div class="product-wishlist" onclick="toggleFav(this, 5)">♡</div></div>
-          <div class="product-info">
-            <div class="product-category">Alarmas</div>
-            <div class="product-name">Kit Alarma Inalámbrica 6 Zonas</div>
-            <div class="product-desc">Central + 6 sensores + sirena, app móvil, batería 24h.</div>
-            <div class="product-footer">
-              <span class="product-price">3,200.00 HNL</span>
-              <button class="btn-add" onclick="addToCart(5, 'Kit Alarma 6 Zonas', 3200, '🔔')">+ Carrito</button>
-            </div>
-          </div>
-        </div>
-        <div class="product-card" data-id="6" data-category="cercas" data-brand="uniview">
-          <div class="product-img">⚡ <span class="product-badge nuevo">Nuevo</span> <div class="product-wishlist" onclick="toggleFav(this, 6)">♡</div></div>
-          <div class="product-info">
-            <div class="product-category">Cercas Eléctricas</div>
-            <div class="product-name">Kit Cerca Eléctrica 500m</div>
-            <div class="product-desc">Energizador 5J, alarma integrada, resistente a lluvia.</div>
-            <div class="product-footer">
-              <span class="product-price">1,890.00 HNL</span>
-              <button class="btn-add" onclick="addToCart(6, 'Kit Cerca Eléctrica', 1890, '⚡')">+ Carrito</button>
-            </div>
-          </div>
-        </div>
-        <div class="product-card" data-id="7" data-category="fuentes" data-brand="dahua">
-          <div class="product-img">🔌 <div class="product-wishlist" onclick="toggleFav(this, 7)">♡</div></div>
-          <div class="product-info">
-            <div class="product-category">Fuentes de Poder</div>
-            <div class="product-name">Fuente 12V 10A con Respaldo</div>
-            <div class="product-desc">Para 8 cámaras, batería incluida, caja metálica.</div>
-            <div class="product-footer">
-              <span class="product-price">600.00 HNL</span>
-              <button class="btn-add" onclick="addToCart(7, 'Fuente 12V 10A', 600, '🔌')">+ Carrito</button>
-            </div>
-          </div>
-        </div>
-        <div class="product-card" data-id="8" data-category="camaras" data-brand="hikvision">
-          <div class="product-img">🎥 <span class="product-badge">Popular</span> <div class="product-wishlist" onclick="toggleFav(this, 8)">♡</div></div>
-          <div class="product-info">
-            <div class="product-category">Cámaras CCTV</div>
-            <div class="product-name">Cámara PTZ 360° Zoom 30x</div>
-            <div class="product-desc">Zoom óptico 30x, seguimiento automático, visión nocturna.</div>
-            <div class="product-footer">
-              <span class="product-price">8,200.00 HNL</span>
-              <button class="btn-add" onclick="addToCart(8, 'Cámara PTZ 360°', 8200, '🎥')">+ Carrito</button>
-            </div>
-          </div>
-        </div>
-        <div class="product-card" data-id="9" data-category="monitores" data-brand="hikvision">
-          <div class="product-img">📹 <div class="product-wishlist" onclick="toggleFav(this, 9)">♡</div></div>
-          <div class="product-info">
-            <div class="product-category">Grabadores</div>
-            <div class="product-name">NVR Hikvision 8 Canales 4K</div>
-            <div class="product-desc">Soporta cámaras hasta 8MP, salida HDMI/VGA.</div>
-            <div class="product-footer">
-              <span class="product-price">4,500.00 HNL</span>
-              <button class="btn-add" onclick="addToCart(9, 'NVR Hikvision 8 Ch', 4500, '📹')">+ Carrito</button>
-            </div>
-          </div>
-        </div>
-        <div class="product-card" data-id="10" data-category="almacenamiento" data-brand="hikvision">
-          <div class="product-img">💾 <span class="product-badge oferta">Oferta</span> <div class="product-wishlist" onclick="toggleFav(this, 10)">♡</div></div>
-          <div class="product-info">
-            <div class="product-category">Almacenamiento</div>
-            <div class="product-name">Disco Duro WD Purple 4TB</div>
-            <div class="product-desc">Especial para videovigilancia 24/7, tecnología AllFrame.</div>
-            <div class="product-footer">
-              <div><span class="product-price">2,900.00 HNL</span><span class="product-price-old">3,400.00 HNL</span></div>
-              <button class="btn-add" onclick="addToCart(10, 'Disco Duro 4TB', 2900, '💾')">+ Carrito</button>
-            </div>
-          </div>
-        </div>
+      <div class="footer-col">
+        <h4>Soporte</h4>
+        <ul>
+          <li><a href="#">Centro de ayuda</a></li>
+          <li><a href="#">Envíos</a></li>
+          <li><a href="#">Garantía</a></li>
+        </ul>
       </div>
-    </main>
-  </div>
+    </div>
+    <div class="footer-bottom">
+      <p>© 2026 SecureVision. Todos los derechos reservados.</p>
+      <p>Hecho con 💙 para proteger el mundo</p>
+    </div>
+</footer>
 
-  <script>
-    let cart = [];
-    let favList = [];
-    let currentCategory = 'todos';
-    let isFavMode = false;
-    let activeDiscount = 0;
+<script>
+  let cartData = [];
 
-    
-    function validateCoupon() {
-      const input = document.getElementById('couponInput').value.toUpperCase();
-      const msg = document.getElementById('couponMsg');
-      if(input === 'PROMO20') { activeDiscount = 0.20; msg.style.display = 'block'; msg.style.color = '#2dc653'; msg.textContent = '¡20% aplicado!'; }
-      else if(input === 'SECURE10') { activeDiscount = 0.10; msg.style.display = 'block'; msg.style.color = '#2dc653'; msg.textContent = '¡10% aplicado!'; }
-      else { activeDiscount = 0; msg.style.display = 'block'; msg.style.color = '#e63946'; msg.textContent = 'Inválido'; }
-      updateCartUI();
-    }
+  function toggleCart(open) {
+    document.getElementById('cartOverlay').classList.toggle('open', open);
+  }
 
-    
-    function toggleCart(open) { document.getElementById('cartOverlay').classList.toggle('open', open); }
-
-    function addToCart(id, name, price, icon) {
-      const item = cart.find(i => i.id === id);
-      if(item) item.qty++; else cart.push({id, name, price, icon, qty: 1});
-      updateCartUI();
-      toggleCart(true);
-    }
-
-    function changeQty(id, delta) {
-      const item = cart.find(i => i.id === id);
-      if(item) { item.qty += delta; if(item.qty <= 0) cart = cart.filter(i => i.id !== id); }
-      updateCartUI();
-    }
-
-    function updateCartUI() {
-      const list = document.getElementById('cartItemsList');
-      let subtotal = 0, count = 0;
-      if(cart.length === 0) {
-        list.innerHTML = `<p style="text-align: center; color: var(--gray); margin-top: 40px;">Tu carrito está vacío</p>`;
-        activeDiscount = 0;
-      } else {
-        list.innerHTML = cart.map(item => {
-          subtotal += item.price * item.qty; count += item.qty;
-          return `<div class="cart-item"><div class="cart-item-img">${item.icon}</div><div class="cart-item-info">
-          <div class="cart-item-name">${item.name}</div><div class="cart-item-price">${item.price.toLocaleString()} HNL</div>
-          <div class="cart-item-actions"><button class="qty-btn" onclick="changeQty(${item.id},-1)">-</button><span>${item.qty}</span><button class="qty-btn" onclick="changeQty(${item.id},1)">+</button><span class="remove-item" onclick="changeQty(${item.id},-${item.qty})">Eliminar</span></div></div></div>`;
-        }).join('');
-      }
-      const desc = subtotal * activeDiscount;
-      document.getElementById('cartBadge').textContent = count;
-      document.getElementById('cartSubtotal').textContent = subtotal.toLocaleString() + ' HNL';
-      document.getElementById('discountLine').style.display = desc > 0 ? 'flex' : 'none';
-      document.getElementById('cartDiscount').textContent = `-${desc.toLocaleString()} HNL`;
-      document.getElementById('cartTotalPrice').textContent = (subtotal - desc).toLocaleString() + ' HNL';
-    }
-
-   
-    function filterCategory(btn, cat) {
-      document.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('active'));
-      btn.classList.add('active');
-      currentCategory = cat;
-      applyFilters();
-    }
-
-    function applyFilters() {
-      const query = document.getElementById('searchInput').value.toLowerCase();
-      const minP = parseFloat(document.getElementById('minPrice').value) || 0;
-      const maxP = parseFloat(document.getElementById('maxPrice').value) || Infinity;
-      const selectedBrands = Array.from(document.querySelectorAll('.brand-check:checked')).map(cb => cb.value);
-      const onlyNew = document.getElementById('onlyNew').checked;
-      const onlySale = document.getElementById('onlySale').checked;
-
-      const cards = document.querySelectorAll('.product-card');
-      let count = 0;
-
-      cards.forEach(card => {
-        const id = parseInt(card.dataset.id);
-        const name = card.querySelector('.product-name').textContent.toLowerCase();
-        const cat = card.dataset.category;
-        const brand = card.dataset.brand;
-        const price = parseFloat(card.querySelector('.product-price').textContent.replace(/,/g, '').replace(' HNL', ''));
-        const isNew = card.querySelector('.product-badge.nuevo') !== null;
-        const isSale = card.querySelector('.product-badge.oferta') !== null;
-
-        const matchCat = currentCategory === 'todos' || cat === currentCategory;
-        const matchSearch = name.includes(query);
-        const matchPrice = price >= minP && price <= maxP;
-        const matchBrand = selectedBrands.length === 0 || selectedBrands.includes(brand);
-        const matchNew = !onlyNew || isNew;
-        const matchSale = !onlySale || isSale;
-        const matchFav = !isFavMode || favList.includes(id);
-
-        if(matchCat && matchSearch && matchPrice && matchBrand && matchNew && matchSale && matchFav) {
-          card.style.display = 'flex';
-          count++;
-        } else {
-          card.style.display = 'none';
-        }
+  async function addToCart(id, name, price, emoji) {
+    try {
+      const response = await fetch(`/agregar_carrito/${id}`, { 
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' }
       });
-      document.querySelector('.results-count span').textContent = count;
+
+      if (response.ok) {
+        const existingItem = cartData.find(i => i.id === id);
+        if (existingItem) {
+            existingItem.qty++;
+        } else {
+            // Ahora 'emoji' se guarda correctamente
+            cartData.push({ id, name, price, emoji, qty: 1 }); 
+        }
+        updateCartUI();
+        toggleCart(true);
+      }
+    } catch (error) {
+      console.error("Error al agregar:", error);
+    }
+  }
+
+  function updateCartUI() {
+    const list = document.getElementById('cartItemsList');
+    const badge = document.getElementById('cartBadgeMain');
+    let total = 0;
+    let count = 0;
+
+    if (cartData.length === 0) {
+      list.innerHTML = '<p style="text-align: center; color: var(--gray); margin-top: 20px;">Tu carrito está vacío</p>';
+    } else {
+      list.innerHTML = cartData.map(item => {
+        total += (item.price * item.qty);
+        count += item.qty;
+        return `
+          <div style="display: flex; gap: 15px; margin-bottom: 15px; border-bottom: 1px solid rgba(255,255,255,0.05); padding-bottom: 10px;">
+            <div style="background: #13131f; padding: 10px; border-radius: 4px; font-size: 1.2rem; display: flex; align-items: center; justify-content: center; width: 50px; height: 50px;"> 
+                ${item.emoji} 
+            </div> 
+            <div style="flex-grow: 1;">
+              <div style="font-size: 0.85rem; font-weight: 600; font-family: 'Rajdhani'; color: white;"> ${item.name} </div>
+              <div style="color: var(--cyan); font-size: 0.8rem; font-family: 'Rajdhani';"> ${item.price.toLocaleString()} HNL x ${item.qty} </div>
+            </div>
+          </div>
+        `;
+      }).join('');
     }
 
-    function toggleFavMode() {
-      isFavMode = !isFavMode;
-      document.getElementById('favModeBtn').classList.toggle('active-filter', isFavMode);
-      document.getElementById('pageTitle').innerHTML = isFavMode ? "Mis <span>Favoritos</span>" : "Todos nuestros <span>Productos</span>";
-      applyFilters();
-    }
+    badge.textContent = count;
+    document.getElementById('cartTotalPrice').textContent = total.toLocaleString(undefined, {minimumFractionDigits: 2}) + ' HNL';
+  }
+</script>
 
-    function toggleFav(element, id) {
-      const idx = favList.indexOf(id);
-      if(idx === -1) { favList.push(id); element.textContent = '♥'; element.classList.add('active'); }
-      else { favList.splice(idx, 1); element.textContent = '♡'; element.classList.remove('active'); }
-      document.getElementById('favBadge').textContent = favList.length;
-      if(isFavMode) applyFilters();
-    }
-
-    document.getElementById('searchInput').addEventListener('input', applyFilters);
-    window.onload = applyFilters;
-  </script>
 </body>
 </html>

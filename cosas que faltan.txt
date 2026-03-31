@@ -1,9 +1,9 @@
-7) no se puede conectar a la base de datos
+7) no se puede conectar a la base de datos ----conexion realizada
 8) login no marca error si no esta registrado 
 9) no aparece en la base de datos el usuario , cuando se registra 
 10) imagenes 
-11)nosotros
-12)contacto 
+11)nosotros ---- vista agregada
+12)contacto ---- vista agregada
 13) enlaces del pie de pagina 
 14)probar el chekut 
 15) descargar pdf y imprimir factura
