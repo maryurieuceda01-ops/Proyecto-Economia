@@ -1,13 +1,13 @@
 7) no se puede conectar a la base de datos ----conexion realizada
-8) login no marca error si no esta registrado 
-9) no aparece en la base de datos el usuario , cuando se registra 
+8) login no marca error si no esta registrado -- Ya funciona.
+9) no aparece en la base de datos el usuario, cuando se registra -- Ya aparece el usuario en la bd.
 10) imagenes 
-11)nosotros ---- vista agregada
-12)contacto ---- vista agregada
+11) nosotros ---- vista agregada
+12) contacto ---- vista agregada
 13) enlaces del pie de pagina 
-14)probar el chekut 
-15) descargar pdf y imprimir factura
-16 )sello de verifiacion Código de verificación, Simulación de QR que funcionen 
+14) probar el chekut 
+15) descargar pdf e imprimir factura
+16) sello de verifiacion Código de verificación, Simulación de QR que funcionen 
 17) validar login para continuar con google o facebook
 18) enlace de producto en catalogo 
 19) contador dinamico de carrito 
