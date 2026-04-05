@@ -357,6 +357,25 @@
 
     .login-link a:hover { color: var(--cyan); }
 
+    .alert {
+      border-radius: 5px;
+      padding: 12px 16px;
+      font-size: 0.82rem;
+      margin-bottom: 20px;
+    }
+
+    .alert-error {
+      background: rgba(230,57,70,0.1);
+      border: 1px solid rgba(230,57,70,0.3);
+      color: var(--error);
+    }
+
+    .alert-success {
+      background: rgba(45,198,83,0.1);
+      border: 1px solid rgba(45,198,83,0.3);
+      color: var(--success);
+    }
+
     @keyframes fadeUp {
       from { opacity: 0; transform: translateY(20px); }
       to   { opacity: 1; transform: translateY(0); }
@@ -416,13 +435,23 @@
         <p>¿Ya tienes cuenta? <a href="login.html">Inicia sesión</a></p>
       </div>
 
+      {% with messages = get_flashed_messages(with_categories=true) %}
+        {% for category, message in messages %}
+          <div class="alert {% if category == 'error' %}alert-error{% else %}alert-success{% endif %}">
+            {{ message }}
+          </div>
+        {% endfor %}
+      {% endwith %}
+
+      <form id="registerForm" method="POST" action="/registro">
+
       <!-- Nombres -->
       <div class="form-row">
         <div class="form-group">
           <label class="form-label">Nombre</label>
           <div class="input-wrapper">
             <span class="input-icon">👤</span>
-            <input type="text" class="form-input" id="nombre" placeholder="Tu nombre"/>
+            <input type="text" class="form-input" id="nombre" name="nombre" placeholder="Tu nombre"/>
           </div>
           <div class="error-msg" id="nombreError">Campo requerido</div>
         </div>
@@ -430,7 +459,7 @@
           <label class="form-label">Apellido</label>
           <div class="input-wrapper">
             <span class="input-icon">👤</span>
-            <input type="text" class="form-input" id="apellido" placeholder="Tu apellido"/>
+            <input type="text" class="form-input" id="apellido" name="apellido" placeholder="Tu apellido"/>
           </div>
           <div class="error-msg" id="apellidoError">Campo requerido</div>
         </div>
@@ -441,7 +470,7 @@
         <label class="form-label">Correo Electrónico</label>
         <div class="input-wrapper">
           <span class="input-icon">📧</span>
-          <input type="email" class="form-input" id="email" placeholder="tucorreo@ejemplo.com"/>
+          <input type="email" class="form-input" id="email" name="email" placeholder="tucorreo@ejemplo.com"/>
         </div>
         <div class="error-msg" id="emailError">Ingresa un correo válido</div>
       </div>
@@ -451,7 +480,7 @@
         <label class="form-label">Teléfono</label>
         <div class="input-wrapper">
           <span class="input-icon">📱</span>
-          <input type="tel" class="form-input" id="telefono" placeholder="+504 0000-0000"/>
+          <input type="tel" class="form-input" id="telefono" name="telefono" placeholder="+504 0000-0000"/>
         </div>
       </div>
 
@@ -460,7 +489,7 @@
         <label class="form-label">Contraseña</label>
         <div class="input-wrapper">
           <span class="input-icon">🔒</span>
-          <input type="password" class="form-input" id="password" placeholder="Mínimo 8 caracteres" oninput="checkStrength()"/>
+          <input type="password" class="form-input" id="password" name="password" placeholder="Mínimo 8 caracteres" oninput="checkStrength()"/>
           <button class="toggle-password" onclick="togglePass('password')" type="button">👁️</button>
         </div>
         <div class="password-strength">
@@ -485,13 +514,16 @@
 
       <!-- Términos -->
       <div class="terms-check">
-        <input type="checkbox" id="terms"/>
+        <input type="checkbox" id="terms" onchange="if(this.checked) document.getElementById('termsError').style.display='none'"/>
         <label for="terms">
           Acepto los <a href="#">Términos y Condiciones</a> y la <a href="#">Política de Privacidad</a> de SecureVision
         </label>
       </div>
+      <div class="error-msg" id="termsError" style="margin-top:-10px; margin-bottom:12px;">Debes aceptar los términos y condiciones</div>
 
-      <button class="btn-register" onclick="handleRegister()">Crear Cuenta</button>
+      <button type="button" class="btn-register" onclick="handleRegister()">Crear Cuenta</button>
+
+      </form>
 
       <div class="login-link">
         ¿Ya tienes cuenta? <a href="login.html">Inicia sesión aquí</a>
@@ -570,13 +602,14 @@
 
       // Términos
       if (!document.getElementById('terms').checked) {
-        alert('Debes aceptar los términos y condiciones');
+        document.getElementById('termsError').style.display = 'block';
         valid = false;
+      } else {
+        document.getElementById('termsError').style.display = 'none';
       }
 
       if (valid) {
-        // Por ahora redirige al login (cuando haya backend guardará en BD)
-        window.location.href = 'login.html';
+        document.getElementById('registerForm').submit();
       }
     }
   </script>

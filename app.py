@@ -1,6 +1,7 @@
 from flask import Flask, render_template, request, redirect, url_for, session, flash
 import sqlite3
 import os
+from difflib import SequenceMatcher
 from datetime import datetime
 import random
 
@@ -392,6 +393,51 @@ def nosotros_html():
 @app.route('/contacto.html')
 def contacto_html():
     return redirect(url_for('contacto'))
+
+
+@app.route('/recuperar', methods=['GET', 'POST'])
+def recuperar():
+    paso = 'verificar'
+    if request.method == 'POST':
+        accion = request.form.get('accion', 'verificar')
+
+        if accion == 'verificar':
+            email    = request.form['email']
+            password = request.form['password']
+            conn = get_db()
+            usuario = conn.execute(
+                'SELECT * FROM usuarios WHERE email = ?', (email,)
+            ).fetchone()
+            conn.close()
+            if usuario:
+                similitud = SequenceMatcher(None, password, usuario['password']).ratio()
+                if similitud >= 0.5:
+                    paso = 'nueva'
+                    return render_template('recuperar.html', paso=paso, email=email)
+                else:
+                    flash('La contraseña no se parece a la anterior.', 'error')
+            else:
+                flash('No encontramos una cuenta con ese correo.', 'error')
+
+        elif accion == 'cambiar':
+            email        = request.form['email']
+            new_password = request.form['new_password']
+            conn = get_db()
+            conn.execute(
+                'UPDATE usuarios SET password = ? WHERE email = ?',
+                (new_password, email)
+            )
+            conn.commit()
+            conn.close()
+            flash('¡Contraseña actualizada! Ya puedes iniciar sesión.', 'success')
+            return redirect(url_for('login'))
+
+    return render_template('recuperar.html', paso=paso)
+
+
+@app.route('/recuperar.html')
+def recuperar_html():
+    return redirect(url_for('recuperar'))
 
 
 # ── INICIAR SERVIDOR ────────────────────────────────────────
