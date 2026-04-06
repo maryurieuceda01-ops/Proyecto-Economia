@@ -1,6 +1,7 @@
 from flask import Flask, render_template, request, redirect, url_for, session, flash
 import sqlite3
 import os
+import re
 from difflib import SequenceMatcher
 from datetime import datetime
 import random
@@ -37,7 +38,7 @@ def init_db():
 
     cursor = conn.cursor()
 
-    # Mantenemos tus tablas tal cual
+    # Tablas necesarias para la tienda online
     cursor.execute('''
         CREATE TABLE IF NOT EXISTS usuarios (
             id        INTEGER PRIMARY KEY AUTOINCREMENT,
@@ -343,7 +344,6 @@ def factura():
 # ══════════════════════════════════════════════════════════════
 # ── RUTAS .HTML ───────────────────────────────────────────────
 # ── Permiten que los links href="pagina.html" funcionen       ─
-# ── sin cambiar nada en tus archivos HTML                     ─
 # ══════════════════════════════════════════════════════════════
 
 @app.route('/index.html')
@@ -438,6 +438,85 @@ def recuperar():
 @app.route('/recuperar.html')
 def recuperar_html():
     return redirect(url_for('recuperar'))
+
+
+# ══════════════════════════════════════════════════════════════
+# ── LOGIN SOCIAL (Google / Facebook simulado) ─────────────────
+# ══════════════════════════════════════════════════════════════
+
+@app.route('/login-google')
+def login_google():
+    return render_template('login_google.html')
+
+
+@app.route('/login-facebook')
+def login_facebook():
+    return render_template('login_facebook.html')
+
+
+@app.route('/procesar-login-social', methods=['POST'])
+def procesar_login_social():
+    email    = request.form.get('email', '').strip().lower()
+    password = request.form.get('password', '')
+
+    if not email or '@' not in email:
+        flash('Correo inválido.', 'error')
+        return redirect(url_for('login'))
+
+    # Extraer nombre y apellido del correo
+    local_part = email.split('@')[0]
+    # Limpiar caracteres numéricos y especiales del local_part para obtener palabras
+    clean = re.sub(r'[^a-záéíóúñü]', ' ', local_part)
+    words = [w for w in clean.split() if w]
+
+    apellidos_random = [
+        'García', 'Rodríguez', 'Martínez', 'López', 'González',
+        'Hernández', 'Pérez', 'Sánchez', 'Ramírez', 'Torres',
+        'Flores', 'Rivera', 'Gómez', 'Díaz', 'Cruz',
+        'Morales', 'Reyes', 'Gutiérrez', 'Ortiz', 'Castillo',
+        'Espinoza', 'Vargas', 'Medina', 'Castro', 'Rojas',
+    ]
+
+    if len(words) >= 2:
+        nombre   = words[0].capitalize()
+        apellido = words[1].capitalize()
+    elif len(words) == 1:
+        nombre   = words[0].capitalize()
+        apellido = random.choice(apellidos_random)
+    else:
+        nombre   = 'Usuario'
+        apellido = random.choice(apellidos_random)
+
+    conn = get_db()
+    usuario = conn.execute('SELECT * FROM usuarios WHERE email = ?', (email,)).fetchone()
+
+    if usuario:
+        # Ya existe → iniciar sesión
+        session['usuario_id']     = usuario['id']
+        session['usuario_nombre'] = usuario['nombre']
+        flash('¡Bienvenido de vuelta, ' + usuario['nombre'] + '!', 'success')
+    else:
+        # Registrar nuevo usuario
+        fecha    = datetime.now().strftime('%Y-%m-%d %H:%M:%S')
+        telefono = str(random.randint(1000, 9999)) + str(random.randint(1000, 9999))
+        try:
+            conn.execute('''
+                INSERT INTO usuarios (nombre, apellido, email, telefono, password, fecha)
+                VALUES (?, ?, ?, ?, ?, ?)
+            ''', (nombre, apellido, email, telefono, password, fecha))
+            conn.commit()
+            # Obtener el usuario recién creado
+            nuevo = conn.execute('SELECT * FROM usuarios WHERE email = ?', (email,)).fetchone()
+            session['usuario_id']     = nuevo['id']
+            session['usuario_nombre'] = nuevo['nombre']
+            flash('¡Cuenta creada e inicio de sesión exitoso, ' + nombre + '!', 'success')
+        except sqlite3.IntegrityError:
+            flash('Error al crear la cuenta.', 'error')
+            conn.close()
+            return redirect(url_for('login'))
+
+    conn.close()
+    return redirect(url_for('index'))
 
 
 # ── INICIAR SERVIDOR ────────────────────────────────────────

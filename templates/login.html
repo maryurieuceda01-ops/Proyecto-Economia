@@ -351,30 +351,40 @@
     /* Social buttons */
     .social-btns {
       display: flex;
+      flex-direction: column;
       gap: 12px;
       margin-bottom: 28px;
     }
 
     .btn-social {
-      flex: 1;
-      background: var(--card-bg);
-      border: 1px solid var(--border);
+      width: 100%;
+      background: #2a2a3a;
+      border: 1px solid rgba(255,255,255,0.08);
       color: var(--white);
-      padding: 11px;
+      padding: 14px;
       border-radius: 5px;
-      font-size: 0.82rem;
+      font-size: 0.88rem;
+      font-weight: 500;
       cursor: pointer;
       font-family: 'Inter', sans-serif;
-      transition: all 0.2s;
+      transition: all 0.25s ease;
       display: flex;
       align-items: center;
       justify-content: center;
-      gap: 8px;
+      gap: 14px;
+      text-decoration: none;
+    }
+
+    .btn-social svg {
+      width: 22px;
+      height: 22px;
+      flex-shrink: 0;
     }
 
     .btn-social:hover {
+      background: #353548;
       border-color: var(--blue);
-      background: rgba(0,102,255,0.08);
+      box-shadow: 0 0 12px rgba(0, 102, 255, 0.25);
     }
 
     .register-link {
@@ -518,8 +528,14 @@
       </div>
 
       <div class="social-btns">
-        <button class="btn-social">🌐 Google</button>
-        <button class="btn-social">📘 Facebook</button>
+        <button class="btn-social" onclick="window.location.href='/login-google'">
+          <svg viewBox="0 0 48 48"><path fill="#EA4335" d="M24 9.5c3.54 0 6.71 1.22 9.21 3.6l6.85-6.85C35.9 2.38 30.47 0 24 0 14.62 0 6.51 5.38 2.56 13.22l7.98 6.19C12.43 13.72 17.74 9.5 24 9.5z"/><path fill="#4285F4" d="M46.98 24.55c0-1.57-.15-3.09-.38-4.55H24v9.02h12.94c-.58 2.96-2.26 5.48-4.78 7.18l7.73 6c4.51-4.18 7.09-10.36 7.09-17.65z"/><path fill="#FBBC05" d="M10.53 28.59c-.48-1.45-.76-2.99-.76-4.59s.27-3.14.76-4.59l-7.98-6.19C.92 16.46 0 20.12 0 24c0 3.88.92 7.54 2.56 10.78l7.97-6.19z"/><path fill="#34A853" d="M24 48c6.48 0 11.93-2.13 15.89-5.81l-7.73-6c-2.15 1.45-4.92 2.3-8.16 2.3-6.26 0-11.57-4.22-13.47-9.91l-7.98 6.19C6.51 42.62 14.62 48 24 48z"/></svg>
+          Usar Google
+        </button>
+        <button class="btn-social" onclick="window.location.href='/login-facebook'">
+          <svg viewBox="0 0 48 48"><circle cx="24" cy="24" r="24" fill="#1877F2"/><path fill="#fff" d="M33.12 30.94l.93-6.07h-5.82v-3.94c0-1.66.81-3.28 3.42-3.28h2.65v-5.17s-2.4-.41-4.7-.41c-4.8 0-7.93 2.91-7.93 8.17v4.63h-5.33v6.07h5.33V48.1c1.07.17 2.16.26 3.28.26s2.21-.09 3.28-.26V30.94h4.89z"/></svg>
+          Usar Facebook
+        </button>
       </div>
 
       <div class="register-link">

