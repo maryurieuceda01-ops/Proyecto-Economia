@@ -341,6 +341,15 @@ def factura():
     return render_template('factura.html', pedido=pedido)
 
 
+
+# ══════════════════════════════════════════════════════════════
+# ── RUTA POLÍTICA DE PRIVACIDAD ───────────────────────────────
+# ══════════════════════════════════════════════════════════════
+
+@app.route('/privacidad')
+def privacidad():
+    return render_template('privacidad.html')
+
 # ══════════════════════════════════════════════════════════════
 # ── RUTAS .HTML ───────────────────────────────────────────────
 # ── Permiten que los links href="pagina.html" funcionen       ─

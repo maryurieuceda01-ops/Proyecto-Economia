@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Nosotros | SecureVision</title>
+  <title>¿Quiénes somos? | SecureVision</title>
   <link href="https://fonts.googleapis.com/css2?family=Rajdhani:wght@400;600;700&family=Inter:wght@300;400;500&display=swap" rel="stylesheet"/>
   <style>
     :root {
@@ -126,6 +126,7 @@
       color: var(--gray);
       line-height: 1.8;
       font-size: 1.1rem;
+      text-align: justify;
     }
 
     /* ── SECCIÓN HISTORIA / RESUMEN ── */
@@ -147,9 +148,13 @@
       color: var(--gray);
       line-height: 1.8;
       margin-bottom: 20px;
+      text-align: justify;
     }
 
     .experience-box {
+          .experience-box p {
+            text-align: justify;
+          }
       background: var(--card-bg);
       border: 1px solid var(--border);
       padding: 40px;
@@ -187,6 +192,9 @@
     .mv-card:hover { border-color: var(--cyan); background: rgba(0,207,255,0.03); }
 
     .mv-card h3 {
+          .mv-card p {
+            text-align: justify;
+          }
       font-family: 'Rajdhani', sans-serif;
       color: var(--cyan);
       letter-spacing: 2px;
@@ -215,6 +223,14 @@
     .footer-col ul { list-style: none; }
     .footer-col ul li { margin-bottom: 10px; }
     .footer-col ul li a { color: var(--gray); text-decoration: none; font-size: 0.82rem; transition: color 0.2s; }
+      .footer-brand p {
+        color: var(--gray);
+        font-size: 0.82rem;
+        line-height: 1.8;
+        max-width: 260px;
+        text-align: left;
+        margin: 0;
+      }
     .footer-col ul li a:hover { color: var(--blue); }
     .footer-bottom { border-top: 1px solid var(--border); padding-top: 24px; display: flex; justify-content: space-between; align-items: center; }
     .footer-bottom p { color: var(--gray); font-size: 0.75rem; }
@@ -236,8 +252,8 @@
     <ul class="nav-links">
         <li><a href="{{ url_for('index') }}">Inicio</a></li>
         <li><a href="{{ url_for('catalogo') }}">Catálogo</a></li>
-        <li><a href="{{ url_for('contacto') }}">Contacto</a></li>
-        <li><a href="{{ url_for('nosotros') }}">Acerca de</a></li>
+        <li><a href="{{ url_for('nosotros') }}">¿Quiénes somos?</a></li>
+        <li><a href="{{ url_for('contacto') }}">Contáctanos</a></li>
     </ul>
 
     <div class="nav-actions">
@@ -264,11 +280,20 @@
     </div>
   </section>
 
+  <!-- NUESTRA HISTORIA -->
+  <section class="section" style="padding-top:40px; padding-bottom:40px;">
+    <div style="max-width:900px; margin:0 auto;">
+      <h2 style="font-family:'Rajdhani',sans-serif; font-size:2rem; color:var(--blue); margin-bottom:18px;">Nuestra Historia: <span style="color:var(--white)">Pasión por tu Tranquilidad</span></h2>
+      <p style="color:var(--gray); font-size:1.08rem; line-height:1.8; margin-bottom:10px; text-align:justify;">En <strong>SecureVision</strong>, no solo vendemos cámaras; diseñamos la paz mental que tú y tu familia merecen. Nacimos con la misión de democratizar la seguridad de alta tecnología en Honduras, fusionando años de experiencia en ingeniería de sistemas con el compromiso de proteger lo que más importa.</p>
+      <p style="color:var(--gray); font-size:1.08rem; line-height:1.8; margin-bottom:10px; text-align:justify;">Desde nuestro primer sistema instalado, entendimos que cada hogar y cada negocio es un mundo diferente. Por eso, evolucionamos de ser un proveedor de equipos a convertirnos en el aliado estratégico de miles de clientes que buscan soluciones robustas, inteligentes y fáciles de usar. Hoy, somos referentes en el mercado de CCTV y seguridad electrónica, transformando la vigilancia compleja en una experiencia de control total al alcance de tu mano. Porque tu seguridad no es un lujo, es nuestra prioridad.</p>
+    </div>
+  </section>
+
   <section class="section">
     <div class="content-grid">
       <div class="text-content">
         <h2>¿Qué <span>Hacemos?</span></h2>
-        <p>En <strong>SecureVision</strong>, no solo vendemos equipos; diseñamos ecosistemas de protección. Nos especializamos en la distribución de tecnología avanzada en CCTV, controles de acceso biométricos y sistemas de intrusión inteligentes.</p>
+        <p>En <strong>SecureVision</strong>, diseñamos ecosistemas de protección. Nos especializamos en la distribución de tecnología avanzada en CCTV, controles de acceso biométricos y sistemas de intrusión inteligentes.</p>
         <p>Nacimos en el año <strong>2011</strong> con el firme propósito de democratizar la seguridad de alto nivel, permitiendo que tanto pequeños negocios como grandes corporaciones tengan el control total de sus espacios en tiempo real.</p>
       </div>
       <div class="experience-box">
@@ -290,6 +315,29 @@
     </div>
   </section>
 
+    <!-- NUESTROS VALORES -->
+    <section class="section" style="padding-top:40px; padding-bottom:40px;">
+      <div style="max-width:900px; margin:0 auto;">
+        <h2 style="font-family:'Rajdhani',sans-serif; font-size:2rem; color:var(--blue); margin-bottom:18px;">Nuestros Valores: <span style="color:var(--white)">El ADN de nuestra protección</span></h2>
+        <div style="display:grid; grid-template-columns:1fr 1fr; gap:36px;">
+          <div>
+            <h4 style="color:var(--cyan); font-family:'Rajdhani',sans-serif; font-size:1.1rem; margin-bottom:8px; letter-spacing:1px;">Pasión por el Cliente</h4>
+            <p style="color:var(--gray); font-size:1.01rem; line-height:1.7; margin-bottom:18px; text-align:justify;">Tu tranquilidad es nuestra razón de ser. Nos obsesionamos con entender tus necesidades para ofrecerte la solución exacta, ni más, ni menos.</p>
+            <h4 style="color:var(--cyan); font-family:'Rajdhani',sans-serif; font-size:1.1rem; margin-bottom:8px; letter-spacing:1px;">Innovación Sin Límites</h4>
+            <p style="color:var(--gray); font-size:1.01rem; line-height:1.7; margin-bottom:18px; text-align:justify;">El mundo cambia y nosotros vamos un paso adelante. Traemos la tecnología de punta antes que nadie para que siempre estés protegido con lo mejor.</p>
+            <h4 style="color:var(--cyan); font-family:'Rajdhani',sans-serif; font-size:1.1rem; margin-bottom:8px; letter-spacing:1px;">Confianza Blindada</h4>
+            <p style="color:var(--gray); font-size:1.01rem; line-height:1.7; margin-bottom:18px; text-align:justify;">La honestidad es nuestra mejor herramienta. Hablamos claro, cumplimos promesas y garantizamos que cada equipo instalado sea una inversión segura.</p>
+          </div>
+          <div>
+            <h4 style="color:var(--cyan); font-family:'Rajdhani',sans-serif; font-size:1.1rem; margin-bottom:8px; letter-spacing:1px;">Calidad de Excelencia</h4>
+            <p style="color:var(--gray); font-size:1.01rem; line-height:1.7; margin-bottom:18px; text-align:justify;">No instalamos nada que no pondríamos en nuestras propias casas. Seleccionamos cada sensor, cámara y alarma bajo los estándares más estrictos de durabilidad.</p>
+            <h4 style="color:var(--cyan); font-family:'Rajdhani',sans-serif; font-size:1.1rem; margin-bottom:8px; letter-spacing:1px;">Agilidad y Respuesta</h4>
+            <p style="color:var(--gray); font-size:1.01rem; line-height:1.7; margin-bottom:18px; text-align:justify;">Sabemos que en seguridad, cada segundo cuenta. Por eso, nos distinguimos por un servicio técnico rápido, eficiente y siempre listo para apoyarte.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
   <div class="stats">
     <div class="stat">
       <div class="stat-number">18+</div>
@@ -309,41 +357,46 @@
     </div>
   </div>
 
-  <footer>
-    <div class="footer-grid">
+ <!-- FOOTER ESTILO PRIVACIDAD -->
+  <footer style="background: #0d0d1a; border-top: 1px solid #1a1a2a; padding: 60px;">
+    <div class="footer-grid" style="display: grid; grid-template-columns: 2fr 1fr 1fr 1fr; gap: 40px; margin-bottom: 40px;">
       <div class="footer-brand">
-        <span class="logo">SECURE<span>VISION</span></span>
-        <p>Soluciones de seguridad electrónica profesional para hogares y empresas a nivel mundial.</p>
+        <span class="logo" style="font-size: 1.4rem; color: #f0f4ff; font-family: 'Rajdhani', sans-serif; font-weight: 700; display: block; margin-bottom: 16px;">SECURE<span style="color:#0066ff">VISION</span></span>
+        <p style="color: #8890aa; font-size: 0.82rem; line-height: 1.8; max-width: 260px; margin: 0;">Soluciones de seguridad electrónica profesional para hogares y empresas a nivel mundial.</p>
       </div>
       <div class="footer-col">
-        <h4>Productos</h4>
-        <ul>
-          <li><a href="#">Cámaras CCTV</a></li>
-          <li><a href="#">Monitores</a></li>
-          <li><a href="#">Alarmas</a></li>
-          <li><a href="#">Biométricos</a></li>
+        <h4 style="font-family: 'Rajdhani', sans-serif; font-size: 0.85rem; letter-spacing: 2px; text-transform: uppercase; color: #f0f4ff; margin-bottom: 18px;">Productos</h4>
+        <ul style="list-style: none; padding: 0;">
+          <li><a href="#" style="color: #8890aa; text-decoration: none; font-size: 0.82rem;">Cámaras CCTV</a></li>
+          <li><a href="#" style="color: #8890aa; text-decoration: none; font-size: 0.82rem;">Monitores</a></li>
+          <li><a href="#" style="color: #8890aa; text-decoration: none; font-size: 0.82rem;">Alarmas</a></li>
+          <li><a href="#" style="color: #8890aa; text-decoration: none; font-size: 0.82rem;">Biométricos</a></li>
+          <li><a href="#" style="color: #8890aa; text-decoration: none; font-size: 0.82rem;">Cercas Eléctricas</a></li>
         </ul>
       </div>
       <div class="footer-col">
-        <h4>Empresa</h4>
-        <ul>
-          <li><a href="nosotros.html">Nosotros</a></li>
-          <li><a href="#">Blog</a></li>
-          <li><a href="contacto.html">Contacto</a></li>
+        <h4 style="font-family: 'Rajdhani', sans-serif; font-size: 0.85rem; letter-spacing: 2px; text-transform: uppercase; color: #f0f4ff; margin-bottom: 18px;">Empresa</h4>
+        <ul style="list-style: none; padding: 0;">
+          <li><a href="{{ url_for('nosotros') }}">¿Quiénes somos?</a></li>
+          <li><a href="#">Blog de noticias</a></li>
+          <li><a href="{{ url_for('contacto') }}">Contáctanos</a></li>
+          <li><a href="#">Preguntas frecuentes</a></li>
         </ul>
       </div>
       <div class="footer-col">
-        <h4>Soporte</h4>
-        <ul>
-          <li><a href="#">Centro de ayuda</a></li>
-          <li><a href="#">Envíos</a></li>
-          <li><a href="#">Garantía</a></li>
+        <h4 style="font-family: 'Rajdhani', sans-serif; font-size: 0.85rem; letter-spacing: 2px; text-transform: uppercase; color: #f0f4ff; margin-bottom: 18px;">Políticas</h4>
+        <ul style="list-style: none; padding: 0;">
+          <li><a href="#" style="color: #8890aa; text-decoration: none; font-size: 0.82rem;">Términos generales</a></li>
+          <li><a href="{{ url_for('privacidad') }}" style="color: #8890aa; text-decoration: none; font-size: 0.82rem;">Privacidad</a></li>
+          <li><a href="#" style="color: #8890aa; text-decoration: none; font-size: 0.82rem;">Envíos</a></li>
+          <li><a href="#" style="color: #8890aa; text-decoration: none; font-size: 0.82rem;">Devoluciones y cambios</a></li>
+          <li><a href="#" style="color: #8890aa; text-decoration: none; font-size: 0.82rem;">Garantía</a></li>
         </ul>
       </div>
     </div>
-    <div class="footer-bottom">
-      <p>© 2026 SecureVision. Todos los derechos reservados.</p>
-      <p>Protegiendo tu futuro digital 💙</p>
+    <div class="footer-bottom" style="border-top: 1px solid #1a1a2a; padding-top: 24px; display: flex; justify-content: space-between; align-items: center;">
+      <p style="color: #8890aa; font-size: 0.75rem; letter-spacing: 1px;">© 2026 SecureVision. Todos los derechos reservados.</p>
+      <p style="color: #8890aa; font-size: 0.75rem; letter-spacing: 1px;">Hecho con 💙 para proteger el mundo.</p>
     </div>
   </footer>
 

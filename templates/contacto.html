@@ -116,7 +116,11 @@
     .contact-main {
       padding: 140px 60px 80px;
       max-width: 1100px;
-      margin: 0 auto;
+      margin-left: auto;
+      margin-right: auto;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
     }
 
     .section-header {
@@ -287,13 +291,111 @@
       letter-spacing: 1px;
     }
 
-    /* Responsive */
+    /* FORMULARIO DE CONTACTO MEJORADO */
+    .contact-form {
+      background: linear-gradient(135deg, #10101e 80%, #0d0d1a 100%);
+      border: 2px solid var(--blue-glow);
+      border-radius: 18px;
+      padding: 44px 32px 32px 32px;
+      max-width: 420px;
+      margin: 0 auto 60px auto;
+      box-shadow: 0 8px 40px 0 rgba(0,102,255,0.13), 0 1.5px 0 0 var(--blue-glow);
+      animation: fadeUp 0.7s;
+      position: relative;
+      z-index: 2;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 0.5rem;
+    }
+    .form-icon {
+      background: linear-gradient(135deg, var(--blue) 60%, var(--cyan) 100%);
+      color: #fff;
+      width: 60px;
+      height: 60px;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 2.1rem;
+      margin-bottom: 18px;
+      box-shadow: 0 2px 16px 0 rgba(0,102,255,0.18);
+      border: 2.5px solid var(--bg2);
+    }
+    .form-row {
+      display: flex;
+      gap: 18px;
+      margin-bottom: 12px;
+      width: 100%;
+    }
+    .form-row-horizontal {
+      flex-direction: row;
+      gap: 18px;
+      width: 100%;
+      justify-content: center;
+      align-items: flex-start;
+    }
+    .form-group {
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+      margin-bottom: 8px;
+    }
+    .form-group label {
+      color: var(--blue);
+      font-family: 'Rajdhani', sans-serif;
+      font-size: 1.01rem;
+      margin-bottom: 7px;
+      letter-spacing: 1px;
+      font-weight: 600;
+      text-align: left;
+      padding-left: 2px;
+    }
+    .form-group input,
+    .form-group textarea {
+      background: #18182a;
+      border: 1.5px solid var(--border);
+      border-radius: 8px;
+      color: var(--white);
+      font-size: 1rem;
+      padding: 13px 16px;
+      margin-bottom: 2px;
+      outline: none;
+      transition: border 0.22s, box-shadow 0.22s, background 0.22s;
+      font-family: 'Inter', sans-serif;
+      resize: none;
+      box-shadow: 0 1.5px 0 0 var(--blue-glow);
+      font-weight: 500;
+    }
+    .form-group input:focus,
+    .form-group textarea:focus {
+      border-color: var(--cyan);
+      box-shadow: 0 0 0 2px var(--blue);
+      background: #15152a;
+    }
+    .btn-form {
+      width: 100%;
+      font-size: 1.08rem;
+      font-weight: 700;
+      margin-top: 16px;
+      letter-spacing: 1px;
+      border-radius: 8px;
+      box-shadow: 0 2px 12px 0 rgba(0,102,255,0.10);
+      background: linear-gradient(90deg, var(--blue) 60%, var(--cyan) 100%);
+      border: none;
+      color: #fff;
+      padding: 13px 0;
+      transition: background 0.2s, box-shadow 0.2s;
+    }
+    .btn-form:hover {
+      background: linear-gradient(90deg, var(--cyan) 60%, var(--blue) 100%);
+      box-shadow: 0 4px 18px 0 rgba(0,102,255,0.18);
+    }
+    #form-exito { animation: fadeUp 0.7s; }
     @media (max-width: 900px) {
-      nav { padding: 16px 24px; }
-      .nav-links { display: none; }
-      .contact-main { padding: 120px 24px 60px; }
-      .contact-grid { grid-template-columns: 1fr; } /* En móvil mejor 1 sola columna */
-      .footer-grid { grid-template-columns: 1fr 1fr; }
+      .contact-form { padding: 22px 8px 18px 8px; max-width: 98vw; }
+      .form-row { flex-direction: column; gap: 0; }
+      .form-icon { margin-bottom: 12px; }
     }
   </style>
 </head>
@@ -305,8 +407,8 @@
     <ul class="nav-links">
         <li><a href="{{ url_for('index') }}">Inicio</a></li>
         <li><a href="{{ url_for('catalogo') }}">Catálogo</a></li>
-        <li><a href="{{ url_for('contacto') }}">Contacto</a></li>
-        <li><a href="{{ url_for('nosotros') }}">Acerca de</a></li>
+        <li><a href="{{ url_for('nosotros') }}">¿Quiénes somos?</a></li>
+        <li><a href="{{ url_for('contacto') }}">Contáctanos</a></li>
     </ul>
 
     <div class="nav-actions">
@@ -376,8 +478,51 @@
             referrerpolicy="no-referrer-when-downgrade">
         </iframe>
         </div>
+    <!-- FORMULARIO DE CONTACTO MEJORADO -->
+    <div class="section-header" style="margin-top: 60px;">
+      <div class="section-tag">// Formulario de contacto</div>
+      <h2 class="section-title">Contáctanos <span>Directamente</span></h2>
+    </div>
+    <form class="contact-form" id="contactForm" autocomplete="off" onsubmit="return enviarFormulario(event)">
+      <div class="form-icon">
+        <span>✉️</span>
+      </div>
+      <div class="form-row-vertical">
+        <div class="form-group">
+          <label for="nombre">Nombre</label>
+          <input type="text" id="nombre" name="nombre" required maxlength="60" placeholder="Tu nombre completo">
+        </div>
+        <div class="form-group">
+          <label for="telefono">Teléfono</label>
+          <input type="tel" id="telefono" name="telefono" required maxlength="20" pattern="[0-9\-\+\s]+" placeholder="Ej: +504 9999-9999">
+        </div>
+        <div class="form-group">
+          <label for="email">Email</label>
+          <input type="email" id="email" name="email" required maxlength="80" placeholder="correo@ejemplo.com">
+        </div>
+        <div class="form-group">
+          <label for="mensaje">Mensaje</label>
+          <textarea id="mensaje" name="mensaje" required maxlength="500" rows="3" placeholder="¿En qué podemos ayudarte?"></textarea>
+        </div>
+      </div>
+      <button type="submit" class="btn-nav btn-form">Enviar mensaje</button>
+      <div id="form-exito" style="display:none; color:var(--cyan); margin-top:18px; text-align:center; font-size:1.1rem;">¡Mensaje enviado! Nos pondremos en contacto pronto.</div>
+    </form>
+    <script>
+      function enviarFormulario(event) {
+        event.preventDefault();
+        // Simula el envío y muestra mensaje de éxito
+        document.getElementById('form-exito').style.display = 'block';
+        setTimeout(function() {
+          document.getElementById('form-exito').style.display = 'none';
+          document.getElementById('contactForm').reset();
+        }, 3500);
+        return false;
+      }
+    </script>
   </main>
 
+  <!-- FOOTER -->
   <footer>
     <div class="footer-grid">
       <div class="footer-brand">
@@ -397,25 +542,26 @@
       <div class="footer-col">
         <h4>Empresa</h4>
         <ul>
-          <li><a href="#">Nosotros</a></li>
-          <li><a href="#">Blog</a></li>
-          <li><a href="{{ url_for('contacto') }}">Contacto</a></li>
-          <li><a href="#">Distribuidores</a></li>
+          <li><a href="{{ url_for('nosotros') }}">¿Quiénes somos?</a></li>
+          <li><a href="#">Blog de noticias</a></li>
+          <li><a href="{{ url_for('contacto') }}">Contáctanos</a></li>
+          <li><a href="#">Preguntas frecuentes</a></li>
         </ul>
       </div>
       <div class="footer-col">
-        <h4>Soporte</h4>
+        <h4>Políticas</h4>
         <ul>
-          <li><a href="#">Centro de ayuda</a></li>
+          <li><a href="#">Términos generales</a></li>
+          <li><a href="{{ url_for('privacidad') }}">Privacidad</a></li>
           <li><a href="#">Envíos</a></li>
-          <li><a href="#">Devoluciones</a></li>
+          <li><a href="#">Devoluciones y cambios</a></li>
           <li><a href="#">Garantía</a></li>
         </ul>
       </div>
     </div>
     <div class="footer-bottom">
       <p>© 2026 SecureVision. Todos los derechos reservados.</p>
-      <p>Hecho con 💙 para proteger el mundo</p>
+      <p>Hecho con 💙 para proteger el mundo.</p>
     </div>
   </footer>
 
