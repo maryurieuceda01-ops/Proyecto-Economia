@@ -350,9 +350,13 @@ def factura():
 def privacidad():
     return render_template('privacidad.html')
 
+# Ruta para devoluciones
+@app.route('/devoluciones')
+def devoluciones():
+    return render_template('devoluciones.html')
+
 # ══════════════════════════════════════════════════════════════
 # ── RUTAS .HTML ───────────────────────────────────────────────
-# ── Permiten que los links href="pagina.html" funcionen       ─
 # ══════════════════════════════════════════════════════════════
 
 @app.route('/index.html')
@@ -450,7 +454,7 @@ def recuperar_html():
 
 
 # ══════════════════════════════════════════════════════════════
-# ── LOGIN SOCIAL (Google / Facebook simulado) ─────────────────
+# ── LOGIN SOCIAL (Google / Facebook) ─────────────────
 # ══════════════════════════════════════════════════════════════
 
 @app.route('/login-google')
