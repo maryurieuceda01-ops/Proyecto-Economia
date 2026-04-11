@@ -255,6 +255,12 @@
       border-radius: 8px;
       border: 1px solid var(--border);
       box-shadow: 0 0 60px rgba(0,102,255,0.15);
+      transition: opacity 0.8s ease;
+    }
+
+    .hero-image img.hidden {
+      opacity: 0;
+      position: absolute;
     }
 
     /* Placeholder imagen si no hay img */
@@ -353,16 +359,60 @@
       gap: 16px;
     }
 
+    /* ── CARRUSEL ── */
+    .carousel-wrapper {
+      position: relative;
+      display: flex;
+      align-items: center;
+      gap: 20px;
+    }
+
+    .carousel-container {
+      overflow: hidden;
+      flex: 1;
+      border-radius: 6px;
+    }
+
+    .carousel-track {
+      display: flex;
+      gap: 16px;
+      transition: transform 0.5s ease;
+    }
+
+    .carousel-slide {
+      flex: 0 0 calc(50% - 8px);
+      min-width: 300px;
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+    }
+
+    .carousel-slide .category-card {
+      flex: 1;
+    }
+
+    .carousel-slide .cat-count {
+      padding: 8px 12px;
+      background: rgba(0,102,255,0.08);
+      border-radius: 4px;
+      text-align: center;
+    }
+
     .category-card {
       background: var(--card-bg);
       border: 1px solid var(--border);
       border-radius: 6px;
-      padding: 32px 24px;
+      padding: 48px 32px;
       text-align: center;
       cursor: pointer;
       transition: all 0.25s;
       text-decoration: none;
       color: var(--white);
+      height: 100%;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      min-height: 280px;
     }
 
     .category-card:hover {
@@ -373,13 +423,19 @@
     }
 
     .cat-icon {
-      font-size: 2.2rem;
-      margin-bottom: 14px;
+      font-size: 3rem;
+      margin-bottom: 20px;
+    }
+
+    .cat-icon img {
+      max-width: 100%;
+      height: auto;
+      max-height: 120px;
     }
 
     .cat-name {
       font-family: 'Rajdhani', sans-serif;
-      font-size: 1rem;
+      font-size: 1.1rem;
       font-weight: 600;
       letter-spacing: 1px;
       text-transform: uppercase;
@@ -388,7 +444,34 @@
     .cat-count {
       font-size: 0.72rem;
       color: var(--gray);
-      margin-top: 6px;
+      margin-top: 12px;
+    }
+
+    .carousel-btn {
+      background: var(--blue);
+      border: none;
+      color: #fff;
+      width: 40px;
+      height: 40px;
+      border-radius: 50%;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1.2rem;
+      transition: all 0.2s;
+      flex-shrink: 0;
+    }
+
+    .carousel-btn:hover {
+      background: var(--blue-glow);
+      transform: scale(1.05);
+    }
+
+    .carousel-btn:disabled {
+      background: var(--gray);
+      cursor: not-allowed;
+      opacity: 0.5;
     }
 
     /* ── PRODUCTOS DESTACADOS ── */
@@ -611,6 +694,34 @@
       .promo-banner { margin: 0 24px 60px; padding: 36px 24px; flex-direction: column; gap: 24px; }
       footer { padding: 40px 24px; }
       .footer-grid { grid-template-columns: 1fr 1fr; }
+      
+      .carousel-slide {
+        flex: 0 0 calc(50% - 8px);
+        min-width: 180px;
+      }
+    }
+
+    @media (max-width: 600px) {
+      .carousel-slide {
+        flex: 0 0 100%;
+        min-width: 100%;
+      }
+      
+      .carousel-btn {
+        width: 36px;
+        height: 36px;
+        font-size: 1rem;
+      }
+      
+      .category-card {
+        padding: 32px 24px;
+        min-height: 240px;
+      }
+      
+      .cat-icon {
+        font-size: 2rem;
+        margin-bottom: 16px;
+      }
     }
   </style>
 </head>
@@ -647,7 +758,7 @@
   <section class="hero">
     <div class="hero-grid"></div>
     <div class="hero-content">
-      <div class="hero-tag">⚡ Tecnología de Seguridad Avanzada</div>
+      <div class="hero-tag">Tecnología de Seguridad Avanzada</div>
       <h1>Protege lo que<br/>más <span>importa</span></h1>
       <p>Equipos de seguridad profesionales para hogares y empresas. Cámaras CCTV, alarmas, biométricos y más — soluciones confiables para todo el mundo.</p>
       <div class="hero-btns">
@@ -657,8 +768,14 @@
     </div>
     <div class="hero-image">
       <div class="hero-placeholder">
-        <div class="cam-icon">📷</div>
-        <p>Agrega tu imagen aquí</p>
+        <img src="/static/img/Cámara.webp" alt="Cámara CCTV" width="200" height="350" class="hero-img">
+        <img src="/static/img/Hero_1.webp" alt="Cámara Bullet" width="200" height="350" class="hero-img hidden">
+        <img src="/static/img/Hero_2.webp" alt="NVR" width="200" height="350" class="hero-img hidden">
+        <img src="/static/img/Hero_3.webp" alt="Biométrico" width="200" height="350" class="hero-img hidden">
+        <img src="/static/img/Hero_4.webp" alt="Alarma" width="200" height="350" class="hero-img hidden">
+        <img src="/static/img/Hero_5.webp" alt="Biométrico" width="200" height="350" class="hero-img hidden">
+        <img src="/static/img/Hero_6.webp" alt="Biométrico" width="200" height="350" class="hero-img hidden">
+        <img src="/static/img/Hero_7.webp" alt="Biométrico" width="200" height="350" class="hero-img hidden">
       </div>
     </div>
   </section>
@@ -666,7 +783,7 @@
   <!-- STATS -->
   <div class="stats">
     <div class="stat">
-      <div class="stat-number">500+</div>
+      <div class="stat-number">400+</div>
       <div class="stat-label">Productos</div>
     </div>
     <div class="stat">
@@ -674,7 +791,7 @@
       <div class="stat-label">Clientes</div>
     </div>
     <div class="stat">
-      <div class="stat-number">50+</div>
+      <div class="stat-number">10+</div>
       <div class="stat-label">Países</div>
     </div>
     <div class="stat">
@@ -683,43 +800,71 @@
     </div>
   </div>
 
-  <!-- CATEGORÍAS -->
+  <!-- CATEGORÍAS CARRUSEL -->
   <section class="section" id="categorias">
     <div class="section-header">
       <div class="section-tag">// Explora</div>
       <h2 class="section-title">Nuestras <span>Categorías</span></h2>
     </div>
-    <div class="categories-grid">
-      <a href="catalogo.html" class="category-card">
-        <div class="cat-icon">📹</div>
-        <div class="cat-name">Cámaras CCTV</div>
-        <div class="cat-count">120+ productos</div>
-      </a>
-      <a href="catalogo.html" class="category-card">
-        <div class="cat-icon">🖥️</div>
-        <div class="cat-name">Monitores</div>
-        <div class="cat-count">45+ productos</div>
-      </a>
-      <a href="catalogo.html" class="category-card">
-        <div class="cat-icon">🔔</div>
-        <div class="cat-name">Alarmas</div>
-        <div class="cat-count">80+ productos</div>
-      </a>
-      <a href="catalogo.html" class="category-card">
-        <div class="cat-icon">⚡</div>
-        <div class="cat-name">Cercas Eléctricas</div>
-        <div class="cat-count">30+ productos</div>
-      </a>
-      <a href="catalogo.html" class="category-card">
-        <div class="cat-icon">👆</div>
-        <div class="cat-name">Biométricos</div>
-        <div class="cat-count">60+ productos</div>
-      </a>
-      <a href="catalogo.html" class="category-card">
-        <div class="cat-icon">🔌</div>
-        <div class="cat-name">Fuentes de Poder</div>
-        <div class="cat-count">50+ productos</div>
-      </a>
+    
+    <div class="carousel-wrapper">
+      <button class="carousel-btn" id="prevBtn" onclick="moveCarousel(-1)">❮</button>
+      
+      <div class="carousel-container">
+        <div class="carousel-track" id="carouselTrack">
+          <div class="carousel-slide">
+            <a href="catalogo.html" class="category-card">
+              <div class="cat-icon">
+                <img src="/static/img/Camara.webp" width="200" height="200">
+              </div>
+             <!-- <div class="cat-name">Cámaras CCTV</div> -->
+            </a>
+            <div class="cat-name">Cámaras CCTV</div>
+          </div>
+          
+          <div class="carousel-slide">
+            <a href="catalogo.html" class="category-card">
+              <div class="cat-icon">🖥️</div>
+              <div class="cat-name">Monitores</div>
+            </a>
+            <div class="cat-count">45+ productos</div>
+          </div>
+          
+          <div class="carousel-slide">
+            <a href="catalogo.html" class="category-card">
+              <div class="cat-icon">🔔</div>
+              <div class="cat-name">Alarmas</div>
+            </a>
+            <div class="cat-count">80+ productos</div>
+          </div>
+          
+          <div class="carousel-slide">
+            <a href="catalogo.html" class="category-card">
+              <div class="cat-icon">⚡</div>
+              <div class="cat-name">Cercas Eléctricas</div>
+            </a>
+            <div class="cat-count">30+ productos</div>
+          </div>
+          
+          <div class="carousel-slide">
+            <a href="catalogo.html" class="category-card">
+              <div class="cat-icon">👆</div>
+              <div class="cat-name">Biométricos</div>
+            </a>
+            <div class="cat-count">60+ productos</div>
+          </div>
+          
+          <div class="carousel-slide">
+            <a href="catalogo.html" class="category-card">
+              <div class="cat-icon">🔌</div>
+              <div class="cat-name">Fuentes de Poder</div>
+            </a>
+            <div class="cat-count">50+ productos</div>
+          </div>
+        </div>
+      </div>
+      
+      <button class="carousel-btn" id="nextBtn" onclick="moveCarousel(1)">❯</button>
     </div>
   </section>
 
@@ -732,60 +877,64 @@
     <div class="products-grid">
 
       <div class="product-card">
-        <div class="product-img">
-          📹
+         <div class="product-img">
+          <!--📹--> 
+        <img src="/static/img/Cámara_bullet.webp" width="250" height="185">
           <span class="product-badge">Nuevo</span>
         </div>
         <div class="product-info">
-          <div class="product-name">Cámara IP 4K Exterior</div>
+          <div class="product-name">Cámara 4K tipo bullet</div>
           <div class="product-desc">Visión nocturna 40m, resistente al agua IP67, detección de movimiento.</div>
           <div class="product-footer">
-            <div class="product-price">8,400.00 HNL</div>
-            <button class="btn-add">+ Carrito</button>
+            <div class="product-price">1,100.00 HNL</div>
+            <button class="btn-add">+ Carrito </button>
           </div>
         </div>
       </div>
 
       <div class="product-card">
         <div class="product-img">
-          🖥️
+        <!-- 🖥️ -->        
+        <img src="/static/img/NVR.webp" width="250" height="185">
           <span class="product-badge">Popular</span>
         </div>
         <div class="product-info">
-          <div class="product-name">Monitor NVR 16 Canales</div>
+          <div class="product-name">NVR 16 Canales</div>
           <div class="product-desc">Pantalla Full HD 21", grabación continua, acceso remoto desde app.</div>
           <div class="product-footer">
-            <div class="product-price">6,400.00 HNL</div>
-            <button class="btn-add">+ Carrito</button>
+            <div class="product-price">4,000.00 HNL</div>
+            <button class="btn-add">+ Carrito </button>
           </div>
         </div>
       </div>
 
       <div class="product-card">
         <div class="product-img">
-          👆
+        <!-- 👆 -->
+        <img src="/static/img/biometrico.webp" width="250" height="185">
           <span class="product-badge">Oferta</span>
         </div>
         <div class="product-info">
-          <div class="product-name">Control Biométrico Facial</div>
+          <div class="product-name">Control de acceso biométrico</div>
           <div class="product-desc">Reconocimiento facial + huella, hasta 3000 usuarios, WiFi integrado.</div>
           <div class="product-footer">
-            <div class="product-price">3,700.00 HNL</div>
-            <button class="btn-add">+ Carrito</button>
+            <div class="product-price">1,700.00 HNL</div>
+            <button class="btn-add">+ Carrito </button>
           </div>
         </div>
       </div>
 
       <div class="product-card">
         <div class="product-img">
-          🔔
+          <!-- 🔔 -->
+        <img src="/static/img/Alarma.webp" width="250" height="185">  
         </div>
         <div class="product-info">
           <div class="product-name">Kit Alarma Inalámbrica</div>
           <div class="product-desc">Central + 6 sensores + sirena, app móvil, batería de respaldo 24h.</div>
           <div class="product-footer">
-            <div class="product-price">3,200.00 HNL</div>
-            <button class="btn-add">+ Carrito</button>
+            <div class="product-price">1,900.00 HNL</div>
+            <button class="btn-add">+ Carrito </button>
           </div>
         </div>
       </div>
@@ -831,19 +980,116 @@
       <div class="footer-col">
         <h4>Políticas</h4>
         <ul>
-          <li><a href="#">Términos generales</a></li>
+          <li><a href="{{ url_for('terminos') }}">Términos generales</a></li>
           <li><a href="{{ url_for('privacidad') }}">Privacidad</a></li>
           <li><a href="{{ url_for('devoluciones') }}">Devoluciones y cambios</a></li>
-          <li><a href="#">Envíos</a></li>
-          <li><a href="#">Garantía</a></li>
+          <li><a href="{{ url_for('envios') }}">Envíos</a></li>
+          <li><a href="{{ url_for('garantia') }}">Garantía</a></li>
         </ul>
       </div>
     </div>
     <div class="footer-bottom">
       <p>© 2026 SecureVision. Todos los derechos reservados.</p>
-      <p>Hecho con 💙 para proteger el mundo.</p>
     </div>
   </footer>
+
+  <script>
+    // ── CARRUSEL DE CATEGORÍAS ──
+    let currentIndex = 0;
+    const track = document.getElementById('carouselTrack');
+    const slides = document.querySelectorAll('.carousel-slide');
+    const slideWidth = slides[0].offsetWidth + 16; // 16px es el gap
+    let autoplayInterval;
+
+    function updateCarousel() {
+      const offset = -currentIndex * slideWidth;
+      track.style.transform = `translateX(${offset}px)`;
+      updateButtons();
+    }
+
+    function moveCarousel(direction) {
+      const maxIndex = slides.length - 2; // Mostrar 2 slides a la vez
+      currentIndex += direction;
+
+      if (currentIndex < 0) {
+        currentIndex = maxIndex;
+      } else if (currentIndex > maxIndex) {
+        currentIndex = 0;
+      }
+
+      updateCarousel();
+      resetAutoplay();
+    }
+
+    function updateButtons() {
+      const maxIndex = slides.length - 2;
+      document.getElementById('prevBtn').disabled = currentIndex === 0;
+      document.getElementById('nextBtn').disabled = currentIndex === maxIndex;
+    }
+
+    function autoplay() {
+      const maxIndex = slides.length - 2;
+      currentIndex++;
+      if (currentIndex > maxIndex) {
+        currentIndex = 0;
+      }
+      updateCarousel();
+    }
+
+    function startAutoplay() {
+      autoplayInterval = setInterval(autoplay, 4000); // Cambiar cada 4 segundos
+    }
+
+    function resetAutoplay() {
+      clearInterval(autoplayInterval);
+      startAutoplay();
+    }
+
+    // Inicializar carrusel de categorías
+    updateButtons();
+    startAutoplay();
+
+    // Pausar autoplay al pasar el mouse
+    document.querySelector('.carousel-wrapper').addEventListener('mouseenter', () => {
+      clearInterval(autoplayInterval);
+    });
+
+    document.querySelector('.carousel-wrapper').addEventListener('mouseleave', () => {
+      startAutoplay();
+    });
+
+    // ── CARRUSEL DE IMÁGENES HERO ──
+    let heroImageIndex = 0;
+    const heroImages = document.querySelectorAll('.hero-img');
+    let heroAutoplayInterval;
+
+    function updateHeroImage() {
+      heroImages.forEach(img => img.classList.add('hidden'));
+      heroImages[heroImageIndex].classList.remove('hidden');
+    }
+
+    function rotateHeroImage() {
+      heroImageIndex = (heroImageIndex + 1) % heroImages.length;
+      updateHeroImage();
+    }
+
+    function startHeroAutoplay() {
+      heroAutoplayInterval = setInterval(rotateHeroImage, 4000); // Cambiar cada 4 segundos
+    }
+
+    // Inicializar carrusel de imágenes hero
+    updateHeroImage();
+    startHeroAutoplay();
+
+    // Pausar autoplay hero al pasar el mouse
+    document.querySelector('.hero-image').addEventListener('mouseenter', () => {
+      clearInterval(heroAutoplayInterval);
+    });
+
+    document.querySelector('.hero-image').addEventListener('mouseleave', () => {
+      startHeroAutoplay();
+    });
+  </script>
 
 </body>
 </html>

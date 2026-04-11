@@ -343,17 +343,28 @@ def factura():
 
 
 # ══════════════════════════════════════════════════════════════
-# ── RUTA POLÍTICA DE PRIVACIDAD ───────────────────────────────
+# ── RUTA POLÍTICAS ───────────────────────────────
 # ══════════════════════════════════════════════════════════════
+@app.route('/envios')
+def envios():
+    return render_template('envios.html')
 
 @app.route('/privacidad')
 def privacidad():
     return render_template('privacidad.html')
 
+@app.route('/terminos')
+def terminos():
+    return render_template('terminos.html')
+
 # Ruta para devoluciones
 @app.route('/devoluciones')
 def devoluciones():
     return render_template('devoluciones.html')
+
+@app.route('/garantia')
+def garantia():
+    return render_template('garantia.html')
 
 # ══════════════════════════════════════════════════════════════
 # ── RUTAS .HTML ───────────────────────────────────────────────
