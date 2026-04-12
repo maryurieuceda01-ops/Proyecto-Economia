@@ -28,7 +28,6 @@
     *{margin:0;padding:0;box-sizing:border-box;}
     body{background:var(--bg);color:var(--white);font-family:'Inter',sans-serif;overflow-x:hidden;transition:background .35s,color .35s;}
 
-    /* NAVBAR */
     nav{position:fixed;top:0;left:0;right:0;z-index:200;display:flex;align-items:center;justify-content:space-between;padding:16px 60px;background:var(--nav-bg);backdrop-filter:blur(14px);border-bottom:1px solid var(--border);transition:background .35s;}
     .logo{font-family:'Rajdhani',sans-serif;font-size:1.6rem;font-weight:700;letter-spacing:2px;color:var(--white);text-decoration:none;}
     .logo span{color:var(--gold);}
@@ -59,7 +58,6 @@
     .mobile-menu a:hover{color:var(--gold);}
     .mobile-menu a:last-child{border-bottom:none;}
 
-    /* PAGE HEADER */
     .page-header{padding:110px 60px 40px;background:var(--bg2);border-bottom:1px solid var(--border);position:relative;overflow:hidden;}
     .page-header::before{content:'';position:absolute;right:-80px;top:-80px;width:320px;height:320px;background:radial-gradient(circle,var(--gold-glow) 0%,transparent 70%);pointer-events:none;}
     .page-header-tag{font-size:.7rem;letter-spacing:3px;text-transform:uppercase;color:var(--gold);margin-bottom:10px;}
@@ -67,10 +65,8 @@
     .page-header h1 span{color:var(--blue);}
     .page-header p{color:var(--gray);font-size:.88rem;margin-top:8px;}
 
-    /* LAYOUT */
     .catalog-layout{display:grid;grid-template-columns:256px 1fr;min-height:80vh;}
 
-    /* SIDEBAR */
     .sidebar{background:var(--sidebar-bg);border-right:1px solid var(--border);padding:28px 20px;position:sticky;top:65px;height:calc(100vh - 65px);overflow-y:auto;transition:background .35s;}
     .sidebar::-webkit-scrollbar{width:3px;}
     .sidebar::-webkit-scrollbar-thumb{background:var(--border);border-radius:2px;}
@@ -89,7 +85,6 @@
     .checkbox-filter input[type="checkbox"]{accent-color:var(--gold);cursor:pointer;}
     .checkbox-filter label{font-size:.8rem;color:var(--gray);cursor:pointer;}
 
-    /* PRODUCTS AREA */
     .products-area{padding:26px 34px;}
     .toolbar{display:flex;justify-content:space-between;align-items:center;margin-bottom:22px;padding-bottom:16px;border-bottom:1px solid var(--border);flex-wrap:wrap;gap:10px;}
     .results-count{font-size:.78rem;color:var(--gray);}
@@ -102,7 +97,6 @@
     .sort-select{background:var(--input-bg);border:1px solid var(--border);color:var(--gray);padding:8px 11px;border-radius:4px;font-size:.78rem;font-family:'Inter',sans-serif;outline:none;cursor:pointer;transition:border .2s;}
     .sort-select:focus{border-color:var(--gold);}
 
-    /* GRID */
     .products-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(245px,1fr));gap:18px;}
     .product-card{background:var(--card-bg);border:1px solid var(--border);border-radius:8px;overflow:hidden;transition:all .28s;display:flex;flex-direction:column;}
     .product-card:hover{border-color:var(--gold);transform:translateY(-5px);box-shadow:0 18px 44px var(--gold-glow);}
@@ -131,7 +125,6 @@
     .empty-state{grid-column:1/-1;text-align:center;padding:70px 20px;color:var(--gray);}
     .empty-icon{font-size:3rem;opacity:.3;margin-bottom:14px;}
 
-    /* PANELS */
     .panel-overlay{position:fixed;inset:0;background:rgba(0,0,0,.55);z-index:298;opacity:0;pointer-events:none;transition:opacity .3s;}
     .panel-overlay.show{opacity:1;pointer-events:all;}
     .side-panel{position:fixed;top:0;right:-440px;width:420px;height:100%;background:var(--bg2);border-left:1px solid var(--border);z-index:299;transition:right .35s cubic-bezier(.4,0,.2,1);display:flex;flex-direction:column;box-shadow:-12px 0 40px rgba(0,0,0,.45);}
@@ -184,14 +177,12 @@
     .btn-fav-del{background:none;border:1px solid rgba(230,57,70,.35);color:#e63946;width:26px;height:26px;border-radius:3px;cursor:pointer;font-size:.75rem;display:flex;align-items:center;justify-content:center;transition:all .2s;}
     .btn-fav-del:hover{background:rgba(230,57,70,.1);}
 
-    /* TOAST */
     #toast{position:fixed;bottom:26px;right:26px;z-index:9999;padding:10px 17px;border-radius:6px;font-size:.78rem;opacity:0;transform:translateY(14px);pointer-events:none;transition:all .3s;}
     #toast.show{opacity:1;transform:translateY(0);}
     #toast.blue{background:var(--blue);color:#fff;box-shadow:0 4px 18px rgba(0,102,255,.3);}
     #toast.gold{background:var(--gold);color:#000;box-shadow:0 4px 18px var(--gold-glow);}
     #toast.red{background:#e63946;color:#fff;}
 
-    /* FOOTER */
     footer{background:var(--footer-bg);border-top:1px solid var(--border);padding:52px 60px 32px;transition:background .35s;}
     .footer-grid{display:grid;grid-template-columns:2fr 1fr 1fr 1fr;gap:40px;margin-bottom:32px;}
     .footer-brand .logo{font-size:1.4rem;margin-bottom:13px;display:block;}
@@ -207,7 +198,6 @@
     .footer-bottom{border-top:1px solid var(--border);padding-top:20px;display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:10px;}
     .footer-bottom p{color:var(--gray);font-size:.7rem;letter-spacing:1px;}
 
-    /* RESPONSIVE */
     @media(max-width:960px){
       nav{padding:14px 22px;}.nav-links{display:none;}.hamburger{display:flex;}
       .catalog-layout{grid-template-columns:1fr;}.sidebar{display:none;}
@@ -278,7 +268,7 @@
     <div class="summary-line"><span>Subtotal:</span><span id="cartSubtotal">0.00 HNL</span></div>
     <div class="summary-line" id="discountLine" style="display:none"><span>Descuento:</span><span id="cartDiscount" class="discount-val">-0.00 HNL</span></div>
     <div class="total-row"><span>Total:</span><span id="cartTotal">0.00 HNL</span></div>
-    <button class="btn-checkout" onclick="window.location.href='{{ url_for('checkout') }}'">Finalizar Compra</button>
+    <button class="btn-checkout" onclick="syncAndCheckout()">Finalizar Compra</button>
   </div>
 </div>
 
@@ -359,7 +349,7 @@
         <div class="product-img">
           <img src="/static/img/Cámara_bullet.webp" alt="Cámara IP 4K" onerror="this.style.display='none'">
           <span class="product-badge nuevo">Nuevo</span>
-          <button class="btn-wishlist" id="wb1" onclick="toggleFav(1,'Cámara IP 4K Exterior Hikvision',8400,'📹')">♡</button>
+          <button class="btn-wishlist" id="wb1" onclick="toggleFav(1,'Cámara IP 4K Exterior Hikvision',8400,'📹','camaras')">♡</button>
         </div>
         <div class="product-info">
           <div class="product-category">Cámaras CCTV</div>
@@ -368,8 +358,8 @@
           <div class="product-footer">
             <div class="price-block"><span class="product-price">8,400.00 HNL</span></div>
             <div class="card-btns">
-              <button class="btn-add" onclick="addToCart(1,'Cámara IP 4K Exterior Hikvision',8400,'📹')">+ Carrito</button>
-              <button class="btn-fav-card" id="fb1" onclick="toggleFav(1,'Cámara IP 4K Exterior Hikvision',8400,'📹')">♡</button>
+              <button class="btn-add" onclick="addToCart(1,'Cámara IP 4K Exterior Hikvision',8400,'📹','camaras')">+ Carrito</button>
+              <button class="btn-fav-card" id="fb1" onclick="toggleFav(1,'Cámara IP 4K Exterior Hikvision',8400,'📹','camaras')">♡</button>
             </div>
           </div>
         </div>
@@ -379,7 +369,7 @@
         <div class="product-img">
           <img src="/static/img/Cámara.webp" alt="Cámara Domo" onerror="this.style.display='none'">
           <span class="product-badge oferta">Oferta</span>
-          <button class="btn-wishlist" id="wb2" onclick="toggleFav(2,'Cámara Domo 2MP Interior Dahua',1800,'📷')">♡</button>
+          <button class="btn-wishlist" id="wb2" onclick="toggleFav(2,'Cámara Domo 2MP Interior Dahua',1800,'📷','camaras')">♡</button>
         </div>
         <div class="product-info">
           <div class="product-category">Cámaras CCTV</div>
@@ -388,28 +378,26 @@
           <div class="product-footer">
             <div class="price-block"><span class="product-price">1,800.00 HNL</span><span class="product-price-old">2,250.00 HNL</span></div>
             <div class="card-btns">
-              <button class="btn-add" onclick="addToCart(2,'Cámara Domo 2MP Interior Dahua',1800,'📷')">+ Carrito</button>
-              <button class="btn-fav-card" id="fb2" onclick="toggleFav(2,'Cámara Domo 2MP Interior Dahua',1800,'📷')">♡</button>
+              <button class="btn-add" onclick="addToCart(2,'Cámara Domo 2MP Interior Dahua',1800,'📷','camaras')">+ Carrito</button>
+              <button class="btn-fav-card" id="fb2" onclick="toggleFav(2,'Cámara Domo 2MP Interior Dahua',1800,'📷','camaras')">♡</button>
             </div>
           </div>
         </div>
       </div>
 
-      <!-- Monitor con icono 🖥️ correcto, SIN imagen de cámara -->
       <div class="product-card" data-id="3" data-category="monitores" data-brand="hikvision" data-price="6400">
-        <div class="product-img">
-          🖥️
-          <button class="btn-wishlist" id="wb3" onclick="toggleFav(3,'Monitor Full HD 21 Hikvision',6400,'🖥️')">♡</button>
+        <div class="product-img">🖥️
+          <button class="btn-wishlist" id="wb3" onclick="toggleFav(3,'Monitor Full HD 21 Hikvision',6400,'🖥️','monitores')">♡</button>
         </div>
         <div class="product-info">
           <div class="product-category">Monitores</div>
           <div class="product-name">Monitor Full HD 21" Hikvision</div>
-          <div class="product-desc">Pantalla LED 21", resolución 1080p, entradas HDMI/VGA, diseñado para NVR/DVR.</div>
+          <div class="product-desc">Pantalla LED 21", resolución 1080p, entradas HDMI/VGA.</div>
           <div class="product-footer">
             <div class="price-block"><span class="product-price">6,400.00 HNL</span></div>
             <div class="card-btns">
-              <button class="btn-add" onclick="addToCart(3,'Monitor Full HD 21 Hikvision',6400,'🖥️')">+ Carrito</button>
-              <button class="btn-fav-card" id="fb3" onclick="toggleFav(3,'Monitor Full HD 21 Hikvision',6400,'🖥️')">♡</button>
+              <button class="btn-add" onclick="addToCart(3,'Monitor Full HD 21 Hikvision',6400,'🖥️','monitores')">+ Carrito</button>
+              <button class="btn-fav-card" id="fb3" onclick="toggleFav(3,'Monitor Full HD 21 Hikvision',6400,'🖥️','monitores')">♡</button>
             </div>
           </div>
         </div>
@@ -419,7 +407,7 @@
         <div class="product-img">
           <img src="/static/img/biometrico.webp" alt="Biométrico" onerror="this.style.display='none'">
           <span class="product-badge oferta">Oferta</span>
-          <button class="btn-wishlist" id="wb4" onclick="toggleFav(4,'Control Biométrico Facial + Huella',3700,'👆')">♡</button>
+          <button class="btn-wishlist" id="wb4" onclick="toggleFav(4,'Control Biométrico Facial + Huella',3700,'👆','biometricos')">♡</button>
         </div>
         <div class="product-info">
           <div class="product-category">Biométricos</div>
@@ -428,8 +416,8 @@
           <div class="product-footer">
             <div class="price-block"><span class="product-price">3,700.00 HNL</span><span class="product-price-old">4,890.00 HNL</span></div>
             <div class="card-btns">
-              <button class="btn-add" onclick="addToCart(4,'Control Biométrico Facial + Huella',3700,'👆')">+ Carrito</button>
-              <button class="btn-fav-card" id="fb4" onclick="toggleFav(4,'Control Biométrico Facial + Huella',3700,'👆')">♡</button>
+              <button class="btn-add" onclick="addToCart(4,'Control Biométrico Facial + Huella',3700,'👆','biometricos')">+ Carrito</button>
+              <button class="btn-fav-card" id="fb4" onclick="toggleFav(4,'Control Biométrico Facial + Huella',3700,'👆','biometricos')">♡</button>
             </div>
           </div>
         </div>
@@ -438,7 +426,7 @@
       <div class="product-card" data-id="5" data-category="alarmas" data-brand="tp-link" data-price="3200">
         <div class="product-img">
           <img src="/static/img/Alarma.webp" alt="Alarma" onerror="this.style.display='none'">
-          <button class="btn-wishlist" id="wb5" onclick="toggleFav(5,'Kit Alarma Inalámbrica 6 Zonas',3200,'🔔')">♡</button>
+          <button class="btn-wishlist" id="wb5" onclick="toggleFav(5,'Kit Alarma Inalámbrica 6 Zonas',3200,'🔔','alarmas')">♡</button>
         </div>
         <div class="product-info">
           <div class="product-category">Alarmas</div>
@@ -447,18 +435,17 @@
           <div class="product-footer">
             <div class="price-block"><span class="product-price">3,200.00 HNL</span></div>
             <div class="card-btns">
-              <button class="btn-add" onclick="addToCart(5,'Kit Alarma Inalámbrica 6 Zonas',3200,'🔔')">+ Carrito</button>
-              <button class="btn-fav-card" id="fb5" onclick="toggleFav(5,'Kit Alarma Inalámbrica 6 Zonas',3200,'🔔')">♡</button>
+              <button class="btn-add" onclick="addToCart(5,'Kit Alarma Inalámbrica 6 Zonas',3200,'🔔','alarmas')">+ Carrito</button>
+              <button class="btn-fav-card" id="fb5" onclick="toggleFav(5,'Kit Alarma Inalámbrica 6 Zonas',3200,'🔔','alarmas')">♡</button>
             </div>
           </div>
         </div>
       </div>
 
       <div class="product-card" data-id="6" data-category="cercas" data-brand="uniview" data-price="1890" data-new="1">
-        <div class="product-img">
-          ⚡
+        <div class="product-img">⚡
           <span class="product-badge nuevo">Nuevo</span>
-          <button class="btn-wishlist" id="wb6" onclick="toggleFav(6,'Kit Cerca Eléctrica 500m',1890,'⚡')">♡</button>
+          <button class="btn-wishlist" id="wb6" onclick="toggleFav(6,'Kit Cerca Eléctrica 500m',1890,'⚡','cercas')">♡</button>
         </div>
         <div class="product-info">
           <div class="product-category">Cercas Eléctricas</div>
@@ -467,17 +454,16 @@
           <div class="product-footer">
             <div class="price-block"><span class="product-price">1,890.00 HNL</span></div>
             <div class="card-btns">
-              <button class="btn-add" onclick="addToCart(6,'Kit Cerca Eléctrica 500m',1890,'⚡')">+ Carrito</button>
-              <button class="btn-fav-card" id="fb6" onclick="toggleFav(6,'Kit Cerca Eléctrica 500m',1890,'⚡')">♡</button>
+              <button class="btn-add" onclick="addToCart(6,'Kit Cerca Eléctrica 500m',1890,'⚡','cercas')">+ Carrito</button>
+              <button class="btn-fav-card" id="fb6" onclick="toggleFav(6,'Kit Cerca Eléctrica 500m',1890,'⚡','cercas')">♡</button>
             </div>
           </div>
         </div>
       </div>
 
       <div class="product-card" data-id="7" data-category="fuentes" data-brand="dahua" data-price="600">
-        <div class="product-img">
-          🔌
-          <button class="btn-wishlist" id="wb7" onclick="toggleFav(7,'Fuente 12V 10A con Respaldo',600,'🔌')">♡</button>
+        <div class="product-img">🔌
+          <button class="btn-wishlist" id="wb7" onclick="toggleFav(7,'Fuente 12V 10A con Respaldo',600,'🔌','fuentes')">♡</button>
         </div>
         <div class="product-info">
           <div class="product-category">Fuentes de Poder</div>
@@ -486,18 +472,17 @@
           <div class="product-footer">
             <div class="price-block"><span class="product-price">600.00 HNL</span></div>
             <div class="card-btns">
-              <button class="btn-add" onclick="addToCart(7,'Fuente 12V 10A con Respaldo',600,'🔌')">+ Carrito</button>
-              <button class="btn-fav-card" id="fb7" onclick="toggleFav(7,'Fuente 12V 10A con Respaldo',600,'🔌')">♡</button>
+              <button class="btn-add" onclick="addToCart(7,'Fuente 12V 10A con Respaldo',600,'🔌','fuentes')">+ Carrito</button>
+              <button class="btn-fav-card" id="fb7" onclick="toggleFav(7,'Fuente 12V 10A con Respaldo',600,'🔌','fuentes')">♡</button>
             </div>
           </div>
         </div>
       </div>
 
       <div class="product-card" data-id="8" data-category="camaras" data-brand="hikvision" data-price="8200">
-        <div class="product-img">
-          🎥
+        <div class="product-img">🎥
           <span class="product-badge popular">Popular</span>
-          <button class="btn-wishlist" id="wb8" onclick="toggleFav(8,'Cámara PTZ 360° Zoom 30x',8200,'🎥')">♡</button>
+          <button class="btn-wishlist" id="wb8" onclick="toggleFav(8,'Cámara PTZ 360° Zoom 30x',8200,'🎥','camaras')">♡</button>
         </div>
         <div class="product-info">
           <div class="product-category">Cámaras CCTV</div>
@@ -506,8 +491,8 @@
           <div class="product-footer">
             <div class="price-block"><span class="product-price">8,200.00 HNL</span></div>
             <div class="card-btns">
-              <button class="btn-add" onclick="addToCart(8,'Cámara PTZ 360° Zoom 30x',8200,'🎥')">+ Carrito</button>
-              <button class="btn-fav-card" id="fb8" onclick="toggleFav(8,'Cámara PTZ 360° Zoom 30x',8200,'🎥')">♡</button>
+              <button class="btn-add" onclick="addToCart(8,'Cámara PTZ 360° Zoom 30x',8200,'🎥','camaras')">+ Carrito</button>
+              <button class="btn-fav-card" id="fb8" onclick="toggleFav(8,'Cámara PTZ 360° Zoom 30x',8200,'🎥','camaras')">♡</button>
             </div>
           </div>
         </div>
@@ -516,7 +501,7 @@
       <div class="product-card" data-id="9" data-category="monitores" data-brand="hikvision" data-price="4500">
         <div class="product-img">
           <img src="/static/img/NVR.webp" alt="NVR" onerror="this.style.display='none'">
-          <button class="btn-wishlist" id="wb9" onclick="toggleFav(9,'NVR Hikvision 8 Canales 4K',4500,'📼')">♡</button>
+          <button class="btn-wishlist" id="wb9" onclick="toggleFav(9,'NVR Hikvision 8 Canales 4K',4500,'📼','monitores')">♡</button>
         </div>
         <div class="product-info">
           <div class="product-category">Grabadores / NVR</div>
@@ -525,18 +510,17 @@
           <div class="product-footer">
             <div class="price-block"><span class="product-price">4,500.00 HNL</span></div>
             <div class="card-btns">
-              <button class="btn-add" onclick="addToCart(9,'NVR Hikvision 8 Canales 4K',4500,'📼')">+ Carrito</button>
-              <button class="btn-fav-card" id="fb9" onclick="toggleFav(9,'NVR Hikvision 8 Canales 4K',4500,'📼')">♡</button>
+              <button class="btn-add" onclick="addToCart(9,'NVR Hikvision 8 Canales 4K',4500,'📼','monitores')">+ Carrito</button>
+              <button class="btn-fav-card" id="fb9" onclick="toggleFav(9,'NVR Hikvision 8 Canales 4K',4500,'📼','monitores')">♡</button>
             </div>
           </div>
         </div>
       </div>
 
       <div class="product-card" data-id="10" data-category="almacenamiento" data-brand="hikvision" data-price="2900" data-sale="1">
-        <div class="product-img">
-          💾
+        <div class="product-img">💾
           <span class="product-badge oferta">Oferta</span>
-          <button class="btn-wishlist" id="wb10" onclick="toggleFav(10,'Disco Duro WD Purple 4TB',2900,'💾')">♡</button>
+          <button class="btn-wishlist" id="wb10" onclick="toggleFav(10,'Disco Duro WD Purple 4TB',2900,'💾','almacenamiento')">♡</button>
         </div>
         <div class="product-info">
           <div class="product-category">Almacenamiento</div>
@@ -545,8 +529,8 @@
           <div class="product-footer">
             <div class="price-block"><span class="product-price">2,900.00 HNL</span><span class="product-price-old">3,400.00 HNL</span></div>
             <div class="card-btns">
-              <button class="btn-add" onclick="addToCart(10,'Disco Duro WD Purple 4TB',2900,'💾')">+ Carrito</button>
-              <button class="btn-fav-card" id="fb10" onclick="toggleFav(10,'Disco Duro WD Purple 4TB',2900,'💾')">♡</button>
+              <button class="btn-add" onclick="addToCart(10,'Disco Duro WD Purple 4TB',2900,'💾','almacenamiento')">+ Carrito</button>
+              <button class="btn-fav-card" id="fb10" onclick="toggleFav(10,'Disco Duro WD Purple 4TB',2900,'💾','almacenamiento')">♡</button>
             </div>
           </div>
         </div>
@@ -603,7 +587,17 @@
 </footer>
 
 <script>
-  let cart = [];
+  // ✅ CARRITO INICIALIZADO DESDE SESIÓN FLASK
+  let cart = {{ carrito | tojson }};
+  cart = cart.map(item => ({
+    id:       item.id,
+    name:     item.nombre,
+    price:    item.precio,
+    icon:     item.emoji,
+    category: item.categoria,
+    qty:      item.cantidad
+  }));
+
   let favs = {};
   let currentCategory = 'todos';
   let activeDiscount = 0;
@@ -633,20 +627,38 @@
     t._t = setTimeout(() => t.className = '', 2600);
   }
 
-  // Cart
-  function addToCart(id, name, price, icon) {
+  // ✅ addToCart ahora sincroniza con Flask inmediatamente
+  function addToCart(id, name, price, icon, category) {
     const item = cart.find(i => i.id === id);
-    if (item) item.qty++; else cart.push({id, name, price, icon, qty:1});
-    renderCart(); openPanel('cart');
+    if (item) item.qty++;
+    else cart.push({id, name, price, icon, category, qty:1});
+    renderCart();
+    openPanel('cart');
     showToast('✓ ' + name + ' agregado', 'blue');
+    // Sincronizar con Flask en segundo plano
+    syncCarritoSilencioso();
   }
+
   function changeQty(id, delta) {
     const item = cart.find(i => i.id === id);
     if (!item) return;
     item.qty += delta;
     if (item.qty <= 0) cart = cart.filter(i => i.id !== id);
     renderCart();
+    syncCarritoSilencioso();
   }
+
+  // ✅ Sincroniza silenciosamente sin redirigir
+  async function syncCarritoSilencioso() {
+    try {
+      await fetch('/sync_carrito', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ items: cart })
+      });
+    } catch(e) {}
+  }
+
   function renderCart() {
     const body = document.getElementById('cartBody');
     let sub = 0, count = 0;
@@ -685,8 +697,15 @@
     renderCart();
   }
 
+  // Ir al carrito (ya está sincronizado)
+  async function syncAndCheckout() {
+    if (!cart.length) { showToast('Tu carrito está vacío', 'red'); return; }
+    await syncCarritoSilencioso();
+    window.location.href = '{{ url_for("carrito") }}';
+  }
+
   // Favorites
-  function toggleFav(id, name, price, icon) {
+  function toggleFav(id, name, price, icon, category) {
     const wb = document.getElementById('wb'+id);
     const fb = document.getElementById('fb'+id);
     if (favs[id]) {
@@ -695,13 +714,14 @@
       if(fb){fb.classList.remove('active');fb.textContent='♡';}
       showToast('Eliminado de favoritos','red');
     } else {
-      favs[id] = {id,name,price,icon};
+      favs[id] = {id,name,price,icon,category};
       if(wb){wb.classList.add('active');wb.textContent='♥';}
       if(fb){fb.classList.add('active');fb.textContent='♥';}
       showToast('♥ Agregado a favoritos','gold');
     }
     renderFavs();
   }
+
   function removeFav(id) {
     delete favs[id];
     const wb = document.getElementById('wb'+id);
@@ -710,6 +730,7 @@
     if(fb){fb.classList.remove('active');fb.textContent='♡';}
     renderFavs();
   }
+
   function renderFavs() {
     const body = document.getElementById('favBody');
     const items = Object.values(favs);
@@ -719,7 +740,7 @@
       return;
     }
     body.innerHTML = items.map(item =>
-      '<div class="fav-item"><div class="fav-item-img">'+item.icon+'</div><div class="fav-item-info"><div class="fav-item-name">'+item.name+'</div><div class="fav-item-price">'+item.price.toLocaleString()+' HNL</div></div><div class="fav-actions"><button class="btn-fav-to-cart" onclick="addToCart('+item.id+',\''+item.name.replace(/'/g,"\\'")+"',"+item.price+",'"+item.icon+'\')">+ Carrito</button><button class="btn-fav-del" onclick="removeFav('+item.id+')">✕</button></div></div>'
+      '<div class="fav-item"><div class="fav-item-img">'+item.icon+'</div><div class="fav-item-info"><div class="fav-item-name">'+item.name+'</div><div class="fav-item-price">'+item.price.toLocaleString()+' HNL</div></div><div class="fav-actions"><button class="btn-fav-to-cart" onclick="addToCart('+item.id+',\''+item.name.replace(/'/g,"\\'")+"',"+item.price+",'"+item.icon+"','"+item.category+'\')">+ Carrito</button><button class="btn-fav-del" onclick="removeFav('+item.id+')">✕</button></div></div>'
     ).join('');
   }
 
@@ -730,6 +751,7 @@
     currentCategory = cat;
     applyFilters();
   }
+
   function applyFilters() {
     const query   = document.getElementById('searchInput').value.toLowerCase().trim();
     const minP    = parseFloat(document.getElementById('minPrice').value) || 0;
@@ -779,7 +801,7 @@
       if (!empty) {
         empty = document.createElement('div');
         empty.className = 'empty-state';
-        empty.innerHTML = '<div class="empty-icon">🔍</div><p>No se encontraron productos con esos filtros.</p>';
+        empty.innerHTML = '<div class="empty-icon">🔍</div><p>No se encontraron productos.</p>';
         document.getElementById('productsGrid').appendChild(empty);
       }
     } else if (empty) empty.remove();

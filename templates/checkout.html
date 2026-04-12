@@ -22,574 +22,135 @@
 
     * { margin: 0; padding: 0; box-sizing: border-box; }
 
-    body {
-      background: var(--bg);
-      color: var(--white);
-      font-family: 'Inter', sans-serif;
-    }
+    body { background: var(--bg); color: var(--white); font-family: 'Inter', sans-serif; }
 
-    /* ── NAVBAR ── */
     nav {
-      position: fixed;
-      top: 0; left: 0; right: 0;
-      z-index: 100;
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
+      position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+      display: flex; align-items: center; justify-content: space-between;
       padding: 18px 60px;
       background: rgba(8, 8, 16, 0.95);
       backdrop-filter: blur(12px);
       border-bottom: 1px solid var(--border);
     }
 
-    .logo {
-      font-family: 'Rajdhani', sans-serif;
-      font-size: 1.6rem;
-      font-weight: 700;
-      letter-spacing: 2px;
-      color: var(--white);
-      text-decoration: none;
-    }
-
+    .logo { font-family: 'Rajdhani', sans-serif; font-size: 1.6rem; font-weight: 700; letter-spacing: 2px; color: var(--white); text-decoration: none; }
     .logo span { color: var(--blue); }
 
-    /* Pasos del checkout */
-    .checkout-steps {
-      display: flex;
-      align-items: center;
-      gap: 0;
-    }
+    .checkout-steps { display: flex; align-items: center; gap: 0; }
 
-    .step {
-      display: flex;
-      align-items: center;
-      gap: 8px;
-      font-size: 0.78rem;
-      letter-spacing: 1px;
-      text-transform: uppercase;
-      color: var(--gray);
-    }
-
+    .step { display: flex; align-items: center; gap: 8px; font-size: 0.78rem; letter-spacing: 1px; text-transform: uppercase; color: var(--gray); }
     .step.active { color: var(--white); }
     .step.done { color: var(--success); }
 
-    .step-num {
-      width: 26px; height: 26px;
-      border-radius: 50%;
-      border: 1px solid var(--border);
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      font-size: 0.72rem;
-      font-weight: 600;
-    }
+    .step-num { width: 26px; height: 26px; border-radius: 50%; border: 1px solid var(--border); display: flex; align-items: center; justify-content: center; font-size: 0.72rem; font-weight: 600; }
+    .step.active .step-num { background: var(--blue); border-color: var(--blue); color: #fff; }
+    .step.done .step-num { background: var(--success); border-color: var(--success); color: #fff; }
 
-    .step.active .step-num {
-      background: var(--blue);
-      border-color: var(--blue);
-      color: #fff;
-    }
+    .step-divider { width: 40px; height: 1px; background: var(--border); margin: 0 8px; }
 
-    .step.done .step-num {
-      background: var(--success);
-      border-color: var(--success);
-      color: #fff;
-    }
+    .secure-badge { display: flex; align-items: center; gap: 6px; font-size: 0.75rem; color: var(--success); }
 
-    .step-divider {
-      width: 40px;
-      height: 1px;
-      background: var(--border);
-      margin: 0 8px;
-    }
-
-    .secure-badge {
-      display: flex;
-      align-items: center;
-      gap: 6px;
-      font-size: 0.75rem;
-      color: var(--success);
-    }
-
-    /* ── HEADER ── */
-    .page-header {
-      padding: 110px 60px 40px;
-      background: var(--bg2);
-      border-bottom: 1px solid var(--border);
-    }
-
-    .page-header-tag {
-      font-size: 0.72rem;
-      letter-spacing: 3px;
-      text-transform: uppercase;
-      color: var(--blue);
-      margin-bottom: 10px;
-    }
-
-    .page-header h1 {
-      font-family: 'Rajdhani', sans-serif;
-      font-size: 2.2rem;
-      font-weight: 700;
-    }
-
+    .page-header { padding: 110px 60px 40px; background: var(--bg2); border-bottom: 1px solid var(--border); }
+    .page-header-tag { font-size: 0.72rem; letter-spacing: 3px; text-transform: uppercase; color: var(--blue); margin-bottom: 10px; }
+    .page-header h1 { font-family: 'Rajdhani', sans-serif; font-size: 2.2rem; font-weight: 700; }
     .page-header h1 span { color: var(--blue); }
 
-    /* ── LAYOUT ── */
-    .checkout-layout {
-      display: grid;
-      grid-template-columns: 1fr 400px;
-      gap: 30px;
-      padding: 40px 60px;
-      max-width: 1400px;
-      margin: 0 auto;
-    }
+    .checkout-layout { display: grid; grid-template-columns: 1fr 400px; gap: 30px; padding: 40px 60px; max-width: 1400px; margin: 0 auto; }
 
-    /* ── SECCIONES DEL FORMULARIO ── */
-    .form-section {
-      background: var(--card-bg);
-      border: 1px solid var(--border);
-      border-radius: 6px;
-      padding: 28px;
-      margin-bottom: 20px;
-    }
+    .form-section { background: var(--card-bg); border: 1px solid var(--border); border-radius: 6px; padding: 28px; margin-bottom: 20px; }
 
-    .section-header {
-      display: flex;
-      align-items: center;
-      gap: 12px;
-      margin-bottom: 24px;
-      padding-bottom: 16px;
-      border-bottom: 1px solid var(--border);
-    }
+    .section-header { display: flex; align-items: center; gap: 12px; margin-bottom: 24px; padding-bottom: 16px; border-bottom: 1px solid var(--border); }
+    .section-num { width: 30px; height: 30px; background: var(--blue); border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 0.8rem; font-weight: 700; color: #fff; flex-shrink: 0; }
+    .section-title { font-family: 'Rajdhani', sans-serif; font-size: 1.1rem; font-weight: 700; letter-spacing: 1px; text-transform: uppercase; }
 
-    .section-num {
-      width: 30px; height: 30px;
-      background: var(--blue);
-      border-radius: 50%;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      font-size: 0.8rem;
-      font-weight: 700;
-      color: #fff;
-      flex-shrink: 0;
-    }
-
-    .section-title {
-      font-family: 'Rajdhani', sans-serif;
-      font-size: 1.1rem;
-      font-weight: 700;
-      letter-spacing: 1px;
-      text-transform: uppercase;
-    }
-
-    /* Grid de campos */
-    .form-row {
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 16px;
-    }
-
-    .form-row-3 {
-      display: grid;
-      grid-template-columns: 1fr 1fr 1fr;
-      gap: 16px;
-    }
-
+    .form-row { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
+    .form-row-3 { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 16px; }
     .form-group { margin-bottom: 16px; }
     .form-group.full { grid-column: 1 / -1; }
 
-    .form-label {
-      display: block;
-      font-size: 0.74rem;
-      letter-spacing: 1px;
-      text-transform: uppercase;
-      color: var(--gray);
-      margin-bottom: 7px;
-    }
-
+    .form-label { display: block; font-size: 0.74rem; letter-spacing: 1px; text-transform: uppercase; color: var(--gray); margin-bottom: 7px; }
     .form-label .required { color: var(--error); margin-left: 2px; }
 
     .input-wrapper { position: relative; }
-
-    .input-icon {
-      position: absolute;
-      left: 13px;
-      top: 50%;
-      transform: translateY(-50%);
-      font-size: 0.9rem;
-      pointer-events: none;
-    }
+    .input-icon { position: absolute; left: 13px; top: 50%; transform: translateY(-50%); font-size: 0.9rem; pointer-events: none; }
 
     .form-input {
-      width: 100%;
-      background: var(--bg);
-      border: 1px solid var(--border);
-      color: var(--white);
-      padding: 12px 13px 12px 40px;
-      border-radius: 5px;
-      font-size: 0.86rem;
-      font-family: 'Inter', sans-serif;
+      width: 100%; background: var(--bg); border: 1px solid var(--border); color: var(--white);
+      padding: 12px 13px 12px 40px; border-radius: 5px; font-size: 0.86rem; font-family: 'Inter', sans-serif;
       transition: border-color 0.2s, box-shadow 0.2s;
     }
 
     .form-input.no-icon { padding-left: 13px; }
-
-    .form-input:focus {
-      outline: none;
-      border-color: var(--blue);
-      box-shadow: 0 0 0 3px rgba(0,102,255,0.1);
-    }
-
+    .form-input:focus { outline: none; border-color: var(--blue); box-shadow: 0 0 0 3px rgba(0,102,255,0.1); }
     .form-input::placeholder { color: var(--gray); }
     .form-input.error { border-color: var(--error); }
 
     select.form-input {
-      cursor: pointer;
-      appearance: none;
-      padding-right: 32px;
+      cursor: pointer; appearance: none; padding-right: 32px;
       background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' fill='%238890aa' viewBox='0 0 16 16'%3E%3Cpath d='M7.247 11.14 2.451 5.658C1.885 5.013 2.345 4 3.204 4h9.592a1 1 0 0 1 .753 1.659l-4.796 5.48a1 1 0 0 1-1.506 0z'/%3E%3C/svg%3E");
-      background-repeat: no-repeat;
-      background-position: right 12px center;
+      background-repeat: no-repeat; background-position: right 12px center;
     }
 
     select.form-input option { background: var(--bg2); }
 
-    .error-msg {
-      font-size: 0.7rem;
-      color: var(--error);
-      margin-top: 5px;
-      display: none;
-    }
+    .error-msg { font-size: 0.7rem; color: var(--error); margin-top: 5px; display: none; }
 
-    /* ── MÉTODOS DE PAGO ── */
-    .payment-options {
-      display: flex;
-      flex-direction: column;
-      gap: 12px;
-      margin-bottom: 20px;
-    }
+    .payment-options { display: flex; flex-direction: column; gap: 12px; margin-bottom: 20px; }
 
     .payment-option {
-      display: flex;
-      align-items: center;
-      gap: 14px;
-      background: var(--bg);
-      border: 1px solid var(--border);
-      border-radius: 5px;
-      padding: 16px;
-      cursor: pointer;
-      transition: all 0.2s;
+      display: flex; align-items: center; gap: 14px;
+      background: var(--bg); border: 1px solid var(--border); border-radius: 5px;
+      padding: 16px; cursor: pointer; transition: all 0.2s;
     }
 
     .payment-option:hover { border-color: rgba(0,102,255,0.4); }
-
-    .payment-option.selected {
-      border-color: var(--blue);
-      background: rgba(0,102,255,0.08);
-    }
-
-    .payment-option input[type="radio"] {
-      accent-color: var(--blue);
-      width: 16px;
-      height: 16px;
-      cursor: pointer;
-    }
-
+    .payment-option.selected { border-color: var(--blue); background: rgba(0,102,255,0.08); }
+    .payment-option input[type="radio"] { accent-color: var(--blue); width: 16px; height: 16px; cursor: pointer; }
     .payment-option-icon { font-size: 1.5rem; }
+    .payment-option-info strong { display: block; font-size: 0.88rem; margin-bottom: 2px; }
+    .payment-option-info span { font-size: 0.75rem; color: var(--gray); }
 
-    .payment-option-info strong {
-      display: block;
-      font-size: 0.88rem;
-      margin-bottom: 2px;
-    }
-
-    .payment-option-info span {
-      font-size: 0.75rem;
-      color: var(--gray);
-    }
-
-    /* Campos de tarjeta */
-    .card-fields {
-      display: none;
-      margin-top: 16px;
-      padding-top: 16px;
-      border-top: 1px solid var(--border);
-    }
-
+    .card-fields { display: none; margin-top: 16px; padding-top: 16px; border-top: 1px solid var(--border); }
     .card-fields.show { display: block; }
+    .card-number-input { letter-spacing: 2px; }
 
-    .card-number-input {
-      letter-spacing: 2px;
-    }
+    /* RESUMEN */
+    .summary-card { background: var(--card-bg); border: 1px solid var(--border); border-radius: 6px; padding: 28px; position: sticky; top: 100px; height: fit-content; }
+    .summary-title { font-family: 'Rajdhani', sans-serif; font-size: 1rem; letter-spacing: 2px; text-transform: uppercase; margin-bottom: 20px; padding-bottom: 14px; border-bottom: 1px solid var(--border); }
 
-    /* ── RESUMEN LATERAL ── */
-    .summary-card {
-      background: var(--card-bg);
-      border: 1px solid var(--border);
-      border-radius: 6px;
-      padding: 28px;
-      position: sticky;
-      top: 100px;
-      height: fit-content;
-    }
-
-    .summary-title {
-      font-family: 'Rajdhani', sans-serif;
-      font-size: 1rem;
-      letter-spacing: 2px;
-      text-transform: uppercase;
-      margin-bottom: 20px;
-      padding-bottom: 14px;
-      border-bottom: 1px solid var(--border);
-    }
-
-    .summary-item {
-      display: flex;
-      align-items: center;
-      gap: 12px;
-      margin-bottom: 14px;
-      padding-bottom: 14px;
-      border-bottom: 1px solid var(--border);
-    }
-
+    .summary-item { display: flex; align-items: center; gap: 12px; margin-bottom: 14px; padding-bottom: 14px; border-bottom: 1px solid var(--border); }
     .summary-item:last-of-type { border-bottom: none; margin-bottom: 0; }
-
-    .summary-item-img {
-      width: 48px; height: 48px;
-      background: var(--bg);
-      border: 1px solid var(--border);
-      border-radius: 4px;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      font-size: 1.4rem;
-      flex-shrink: 0;
-    }
-
+    .summary-item-img { width: 48px; height: 48px; background: var(--bg); border: 1px solid var(--border); border-radius: 4px; display: flex; align-items: center; justify-content: center; font-size: 1.4rem; flex-shrink: 0; }
     .summary-item-info { flex: 1; }
+    .summary-item-name { font-size: 0.82rem; font-weight: 500; margin-bottom: 3px; }
+    .summary-item-qty { font-size: 0.72rem; color: var(--gray); }
+    .summary-item-price { font-family: 'Rajdhani', sans-serif; font-size: 1rem; font-weight: 700; color: var(--cyan); white-space: nowrap; }
 
-    .summary-item-name {
-      font-size: 0.82rem;
-      font-weight: 500;
-      margin-bottom: 3px;
-    }
+    .summary-divider { height: 1px; background: var(--border); margin: 18px 0; }
 
-    .summary-item-qty {
-      font-size: 0.72rem;
-      color: var(--gray);
-    }
-
-    .summary-item-price {
-      font-family: 'Rajdhani', sans-serif;
-      font-size: 1rem;
-      font-weight: 700;
-      color: var(--cyan);
-      white-space: nowrap;
-    }
-
-    .summary-divider {
-      height: 1px;
-      background: var(--border);
-      margin: 18px 0;
-    }
-
-    .summary-row {
-      display: flex;
-      justify-content: space-between;
-      font-size: 0.83rem;
-      margin-bottom: 10px;
-    }
-
+    .summary-row { display: flex; justify-content: space-between; font-size: 0.83rem; margin-bottom: 10px; }
     .summary-row .label { color: var(--gray); }
 
-    .summary-total {
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      margin: 18px 0 24px;
-    }
-
-    .total-label {
-      font-family: 'Rajdhani', sans-serif;
-      font-size: 1rem;
-      letter-spacing: 1px;
-      text-transform: uppercase;
-    }
-
-    .total-value {
-      font-family: 'Rajdhani', sans-serif;
-      font-size: 1.8rem;
-      font-weight: 700;
-      color: var(--cyan);
-    }
+    .summary-total { display: flex; justify-content: space-between; align-items: center; margin: 18px 0 24px; }
+    .total-label { font-family: 'Rajdhani', sans-serif; font-size: 1rem; letter-spacing: 1px; text-transform: uppercase; }
+    .total-value { font-family: 'Rajdhani', sans-serif; font-size: 1.8rem; font-weight: 700; color: var(--cyan); }
 
     .btn-place-order {
-      width: 100%;
-      background: var(--blue);
-      color: #fff;
-      border: none;
-      padding: 15px;
-      border-radius: 5px;
-      font-size: 0.9rem;
-      letter-spacing: 2px;
-      text-transform: uppercase;
-      cursor: pointer;
-      font-family: 'Inter', sans-serif;
-      font-weight: 500;
-      transition: all 0.2s;
-      margin-bottom: 14px;
+      width: 100%; background: var(--blue); color: #fff; border: none;
+      padding: 15px; border-radius: 5px; font-size: 0.9rem; letter-spacing: 2px;
+      text-transform: uppercase; cursor: pointer; font-family: 'Inter', sans-serif;
+      font-weight: 500; transition: all 0.2s; margin-bottom: 14px;
     }
 
-    .btn-place-order:hover {
-      background: var(--blue-glow);
-      transform: translateY(-1px);
-      box-shadow: 0 8px 20px rgba(0,102,255,0.3);
-    }
+    .btn-place-order:hover { background: var(--blue-glow); transform: translateY(-1px); box-shadow: 0 8px 20px rgba(0,102,255,0.3); }
 
-    .secure-msg {
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      gap: 6px;
-      font-size: 0.72rem;
-      color: var(--gray);
-      margin-bottom: 16px;
-    }
-
-    .terms-note {
-      font-size: 0.72rem;
-      color: var(--gray);
-      text-align: center;
-      line-height: 1.6;
-    }
-
+    .secure-msg { display: flex; align-items: center; justify-content: center; gap: 6px; font-size: 0.72rem; color: var(--gray); margin-bottom: 16px; }
+    .terms-note { font-size: 0.72rem; color: var(--gray); text-align: center; line-height: 1.6; }
     .terms-note a { color: var(--blue); text-decoration: none; }
 
-    /* ── MODAL ÉXITO ── */
-    .modal-overlay {
-      position: fixed;
-      inset: 0;
-      background: rgba(0,0,0,0.8);
-      backdrop-filter: blur(6px);
-      z-index: 1000;
-      display: none;
-      align-items: center;
-      justify-content: center;
-    }
-
-    .modal-overlay.show { display: flex; }
-
-    .modal {
-      background: var(--card-bg);
-      border: 1px solid var(--border);
-      border-radius: 10px;
-      padding: 50px 40px;
-      text-align: center;
-      max-width: 460px;
-      width: 90%;
-      animation: popIn 0.4s ease;
-    }
-
-    .modal-icon { font-size: 4rem; margin-bottom: 20px; }
-
-    .modal h2 {
-      font-family: 'Rajdhani', sans-serif;
-      font-size: 2rem;
-      font-weight: 700;
-      margin-bottom: 10px;
-    }
-
-    .modal h2 span { color: var(--success); }
-
-    .modal p {
-      color: var(--gray);
-      font-size: 0.88rem;
-      line-height: 1.7;
-      margin-bottom: 28px;
-    }
-
-    .order-number {
-      background: var(--bg);
-      border: 1px solid var(--border);
-      border-radius: 5px;
-      padding: 14px;
-      margin-bottom: 28px;
-    }
-
-    .order-number span {
-      font-size: 0.72rem;
-      color: var(--gray);
-      display: block;
-      margin-bottom: 4px;
-      letter-spacing: 1px;
-      text-transform: uppercase;
-    }
-
-    .order-number strong {
-      font-family: 'Rajdhani', sans-serif;
-      font-size: 1.4rem;
-      color: var(--cyan);
-      letter-spacing: 3px;
-    }
-
-    .modal-btns {
-      display: flex;
-      gap: 12px;
-      justify-content: center;
-    }
-
-    .btn-invoice {
-      background: var(--blue);
-      color: #fff;
-      border: none;
-      padding: 12px 24px;
-      border-radius: 4px;
-      font-size: 0.82rem;
-      letter-spacing: 1px;
-      text-transform: uppercase;
-      cursor: pointer;
-      font-family: 'Inter', sans-serif;
-      text-decoration: none;
-      transition: background 0.2s;
-    }
-
-    .btn-invoice:hover { background: var(--blue-glow); }
-
-    .btn-home {
-      background: transparent;
-      color: var(--white);
-      border: 1px solid var(--border);
-      padding: 12px 24px;
-      border-radius: 4px;
-      font-size: 0.82rem;
-      letter-spacing: 1px;
-      text-transform: uppercase;
-      cursor: pointer;
-      font-family: 'Inter', sans-serif;
-      text-decoration: none;
-      transition: all 0.2s;
-    }
-
-    .btn-home:hover { border-color: var(--blue); color: var(--blue); }
-
-    @keyframes popIn {
-      from { opacity: 0; transform: scale(0.9); }
-      to   { opacity: 1; transform: scale(1); }
-    }
-
-    /* ── FOOTER ── */
-    footer {
-      background: var(--bg2);
-      border-top: 1px solid var(--border);
-      padding: 30px 60px;
-      text-align: center;
-      margin-top: 60px;
-    }
-
+    footer { background: var(--bg2); border-top: 1px solid var(--border); padding: 30px 60px; text-align: center; margin-top: 60px; }
     footer p { color: var(--gray); font-size: 0.78rem; }
 
-    /* ── RESPONSIVE ── */
     @media (max-width: 900px) {
       nav { padding: 16px 24px; }
       .checkout-steps { display: none; }
@@ -603,35 +164,25 @@
 </head>
 <body>
 
-  <!-- NAVBAR -->
   <nav>
-    <a href="index.html" class="logo">SECURE<span>VISION</span></a>
+    <a href="{{ url_for('index') }}" class="logo">SECURE<span>VISION</span></a>
     <div class="checkout-steps">
-      <div class="step done">
-        <div class="step-num">✓</div>
-        <span>Carrito</span>
-      </div>
+      <div class="step done"><div class="step-num">✓</div><span>Carrito</span></div>
       <div class="step-divider"></div>
-      <div class="step active">
-        <div class="step-num">2</div>
-        <span>Pago</span>
-      </div>
+      <div class="step active"><div class="step-num">2</div><span>Pago</span></div>
       <div class="step-divider"></div>
-      <div class="step">
-        <div class="step-num">3</div>
-        <span>Confirmación</span>
-      </div>
+      <div class="step"><div class="step-num">3</div><span>Confirmación</span></div>
     </div>
     <div class="secure-badge">🔒 Pago Seguro</div>
   </nav>
 
-  <!-- HEADER -->
   <div class="page-header">
     <div class="page-header-tag">// Finalizar Compra</div>
     <h1>Datos de <span>Pago</span></h1>
   </div>
 
-  <!-- LAYOUT -->
+  <!-- ✅ FORM con POST real a Flask -->
+  <form method="POST" action="{{ url_for('checkout') }}" id="checkoutForm">
   <div class="checkout-layout">
 
     <!-- FORMULARIO -->
@@ -648,7 +199,7 @@
             <label class="form-label">Nombre <span class="required">*</span></label>
             <div class="input-wrapper">
               <span class="input-icon">👤</span>
-              <input type="text" class="form-input" id="nombre" placeholder="Tu nombre"/>
+              <input type="text" class="form-input" id="nombre" name="nombre" placeholder="Tu nombre"/>
             </div>
             <div class="error-msg" id="nombreError">Campo requerido</div>
           </div>
@@ -656,7 +207,7 @@
             <label class="form-label">Apellido <span class="required">*</span></label>
             <div class="input-wrapper">
               <span class="input-icon">👤</span>
-              <input type="text" class="form-input" id="apellido" placeholder="Tu apellido"/>
+              <input type="text" class="form-input" id="apellido" name="apellido" placeholder="Tu apellido"/>
             </div>
             <div class="error-msg" id="apellidoError">Campo requerido</div>
           </div>
@@ -666,7 +217,7 @@
             <label class="form-label">Correo Electrónico <span class="required">*</span></label>
             <div class="input-wrapper">
               <span class="input-icon">📧</span>
-              <input type="email" class="form-input" id="email" placeholder="tucorreo@ejemplo.com"/>
+              <input type="email" class="form-input" id="email" name="email" placeholder="tucorreo@ejemplo.com"/>
             </div>
             <div class="error-msg" id="emailError">Correo inválido</div>
           </div>
@@ -674,7 +225,7 @@
             <label class="form-label">Teléfono <span class="required">*</span></label>
             <div class="input-wrapper">
               <span class="input-icon">📱</span>
-              <input type="tel" class="form-input" id="telefono" placeholder="+504 0000-0000"/>
+              <input type="tel" class="form-input" id="telefono" name="telefono" placeholder="+504 0000-0000"/>
             </div>
             <div class="error-msg" id="telefonoError">Campo requerido</div>
           </div>
@@ -689,7 +240,7 @@
         </div>
         <div class="form-group">
           <label class="form-label">País <span class="required">*</span></label>
-          <select class="form-input no-icon" id="pais">
+          <select class="form-input no-icon" id="pais" name="pais">
             <option value="">Selecciona tu país</option>
             <option>Honduras</option>
             <option>Guatemala</option>
@@ -710,7 +261,7 @@
           <label class="form-label">Dirección <span class="required">*</span></label>
           <div class="input-wrapper">
             <span class="input-icon">📍</span>
-            <input type="text" class="form-input" id="direccion" placeholder="Calle, número, colonia"/>
+            <input type="text" class="form-input" id="direccion" name="direccion" placeholder="Calle, número, colonia"/>
           </div>
           <div class="error-msg" id="direccionError">Campo requerido</div>
         </div>
@@ -719,7 +270,7 @@
             <label class="form-label">Ciudad <span class="required">*</span></label>
             <div class="input-wrapper">
               <span class="input-icon">🏙️</span>
-              <input type="text" class="form-input" id="ciudad" placeholder="Tu ciudad"/>
+              <input type="text" class="form-input" id="ciudad" name="ciudad" placeholder="Tu ciudad"/>
             </div>
             <div class="error-msg" id="ciudadError">Campo requerido</div>
           </div>
@@ -727,13 +278,14 @@
             <label class="form-label">Código Postal</label>
             <div class="input-wrapper">
               <span class="input-icon">📮</span>
-              <input type="text" class="form-input" id="postal" placeholder="00000"/>
+              <input type="text" class="form-input" id="postal" name="postal" placeholder="00000"/>
             </div>
           </div>
         </div>
         <div class="form-group">
           <label class="form-label">Referencia o instrucciones de entrega</label>
-          <textarea class="form-input no-icon" id="referencia" rows="2" placeholder="Ej: Casa color azul, portón negro..." style="resize:vertical; min-height:60px; padding: 12px;"></textarea>
+          <textarea class="form-input no-icon" id="referencia" name="referencia" rows="2"
+            placeholder="Ej: Casa color azul, portón negro..." style="resize:vertical;min-height:60px;padding:12px;"></textarea>
         </div>
       </div>
 
@@ -745,8 +297,7 @@
         </div>
 
         <div class="payment-options">
-
-          <label class="payment-option selected" onclick="selectPayment(this, 'card')">
+          <label class="payment-option selected" onclick="selectPayment(this,'card')">
             <input type="radio" name="payment" value="card" checked/>
             <span class="payment-option-icon">💳</span>
             <div class="payment-option-info">
@@ -754,8 +305,7 @@
               <span>Visa, Mastercard, American Express</span>
             </div>
           </label>
-
-          <label class="payment-option" onclick="selectPayment(this, 'paypal')">
+          <label class="payment-option" onclick="selectPayment(this,'paypal')">
             <input type="radio" name="payment" value="paypal"/>
             <span class="payment-option-icon">🅿️</span>
             <div class="payment-option-info">
@@ -763,8 +313,7 @@
               <span>Paga con tu cuenta PayPal</span>
             </div>
           </label>
-
-          <label class="payment-option" onclick="selectPayment(this, 'transfer')">
+          <label class="payment-option" onclick="selectPayment(this,'transfer')">
             <input type="radio" name="payment" value="transfer"/>
             <span class="payment-option-icon">🏦</span>
             <div class="payment-option-info">
@@ -772,30 +321,25 @@
               <span>Te enviaremos los datos bancarios</span>
             </div>
           </label>
-
         </div>
 
-        <!-- Campos de tarjeta -->
         <div class="card-fields show" id="cardFields">
           <div class="form-group">
-            <label class="form-label">Número de Tarjeta <span class="required">*</span></label>
+            <label class="form-label">Número de Tarjeta</label>
             <div class="input-wrapper">
               <span class="input-icon">💳</span>
-              <input type="text" class="form-input card-number-input" id="cardNumber"
-                placeholder="0000 0000 0000 0000" maxlength="19"
-                oninput="formatCard(this)"/>
+              <input type="text" class="form-input card-number-input" placeholder="0000 0000 0000 0000" maxlength="19" oninput="formatCard(this)"/>
             </div>
-            <div class="error-msg" id="cardError">Número de tarjeta inválido</div>
           </div>
           <div class="form-row">
             <div class="form-group">
-              <label class="form-label">Nombre en la tarjeta <span class="required">*</span></label>
+              <label class="form-label">Nombre en la tarjeta</label>
               <div class="input-wrapper">
                 <span class="input-icon">👤</span>
-                <input type="text" class="form-input" id="cardName" placeholder="Como aparece en la tarjeta"/>
+                <input type="text" class="form-input" placeholder="Como aparece en la tarjeta"/>
               </div>
             </div>
-            <div class="form-row" style="margin:0; gap:12px;">
+            <div class="form-row" style="margin:0;gap:12px;">
               <div class="form-group" style="margin:0;">
                 <label class="form-label">Vencimiento</label>
                 <input type="text" class="form-input no-icon" placeholder="MM/AA" maxlength="5" oninput="formatExpiry(this)"/>
@@ -807,7 +351,6 @@
             </div>
           </div>
         </div>
-
       </div>
 
     </div>
@@ -817,38 +360,22 @@
       <div class="summary-card">
         <div class="summary-title">Tu Pedido</div>
 
+        {% for item in carrito %}
         <div class="summary-item">
-          <div class="summary-item-img">📹</div>
+          <div class="summary-item-img">{{ item.emoji }}</div>
           <div class="summary-item-info">
-            <div class="summary-item-name">Cámara IP 4K Exterior</div>
-            <div class="summary-item-qty">x1</div>
+            <div class="summary-item-name">{{ item.nombre }}</div>
+            <div class="summary-item-qty">x{{ item.cantidad }}</div>
           </div>
-          <div class="summary-item-price">$89.99</div>
+          <div class="summary-item-price">${{ "%.2f"|format(item.precio * item.cantidad) }}</div>
         </div>
-
-        <div class="summary-item">
-          <div class="summary-item-img">👆</div>
-          <div class="summary-item-info">
-            <div class="summary-item-name">Control Biométrico Facial</div>
-            <div class="summary-item-qty">x2</div>
-          </div>
-          <div class="summary-item-price">$270.00</div>
-        </div>
-
-        <div class="summary-item">
-          <div class="summary-item-img">🔔</div>
-          <div class="summary-item-info">
-            <div class="summary-item-name">Kit Alarma Inalámbrica</div>
-            <div class="summary-item-qty">x1</div>
-          </div>
-          <div class="summary-item-price">$120.00</div>
-        </div>
+        {% endfor %}
 
         <div class="summary-divider"></div>
 
         <div class="summary-row">
           <span class="label">Subtotal</span>
-          <span>$479.99</span>
+          <span>${{ "%.2f"|format(subtotal) }}</span>
         </div>
         <div class="summary-row">
           <span class="label">Envío</span>
@@ -856,47 +383,32 @@
         </div>
         <div class="summary-row">
           <span class="label">Impuestos (15%)</span>
-          <span>$72.00</span>
+          <span>${{ "%.2f"|format(impuestos) }}</span>
         </div>
 
         <div class="summary-total">
           <span class="total-label">Total</span>
-          <span class="total-value">$551.99</span>
+          <span class="total-value">${{ "%.2f"|format(total) }}</span>
         </div>
 
-        <button class="btn-place-order" onclick="placeOrder()">
+        <!-- ✅ Botón que valida y envía el formulario -->
+        <button type="button" class="btn-place-order" onclick="placeOrder()">
           Confirmar Pedido 🔒
         </button>
 
         <div class="secure-msg">🔒 Tus datos están protegidos con SSL</div>
 
         <div class="terms-note">
-          Al confirmar aceptas nuestros <a href="#">Términos de Servicio</a> y <a href="#">Política de Privacidad</a>
+          Al confirmar aceptas nuestros
+          <a href="{{ url_for('terminos') }}">Términos de Servicio</a> y
+          <a href="{{ url_for('privacidad') }}">Política de Privacidad</a>
         </div>
-
       </div>
     </div>
 
   </div>
+  </form>
 
-  <!-- MODAL ÉXITO -->
-  <div class="modal-overlay" id="successModal">
-    <div class="modal">
-      <div class="modal-icon">🎉</div>
-      <h2>¡Pedido <span>Confirmado</span>!</h2>
-      <p>Tu pedido ha sido procesado exitosamente. Recibirás un correo de confirmación con los detalles de tu compra.</p>
-      <div class="order-number">
-        <span>Número de pedido</span>
-        <strong id="orderNum">#SV-00000</strong>
-      </div>
-      <div class="modal-btns">
-        <a href="factura.html" class="btn-invoice">📄 Ver Factura</a>
-        <a href="index.html" class="btn-home">🏠 Ir al Inicio</a>
-      </div>
-    </div>
-  </div>
-
-  <!-- FOOTER -->
   <footer>
     <p>© 2026 SecureVision. Todos los derechos reservados.</p>
   </footer>
@@ -919,6 +431,7 @@
       input.value = val;
     }
 
+    // ✅ Valida y envía el formulario a Flask
     function placeOrder() {
       const fields = [
         { id: 'nombre',    errorId: 'nombreError',    check: v => v.trim().length > 0 },
@@ -945,9 +458,7 @@
       });
 
       if (valid) {
-        const orderNum = '#SV-' + Math.floor(10000 + Math.random() * 90000);
-        document.getElementById('orderNum').textContent = orderNum;
-        document.getElementById('successModal').classList.add('show');
+        document.getElementById('checkoutForm').submit();
       }
     }
   </script>

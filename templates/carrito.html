@@ -28,7 +28,6 @@
       font-family: 'Inter', sans-serif;
     }
 
-    /* ── NAVBAR ── */
     nav {
       position: fixed;
       top: 0; left: 0; right: 0;
@@ -53,11 +52,7 @@
 
     .logo span { color: var(--blue); }
 
-    .nav-links {
-      display: flex;
-      gap: 36px;
-      list-style: none;
-    }
+    .nav-links { display: flex; gap: 36px; list-style: none; }
 
     .nav-links a {
       text-decoration: none;
@@ -70,11 +65,7 @@
 
     .nav-links a:hover { color: var(--white); }
 
-    .nav-actions {
-      display: flex;
-      align-items: center;
-      gap: 16px;
-    }
+    .nav-actions { display: flex; align-items: center; gap: 16px; }
 
     .btn-nav {
       background: var(--blue);
@@ -92,7 +83,6 @@
 
     .btn-nav:hover { background: var(--blue-glow); }
 
-    /* ── HEADER PÁGINA ── */
     .page-header {
       padding: 110px 60px 40px;
       background: var(--bg2);
@@ -107,35 +97,14 @@
       margin-bottom: 10px;
     }
 
-    .page-header h1 {
-      font-family: 'Rajdhani', sans-serif;
-      font-size: 2.2rem;
-      font-weight: 700;
-    }
-
+    .page-header h1 { font-family: 'Rajdhani', sans-serif; font-size: 2.2rem; font-weight: 700; }
     .page-header h1 span { color: var(--blue); }
 
-    /* Breadcrumb */
-    .breadcrumb {
-      display: flex;
-      align-items: center;
-      gap: 8px;
-      margin-top: 10px;
-      font-size: 0.78rem;
-      color: var(--gray);
-    }
-
-    .breadcrumb a {
-      color: var(--gray);
-      text-decoration: none;
-      transition: color 0.2s;
-    }
-
+    .breadcrumb { display: flex; align-items: center; gap: 8px; margin-top: 10px; font-size: 0.78rem; color: var(--gray); }
+    .breadcrumb a { color: var(--gray); text-decoration: none; transition: color 0.2s; }
     .breadcrumb a:hover { color: var(--blue); }
-
     .breadcrumb span { color: var(--white); }
 
-    /* ── LAYOUT ── */
     .cart-layout {
       display: grid;
       grid-template-columns: 1fr 380px;
@@ -145,7 +114,6 @@
       margin: 0 auto;
     }
 
-    /* ── LISTA DE PRODUCTOS ── */
     .cart-items-section h2 {
       font-family: 'Rajdhani', sans-serif;
       font-size: 1.1rem;
@@ -173,85 +141,46 @@
     .cart-item:hover { border-color: rgba(0,102,255,0.4); }
 
     .item-img {
-      width: 90px;
-      height: 90px;
+      width: 90px; height: 90px;
       background: #13131f;
       border: 1px solid var(--border);
       border-radius: 6px;
-      display: flex;
-      align-items: center;
-      justify-content: center;
+      display: flex; align-items: center; justify-content: center;
       font-size: 2.5rem;
     }
 
     .item-details { flex: 1; }
 
-    .item-category {
-      font-size: 0.68rem;
-      letter-spacing: 2px;
-      text-transform: uppercase;
-      color: var(--blue);
-      margin-bottom: 5px;
-    }
+    .item-category { font-size: 0.68rem; letter-spacing: 2px; text-transform: uppercase; color: var(--blue); margin-bottom: 5px; }
+    .item-name { font-family: 'Rajdhani', sans-serif; font-size: 1.05rem; font-weight: 600; margin-bottom: 12px; }
 
-    .item-name {
-      font-family: 'Rajdhani', sans-serif;
-      font-size: 1.05rem;
-      font-weight: 600;
-      margin-bottom: 5px;
-    }
-
-    .item-desc {
-      font-size: 0.75rem;
-      color: var(--gray);
-      margin-bottom: 12px;
-    }
-
-    .item-controls {
-      display: flex;
-      align-items: center;
-      gap: 14px;
-    }
-
-    .quantity-control {
-      display: flex;
-      align-items: center;
-      gap: 0;
-      border: 1px solid var(--border);
-      border-radius: 4px;
-      overflow: hidden;
-    }
+    .item-controls { display: flex; align-items: center; gap: 10px; }
 
     .qty-btn {
       background: var(--bg2);
-      border: none;
+      border: 1px solid var(--border);
       color: var(--white);
-      width: 32px;
-      height: 32px;
+      width: 32px; height: 32px;
       cursor: pointer;
       font-size: 1rem;
+      border-radius: 4px;
       transition: background 0.2s;
-      display: flex;
-      align-items: center;
-      justify-content: center;
+      text-decoration: none;
+      display: flex; align-items: center; justify-content: center;
     }
 
     .qty-btn:hover { background: rgba(0,102,255,0.15); }
 
-    .qty-value {
+    .qty-display {
       background: var(--card-bg);
       color: var(--white);
-      width: 40px;
-      height: 32px;
+      width: 40px; height: 32px;
       text-align: center;
       font-size: 0.88rem;
-      border: none;
-      border-left: 1px solid var(--border);
-      border-right: 1px solid var(--border);
-      font-family: 'Inter', sans-serif;
+      border: 1px solid var(--border);
+      border-radius: 4px;
+      display: flex; align-items: center; justify-content: center;
     }
-
-    .qty-value:focus { outline: none; }
 
     .btn-remove {
       background: transparent;
@@ -265,315 +194,130 @@
       cursor: pointer;
       font-family: 'Inter', sans-serif;
       transition: all 0.2s;
+      text-decoration: none;
     }
 
-    .btn-remove:hover {
-      background: rgba(230,57,70,0.1);
-      border-color: var(--error);
-    }
+    .btn-remove:hover { background: rgba(230,57,70,0.1); border-color: var(--error); }
 
-    .item-price-col {
-      text-align: right;
-      min-width: 100px;
-    }
+    .item-price-col { text-align: right; min-width: 100px; }
+    .item-unit-price { font-size: 0.72rem; color: var(--gray); margin-bottom: 4px; }
+    .item-total-price { font-family: 'Rajdhani', sans-serif; font-size: 1.3rem; font-weight: 700; color: var(--cyan); }
 
-    .item-unit-price {
-      font-size: 0.72rem;
-      color: var(--gray);
-      margin-bottom: 4px;
-    }
-
-    .item-total-price {
-      font-family: 'Rajdhani', sans-serif;
-      font-size: 1.3rem;
-      font-weight: 700;
-      color: var(--cyan);
-    }
-
-    /* Carrito vacío */
     .empty-cart {
       text-align: center;
       padding: 80px 40px;
       background: var(--card-bg);
       border: 1px solid var(--border);
       border-radius: 6px;
-      display: none;
     }
 
     .empty-cart .empty-icon { font-size: 4rem; margin-bottom: 20px; }
-
-    .empty-cart h3 {
-      font-family: 'Rajdhani', sans-serif;
-      font-size: 1.4rem;
-      margin-bottom: 10px;
-    }
-
-    .empty-cart p {
-      color: var(--gray);
-      font-size: 0.85rem;
-      margin-bottom: 24px;
-    }
+    .empty-cart h3 { font-family: 'Rajdhani', sans-serif; font-size: 1.4rem; margin-bottom: 10px; }
+    .empty-cart p { color: var(--gray); font-size: 0.85rem; margin-bottom: 24px; }
 
     .btn-shop {
-      background: var(--blue);
-      color: #fff;
-      border: none;
-      padding: 12px 28px;
-      border-radius: 4px;
-      font-size: 0.82rem;
-      letter-spacing: 1px;
-      text-transform: uppercase;
-      cursor: pointer;
-      font-family: 'Inter', sans-serif;
-      text-decoration: none;
-      display: inline-block;
+      background: var(--blue); color: #fff; border: none;
+      padding: 12px 28px; border-radius: 4px;
+      font-size: 0.82rem; letter-spacing: 1px; text-transform: uppercase;
+      cursor: pointer; font-family: 'Inter', sans-serif;
+      text-decoration: none; display: inline-block;
       transition: background 0.2s;
     }
 
     .btn-shop:hover { background: var(--blue-glow); }
 
-    /* Acciones del carrito */
     .cart-actions {
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      margin-top: 20px;
-      padding-top: 20px;
-      border-top: 1px solid var(--border);
+      display: flex; justify-content: space-between; align-items: center;
+      margin-top: 20px; padding-top: 20px; border-top: 1px solid var(--border);
     }
 
     .btn-continue {
-      background: transparent;
-      border: 1px solid var(--border);
-      color: var(--white);
-      padding: 10px 20px;
-      border-radius: 4px;
-      font-size: 0.8rem;
-      letter-spacing: 1px;
-      text-transform: uppercase;
-      cursor: pointer;
-      font-family: 'Inter', sans-serif;
-      text-decoration: none;
-      transition: all 0.2s;
+      background: transparent; border: 1px solid var(--border); color: var(--white);
+      padding: 10px 20px; border-radius: 4px; font-size: 0.8rem;
+      letter-spacing: 1px; text-transform: uppercase; cursor: pointer;
+      font-family: 'Inter', sans-serif; text-decoration: none; transition: all 0.2s;
     }
 
-    .btn-continue:hover {
-      border-color: var(--blue);
-      color: var(--blue);
-    }
+    .btn-continue:hover { border-color: var(--blue); color: var(--blue); }
 
     .btn-clear {
-      background: transparent;
-      border: 1px solid rgba(230,57,70,0.3);
-      color: var(--error);
-      padding: 10px 20px;
-      border-radius: 4px;
-      font-size: 0.8rem;
-      letter-spacing: 1px;
-      text-transform: uppercase;
-      cursor: pointer;
-      font-family: 'Inter', sans-serif;
-      transition: all 0.2s;
+      background: transparent; border: 1px solid rgba(230,57,70,0.3); color: var(--error);
+      padding: 10px 20px; border-radius: 4px; font-size: 0.8rem;
+      letter-spacing: 1px; text-transform: uppercase; cursor: pointer;
+      font-family: 'Inter', sans-serif; text-decoration: none; transition: all 0.2s;
     }
 
-    .btn-clear:hover {
-      background: rgba(230,57,70,0.1);
-      border-color: var(--error);
-    }
+    .btn-clear:hover { background: rgba(230,57,70,0.1); border-color: var(--error); }
 
-    /* ── RESUMEN ── */
     .summary-card {
-      background: var(--card-bg);
-      border: 1px solid var(--border);
-      border-radius: 6px;
-      padding: 28px;
-      position: sticky;
-      top: 100px;
-      height: fit-content;
+      background: var(--card-bg); border: 1px solid var(--border);
+      border-radius: 6px; padding: 28px; position: sticky; top: 100px; height: fit-content;
     }
 
     .summary-title {
-      font-family: 'Rajdhani', sans-serif;
-      font-size: 1.1rem;
-      letter-spacing: 2px;
-      text-transform: uppercase;
-      margin-bottom: 24px;
-      padding-bottom: 14px;
-      border-bottom: 1px solid var(--border);
+      font-family: 'Rajdhani', sans-serif; font-size: 1.1rem;
+      letter-spacing: 2px; text-transform: uppercase;
+      margin-bottom: 24px; padding-bottom: 14px; border-bottom: 1px solid var(--border);
     }
 
-    .summary-row {
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      margin-bottom: 14px;
-      font-size: 0.85rem;
-    }
-
+    .summary-row { display: flex; justify-content: space-between; align-items: center; margin-bottom: 14px; font-size: 0.85rem; }
     .summary-row .label { color: var(--gray); }
     .summary-row .value { color: var(--white); font-weight: 500; }
     .summary-row .value.free { color: var(--success); }
 
-    .summary-divider {
-      height: 1px;
-      background: var(--border);
-      margin: 18px 0;
-    }
+    .summary-divider { height: 1px; background: var(--border); margin: 18px 0; }
 
-    .summary-total {
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      margin-bottom: 24px;
-    }
+    .summary-total { display: flex; justify-content: space-between; align-items: center; margin-bottom: 24px; }
+    .total-label { font-family: 'Rajdhani', sans-serif; font-size: 1rem; letter-spacing: 1px; text-transform: uppercase; }
+    .total-value { font-family: 'Rajdhani', sans-serif; font-size: 1.8rem; font-weight: 700; color: var(--cyan); }
 
-    .total-label {
-      font-family: 'Rajdhani', sans-serif;
-      font-size: 1rem;
-      letter-spacing: 1px;
-      text-transform: uppercase;
-    }
-
-    .total-value {
-      font-family: 'Rajdhani', sans-serif;
-      font-size: 1.8rem;
-      font-weight: 700;
-      color: var(--cyan);
-    }
-
-    /* Cupón */
-    .coupon-section {
-      margin-bottom: 20px;
-    }
-
-    .coupon-label {
-      font-size: 0.75rem;
-      letter-spacing: 1px;
-      text-transform: uppercase;
-      color: var(--gray);
-      margin-bottom: 8px;
-    }
-
-    .coupon-input-row {
-      display: flex;
-      gap: 8px;
-    }
+    .coupon-section { margin-bottom: 20px; }
+    .coupon-label { font-size: 0.75rem; letter-spacing: 1px; text-transform: uppercase; color: var(--gray); margin-bottom: 8px; }
+    .coupon-input-row { display: flex; gap: 8px; }
 
     .coupon-input {
-      flex: 1;
-      background: var(--bg);
-      border: 1px solid var(--border);
-      color: var(--white);
-      padding: 10px 13px;
-      border-radius: 4px;
-      font-size: 0.82rem;
-      font-family: 'Inter', sans-serif;
+      flex: 1; background: var(--bg); border: 1px solid var(--border); color: var(--white);
+      padding: 10px 13px; border-radius: 4px; font-size: 0.82rem; font-family: 'Inter', sans-serif;
     }
 
-    .coupon-input:focus {
-      outline: none;
-      border-color: var(--blue);
-    }
-
+    .coupon-input:focus { outline: none; border-color: var(--blue); }
     .coupon-input::placeholder { color: var(--gray); }
 
     .btn-coupon {
-      background: transparent;
-      border: 1px solid var(--blue);
-      color: var(--blue);
-      padding: 10px 14px;
-      border-radius: 4px;
-      font-size: 0.78rem;
-      letter-spacing: 1px;
-      text-transform: uppercase;
-      cursor: pointer;
-      font-family: 'Inter', sans-serif;
-      transition: all 0.2s;
+      background: transparent; border: 1px solid var(--blue); color: var(--blue);
+      padding: 10px 14px; border-radius: 4px; font-size: 0.78rem;
+      letter-spacing: 1px; text-transform: uppercase; cursor: pointer;
+      font-family: 'Inter', sans-serif; transition: all 0.2s;
     }
 
-    .btn-coupon:hover {
-      background: rgba(0,102,255,0.1);
-    }
+    .btn-coupon:hover { background: rgba(0,102,255,0.1); }
 
     .btn-checkout {
-      width: 100%;
-      background: var(--blue);
-      color: #fff;
-      border: none;
-      padding: 15px;
-      border-radius: 5px;
-      font-size: 0.9rem;
-      letter-spacing: 2px;
-      text-transform: uppercase;
-      cursor: pointer;
-      font-family: 'Inter', sans-serif;
-      font-weight: 500;
-      transition: all 0.2s;
-      margin-bottom: 14px;
-      text-decoration: none;
-      display: block;
-      text-align: center;
+      width: 100%; background: var(--blue); color: #fff; border: none;
+      padding: 15px; border-radius: 5px; font-size: 0.9rem; letter-spacing: 2px;
+      text-transform: uppercase; cursor: pointer; font-family: 'Inter', sans-serif;
+      font-weight: 500; transition: all 0.2s; margin-bottom: 14px;
+      text-decoration: none; display: block; text-align: center;
     }
 
-    .btn-checkout:hover {
-      background: var(--blue-glow);
-      transform: translateY(-1px);
-      box-shadow: 0 8px 20px rgba(0,102,255,0.3);
-    }
+    .btn-checkout:hover { background: var(--blue-glow); transform: translateY(-1px); box-shadow: 0 8px 20px rgba(0,102,255,0.3); }
+    .btn-checkout:disabled { opacity: 0.4; cursor: not-allowed; }
 
-    .secure-msg {
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      gap: 6px;
-      font-size: 0.72rem;
-      color: var(--gray);
-    }
+    .secure-msg { display: flex; align-items: center; justify-content: center; gap: 6px; font-size: 0.72rem; color: var(--gray); }
 
-    /* Métodos de pago aceptados */
-    .payment-methods {
-      margin-top: 20px;
-      padding-top: 18px;
-      border-top: 1px solid var(--border);
-    }
+    .payment-methods { margin-top: 20px; padding-top: 18px; border-top: 1px solid var(--border); }
+    .payment-label { font-size: 0.7rem; letter-spacing: 2px; text-transform: uppercase; color: var(--gray); margin-bottom: 10px; text-align: center; }
+    .payment-icons { display: flex; justify-content: center; gap: 10px; flex-wrap: wrap; }
+    .payment-icon { background: var(--bg2); border: 1px solid var(--border); border-radius: 4px; padding: 6px 12px; font-size: 0.75rem; color: var(--gray); }
 
-    .payment-label {
-      font-size: 0.7rem;
-      letter-spacing: 2px;
-      text-transform: uppercase;
-      color: var(--gray);
-      margin-bottom: 10px;
-      text-align: center;
-    }
-
-    .payment-icons {
-      display: flex;
-      justify-content: center;
-      gap: 10px;
-      flex-wrap: wrap;
-    }
-
-    .payment-icon {
-      background: var(--bg2);
-      border: 1px solid var(--border);
-      border-radius: 4px;
-      padding: 6px 12px;
-      font-size: 0.75rem;
-      color: var(--gray);
-    }
-
-    /* ── FOOTER ── */
-    footer {
-      background: var(--bg2);
-      border-top: 1px solid var(--border);
-      padding: 30px 60px;
-      text-align: center;
-      margin-top: 60px;
-    }
-
+    footer { background: var(--bg2); border-top: 1px solid var(--border); padding: 30px 60px; text-align: center; margin-top: 60px; }
     footer p { color: var(--gray); font-size: 0.78rem; }
 
-    /* ── RESPONSIVE ── */
+    .flash-messages { padding: 10px 60px 0; margin-top: 80px; }
+    .flash { padding: 10px 16px; border-radius: 4px; margin-bottom: 8px; font-size: 0.83rem; }
+    .flash.success { background: rgba(45,198,83,0.1); border: 1px solid var(--success); color: var(--success); }
+    .flash.error   { background: rgba(230,57,70,0.1);  border: 1px solid var(--error);   color: var(--error); }
+
     @media (max-width: 900px) {
       nav { padding: 16px 24px; }
       .nav-links { display: none; }
@@ -583,6 +327,7 @@
       .cart-item { grid-template-columns: 70px 1fr; }
       .item-price-col { grid-column: 2; }
       footer { padding: 24px; }
+      .flash-messages { padding: 10px 24px 0; }
     }
   </style>
 </head>
@@ -590,7 +335,7 @@
 
   <!-- NAVBAR -->
   <nav>
-    <a href="index.html" class="logo">SECURE<span>VISION</span></a>
+    <a href="{{ url_for('index') }}" class="logo">SECURE<span>VISION</span></a>
     <ul class="nav-links">
       <li><a href="{{ url_for('index') }}">Inicio</a></li>
       <li><a href="{{ url_for('catalogo') }}">Catálogo</a></li>
@@ -598,16 +343,34 @@
       <li><a href="{{ url_for('nosotros') }}">Acerca de</a></li>
     </ul>
     <div class="nav-actions">
-      <a href="login.html" class="btn-nav">Iniciar Sesión</a>
+      {% if session.usuario_nombre %}
+        <span style="color:var(--gray);font-size:0.82rem;">{{ session.usuario_nombre }}</span>
+        <a href="{{ url_for('logout') }}" class="btn-nav">Salir</a>
+      {% else %}
+        <a href="{{ url_for('login') }}" class="btn-nav">Iniciar Sesión</a>
+      {% endif %}
     </div>
   </nav>
+
+  <!-- FLASH MESSAGES -->
+  {% with messages = get_flashed_messages(with_categories=true) %}
+    {% if messages %}
+      <div class="flash-messages">
+        {% for category, message in messages %}
+          <div class="flash {{ category }}">{{ message }}</div>
+        {% endfor %}
+      </div>
+    {% endif %}
+  {% endwith %}
 
   <!-- HEADER -->
   <div class="page-header">
     <div class="page-header-tag">// Mi Carrito</div>
     <h1>Carrito de <span>Compras</span></h1>
     <div class="breadcrumb">
-      <a href="index.html">Inicio</a> › <a href="catalogo.html">Catálogo</a> › <span>Carrito</span>
+      <a href="{{ url_for('index') }}">Inicio</a> ›
+      <a href="{{ url_for('catalogo') }}">Catálogo</a> ›
+      <span>Carrito</span>
     </div>
   </div>
 
@@ -616,89 +379,46 @@
 
     <!-- PRODUCTOS -->
     <div class="cart-items-section">
-      <h2>Productos (<span id="itemCount">3</span>)</h2>
+      <h2>Productos (<span>{{ carrito|length }}</span>)</h2>
 
-      <!-- Carrito vacío (oculto por defecto) -->
-      <div class="empty-cart" id="emptyCart">
-        <div class="empty-icon">🛒</div>
-        <h3>Tu carrito está vacío</h3>
-        <p>Agrega productos desde el catálogo para comenzar tu compra.</p>
-        <a href="catalogo.html" class="btn-shop">Ver Catálogo</a>
-      </div>
+      {% if carrito %}
 
-      <!-- Items del carrito -->
-      <div id="cartItems">
-
-        <div class="cart-item" id="item1">
-          <div class="item-img">📹</div>
+        {% for item in carrito %}
+        <div class="cart-item">
+          <div class="item-img">{{ item.emoji }}</div>
           <div class="item-details">
-            <div class="item-category">Cámaras CCTV</div>
-            <div class="item-name">Cámara IP 4K Exterior Hikvision</div>
-            <div class="item-desc">Visión nocturna 40m, IP67, detección de movimiento IA</div>
+            <div class="item-category">{{ item.categoria }}</div>
+            <div class="item-name">{{ item.nombre }}</div>
             <div class="item-controls">
-              <div class="quantity-control">
-                <button class="qty-btn" onclick="changeQty('item1', -1)">−</button>
-                <input class="qty-value" type="number" id="qty-item1" value="1" min="1" onchange="updatePrice('item1', 89.99)"/>
-                <button class="qty-btn" onclick="changeQty('item1', 1)">+</button>
-              </div>
-              <button class="btn-remove" onclick="removeItem('item1')">🗑 Eliminar</button>
+              <a href="{{ url_for('actualizar_carrito', producto_id=item.id, accion='decrementar') }}" class="qty-btn">−</a>
+              <div class="qty-display">{{ item.cantidad }}</div>
+              <a href="{{ url_for('actualizar_carrito', producto_id=item.id, accion='incrementar') }}" class="qty-btn">+</a>
+              <a href="{{ url_for('eliminar_carrito', producto_id=item.id) }}" class="btn-remove">🗑 Eliminar</a>
             </div>
           </div>
           <div class="item-price-col">
-            <div class="item-unit-price">$89.99 c/u</div>
-            <div class="item-total-price" id="price-item1">$89.99</div>
+            <div class="item-unit-price">${{ "%.2f"|format(item.precio) }} c/u</div>
+            <div class="item-total-price">${{ "%.2f"|format(item.precio * item.cantidad) }}</div>
           </div>
         </div>
+        {% endfor %}
 
-        <div class="cart-item" id="item2">
-          <div class="item-img">👆</div>
-          <div class="item-details">
-            <div class="item-category">Biométricos</div>
-            <div class="item-name">Control Biométrico Facial + Huella</div>
-            <div class="item-desc">3000 usuarios, WiFi, reconocimiento en 0.3 seg</div>
-            <div class="item-controls">
-              <div class="quantity-control">
-                <button class="qty-btn" onclick="changeQty('item2', -1)">−</button>
-                <input class="qty-value" type="number" id="qty-item2" value="2" min="1" onchange="updatePrice('item2', 135.00)"/>
-                <button class="qty-btn" onclick="changeQty('item2', 1)">+</button>
-              </div>
-              <button class="btn-remove" onclick="removeItem('item2')">🗑 Eliminar</button>
-            </div>
-          </div>
-          <div class="item-price-col">
-            <div class="item-unit-price">$135.00 c/u</div>
-            <div class="item-total-price" id="price-item2">$270.00</div>
-          </div>
+        <div class="cart-actions">
+          <a href="{{ url_for('catalogo') }}" class="btn-continue">← Seguir Comprando</a>
+          <a href="{{ url_for('vaciar_carrito') }}" class="btn-clear"
+             onclick="return confirm('¿Vaciar el carrito?')">🗑 Vaciar Carrito</a>
         </div>
 
-        <div class="cart-item" id="item3">
-          <div class="item-img">🔔</div>
-          <div class="item-details">
-            <div class="item-category">Alarmas</div>
-            <div class="item-name">Kit Alarma Inalámbrica 6 Zonas</div>
-            <div class="item-desc">Central + 6 sensores + sirena, app móvil, batería 24h</div>
-            <div class="item-controls">
-              <div class="quantity-control">
-                <button class="qty-btn" onclick="changeQty('item3', -1)">−</button>
-                <input class="qty-value" type="number" id="qty-item3" value="1" min="1" onchange="updatePrice('item3', 120.00)"/>
-                <button class="qty-btn" onclick="changeQty('item3', 1)">+</button>
-              </div>
-              <button class="btn-remove" onclick="removeItem('item3')">🗑 Eliminar</button>
-            </div>
-          </div>
-          <div class="item-price-col">
-            <div class="item-unit-price">$120.00 c/u</div>
-            <div class="item-total-price" id="price-item3">$120.00</div>
-          </div>
+      {% else %}
+
+        <div class="empty-cart">
+          <div class="empty-icon">🛒</div>
+          <h3>Tu carrito está vacío</h3>
+          <p>Agrega productos desde el catálogo para comenzar tu compra.</p>
+          <a href="{{ url_for('catalogo') }}" class="btn-shop">Ver Catálogo</a>
         </div>
 
-      </div>
-
-      <!-- Acciones -->
-      <div class="cart-actions">
-        <a href="catalogo.html" class="btn-continue">← Seguir Comprando</a>
-        <button class="btn-clear" onclick="clearCart()">🗑 Vaciar Carrito</button>
-      </div>
+      {% endif %}
     </div>
 
     <!-- RESUMEN -->
@@ -707,30 +427,25 @@
         <div class="summary-title">Resumen del Pedido</div>
 
         <div class="summary-row">
-          <span class="label">Subtotal (<span id="summaryCount">3</span> productos)</span>
-          <span class="value" id="subtotal">$479.99</span>
-        </div>
-        <div class="summary-row">
-          <span class="label">Descuento cupón</span>
-          <span class="value" id="discount" style="color: var(--success);">-$0.00</span>
+          <span class="label">Subtotal ({{ carrito|length }} productos)</span>
+          <span class="value">${{ "%.2f"|format(subtotal) }}</span>
         </div>
         <div class="summary-row">
           <span class="label">Envío internacional</span>
-          <span class="value free" id="shipping">Gratis</span>
+          <span class="value free">Gratis</span>
         </div>
         <div class="summary-row">
           <span class="label">Impuestos (15%)</span>
-          <span class="value" id="taxes">$72.00</span>
+          <span class="value">${{ "%.2f"|format(impuestos) }}</span>
         </div>
 
         <div class="summary-divider"></div>
 
         <div class="summary-total">
           <span class="total-label">Total</span>
-          <span class="total-value" id="total">$551.99</span>
+          <span class="total-value">${{ "%.2f"|format(total) }}</span>
         </div>
 
-        <!-- Cupón -->
         <div class="coupon-section">
           <div class="coupon-label">Código de descuento</div>
           <div class="coupon-input-row">
@@ -739,7 +454,11 @@
           </div>
         </div>
 
-        <a href="checkout.html" class="btn-checkout">Proceder al Pago →</a>
+        {% if carrito %}
+          <a href="{{ url_for('checkout') }}" class="btn-checkout">Proceder al Pago →</a>
+        {% else %}
+          <button class="btn-checkout" disabled>Proceder al Pago →</button>
+        {% endif %}
 
         <div class="secure-msg">🔒 Pago 100% seguro y encriptado</div>
 
@@ -756,82 +475,14 @@
 
   </div>
 
-  <!-- FOOTER -->
   <footer>
     <p>© 2026 SecureVision. Todos los derechos reservados.</p>
   </footer>
 
   <script>
-    const prices = { item1: 89.99, item2: 135.00, item3: 120.00 };
-
-    function changeQty(itemId, delta) {
-      const input = document.getElementById('qty-' + itemId);
-      let qty = parseInt(input.value) + delta;
-      if (qty < 1) qty = 1;
-      input.value = qty;
-      updatePrice(itemId, prices[itemId]);
-    }
-
-    function updatePrice(itemId, unitPrice) {
-      const qty = parseInt(document.getElementById('qty-' + itemId).value);
-      const total = (unitPrice * qty).toFixed(2);
-      document.getElementById('price-' + itemId).textContent = '$' + total;
-      recalculate();
-    }
-
-    function removeItem(itemId) {
-      const item = document.getElementById(itemId);
-      item.style.opacity = '0';
-      item.style.transform = 'translateX(20px)';
-      item.style.transition = 'all 0.3s';
-      setTimeout(() => {
-        item.remove();
-        delete prices[itemId];
-        recalculate();
-        checkEmpty();
-      }, 300);
-    }
-
-    function clearCart() {
-      if (confirm('¿Estás seguro de que deseas vaciar el carrito?')) {
-        document.getElementById('cartItems').innerHTML = '';
-        Object.keys(prices).forEach(k => delete prices[k]);
-        recalculate();
-        checkEmpty();
-      }
-    }
-
-    function checkEmpty() {
-      const items = document.querySelectorAll('.cart-item');
-      if (items.length === 0) {
-        document.getElementById('emptyCart').style.display = 'block';
-        document.getElementById('cartItems').style.display = 'none';
-      }
-      document.getElementById('itemCount').textContent = items.length;
-      document.getElementById('summaryCount').textContent = items.length;
-    }
-
-    function recalculate() {
-      let subtotal = 0;
-      document.querySelectorAll('.cart-item').forEach(item => {
-        const priceEl = item.querySelector('[id^="price-"]');
-        if (priceEl) {
-          subtotal += parseFloat(priceEl.textContent.replace('$', ''));
-        }
-      });
-
-      const taxes = subtotal * 0.15;
-      const total = subtotal + taxes;
-
-      document.getElementById('subtotal').textContent = '$' + subtotal.toFixed(2);
-      document.getElementById('taxes').textContent = '$' + taxes.toFixed(2);
-      document.getElementById('total').textContent = '$' + total.toFixed(2);
-    }
-
     function applyCoupon() {
       const code = document.getElementById('couponInput').value.toUpperCase();
       if (code === 'SECURE10') {
-        document.getElementById('discount').textContent = '-10%';
         alert('✅ Cupón aplicado: 10% de descuento');
       } else {
         alert('❌ Cupón inválido');

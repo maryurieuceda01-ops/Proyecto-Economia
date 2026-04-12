@@ -5,10 +5,8 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>SecureVision | Equipos de Seguridad</title>
   <link href="https://fonts.googleapis.com/css2?family=Rajdhani:wght@400;600;700&family=Inter:wght@300;400;500&display=swap" rel="stylesheet"/>
-  <!-- Tema global — debe ir en TODAS las páginas en el <head> -->
   <script src="/static/js/theme.js"></script>
   <style>
-    /* ── VARIABLES MODO OSCURO (default) ── */
     :root {
       --bg: #080810;
       --bg2: #0d0d1a;
@@ -36,7 +34,6 @@
       --hero-grid-color: rgba(0,102,255,0.04);
     }
 
-    /* ── VARIABLES MODO CLARO ── */
     [data-theme="light"] {
       --bg: #f5f7ff;
       --bg2: #eef1ff;
@@ -100,11 +97,7 @@
 
     .logo span { color: var(--blue); }
 
-    .nav-links {
-      display: flex;
-      gap: 36px;
-      list-style: none;
-    }
+    .nav-links { display: flex; gap: 36px; list-style: none; }
 
     .nav-links a {
       text-decoration: none;
@@ -129,13 +122,8 @@
     .nav-links a:hover { color: var(--white); }
     .nav-links a:hover::after { transform: scaleX(1); }
 
-    .nav-actions {
-      display: flex;
-      align-items: center;
-      gap: 14px;
-    }
+    .nav-actions { display: flex; align-items: center; gap: 14px; }
 
-    /* Botón modo claro/oscuro */
     .theme-toggle {
       background: var(--card-bg);
       border: 1px solid var(--border);
@@ -143,17 +131,12 @@
       width: 36px; height: 36px;
       border-radius: 50%;
       cursor: pointer;
-      display: flex;
-      align-items: center;
-      justify-content: center;
+      display: flex; align-items: center; justify-content: center;
       font-size: 1rem;
       transition: all 0.2s;
     }
 
-    .theme-toggle:hover {
-      border-color: var(--blue);
-      color: var(--blue);
-    }
+    .theme-toggle:hover { border-color: var(--blue); color: var(--blue); }
 
     .btn-nav {
       background: var(--blue);
@@ -171,17 +154,16 @@
 
     .btn-nav:hover { background: var(--blue-glow); }
 
-    .user-welcome {
-      color: var(--gray);
-      font-size: 0.82rem;
-    }
+    .user-welcome { color: var(--gray); font-size: 0.82rem; }
 
+    /* ── CARRITO ICONO ── */
     .cart-icon {
       position: relative;
       cursor: pointer;
       color: var(--gray);
       font-size: 1.2rem;
       transition: color 0.2s;
+      text-decoration: none;
     }
 
     .cart-icon:hover { color: var(--white); }
@@ -194,9 +176,7 @@
       font-size: 0.6rem;
       width: 16px; height: 16px;
       border-radius: 50%;
-      display: flex;
-      align-items: center;
-      justify-content: center;
+      display: flex; align-items: center; justify-content: center;
     }
 
     /* ── HAMBURGER ── */
@@ -218,17 +198,10 @@
       transition: all 0.3s;
     }
 
-    .hamburger.open span:nth-child(1) {
-      transform: translateY(7px) rotate(45deg);
-    }
-    .hamburger.open span:nth-child(2) {
-      opacity: 0;
-    }
-    .hamburger.open span:nth-child(3) {
-      transform: translateY(-7px) rotate(-45deg);
-    }
+    .hamburger.open span:nth-child(1) { transform: translateY(7px) rotate(45deg); }
+    .hamburger.open span:nth-child(2) { opacity: 0; }
+    .hamburger.open span:nth-child(3) { transform: translateY(-7px) rotate(-45deg); }
 
-    /* ── MENÚ MOBILE ── */
     .mobile-menu {
       display: none;
       position: fixed;
@@ -292,17 +265,8 @@
       pointer-events: none;
     }
 
-    [data-theme="light"] .hero::before {
-      background: radial-gradient(circle, rgba(0,85,221,0.08) 0%, transparent 70%);
-    }
-
-    [data-theme="light"] .hero::after {
-      background: radial-gradient(circle, rgba(0,153,204,0.06) 0%, transparent 70%);
-    }
-
     .hero-grid {
-      position: absolute;
-      inset: 0;
+      position: absolute; inset: 0;
       background-image:
         linear-gradient(var(--hero-grid-color) 1px, transparent 1px),
         linear-gradient(90deg, var(--hero-grid-color) 1px, transparent 1px);
@@ -364,36 +328,18 @@
       max-width: 480px;
     }
 
-    .hero-btns {
-      display: flex;
-      gap: 16px;
-      flex-wrap: wrap;
-      margin-bottom: 48px;
-    }
+    .hero-btns { display: flex; gap: 16px; flex-wrap: wrap; margin-bottom: 48px; }
 
-    /* Badges de confianza bajo los botones */
-    .trust-badges {
-      display: flex;
-      gap: 24px;
-      flex-wrap: wrap;
-    }
+    .trust-badges { display: flex; gap: 24px; flex-wrap: wrap; }
 
-    .trust-badge {
-      display: flex;
-      align-items: center;
-      gap: 8px;
-      font-size: 0.78rem;
-      color: var(--gray);
-    }
+    .trust-badge { display: flex; align-items: center; gap: 8px; font-size: 0.78rem; color: var(--gray); }
 
     .trust-badge-icon {
       width: 28px; height: 28px;
       border-radius: 50%;
       background: var(--tag-bg);
       border: 1px solid var(--tag-border);
-      display: flex;
-      align-items: center;
-      justify-content: center;
+      display: flex; align-items: center; justify-content: center;
       font-size: 0.85rem;
     }
 
@@ -412,11 +358,7 @@
       font-family: 'Inter', sans-serif;
     }
 
-    .btn-primary:hover {
-      background: var(--blue-glow);
-      transform: translateY(-2px);
-      box-shadow: 0 8px 24px rgba(0,102,255,0.35);
-    }
+    .btn-primary:hover { background: var(--blue-glow); transform: translateY(-2px); box-shadow: 0 8px 24px rgba(0,102,255,0.35); }
 
     .btn-outline {
       background: transparent;
@@ -433,24 +375,13 @@
       font-family: 'Inter', sans-serif;
     }
 
-    [data-theme="light"] .btn-outline {
-      border-color: rgba(0,0,50,0.2);
-      color: var(--white);
-    }
+    .btn-outline:hover { border-color: var(--blue); color: var(--blue); }
 
-    .btn-outline:hover {
-      border-color: var(--blue);
-      color: var(--blue);
-    }
-
-    /* Hero imagen derecha */
     .hero-image {
       position: absolute;
-      right: 60px;
-      top: 50%;
+      right: 60px; top: 50%;
       transform: translateY(-50%);
-      width: 44%;
-      max-width: 560px;
+      width: 44%; max-width: 560px;
       opacity: 0.9;
       animation: fadeLeft 1s ease 0.3s both;
     }
@@ -461,17 +392,13 @@
       background: var(--card-bg);
       border: 1px solid var(--gold-border);
       border-radius: 12px;
-      display: flex;
-      align-items: center;
-      justify-content: center;
+      display: flex; align-items: center; justify-content: center;
       overflow: hidden;
       box-shadow: 0 0 60px rgba(0,102,255,0.15), 0 0 30px var(--gold-glow), 0 0 0 1px var(--gold-border);
       position: relative;
     }
 
-    /* Gold corner accents */
-    .hero-placeholder::before,
-    .hero-placeholder::after {
+    .hero-placeholder::before, .hero-placeholder::after {
       content: '';
       position: absolute;
       width: 24px; height: 24px;
@@ -480,18 +407,8 @@
       z-index: 3;
     }
 
-    .hero-placeholder::before {
-      top: 14px; left: 14px;
-      border-width: 2px 0 0 2px;
-    }
-
-    .hero-placeholder::after {
-      bottom: 14px; right: 14px;
-      border-width: 0 2px 2px 0;
-    }
-
-    /* Extra two gold corners via pseudo on wrapper */
-    .hero-corner-tl, .hero-corner-br { display: none; }
+    .hero-placeholder::before { top: 14px; left: 14px; border-width: 2px 0 0 2px; }
+    .hero-placeholder::after  { bottom: 14px; right: 14px; border-width: 0 2px 2px 0; }
 
     .hero-img {
       position: absolute;
@@ -504,30 +421,19 @@
 
     .hero-img.hidden { opacity: 0; }
 
-    /* Subtle gold gradient overlay on hero image */
     .hero-img-overlay {
-      position: absolute;
-      inset: 0;
-      background: linear-gradient(
-        135deg,
-        rgba(201,168,76,0.08) 0%,
-        transparent 40%,
-        transparent 60%,
-        rgba(201,168,76,0.06) 100%
-      );
+      position: absolute; inset: 0;
+      background: linear-gradient(135deg, rgba(201,168,76,0.08) 0%, transparent 40%, transparent 60%, rgba(201,168,76,0.06) 100%);
       z-index: 2;
       border-radius: 12px;
       pointer-events: none;
     }
 
-    /* Indicadores hero */
     .hero-dots {
       position: absolute;
-      bottom: 16px;
-      left: 50%;
+      bottom: 16px; left: 50%;
       transform: translateX(-50%);
-      display: flex;
-      gap: 6px;
+      display: flex; gap: 6px;
       z-index: 3;
     }
 
@@ -539,106 +445,44 @@
       cursor: pointer;
     }
 
-    .hero-dot.active {
-      background: var(--blue);
-      width: 18px;
-      border-radius: 3px;
-    }
+    .hero-dot.active { background: var(--blue); width: 18px; border-radius: 3px; }
 
     /* ── STATS ── */
     .stats {
       display: flex;
       justify-content: center;
-      gap: 0;
       border-top: 1px solid var(--border);
       border-bottom: 1px solid var(--border);
       background: var(--bg2);
     }
 
     .stat {
-      flex: 1;
-      padding: 36px;
+      flex: 1; padding: 36px;
       text-align: center;
       border-right: 1px solid var(--border);
       transition: background 0.2s;
-      position: relative;
     }
 
     .stat:last-child { border-right: none; }
-
     .stat:hover { background: var(--stat-hover); }
 
-    .stat-number {
-      font-family: 'Rajdhani', sans-serif;
-      font-size: 2.4rem;
-      font-weight: 700;
-      color: var(--blue);
-      line-height: 1;
-    }
-
-    /* Gold accent on first stat */
+    .stat-number { font-family: 'Rajdhani', sans-serif; font-size: 2.4rem; font-weight: 700; color: var(--blue); line-height: 1; }
     .stat:first-child .stat-number { color: var(--gold); }
-    .stat:first-child:hover { background: rgba(201,168,76,0.04); }
-
-    .stat-label {
-      font-size: 0.72rem;
-      color: var(--gray);
-      letter-spacing: 2px;
-      text-transform: uppercase;
-      margin-top: 6px;
-    }
+    .stat-label { font-size: 0.72rem; color: var(--gray); letter-spacing: 2px; text-transform: uppercase; margin-top: 6px; }
 
     /* ── SECCIONES ── */
     .section { padding: 90px 60px; }
-
     .section-header { margin-bottom: 50px; }
-
-    .section-tag {
-      font-size: 0.72rem;
-      letter-spacing: 3px;
-      text-transform: uppercase;
-      color: var(--blue);
-      margin-bottom: 12px;
-    }
-
+    .section-tag { font-size: 0.72rem; letter-spacing: 3px; text-transform: uppercase; color: var(--blue); margin-bottom: 12px; }
     .section-tag.gold { color: var(--gold); }
-
-    .section-title {
-      font-family: 'Rajdhani', sans-serif;
-      font-size: 2.4rem;
-      font-weight: 700;
-      letter-spacing: 1px;
-    }
-
+    .section-title { font-family: 'Rajdhani', sans-serif; font-size: 2.4rem; font-weight: 700; letter-spacing: 1px; }
     .section-title span { color: var(--blue); }
 
-    /* ── CARRUSEL CATEGORÍAS ── */
-    .carousel-wrapper {
-      position: relative;
-      display: flex;
-      align-items: center;
-      gap: 20px;
-    }
-
-    .carousel-container {
-      overflow: hidden;
-      flex: 1;
-      border-radius: 6px;
-    }
-
-    .carousel-track {
-      display: flex;
-      gap: 16px;
-      transition: transform 0.5s cubic-bezier(0.4,0,0.2,1);
-    }
-
-    .carousel-slide {
-      flex: 0 0 calc(33.333% - 11px);
-      min-width: 200px;
-      display: flex;
-      flex-direction: column;
-      gap: 10px;
-    }
+    /* ── CARRUSEL ── */
+    .carousel-wrapper { position: relative; display: flex; align-items: center; gap: 20px; }
+    .carousel-container { overflow: hidden; flex: 1; border-radius: 6px; }
+    .carousel-track { display: flex; gap: 16px; transition: transform 0.5s cubic-bezier(0.4,0,0.2,1); }
+    .carousel-slide { flex: 0 0 calc(33.333% - 11px); min-width: 200px; display: flex; flex-direction: column; gap: 10px; }
 
     .category-card {
       background: var(--card-bg);
@@ -650,430 +494,147 @@
       transition: all 0.28s;
       text-decoration: none;
       color: var(--white);
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      justify-content: center;
+      display: flex; flex-direction: column; align-items: center; justify-content: center;
       min-height: 240px;
-      position: relative;
-      overflow: hidden;
+      position: relative; overflow: hidden;
     }
 
     .category-card::before {
       content: '';
-      position: absolute;
-      inset: 0;
+      position: absolute; inset: 0;
       background: radial-gradient(circle at 50% 120%, rgba(0,102,255,0.12) 0%, transparent 60%);
-      opacity: 0;
-      transition: opacity 0.3s;
+      opacity: 0; transition: opacity 0.3s;
     }
 
     .category-card:hover::before { opacity: 1; }
+    .category-card:hover { border-color: var(--gold); transform: translateY(-6px); box-shadow: 0 16px 40px rgba(201,168,76,0.18), 0 0 0 1px var(--gold-border); }
 
-    .category-card:hover {
-      border-color: var(--gold);
-      transform: translateY(-6px);
-      box-shadow: 0 16px 40px rgba(201,168,76,0.18), 0 0 0 1px var(--gold-border);
-    }
-
-    .cat-img-wrap {
-      width: 100%;
-      height: 200px;
-      margin-bottom: 16px;
-      border-radius: 6px;
-      overflow: hidden;
-      border: 1px solid var(--border);
-    }
-
-    .cat-img-wrap img {
-      width: 100%;
-      height: 100%;
-      object-fit: cover;
-      transition: transform 0.4s ease;
-    }
-
+    .cat-img-wrap { width: 100%; height: 200px; margin-bottom: 16px; border-radius: 6px; overflow: hidden; border: 1px solid var(--border); }
+    .cat-img-wrap img { width: 100%; height: 100%; object-fit: cover; transition: transform 0.4s ease; }
     .category-card:hover .cat-img-wrap img { transform: scale(1.07); }
-
-    .cat-name {
-      font-family: 'Rajdhani', sans-serif;
-      font-size: 1rem;
-      font-weight: 600;
-      letter-spacing: 1px;
-      text-transform: uppercase;
-      color: var(--white);
-      transition: color 0.25s;
-    }
-
+    .cat-name { font-family: 'Rajdhani', sans-serif; font-size: 1rem; font-weight: 600; letter-spacing: 1px; text-transform: uppercase; color: var(--white); transition: color 0.25s; }
     .category-card:hover .cat-name { color: var(--gold-light); }
-
-    .cat-count {
-      font-size: 0.72rem;
-      color: var(--gray);
-      margin-top: 4px;
-    }
+    .cat-count { font-size: 0.72rem; color: var(--gray); margin-top: 4px; }
 
     .carousel-btn {
-      background: var(--blue);
-      border: none;
-      color: #fff;
-      width: 42px; height: 42px;
-      border-radius: 50%;
-      cursor: pointer;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      font-size: 1.1rem;
-      transition: all 0.2s;
-      flex-shrink: 0;
+      background: var(--blue); border: none; color: #fff;
+      width: 42px; height: 42px; border-radius: 50%;
+      cursor: pointer; display: flex; align-items: center; justify-content: center;
+      font-size: 1.1rem; transition: all 0.2s; flex-shrink: 0;
       box-shadow: 0 4px 16px rgba(0,102,255,0.3);
     }
 
-    .carousel-btn:hover {
-      background: var(--blue-glow);
-      transform: scale(1.08);
-    }
+    .carousel-btn:hover { background: var(--blue-glow); transform: scale(1.08); }
+    .carousel-btn:disabled { background: var(--gray); cursor: not-allowed; opacity: 0.4; box-shadow: none; }
 
-    .carousel-btn:disabled {
-      background: var(--gray);
-      cursor: not-allowed;
-      opacity: 0.4;
-      box-shadow: none;
-    }
-
-    /* ── PRODUCTOS DESTACADOS ── */
-    .products-grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
-      gap: 20px;
-    }
+    /* ── PRODUCTOS ── */
+    .products-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(260px, 1fr)); gap: 20px; }
 
     .product-card {
-      background: var(--card-bg);
-      border: 1px solid var(--border);
-      border-radius: 8px;
-      overflow: hidden;
-      transition: all 0.28s;
-      cursor: pointer;
-      display: flex;
-      flex-direction: column;
+      background: var(--card-bg); border: 1px solid var(--border);
+      border-radius: 8px; overflow: hidden; transition: all 0.28s;
+      cursor: pointer; display: flex; flex-direction: column;
     }
 
-    .product-card:hover {
-      border-color: var(--blue);
-      transform: translateY(-5px);
-      box-shadow: 0 20px 48px rgba(0,102,255,0.18);
-    }
+    .product-card:hover { border-color: var(--blue); transform: translateY(-5px); box-shadow: 0 20px 48px rgba(0,102,255,0.18); }
 
     .product-img {
-      width: 100%;
-      aspect-ratio: 4/3;
+      width: 100%; aspect-ratio: 4/3;
       background: var(--product-bg);
-      display: flex;
-      align-items: center;
-      justify-content: center;
+      display: flex; align-items: center; justify-content: center;
       border-bottom: 1px solid var(--border);
-      position: relative;
-      overflow: hidden;
+      position: relative; overflow: hidden;
     }
 
-    .product-img img {
-      width: 100%;
-      height: 100%;
-      object-fit: cover;
-      transition: transform 0.4s ease;
-    }
-
-    .product-card:hover .product-img img {
-      transform: scale(1.04);
-    }
+    .product-img img { width: 100%; height: 100%; object-fit: cover; transition: transform 0.4s ease; }
+    .product-card:hover .product-img img { transform: scale(1.04); }
 
     .product-badge {
-      position: absolute;
-      top: 12px; left: 12px;
-      background: var(--blue);
-      color: #fff;
-      font-size: 0.62rem;
-      letter-spacing: 1px;
-      text-transform: uppercase;
-      padding: 4px 10px;
-      border-radius: 2px;
-      z-index: 2;
+      position: absolute; top: 12px; left: 12px;
+      background: var(--blue); color: #fff;
+      font-size: 0.62rem; letter-spacing: 1px; text-transform: uppercase;
+      padding: 4px 10px; border-radius: 2px; z-index: 2;
     }
 
     .product-badge.oferta { background: #e53935; }
     .product-badge.popular { background: #7c3aed; }
 
-    .product-info {
-      padding: 20px;
-      flex: 1;
-      display: flex;
-      flex-direction: column;
-    }
-
-    .product-name {
-      font-family: 'Rajdhani', sans-serif;
-      font-size: 1.08rem;
-      font-weight: 600;
-      letter-spacing: 0.5px;
-      margin-bottom: 6px;
-    }
-
-    .product-desc {
-      font-size: 0.78rem;
-      color: var(--gray);
-      line-height: 1.65;
-      margin-bottom: 16px;
-      flex: 1;
-    }
-
-    .product-footer {
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-    }
-
-    .product-price {
-      font-family: 'Rajdhani', sans-serif;
-      font-size: 1.3rem;
-      font-weight: 700;
-      color: var(--cyan);
-    }
+    .product-info { padding: 20px; flex: 1; display: flex; flex-direction: column; }
+    .product-name { font-family: 'Rajdhani', sans-serif; font-size: 1.08rem; font-weight: 600; letter-spacing: 0.5px; margin-bottom: 6px; }
+    .product-desc { font-size: 0.78rem; color: var(--gray); line-height: 1.65; margin-bottom: 16px; flex: 1; }
+    .product-footer { display: flex; align-items: center; justify-content: space-between; }
+    .product-price { font-family: 'Rajdhani', sans-serif; font-size: 1.3rem; font-weight: 700; color: var(--cyan); }
 
     .btn-add {
-      background: var(--blue);
-      color: #fff;
-      border: none;
-      padding: 9px 18px;
-      font-size: 0.75rem;
-      letter-spacing: 1px;
-      text-transform: uppercase;
-      border-radius: 4px;
-      cursor: pointer;
-      transition: all 0.2s;
-      font-family: 'Inter', sans-serif;
+      background: var(--blue); color: #fff; border: none;
+      padding: 9px 18px; font-size: 0.75rem; letter-spacing: 1px;
+      text-transform: uppercase; border-radius: 4px; cursor: pointer;
+      transition: all 0.2s; font-family: 'Inter', sans-serif;
     }
 
-    .btn-add:hover {
-      background: var(--blue-glow);
-      transform: translateY(-1px);
-    }
+    .btn-add:hover { background: var(--blue-glow); transform: translateY(-1px); }
 
-    /* ── BANNER PROMO ── */
+    /* ── PROMO BANNER ── */
     .promo-banner {
       margin: 0 60px 90px;
       background: var(--promo-bg);
       border: 1px solid rgba(0,102,255,0.3);
-      border-radius: 12px;
-      padding: 60px;
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      gap: 32px;
-      position: relative;
-      overflow: hidden;
+      border-radius: 12px; padding: 60px;
+      display: flex; align-items: center; justify-content: space-between;
+      gap: 32px; position: relative; overflow: hidden;
     }
 
     .promo-banner::before {
       content: '';
-      position: absolute;
-      right: -80px; top: -80px;
+      position: absolute; right: -80px; top: -80px;
       width: 350px; height: 350px;
       background: radial-gradient(circle, rgba(0,102,255,0.16) 0%, transparent 70%);
       pointer-events: none;
     }
 
-    .promo-banner::after {
-      content: '';
-      position: absolute;
-      left: -60px; bottom: -60px;
-      width: 250px; height: 250px;
-      background: radial-gradient(circle, rgba(0,207,255,0.08) 0%, transparent 70%);
-      pointer-events: none;
-    }
-
     .promo-content { position: relative; z-index: 1; }
-
-    .promo-content h2 {
-      font-family: 'Rajdhani', sans-serif;
-      font-size: 2rem;
-      font-weight: 700;
-      margin-bottom: 10px;
-    }
-
+    .promo-content h2 { font-family: 'Rajdhani', sans-serif; font-size: 2rem; font-weight: 700; margin-bottom: 10px; }
     .promo-content h2 span { color: var(--gold); }
+    .promo-gold-line { width: 48px; height: 2px; background: linear-gradient(90deg, var(--gold), transparent); margin-bottom: 16px; }
+    .promo-content p { color: var(--gray); font-size: 0.9rem; max-width: 400px; line-height: 1.7; }
 
-    .promo-gold-line {
-      width: 48px; height: 2px;
-      background: linear-gradient(90deg, var(--gold), transparent);
-      margin-bottom: 16px;
-    }
-
-    .promo-content p {
-      color: var(--gray);
-      font-size: 0.9rem;
-      max-width: 400px;
-      line-height: 1.7;
-    }
-
-    /* ── SECCIÓN MARCAS ── */
-    .brands-section {
-      padding: 48px 60px;
-      border-top: 1px solid var(--border);
-      border-bottom: 1px solid var(--border);
-      background: var(--bg2);
-    }
-
-    .brands-label {
-      text-align: center;
-      font-size: 0.7rem;
-      letter-spacing: 3px;
-      text-transform: uppercase;
-      color: var(--gray);
-      margin-bottom: 28px;
-    }
-
-    .brands-row {
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      gap: 48px;
-      flex-wrap: wrap;
-    }
-
-    .brand-item {
-      font-family: 'Rajdhani', sans-serif;
-      font-size: 1.1rem;
-      font-weight: 700;
-      letter-spacing: 2px;
-      color: var(--gray);
-      text-transform: uppercase;
-      opacity: 0.5;
-      transition: opacity 0.2s;
-    }
-
+    /* ── MARCAS ── */
+    .brands-section { padding: 48px 60px; border-top: 1px solid var(--border); border-bottom: 1px solid var(--border); background: var(--bg2); }
+    .brands-label { text-align: center; font-size: 0.7rem; letter-spacing: 3px; text-transform: uppercase; color: var(--gray); margin-bottom: 28px; }
+    .brands-row { display: flex; justify-content: center; align-items: center; gap: 48px; flex-wrap: wrap; }
+    .brand-item { font-family: 'Rajdhani', sans-serif; font-size: 1.1rem; font-weight: 700; letter-spacing: 2px; color: var(--gray); text-transform: uppercase; opacity: 0.5; transition: opacity 0.2s; }
     .brand-item:hover { opacity: 1; color: var(--gold); }
 
     /* ── FOOTER ── */
-    footer {
-      background: var(--footer-bg);
-      border-top: 1px solid var(--border);
-      padding: 60px;
-    }
-
-    .footer-grid {
-      display: grid;
-      grid-template-columns: 2fr 1fr 1fr 1fr;
-      gap: 40px;
-      margin-bottom: 40px;
-    }
-
-    .footer-brand .logo {
-      font-size: 1.4rem;
-      margin-bottom: 16px;
-      display: block;
-    }
-
-    .footer-brand p {
-      color: var(--gray);
-      font-size: 0.82rem;
-      line-height: 1.8;
-      max-width: 260px;
-      margin-bottom: 20px;
-    }
-
-    .social-links {
-      display: flex;
-      gap: 10px;
-    }
-
-    .social-link {
-      width: 34px; height: 34px;
-      border: 1px solid var(--border);
-      border-radius: 6px;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      color: var(--gray);
-      font-size: 0.9rem;
-      text-decoration: none;
-      transition: all 0.2s;
-    }
-
-    .social-link:hover {
-      border-color: var(--gold);
-      color: var(--gold);
-      background: var(--gold-glow);
-    }
-
-    .footer-col h4 {
-      font-family: 'Rajdhani', sans-serif;
-      font-size: 0.85rem;
-      letter-spacing: 2px;
-      text-transform: uppercase;
-      color: var(--white);
-      margin-bottom: 18px;
-    }
-
+    footer { background: var(--footer-bg); border-top: 1px solid var(--border); padding: 60px; }
+    .footer-grid { display: grid; grid-template-columns: 2fr 1fr 1fr 1fr; gap: 40px; margin-bottom: 40px; }
+    .footer-brand .logo { font-size: 1.4rem; margin-bottom: 16px; display: block; }
+    .footer-brand p { color: var(--gray); font-size: 0.82rem; line-height: 1.8; max-width: 260px; margin-bottom: 20px; }
+    .social-links { display: flex; gap: 10px; }
+    .social-link { width: 34px; height: 34px; border: 1px solid var(--border); border-radius: 6px; display: flex; align-items: center; justify-content: center; color: var(--gray); font-size: 0.9rem; text-decoration: none; transition: all 0.2s; }
+    .social-link:hover { border-color: var(--gold); color: var(--gold); background: var(--gold-glow); }
+    .footer-col h4 { font-family: 'Rajdhani', sans-serif; font-size: 0.85rem; letter-spacing: 2px; text-transform: uppercase; color: var(--white); margin-bottom: 18px; }
     .footer-col ul { list-style: none; }
-
     .footer-col ul li { margin-bottom: 10px; }
-
-    .footer-col ul li a {
-      color: var(--gray);
-      text-decoration: none;
-      font-size: 0.82rem;
-      transition: color 0.2s;
-    }
-
+    .footer-col ul li a { color: var(--gray); text-decoration: none; font-size: 0.82rem; transition: color 0.2s; }
     .footer-col ul li a:hover { color: var(--gold); }
+    .footer-bottom { border-top: 1px solid var(--border); padding-top: 24px; display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 12px; }
+    .footer-bottom p { color: var(--gray); font-size: 0.75rem; letter-spacing: 1px; }
 
-    .footer-bottom {
-      border-top: 1px solid var(--border);
-      padding-top: 24px;
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      flex-wrap: wrap;
-      gap: 12px;
-    }
-
-    .footer-bottom p {
-      color: var(--gray);
-      font-size: 0.75rem;
-      letter-spacing: 1px;
-    }
-
-    /* ── SCROLL TO TOP ── */
     .scroll-top {
-      position: fixed;
-      bottom: 32px; right: 32px;
+      position: fixed; bottom: 32px; right: 32px;
       width: 44px; height: 44px;
-      background: var(--blue);
-      color: #fff;
-      border: none;
-      border-radius: 50%;
-      cursor: pointer;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      font-size: 1.1rem;
-      box-shadow: 0 4px 20px rgba(0,102,255,0.4);
-      z-index: 100;
-      opacity: 0;
-      transform: translateY(20px);
-      transition: all 0.3s;
-      pointer-events: none;
+      background: var(--blue); color: #fff; border: none;
+      border-radius: 50%; cursor: pointer;
+      display: flex; align-items: center; justify-content: center;
+      font-size: 1.1rem; box-shadow: 0 4px 20px rgba(0,102,255,0.4);
+      z-index: 100; opacity: 0; transform: translateY(20px);
+      transition: all 0.3s; pointer-events: none;
     }
 
-    .scroll-top.visible {
-      opacity: 1;
-      transform: translateY(0);
-      pointer-events: all;
-    }
-
+    .scroll-top.visible { opacity: 1; transform: translateY(0); pointer-events: all; }
     .scroll-top:hover { background: var(--blue-glow); }
 
-    /* ── ANIMACIONES ── */
     @keyframes fadeUp {
       from { opacity: 0; transform: translateY(30px); }
       to   { opacity: 1; transform: translateY(0); }
@@ -1084,25 +645,10 @@
       to   { opacity: 0.9; transform: translate(0, -50%); }
     }
 
-    /* Reveal al hacer scroll */
-    .reveal {
-      opacity: 0;
-      transform: translateY(24px);
-      transition: opacity 0.6s ease, transform 0.6s ease;
-    }
+    .reveal { opacity: 0; transform: translateY(24px); transition: opacity 0.6s ease, transform 0.6s ease; }
+    .reveal.visible { opacity: 1; transform: translateY(0); }
 
-    .reveal.visible {
-      opacity: 1;
-      transform: translateY(0);
-    }
-
-    /* ── RESPONSIVE ── */
-    @media (max-width: 1024px) {
-      .carousel-slide {
-        flex: 0 0 calc(50% - 8px);
-        min-width: 180px;
-      }
-    }
+    @media (max-width: 1024px) { .carousel-slide { flex: 0 0 calc(50% - 8px); min-width: 180px; } }
 
     @media (max-width: 900px) {
       nav { padding: 16px 24px; }
@@ -1121,13 +667,7 @@
     }
 
     @media (max-width: 600px) {
-      .carousel-slide {
-        flex: 0 0 calc(100% - 0px);
-        min-width: 100%;
-      }
-
-      .carousel-btn { width: 36px; height: 36px; font-size: 1rem; }
-      .category-card { padding: 28px 20px; min-height: 200px; }
+      .carousel-slide { flex: 0 0 100%; min-width: 100%; }
       .footer-grid { grid-template-columns: 1fr; }
       .promo-banner { padding: 32px 20px; }
       .stat { min-width: 50%; padding: 24px 16px; }
@@ -1148,11 +688,12 @@
     </ul>
 
     <div class="nav-actions">
-      <!-- Carrito -->
-      <div class="cart-icon" onclick="window.location.href='{{ url_for('carrito') }}'">
+
+      <!-- ✅ CARRITO CORREGIDO -->
+      <a href="{{ url_for('carrito') }}" class="cart-icon" title="Ver carrito">
         🛒
         <span class="cart-badge">{{ session.get('carrito', [])|length }}</span>
-      </div>
+      </a>
 
       <!-- Toggle modo claro/oscuro -->
       <button class="theme-toggle" id="themeToggle" title="Cambiar tema">🌙</button>
@@ -1164,12 +705,10 @@
         <a href="{{ url_for('login') }}" class="btn-nav">Iniciar Sesión</a>
       {% endif %}
 
-      <!-- Hamburger -->
       <button class="hamburger" id="hamburger" aria-label="Menú">
-        <span></span>
-        <span></span>
-        <span></span>
+        <span></span><span></span><span></span>
       </button>
+
     </div>
   </nav>
 
@@ -1198,31 +737,22 @@
         <a href="#categorias" class="btn-outline">Conocer Más</a>
       </div>
       <div class="trust-badges">
-        <div class="trust-badge">
-          <div class="trust-badge-icon">✓</div>
-          Envío garantizado
-        </div>
-        <div class="trust-badge">
-          <div class="trust-badge-icon">🔒</div>
-          Pago seguro
-        </div>
-        <div class="trust-badge">
-          <div class="trust-badge-icon">↩</div>
-          Garantía 1 año
-        </div>
+        <div class="trust-badge"><div class="trust-badge-icon">✓</div>Envío garantizado</div>
+        <div class="trust-badge"><div class="trust-badge-icon">🔒</div>Pago seguro</div>
+        <div class="trust-badge"><div class="trust-badge-icon">↩</div>Garantía 1 año</div>
       </div>
     </div>
 
     <div class="hero-image">
       <div class="hero-placeholder">
-        <img src="/static/img/Cámara.webp" alt="Cámara CCTV" class="hero-img">
-        <img src="/static/img/Hero_1.webp" alt="Cámara Bullet" class="hero-img hidden">
-        <img src="/static/img/Hero_2.webp" alt="NVR" class="hero-img hidden">
-        <img src="/static/img/Hero_3.webp" alt="Biométrico" class="hero-img hidden">
-        <img src="/static/img/Hero_4.webp" alt="Alarma" class="hero-img hidden">
-        <img src="/static/img/Hero_5.webp" alt="Sistema" class="hero-img hidden">
-        <img src="/static/img/Hero_6.webp" alt="Control" class="hero-img hidden">
-        <img src="/static/img/Hero_7.webp" alt="Biométrico" class="hero-img hidden">
+        <img src="/static/img/Cámara.webp"        alt="Cámara CCTV"   class="hero-img">
+        <img src="/static/img/Hero_1.webp"         alt="Cámara Bullet" class="hero-img hidden">
+        <img src="/static/img/Hero_2.webp"         alt="NVR"           class="hero-img hidden">
+        <img src="/static/img/Hero_3.webp"         alt="Biométrico"    class="hero-img hidden">
+        <img src="/static/img/Hero_4.webp"         alt="Alarma"        class="hero-img hidden">
+        <img src="/static/img/Hero_5.webp"         alt="Sistema"       class="hero-img hidden">
+        <img src="/static/img/Hero_6.webp"         alt="Control"       class="hero-img hidden">
+        <img src="/static/img/Hero_7.webp"         alt="Biométrico"    class="hero-img hidden">
         <div class="hero-img-overlay"></div>
         <div class="hero-dots" id="heroDots"></div>
       </div>
@@ -1231,22 +761,10 @@
 
   <!-- STATS -->
   <div class="stats reveal">
-    <div class="stat">
-      <div class="stat-number" data-target="400">0</div>
-      <div class="stat-label">Productos</div>
-    </div>
-    <div class="stat">
-      <div class="stat-number" data-target="10000">0</div>
-      <div class="stat-label">Clientes</div>
-    </div>
-    <div class="stat">
-      <div class="stat-number" data-target="10">0</div>
-      <div class="stat-label">Países</div>
-    </div>
-    <div class="stat">
-      <div class="stat-number">24/7</div>
-      <div class="stat-label">Soporte</div>
-    </div>
+    <div class="stat"><div class="stat-number" data-target="400">0</div><div class="stat-label">Productos</div></div>
+    <div class="stat"><div class="stat-number" data-target="10000">0</div><div class="stat-label">Clientes</div></div>
+    <div class="stat"><div class="stat-number" data-target="10">0</div><div class="stat-label">Países</div></div>
+    <div class="stat"><div class="stat-number">24/7</div><div class="stat-label">Soporte</div></div>
   </div>
 
   <!-- MARCAS -->
@@ -1268,85 +786,55 @@
       <div class="section-tag gold">// Explora</div>
       <h2 class="section-title">Nuestras <span>Categorías</span></h2>
     </div>
-
     <div class="carousel-wrapper">
       <button class="carousel-btn" id="prevBtn" onclick="moveCarousel(-1)" aria-label="Anterior">❮</button>
-
       <div class="carousel-container">
         <div class="carousel-track" id="carouselTrack">
 
           <div class="carousel-slide">
             <a href="{{ url_for('catalogo') }}" class="category-card">
-              <div class="cat-img-wrap">
-                <img src="/static/img/Camara.webp" alt="Cámaras CCTV" onerror="this.src='https://images.unsplash.com/photo-1557804506-669a67965ba0?w=400&q=80'">
-              </div>
-              <div class="cat-name">Cámaras CCTV</div>
-              <div class="cat-count">120+ productos</div>
+              <div class="cat-img-wrap"><img src="/static/img/Camara.webp" alt="Cámaras CCTV" onerror="this.src='https://images.unsplash.com/photo-1557804506-669a67965ba0?w=400&q=80'"></div>
+              <div class="cat-name">Cámaras CCTV</div><div class="cat-count">120+ productos</div>
             </a>
           </div>
 
           <div class="carousel-slide">
             <a href="{{ url_for('catalogo') }}" class="category-card">
-              <div class="cat-img-wrap">
-                <!-- Monitor de seguridad CCTV profesional -->
-                <img src="/static/img/monitor_cctv.jpeg" 
-                     alt="Monitor CCTV" 
-                     onerror="this.src='https://images.pexels.com/photos/6771607/pexels-photo-6771607.jpeg?auto=compress&cs=tinysrgb&w=600'">
-              </div>
-              <div class="cat-name">Monitores</div>
-              <div class="cat-count">45+ productos</div>
+              <div class="cat-img-wrap"><img src="/static/img/monitor_cctv.jpeg" alt="Monitor CCTV" onerror="this.src='https://images.pexels.com/photos/6771607/pexels-photo-6771607.jpeg?auto=compress&cs=tinysrgb&w=600'"></div>
+              <div class="cat-name">Monitores</div><div class="cat-count">45+ productos</div>
             </a>
           </div>
 
           <div class="carousel-slide">
             <a href="{{ url_for('catalogo') }}" class="category-card">
-              <div class="cat-img-wrap">
-                <img src="/static/img/Alarma.webp" alt="Alarmas" onerror="this.src='https://images.unsplash.com/photo-1558618666-fcd25c85cd64?w=600&q=85'">
-              </div>
-              <div class="cat-name">Alarmas</div>
-              <div class="cat-count">80+ productos</div>
+              <div class="cat-img-wrap"><img src="/static/img/Alarma.webp" alt="Alarmas" onerror="this.src='https://images.unsplash.com/photo-1558618666-fcd25c85cd64?w=600&q=85'"></div>
+              <div class="cat-name">Alarmas</div><div class="cat-count">80+ productos</div>
             </a>
           </div>
 
           <div class="carousel-slide">
             <a href="{{ url_for('catalogo') }}" class="category-card">
-              <div class="cat-img-wrap">
-                <!-- Cerca eléctrica de seguridad perimetral -->
-                <img src="/static/img/cerca_electrica.avif"
-                     alt="Cerca Eléctrica"
-                     onerror="this.src='https://images.pexels.com/photos/3805983/pexels-photo-3805983.jpeg?auto=compress&cs=tinysrgb&w=600'">
-              </div>
-              <div class="cat-name">Cercas Eléctricas</div>
-              <div class="cat-count">30+ productos</div>
+              <div class="cat-img-wrap"><img src="/static/img/cerca_electrica.avif" alt="Cerca Eléctrica" onerror="this.src='https://images.pexels.com/photos/3805983/pexels-photo-3805983.jpeg?auto=compress&cs=tinysrgb&w=600'"></div>
+              <div class="cat-name">Cercas Eléctricas</div><div class="cat-count">30+ productos</div>
             </a>
           </div>
 
           <div class="carousel-slide">
             <a href="{{ url_for('catalogo') }}" class="category-card">
-              <div class="cat-img-wrap">
-                <img src="/static/img/biometrico.webp" alt="Biométricos" onerror="this.src='https://images.unsplash.com/photo-1563013544-824ae1b704d3?w=600&q=85'">
-              </div>
-              <div class="cat-name">Biométricos</div>
-              <div class="cat-count">60+ productos</div>
+              <div class="cat-img-wrap"><img src="/static/img/biometrico.webp" alt="Biométricos" onerror="this.src='https://images.unsplash.com/photo-1563013544-824ae1b704d3?w=600&q=85'"></div>
+              <div class="cat-name">Biométricos</div><div class="cat-count">60+ productos</div>
             </a>
           </div>
 
           <div class="carousel-slide">
             <a href="{{ url_for('catalogo') }}" class="category-card">
-              <div class="cat-img-wrap">
-                <!-- Fuente de poder para CCTV -->
-                <img src="/static/img/fuente_poder.jpg"
-                     alt="Fuente de Poder CCTV"
-                     onerror="this.src='https://images.pexels.com/photos/257736/pexels-photo-257736.jpeg?auto=compress&cs=tinysrgb&w=600'">
-              </div>
-              <div class="cat-name">Fuentes de Poder</div>
-              <div class="cat-count">50+ productos</div>
+              <div class="cat-img-wrap"><img src="/static/img/fuente_poder.jpg" alt="Fuente de Poder" onerror="this.src='https://images.pexels.com/photos/257736/pexels-photo-257736.jpeg?auto=compress&cs=tinysrgb&w=600'"></div>
+              <div class="cat-name">Fuentes de Poder</div><div class="cat-count">50+ productos</div>
             </a>
           </div>
 
         </div>
       </div>
-
       <button class="carousel-btn" id="nextBtn" onclick="moveCarousel(1)" aria-label="Siguiente">❯</button>
     </div>
   </section>
@@ -1369,7 +857,7 @@
           <div class="product-desc">Visión nocturna 40m, resistente al agua IP67, detección de movimiento.</div>
           <div class="product-footer">
             <div class="product-price">1,100.00 HNL</div>
-            <button class="btn-add" onclick="agregarAlCarrito(1, 'Cámara 4K tipo bullet', 1100)">+ Carrito</button>
+            <button class="btn-add" onclick="agregarAlCarrito(1,'Cámara 4K tipo bullet',1100)">+ Carrito</button>
           </div>
         </div>
       </div>
@@ -1384,14 +872,14 @@
           <div class="product-desc">Pantalla Full HD 21", grabación continua, acceso remoto desde app.</div>
           <div class="product-footer">
             <div class="product-price">4,000.00 HNL</div>
-            <button class="btn-add" onclick="agregarAlCarrito(2, 'NVR 16 Canales', 4000)">+ Carrito</button>
+            <button class="btn-add" onclick="agregarAlCarrito(2,'NVR 16 Canales',4000)">+ Carrito</button>
           </div>
         </div>
       </div>
 
       <div class="product-card">
         <div class="product-img">
-          <img src="/static/img/biometrico.webp" alt="Control de acceso biométrico">
+          <img src="/static/img/biometrico.webp" alt="Control biométrico">
           <span class="product-badge oferta">Oferta</span>
         </div>
         <div class="product-info">
@@ -1399,7 +887,7 @@
           <div class="product-desc">Reconocimiento facial + huella, hasta 3000 usuarios, WiFi integrado.</div>
           <div class="product-footer">
             <div class="product-price">1,700.00 HNL</div>
-            <button class="btn-add" onclick="agregarAlCarrito(3, 'Control de acceso biométrico', 1700)">+ Carrito</button>
+            <button class="btn-add" onclick="agregarAlCarrito(3,'Control de acceso biométrico',1700)">+ Carrito</button>
           </div>
         </div>
       </div>
@@ -1413,7 +901,7 @@
           <div class="product-desc">Central + 6 sensores + sirena, app móvil, batería de respaldo 24h.</div>
           <div class="product-footer">
             <div class="product-price">1,900.00 HNL</div>
-            <button class="btn-add" onclick="agregarAlCarrito(4, 'Kit Alarma Inalámbrica', 1900)">+ Carrito</button>
+            <button class="btn-add" onclick="agregarAlCarrito(4,'Kit Alarma Inalámbrica',1900)">+ Carrito</button>
           </div>
         </div>
       </div>
@@ -1426,9 +914,9 @@
     <div class="promo-content">
       <div class="promo-gold-line"></div>
       <h2>¿Necesitas <span>asesoría</span> personalizada?</h2>
-      <p>Nuestro equipo de expertos te ayuda a elegir la solución de seguridad ideal para tu hogar o negocio. Envíos internacionales disponibles.</p>
+      <p>Nuestro equipo de expertos te ayuda a elegir la solución de seguridad ideal para tu hogar o negocio.</p>
     </div>
-    <a href="{{ url_for('registro') }}" class="btn-primary" style="white-space:nowrap; position:relative; z-index:1;">Crear Cuenta</a>
+    <a href="{{ url_for('registro') }}" class="btn-primary" style="white-space:nowrap;position:relative;z-index:1;">Crear Cuenta</a>
   </div>
 
   <!-- FOOTER -->
@@ -1438,9 +926,9 @@
         <span class="logo">SECURE<span style="color:var(--gold)">VISION</span></span>
         <p>Soluciones de seguridad electrónica profesional para hogares y empresas a nivel mundial.</p>
         <div class="social-links">
-          <a href="#" class="social-link" title="Facebook">f</a>
-          <a href="#" class="social-link" title="Instagram">ig</a>
-          <a href="#" class="social-link" title="WhatsApp">wa</a>
+          <a href="#" class="social-link">f</a>
+          <a href="#" class="social-link">ig</a>
+          <a href="#" class="social-link">wa</a>
         </div>
       </div>
       <div class="footer-col">
@@ -1478,37 +966,21 @@
     </div>
   </footer>
 
-  <!-- Scroll to top -->
   <button class="scroll-top" id="scrollTop" onclick="window.scrollTo({top:0,behavior:'smooth'})" aria-label="Ir arriba">↑</button>
 
   <script>
-    // El tema se maneja desde /static/js/theme.js (cargado en <head>)
-
-    // ── HAMBURGER MENU ──
+    // ── HAMBURGER ──
     const hamburger = document.getElementById('hamburger');
     const mobileMenu = document.getElementById('mobileMenu');
+    hamburger.addEventListener('click', () => { hamburger.classList.toggle('open'); mobileMenu.classList.toggle('open'); });
+    mobileMenu.querySelectorAll('a').forEach(link => link.addEventListener('click', () => { hamburger.classList.remove('open'); mobileMenu.classList.remove('open'); }));
 
-    hamburger.addEventListener('click', () => {
-      hamburger.classList.toggle('open');
-      mobileMenu.classList.toggle('open');
-    });
-
-    // Cerrar menú al hacer click en un enlace
-    mobileMenu.querySelectorAll('a').forEach(link => {
-      link.addEventListener('click', () => {
-        hamburger.classList.remove('open');
-        mobileMenu.classList.remove('open');
-      });
-    });
-
-    // ── CARRUSEL DE CATEGORÍAS ──
+    // ── CARRUSEL CATEGORÍAS ──
     let currentIndex = 0;
     const track = document.getElementById('carouselTrack');
     const slides = document.querySelectorAll('.carousel-slide');
 
-    function getSlidesVisible() {
-      return window.innerWidth <= 600 ? 1 : window.innerWidth <= 1024 ? 2 : 3;
-    }
+    function getSlidesVisible() { return window.innerWidth <= 600 ? 1 : window.innerWidth <= 1024 ? 2 : 3; }
 
     function getSlideWidth() {
       const gap = 16;
@@ -1518,8 +990,7 @@
     }
 
     function updateCarousel() {
-      const offset = -currentIndex * getSlideWidth();
-      track.style.transform = `translateX(${offset}px)`;
+      track.style.transform = `translateX(${-currentIndex * getSlideWidth()}px)`;
       updateButtons();
     }
 
@@ -1539,21 +1010,9 @@
     }
 
     let autoplayInterval;
-
-    function autoplay() {
-      const maxIndex = slides.length - getSlidesVisible();
-      currentIndex = currentIndex >= maxIndex ? 0 : currentIndex + 1;
-      updateCarousel();
-    }
-
-    function startAutoplay() {
-      autoplayInterval = setInterval(autoplay, 4000);
-    }
-
-    function resetAutoplay() {
-      clearInterval(autoplayInterval);
-      startAutoplay();
-    }
+    function autoplay() { const m = slides.length - getSlidesVisible(); currentIndex = currentIndex >= m ? 0 : currentIndex + 1; updateCarousel(); }
+    function startAutoplay() { autoplayInterval = setInterval(autoplay, 4000); }
+    function resetAutoplay() { clearInterval(autoplayInterval); startAutoplay(); }
 
     updateButtons();
     startAutoplay();
@@ -1562,13 +1021,12 @@
     document.querySelector('.carousel-wrapper').addEventListener('mouseleave', startAutoplay);
     window.addEventListener('resize', updateCarousel);
 
-    // ── CARRUSEL HERO ──
+    // ── HERO SLIDER ──
     let heroIndex = 0;
     const heroImgs = document.querySelectorAll('.hero-img');
     const dotsContainer = document.getElementById('heroDots');
     let heroInterval;
 
-    // Crear dots
     heroImgs.forEach((_, i) => {
       const dot = document.createElement('div');
       dot.className = 'hero-dot' + (i === 0 ? ' active' : '');
@@ -1579,87 +1037,64 @@
     function updateHero() {
       heroImgs.forEach(img => img.classList.add('hidden'));
       heroImgs[heroIndex].classList.remove('hidden');
-      document.querySelectorAll('.hero-dot').forEach((d, i) => {
-        d.classList.toggle('active', i === heroIndex);
-      });
+      document.querySelectorAll('.hero-dot').forEach((d, i) => d.classList.toggle('active', i === heroIndex));
     }
 
-    function rotateHero() {
-      heroIndex = (heroIndex + 1) % heroImgs.length;
-      updateHero();
-    }
-
+    function rotateHero() { heroIndex = (heroIndex + 1) % heroImgs.length; updateHero(); }
     function startHeroAutoplay() { heroInterval = setInterval(rotateHero, 4000); }
     function resetHeroAutoplay() { clearInterval(heroInterval); startHeroAutoplay(); }
 
     updateHero();
     startHeroAutoplay();
 
-    // Pausar hero al hover (solo si el elemento existe en el DOM)
     const heroImageEl = document.querySelector('.hero-image');
     if (heroImageEl) {
       heroImageEl.addEventListener('mouseenter', () => clearInterval(heroInterval));
       heroImageEl.addEventListener('mouseleave', startHeroAutoplay);
     }
 
-    // ── AGREGAR AL CARRITO ──
-    function agregarAlCarrito(id, nombre, precio) {
-      fetch('/agregar_carrito', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ id, nombre, precio, cantidad: 1 })
-      })
-      .then(res => res.json())
-      .then(data => {
+    // ── AGREGAR AL CARRITO (Index → sincroniza con Flask) ──
+    async function agregarAlCarrito(id, nombre, precio) {
+      try {
+        // Primero sincronizamos un solo producto con la sesión Flask
+        await fetch('/sync_carrito', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ items: [{ id, name: nombre, price: precio, icon: '📦', category: '', qty: 1 }] })
+        });
+        // Actualizar badge
         const badge = document.querySelector('.cart-badge');
-        if (badge && data.total !== undefined) badge.textContent = data.total;
-        showToast(`✓ ${nombre} agregado al carrito`);
-      })
-      .catch(() => {
-        // Si no hay endpoint aún, solo mostrar notificación
-        showToast(`✓ ${nombre} agregado al carrito`);
-      });
+        if (badge) badge.textContent = parseInt(badge.textContent || 0) + 1;
+        showToast('✓ ' + nombre + ' agregado al carrito');
+      } catch (e) {
+        showToast('✓ ' + nombre + ' agregado al carrito');
+      }
     }
 
-    // ── TOAST NOTIFICACIÓN ──
+    // ── TOAST ──
     function showToast(msg) {
       let toast = document.getElementById('toast');
       if (!toast) {
         toast = document.createElement('div');
         toast.id = 'toast';
-        toast.style.cssText = `
-          position:fixed; bottom:80px; right:32px; z-index:999;
-          background:var(--blue); color:#fff; padding:12px 20px;
-          border-radius:6px; font-size:0.82rem; letter-spacing:0.5px;
-          box-shadow:0 4px 20px rgba(0,102,255,0.4);
-          transform:translateY(20px); opacity:0;
-          transition:all 0.3s;
-        `;
+        toast.style.cssText = 'position:fixed;bottom:80px;right:32px;z-index:999;background:var(--blue);color:#fff;padding:12px 20px;border-radius:6px;font-size:0.82rem;box-shadow:0 4px 20px rgba(0,102,255,0.4);transform:translateY(20px);opacity:0;transition:all 0.3s;';
         document.body.appendChild(toast);
       }
       toast.textContent = msg;
-      requestAnimationFrame(() => {
-        toast.style.opacity = '1';
-        toast.style.transform = 'translateY(0)';
-      });
-      setTimeout(() => {
-        toast.style.opacity = '0';
-        toast.style.transform = 'translateY(20px)';
-      }, 2800);
+      requestAnimationFrame(() => { toast.style.opacity = '1'; toast.style.transform = 'translateY(0)'; });
+      setTimeout(() => { toast.style.opacity = '0'; toast.style.transform = 'translateY(20px)'; }, 2800);
     }
 
-    // ── ANIMACIÓN NÚMEROS STATS ──
+    // ── STATS ANIMACIÓN ──
     function animateNumber(el, target) {
       const duration = 1500;
       const start = performance.now();
       const suffix = target >= 1000 ? 'K+' : '+';
       const displayTarget = target >= 1000 ? target / 1000 : target;
-
       function update(time) {
         const progress = Math.min((time - start) / duration, 1);
         const eased = 1 - Math.pow(1 - progress, 3);
-        const current = Math.floor(eased * displayTarget);
-        el.textContent = current + suffix;
+        el.textContent = Math.floor(eased * displayTarget) + suffix;
         if (progress < 1) requestAnimationFrame(update);
         else el.textContent = displayTarget + suffix;
       }
@@ -1671,11 +1106,8 @@
       entries.forEach(entry => {
         if (entry.isIntersecting) {
           entry.target.classList.add('visible');
-          // Animar números si es la sección stats
           if (entry.target.classList.contains('stats')) {
-            entry.target.querySelectorAll('[data-target]').forEach(el => {
-              animateNumber(el, parseInt(el.dataset.target));
-            });
+            entry.target.querySelectorAll('[data-target]').forEach(el => animateNumber(el, parseInt(el.dataset.target)));
           }
           revealObserver.unobserve(entry.target);
         }
@@ -1684,11 +1116,9 @@
 
     document.querySelectorAll('.reveal').forEach(el => revealObserver.observe(el));
 
-    // ── SCROLL TO TOP ──
+    // ── SCROLL TOP ──
     const scrollTopBtn = document.getElementById('scrollTop');
-    window.addEventListener('scroll', () => {
-      scrollTopBtn.classList.toggle('visible', window.scrollY > 400);
-    });
+    window.addEventListener('scroll', () => scrollTopBtn.classList.toggle('visible', window.scrollY > 400));
   </script>
 
 </body>
