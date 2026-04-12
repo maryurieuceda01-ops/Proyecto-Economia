@@ -1,21 +1,67 @@
 <!DOCTYPE html>
-<html lang="es">
+<html lang="es" data-theme="dark">
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>SecureVision | Equipos de Seguridad</title>
   <link href="https://fonts.googleapis.com/css2?family=Rajdhani:wght@400;600;700&family=Inter:wght@300;400;500&display=swap" rel="stylesheet"/>
+  <!-- Tema global — debe ir en TODAS las páginas en el <head> -->
+  <script src="/static/js/theme.js"></script>
   <style>
+    /* ── VARIABLES MODO OSCURO (default) ── */
     :root {
       --bg: #080810;
       --bg2: #0d0d1a;
       --blue: #0066ff;
       --blue-glow: #0044cc;
       --cyan: #00cfff;
+      --gold: #c9a84c;
+      --gold-light: #e8c96a;
+      --gold-glow: rgba(201,168,76,0.2);
+      --gold-border: rgba(201,168,76,0.3);
       --white: #f0f4ff;
       --gray: #8890aa;
       --card-bg: #10101e;
       --border: rgba(0, 102, 255, 0.2);
+      --nav-bg: rgba(8, 8, 16, 0.92);
+      --shadow: rgba(0,0,0,0.5);
+      --promo-bg: linear-gradient(135deg, #0a0a1a 0%, #0d1533 50%, #0a0a1a 100%);
+      --footer-bg: #0d0d1a;
+      --text-main: #f0f4ff;
+      --stat-hover: rgba(0,102,255,0.05);
+      --product-bg: #13131f;
+      --tag-bg: rgba(0,102,255,0.15);
+      --tag-border: rgba(0,102,255,0.4);
+      --section-alt: #0d0d1a;
+      --hero-grid-color: rgba(0,102,255,0.04);
+    }
+
+    /* ── VARIABLES MODO CLARO ── */
+    [data-theme="light"] {
+      --bg: #f5f7ff;
+      --bg2: #eef1ff;
+      --blue: #0055dd;
+      --blue-glow: #0044bb;
+      --cyan: #0099cc;
+      --gold: #a07820;
+      --gold-light: #c49a2a;
+      --gold-glow: rgba(160,120,32,0.15);
+      --gold-border: rgba(160,120,32,0.3);
+      --white: #0d1133;
+      --gray: #5a6380;
+      --card-bg: #ffffff;
+      --border: rgba(0, 85, 221, 0.18);
+      --nav-bg: rgba(245, 247, 255, 0.95);
+      --shadow: rgba(0,0,50,0.12);
+      --promo-bg: linear-gradient(135deg, #dce4ff 0%, #c8d6ff 50%, #dce4ff 100%);
+      --footer-bg: #e8ecff;
+      --text-main: #0d1133;
+      --stat-hover: rgba(0, 85, 221, 0.05);
+      --product-bg: #f0f3ff;
+      --tag-bg: rgba(0, 85, 221, 0.1);
+      --tag-border: rgba(0, 85, 221, 0.35);
+      --section-alt: #eef1ff;
+      --hero-grid-color: rgba(0,85,221,0.05);
     }
 
     * { margin: 0; padding: 0; box-sizing: border-box; }
@@ -25,20 +71,22 @@
       color: var(--white);
       font-family: 'Inter', sans-serif;
       overflow-x: hidden;
+      transition: background 0.35s, color 0.35s;
     }
 
     /* ── NAVBAR ── */
     nav {
       position: fixed;
       top: 0; left: 0; right: 0;
-      z-index: 100;
+      z-index: 200;
       display: flex;
       align-items: center;
       justify-content: space-between;
       padding: 18px 60px;
-      background: rgba(8, 8, 16, 0.85);
-      backdrop-filter: blur(12px);
+      background: var(--nav-bg);
+      backdrop-filter: blur(14px);
       border-bottom: 1px solid var(--border);
+      transition: background 0.35s, border-color 0.35s;
     }
 
     .logo {
@@ -47,6 +95,7 @@
       font-weight: 700;
       letter-spacing: 2px;
       color: var(--white);
+      text-decoration: none;
     }
 
     .logo span { color: var(--blue); }
@@ -64,14 +113,46 @@
       letter-spacing: 1px;
       text-transform: uppercase;
       transition: color 0.2s;
+      position: relative;
+    }
+
+    .nav-links a::after {
+      content: '';
+      position: absolute;
+      bottom: -4px; left: 0; right: 0;
+      height: 2px;
+      background: var(--blue);
+      transform: scaleX(0);
+      transition: transform 0.2s;
     }
 
     .nav-links a:hover { color: var(--white); }
+    .nav-links a:hover::after { transform: scaleX(1); }
 
     .nav-actions {
       display: flex;
       align-items: center;
-      gap: 16px;
+      gap: 14px;
+    }
+
+    /* Botón modo claro/oscuro */
+    .theme-toggle {
+      background: var(--card-bg);
+      border: 1px solid var(--border);
+      color: var(--gray);
+      width: 36px; height: 36px;
+      border-radius: 50%;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1rem;
+      transition: all 0.2s;
+    }
+
+    .theme-toggle:hover {
+      border-color: var(--blue);
+      color: var(--blue);
     }
 
     .btn-nav {
@@ -89,6 +170,11 @@
     }
 
     .btn-nav:hover { background: var(--blue-glow); }
+
+    .user-welcome {
+      color: var(--gray);
+      font-size: 0.82rem;
+    }
 
     .cart-icon {
       position: relative;
@@ -113,6 +199,71 @@
       justify-content: center;
     }
 
+    /* ── HAMBURGER ── */
+    .hamburger {
+      display: none;
+      flex-direction: column;
+      gap: 5px;
+      cursor: pointer;
+      padding: 6px;
+      background: none;
+      border: none;
+    }
+
+    .hamburger span {
+      display: block;
+      width: 24px; height: 2px;
+      background: var(--white);
+      border-radius: 2px;
+      transition: all 0.3s;
+    }
+
+    .hamburger.open span:nth-child(1) {
+      transform: translateY(7px) rotate(45deg);
+    }
+    .hamburger.open span:nth-child(2) {
+      opacity: 0;
+    }
+    .hamburger.open span:nth-child(3) {
+      transform: translateY(-7px) rotate(-45deg);
+    }
+
+    /* ── MENÚ MOBILE ── */
+    .mobile-menu {
+      display: none;
+      position: fixed;
+      top: 70px; left: 0; right: 0;
+      background: var(--nav-bg);
+      backdrop-filter: blur(14px);
+      border-bottom: 1px solid var(--border);
+      padding: 24px 24px 32px;
+      z-index: 199;
+      flex-direction: column;
+      gap: 0;
+      animation: slideDown 0.25s ease;
+    }
+
+    .mobile-menu.open { display: flex; }
+
+    .mobile-menu a {
+      text-decoration: none;
+      color: var(--gray);
+      font-size: 0.95rem;
+      letter-spacing: 1px;
+      text-transform: uppercase;
+      padding: 14px 0;
+      border-bottom: 1px solid var(--border);
+      transition: color 0.2s;
+    }
+
+    .mobile-menu a:hover { color: var(--blue); }
+    .mobile-menu a:last-child { border-bottom: none; }
+
+    @keyframes slideDown {
+      from { opacity: 0; transform: translateY(-10px); }
+      to   { opacity: 1; transform: translateY(0); }
+    }
+
     /* ── HERO ── */
     .hero {
       min-height: 100vh;
@@ -128,7 +279,7 @@
       position: absolute;
       top: -200px; right: -200px;
       width: 700px; height: 700px;
-      background: radial-gradient(circle, rgba(0,102,255,0.12) 0%, transparent 70%);
+      background: radial-gradient(circle, rgba(0,102,255,0.13) 0%, transparent 70%);
       pointer-events: none;
     }
 
@@ -137,17 +288,24 @@
       position: absolute;
       bottom: -100px; left: 30%;
       width: 400px; height: 400px;
-      background: radial-gradient(circle, rgba(0,207,255,0.06) 0%, transparent 70%);
+      background: radial-gradient(circle, rgba(0,207,255,0.07) 0%, transparent 70%);
       pointer-events: none;
     }
 
-    /* Grid de puntos de fondo */
+    [data-theme="light"] .hero::before {
+      background: radial-gradient(circle, rgba(0,85,221,0.08) 0%, transparent 70%);
+    }
+
+    [data-theme="light"] .hero::after {
+      background: radial-gradient(circle, rgba(0,153,204,0.06) 0%, transparent 70%);
+    }
+
     .hero-grid {
       position: absolute;
       inset: 0;
       background-image:
-        linear-gradient(rgba(0,102,255,0.04) 1px, transparent 1px),
-        linear-gradient(90deg, rgba(0,102,255,0.04) 1px, transparent 1px);
+        linear-gradient(var(--hero-grid-color) 1px, transparent 1px),
+        linear-gradient(90deg, var(--hero-grid-color) 1px, transparent 1px);
       background-size: 50px 50px;
       pointer-events: none;
     }
@@ -160,9 +318,11 @@
     }
 
     .hero-tag {
-      display: inline-block;
-      background: rgba(0,102,255,0.15);
-      border: 1px solid rgba(0,102,255,0.4);
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      background: var(--tag-bg);
+      border: 1px solid var(--tag-border);
       color: var(--cyan);
       font-size: 0.72rem;
       letter-spacing: 3px;
@@ -172,11 +332,24 @@
       margin-bottom: 28px;
     }
 
+    .hero-tag::before {
+      content: '';
+      width: 6px; height: 6px;
+      background: var(--cyan);
+      border-radius: 50%;
+      animation: pulse 2s infinite;
+    }
+
+    @keyframes pulse {
+      0%, 100% { opacity: 1; transform: scale(1); }
+      50% { opacity: 0.4; transform: scale(0.8); }
+    }
+
     .hero h1 {
       font-family: 'Rajdhani', sans-serif;
-      font-size: clamp(2.8rem, 5vw, 4.4rem);
+      font-size: clamp(2.8rem, 5vw, 4.6rem);
       font-weight: 700;
-      line-height: 1.1;
+      line-height: 1.08;
       letter-spacing: 1px;
       margin-bottom: 24px;
     }
@@ -195,6 +368,33 @@
       display: flex;
       gap: 16px;
       flex-wrap: wrap;
+      margin-bottom: 48px;
+    }
+
+    /* Badges de confianza bajo los botones */
+    .trust-badges {
+      display: flex;
+      gap: 24px;
+      flex-wrap: wrap;
+    }
+
+    .trust-badge {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      font-size: 0.78rem;
+      color: var(--gray);
+    }
+
+    .trust-badge-icon {
+      width: 28px; height: 28px;
+      border-radius: 50%;
+      background: var(--tag-bg);
+      border: 1px solid var(--tag-border);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 0.85rem;
     }
 
     .btn-primary {
@@ -221,7 +421,7 @@
     .btn-outline {
       background: transparent;
       color: var(--white);
-      border: 1px solid rgba(255,255,255,0.2);
+      border: 1px solid rgba(255,255,255,0.25);
       padding: 14px 32px;
       font-size: 0.85rem;
       letter-spacing: 1.5px;
@@ -233,62 +433,116 @@
       font-family: 'Inter', sans-serif;
     }
 
+    [data-theme="light"] .btn-outline {
+      border-color: rgba(0,0,50,0.2);
+      color: var(--white);
+    }
+
     .btn-outline:hover {
       border-color: var(--blue);
       color: var(--blue);
     }
 
-    /* Imagen hero derecha */
+    /* Hero imagen derecha */
     .hero-image {
       position: absolute;
       right: 60px;
       top: 50%;
       transform: translateY(-50%);
-      width: 45%;
-      max-width: 580px;
-      opacity: 0.85;
+      width: 44%;
+      max-width: 560px;
+      opacity: 0.9;
       animation: fadeLeft 1s ease 0.3s both;
     }
 
-    .hero-image img {
-      width: 100%;
-      border-radius: 8px;
-      border: 1px solid var(--border);
-      box-shadow: 0 0 60px rgba(0,102,255,0.15);
-      transition: opacity 0.8s ease;
-    }
-
-    .hero-image img.hidden {
-      opacity: 0;
-      position: absolute;
-    }
-
-    /* Placeholder imagen si no hay img */
     .hero-placeholder {
       width: 100%;
-      aspect-ratio: 16/10;
+      aspect-ratio: 4/3;
       background: var(--card-bg);
-      border: 1px solid var(--border);
-      border-radius: 8px;
+      border: 1px solid var(--gold-border);
+      border-radius: 12px;
       display: flex;
-      flex-direction: column;
       align-items: center;
       justify-content: center;
-      gap: 12px;
-      box-shadow: 0 0 60px rgba(0,102,255,0.1);
+      overflow: hidden;
+      box-shadow: 0 0 60px rgba(0,102,255,0.15), 0 0 30px var(--gold-glow), 0 0 0 1px var(--gold-border);
+      position: relative;
     }
 
-    .hero-placeholder .cam-icon {
-      font-size: 4rem;
-      opacity: 0.3;
+    /* Gold corner accents */
+    .hero-placeholder::before,
+    .hero-placeholder::after {
+      content: '';
+      position: absolute;
+      width: 24px; height: 24px;
+      border-color: var(--gold);
+      border-style: solid;
+      z-index: 3;
     }
 
-    .hero-placeholder p {
-      color: var(--gray);
-      font-size: 0.8rem;
-      letter-spacing: 2px;
-      text-transform: uppercase;
-      margin: 0;
+    .hero-placeholder::before {
+      top: 14px; left: 14px;
+      border-width: 2px 0 0 2px;
+    }
+
+    .hero-placeholder::after {
+      bottom: 14px; right: 14px;
+      border-width: 0 2px 2px 0;
+    }
+
+    /* Extra two gold corners via pseudo on wrapper */
+    .hero-corner-tl, .hero-corner-br { display: none; }
+
+    .hero-img {
+      position: absolute;
+      width: 100%; height: 100%;
+      object-fit: cover;
+      border-radius: 12px;
+      transition: opacity 0.8s ease;
+      filter: brightness(1.15) contrast(1.05) saturate(1.1);
+    }
+
+    .hero-img.hidden { opacity: 0; }
+
+    /* Subtle gold gradient overlay on hero image */
+    .hero-img-overlay {
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(
+        135deg,
+        rgba(201,168,76,0.08) 0%,
+        transparent 40%,
+        transparent 60%,
+        rgba(201,168,76,0.06) 100%
+      );
+      z-index: 2;
+      border-radius: 12px;
+      pointer-events: none;
+    }
+
+    /* Indicadores hero */
+    .hero-dots {
+      position: absolute;
+      bottom: 16px;
+      left: 50%;
+      transform: translateX(-50%);
+      display: flex;
+      gap: 6px;
+      z-index: 3;
+    }
+
+    .hero-dot {
+      width: 6px; height: 6px;
+      border-radius: 50%;
+      background: rgba(255,255,255,0.3);
+      transition: all 0.3s;
+      cursor: pointer;
+    }
+
+    .hero-dot.active {
+      background: var(--blue);
+      width: 18px;
+      border-radius: 3px;
     }
 
     /* ── STATS ── */
@@ -303,38 +557,41 @@
 
     .stat {
       flex: 1;
-      padding: 32px;
+      padding: 36px;
       text-align: center;
       border-right: 1px solid var(--border);
       transition: background 0.2s;
+      position: relative;
     }
 
     .stat:last-child { border-right: none; }
-    .stat:hover { background: rgba(0,102,255,0.05); }
+
+    .stat:hover { background: var(--stat-hover); }
 
     .stat-number {
       font-family: 'Rajdhani', sans-serif;
-      font-size: 2.2rem;
+      font-size: 2.4rem;
       font-weight: 700;
       color: var(--blue);
+      line-height: 1;
     }
 
+    /* Gold accent on first stat */
+    .stat:first-child .stat-number { color: var(--gold); }
+    .stat:first-child:hover { background: rgba(201,168,76,0.04); }
+
     .stat-label {
-      font-size: 0.75rem;
+      font-size: 0.72rem;
       color: var(--gray);
       letter-spacing: 2px;
       text-transform: uppercase;
-      margin-top: 4px;
+      margin-top: 6px;
     }
 
-    /* ── CATEGORÍAS ── */
-    .section {
-      padding: 90px 60px;
-    }
+    /* ── SECCIONES ── */
+    .section { padding: 90px 60px; }
 
-    .section-header {
-      margin-bottom: 50px;
-    }
+    .section-header { margin-bottom: 50px; }
 
     .section-tag {
       font-size: 0.72rem;
@@ -344,22 +601,18 @@
       margin-bottom: 12px;
     }
 
+    .section-tag.gold { color: var(--gold); }
+
     .section-title {
       font-family: 'Rajdhani', sans-serif;
-      font-size: 2.2rem;
+      font-size: 2.4rem;
       font-weight: 700;
       letter-spacing: 1px;
     }
 
     .section-title span { color: var(--blue); }
 
-    .categories-grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
-      gap: 16px;
-    }
-
-    /* ── CARRUSEL ── */
+    /* ── CARRUSEL CATEGORÍAS ── */
     .carousel-wrapper {
       position: relative;
       display: flex;
@@ -376,102 +629,115 @@
     .carousel-track {
       display: flex;
       gap: 16px;
-      transition: transform 0.5s ease;
+      transition: transform 0.5s cubic-bezier(0.4,0,0.2,1);
     }
 
     .carousel-slide {
-      flex: 0 0 calc(50% - 8px);
-      min-width: 300px;
+      flex: 0 0 calc(33.333% - 11px);
+      min-width: 200px;
       display: flex;
       flex-direction: column;
-      gap: 12px;
-    }
-
-    .carousel-slide .category-card {
-      flex: 1;
-    }
-
-    .carousel-slide .cat-count {
-      padding: 8px 12px;
-      background: rgba(0,102,255,0.08);
-      border-radius: 4px;
-      text-align: center;
+      gap: 10px;
     }
 
     .category-card {
       background: var(--card-bg);
       border: 1px solid var(--border);
-      border-radius: 6px;
-      padding: 48px 32px;
+      border-radius: 8px;
+      padding: 36px 24px;
       text-align: center;
       cursor: pointer;
-      transition: all 0.25s;
+      transition: all 0.28s;
       text-decoration: none;
       color: var(--white);
-      height: 100%;
       display: flex;
       flex-direction: column;
+      align-items: center;
       justify-content: center;
-      min-height: 280px;
+      min-height: 240px;
+      position: relative;
+      overflow: hidden;
     }
+
+    .category-card::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: radial-gradient(circle at 50% 120%, rgba(0,102,255,0.12) 0%, transparent 60%);
+      opacity: 0;
+      transition: opacity 0.3s;
+    }
+
+    .category-card:hover::before { opacity: 1; }
 
     .category-card:hover {
-      border-color: var(--blue);
-      transform: translateY(-4px);
-      box-shadow: 0 12px 32px rgba(0,102,255,0.15);
-      background: rgba(0,102,255,0.08);
+      border-color: var(--gold);
+      transform: translateY(-6px);
+      box-shadow: 0 16px 40px rgba(201,168,76,0.18), 0 0 0 1px var(--gold-border);
     }
 
-    .cat-icon {
-      font-size: 3rem;
-      margin-bottom: 20px;
+    .cat-img-wrap {
+      width: 100%;
+      height: 200px;
+      margin-bottom: 16px;
+      border-radius: 6px;
+      overflow: hidden;
+      border: 1px solid var(--border);
     }
 
-    .cat-icon img {
-      max-width: 100%;
-      height: auto;
-      max-height: 120px;
+    .cat-img-wrap img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      transition: transform 0.4s ease;
     }
+
+    .category-card:hover .cat-img-wrap img { transform: scale(1.07); }
 
     .cat-name {
       font-family: 'Rajdhani', sans-serif;
-      font-size: 1.1rem;
+      font-size: 1rem;
       font-weight: 600;
       letter-spacing: 1px;
       text-transform: uppercase;
+      color: var(--white);
+      transition: color 0.25s;
     }
+
+    .category-card:hover .cat-name { color: var(--gold-light); }
 
     .cat-count {
       font-size: 0.72rem;
       color: var(--gray);
-      margin-top: 12px;
+      margin-top: 4px;
     }
 
     .carousel-btn {
       background: var(--blue);
       border: none;
       color: #fff;
-      width: 40px;
-      height: 40px;
+      width: 42px; height: 42px;
       border-radius: 50%;
       cursor: pointer;
       display: flex;
       align-items: center;
       justify-content: center;
-      font-size: 1.2rem;
+      font-size: 1.1rem;
       transition: all 0.2s;
       flex-shrink: 0;
+      box-shadow: 0 4px 16px rgba(0,102,255,0.3);
     }
 
     .carousel-btn:hover {
       background: var(--blue-glow);
-      transform: scale(1.05);
+      transform: scale(1.08);
     }
 
     .carousel-btn:disabled {
       background: var(--gray);
       cursor: not-allowed;
-      opacity: 0.5;
+      opacity: 0.4;
+      box-shadow: none;
     }
 
     /* ── PRODUCTOS DESTACADOS ── */
@@ -484,29 +750,41 @@
     .product-card {
       background: var(--card-bg);
       border: 1px solid var(--border);
-      border-radius: 6px;
+      border-radius: 8px;
       overflow: hidden;
-      transition: all 0.25s;
+      transition: all 0.28s;
       cursor: pointer;
+      display: flex;
+      flex-direction: column;
     }
 
     .product-card:hover {
       border-color: var(--blue);
-      transform: translateY(-4px);
-      box-shadow: 0 16px 40px rgba(0,102,255,0.15);
+      transform: translateY(-5px);
+      box-shadow: 0 20px 48px rgba(0,102,255,0.18);
     }
 
     .product-img {
       width: 100%;
       aspect-ratio: 4/3;
-      background: #13131f;
+      background: var(--product-bg);
       display: flex;
       align-items: center;
       justify-content: center;
-      font-size: 3.5rem;
       border-bottom: 1px solid var(--border);
       position: relative;
       overflow: hidden;
+    }
+
+    .product-img img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      transition: transform 0.4s ease;
+    }
+
+    .product-card:hover .product-img img {
+      transform: scale(1.04);
     }
 
     .product-badge {
@@ -514,20 +792,27 @@
       top: 12px; left: 12px;
       background: var(--blue);
       color: #fff;
-      font-size: 0.65rem;
+      font-size: 0.62rem;
       letter-spacing: 1px;
       text-transform: uppercase;
       padding: 4px 10px;
       border-radius: 2px;
+      z-index: 2;
     }
+
+    .product-badge.oferta { background: #e53935; }
+    .product-badge.popular { background: #7c3aed; }
 
     .product-info {
       padding: 20px;
+      flex: 1;
+      display: flex;
+      flex-direction: column;
     }
 
     .product-name {
       font-family: 'Rajdhani', sans-serif;
-      font-size: 1.05rem;
+      font-size: 1.08rem;
       font-weight: 600;
       letter-spacing: 0.5px;
       margin-bottom: 6px;
@@ -536,8 +821,9 @@
     .product-desc {
       font-size: 0.78rem;
       color: var(--gray);
-      line-height: 1.6;
+      line-height: 1.65;
       margin-bottom: 16px;
+      flex: 1;
     }
 
     .product-footer {
@@ -557,28 +843,32 @@
       background: var(--blue);
       color: #fff;
       border: none;
-      padding: 8px 16px;
+      padding: 9px 18px;
       font-size: 0.75rem;
       letter-spacing: 1px;
       text-transform: uppercase;
-      border-radius: 3px;
+      border-radius: 4px;
       cursor: pointer;
-      transition: background 0.2s;
+      transition: all 0.2s;
       font-family: 'Inter', sans-serif;
     }
 
-    .btn-add:hover { background: var(--blue-glow); }
+    .btn-add:hover {
+      background: var(--blue-glow);
+      transform: translateY(-1px);
+    }
 
     /* ── BANNER PROMO ── */
     .promo-banner {
       margin: 0 60px 90px;
-      background: linear-gradient(135deg, #0a0a1a 0%, #0d1533 50%, #0a0a1a 100%);
+      background: var(--promo-bg);
       border: 1px solid rgba(0,102,255,0.3);
-      border-radius: 8px;
+      border-radius: 12px;
       padding: 60px;
       display: flex;
       align-items: center;
       justify-content: space-between;
+      gap: 32px;
       position: relative;
       overflow: hidden;
     }
@@ -586,17 +876,36 @@
     .promo-banner::before {
       content: '';
       position: absolute;
-      right: -100px; top: -100px;
-      width: 400px; height: 400px;
-      background: radial-gradient(circle, rgba(0,102,255,0.15) 0%, transparent 70%);
+      right: -80px; top: -80px;
+      width: 350px; height: 350px;
+      background: radial-gradient(circle, rgba(0,102,255,0.16) 0%, transparent 70%);
       pointer-events: none;
     }
+
+    .promo-banner::after {
+      content: '';
+      position: absolute;
+      left: -60px; bottom: -60px;
+      width: 250px; height: 250px;
+      background: radial-gradient(circle, rgba(0,207,255,0.08) 0%, transparent 70%);
+      pointer-events: none;
+    }
+
+    .promo-content { position: relative; z-index: 1; }
 
     .promo-content h2 {
       font-family: 'Rajdhani', sans-serif;
       font-size: 2rem;
       font-weight: 700;
       margin-bottom: 10px;
+    }
+
+    .promo-content h2 span { color: var(--gold); }
+
+    .promo-gold-line {
+      width: 48px; height: 2px;
+      background: linear-gradient(90deg, var(--gold), transparent);
+      margin-bottom: 16px;
     }
 
     .promo-content p {
@@ -606,9 +915,47 @@
       line-height: 1.7;
     }
 
+    /* ── SECCIÓN MARCAS ── */
+    .brands-section {
+      padding: 48px 60px;
+      border-top: 1px solid var(--border);
+      border-bottom: 1px solid var(--border);
+      background: var(--bg2);
+    }
+
+    .brands-label {
+      text-align: center;
+      font-size: 0.7rem;
+      letter-spacing: 3px;
+      text-transform: uppercase;
+      color: var(--gray);
+      margin-bottom: 28px;
+    }
+
+    .brands-row {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      gap: 48px;
+      flex-wrap: wrap;
+    }
+
+    .brand-item {
+      font-family: 'Rajdhani', sans-serif;
+      font-size: 1.1rem;
+      font-weight: 700;
+      letter-spacing: 2px;
+      color: var(--gray);
+      text-transform: uppercase;
+      opacity: 0.5;
+      transition: opacity 0.2s;
+    }
+
+    .brand-item:hover { opacity: 1; color: var(--gold); }
+
     /* ── FOOTER ── */
     footer {
-      background: var(--bg2);
+      background: var(--footer-bg);
       border-top: 1px solid var(--border);
       padding: 60px;
     }
@@ -631,6 +978,31 @@
       font-size: 0.82rem;
       line-height: 1.8;
       max-width: 260px;
+      margin-bottom: 20px;
+    }
+
+    .social-links {
+      display: flex;
+      gap: 10px;
+    }
+
+    .social-link {
+      width: 34px; height: 34px;
+      border: 1px solid var(--border);
+      border-radius: 6px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: var(--gray);
+      font-size: 0.9rem;
+      text-decoration: none;
+      transition: all 0.2s;
+    }
+
+    .social-link:hover {
+      border-color: var(--gold);
+      color: var(--gold);
+      background: var(--gold-glow);
     }
 
     .footer-col h4 {
@@ -644,9 +1016,7 @@
 
     .footer-col ul { list-style: none; }
 
-    .footer-col ul li {
-      margin-bottom: 10px;
-    }
+    .footer-col ul li { margin-bottom: 10px; }
 
     .footer-col ul li a {
       color: var(--gray);
@@ -655,7 +1025,7 @@
       transition: color 0.2s;
     }
 
-    .footer-col ul li a:hover { color: var(--blue); }
+    .footer-col ul li a:hover { color: var(--gold); }
 
     .footer-bottom {
       border-top: 1px solid var(--border);
@@ -663,6 +1033,8 @@
       display: flex;
       justify-content: space-between;
       align-items: center;
+      flex-wrap: wrap;
+      gap: 12px;
     }
 
     .footer-bottom p {
@@ -670,6 +1042,36 @@
       font-size: 0.75rem;
       letter-spacing: 1px;
     }
+
+    /* ── SCROLL TO TOP ── */
+    .scroll-top {
+      position: fixed;
+      bottom: 32px; right: 32px;
+      width: 44px; height: 44px;
+      background: var(--blue);
+      color: #fff;
+      border: none;
+      border-radius: 50%;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1.1rem;
+      box-shadow: 0 4px 20px rgba(0,102,255,0.4);
+      z-index: 100;
+      opacity: 0;
+      transform: translateY(20px);
+      transition: all 0.3s;
+      pointer-events: none;
+    }
+
+    .scroll-top.visible {
+      opacity: 1;
+      transform: translateY(0);
+      pointer-events: all;
+    }
+
+    .scroll-top:hover { background: var(--blue-glow); }
 
     /* ── ANIMACIONES ── */
     @keyframes fadeUp {
@@ -679,49 +1081,56 @@
 
     @keyframes fadeLeft {
       from { opacity: 0; transform: translate(30px, -50%); }
-      to   { opacity: 0.85; transform: translate(0, -50%); }
+      to   { opacity: 0.9; transform: translate(0, -50%); }
+    }
+
+    /* Reveal al hacer scroll */
+    .reveal {
+      opacity: 0;
+      transform: translateY(24px);
+      transition: opacity 0.6s ease, transform 0.6s ease;
+    }
+
+    .reveal.visible {
+      opacity: 1;
+      transform: translateY(0);
     }
 
     /* ── RESPONSIVE ── */
-    @media (max-width: 900px) {
-      nav { padding: 16px 24px; }
-      .nav-links { display: none; }
-      .hero { padding: 100px 24px 60px; }
-      .hero-image { display: none; }
-      .section { padding: 60px 24px; }
-      .stats { flex-wrap: wrap; }
-      .stat { min-width: 50%; }
-      .promo-banner { margin: 0 24px 60px; padding: 36px 24px; flex-direction: column; gap: 24px; }
-      footer { padding: 40px 24px; }
-      .footer-grid { grid-template-columns: 1fr 1fr; }
-      
+    @media (max-width: 1024px) {
       .carousel-slide {
         flex: 0 0 calc(50% - 8px);
         min-width: 180px;
       }
     }
 
+    @media (max-width: 900px) {
+      nav { padding: 16px 24px; }
+      .nav-links { display: none; }
+      .hamburger { display: flex; }
+      .hero { padding: 100px 24px 60px; }
+      .hero-image { display: none; }
+      .section { padding: 60px 24px; }
+      .stats { flex-wrap: wrap; }
+      .stat { min-width: 50%; }
+      .promo-banner { margin: 0 24px 60px; padding: 40px 28px; flex-direction: column; align-items: flex-start; }
+      footer { padding: 40px 24px; }
+      .footer-grid { grid-template-columns: 1fr 1fr; }
+      .brands-section { padding: 36px 24px; }
+      .brands-row { gap: 28px; }
+    }
+
     @media (max-width: 600px) {
       .carousel-slide {
-        flex: 0 0 100%;
+        flex: 0 0 calc(100% - 0px);
         min-width: 100%;
       }
-      
-      .carousel-btn {
-        width: 36px;
-        height: 36px;
-        font-size: 1rem;
-      }
-      
-      .category-card {
-        padding: 32px 24px;
-        min-height: 240px;
-      }
-      
-      .cat-icon {
-        font-size: 2rem;
-        margin-bottom: 16px;
-      }
+
+      .carousel-btn { width: 36px; height: 36px; font-size: 1rem; }
+      .category-card { padding: 28px 20px; min-height: 200px; }
+      .footer-grid { grid-template-columns: 1fr; }
+      .promo-banner { padding: 32px 20px; }
+      .stat { min-width: 50%; padding: 24px 16px; }
     }
   </style>
 </head>
@@ -729,30 +1138,53 @@
 
   <!-- NAVBAR -->
   <nav>
-    <a href="{{ url_for('index') }}" class="logo" style="text-decoration: none;">SECURE<span>VISION</span></a>
-    
+    <a href="{{ url_for('index') }}" class="logo">SECURE<span>VISION</span></a>
+
     <ul class="nav-links">
-        <li><a href="{{ url_for('index') }}">Inicio</a></li>
-        <li><a href="{{ url_for('catalogo') }}">Catálogo</a></li>
-        <li><a href="{{ url_for('nosotros') }}">¿Quiénes somos?</a></li>
-        <li><a href="{{ url_for('contacto') }}">Contáctanos</a></li>
-        
+      <li><a href="{{ url_for('index') }}">Inicio</a></li>
+      <li><a href="{{ url_for('catalogo') }}">Catálogo</a></li>
+      <li><a href="{{ url_for('nosotros') }}">¿Quiénes somos?</a></li>
+      <li><a href="{{ url_for('contacto') }}">Contáctanos</a></li>
     </ul>
 
     <div class="nav-actions">
-        <div class="cart-icon" onclick="window.location.href='{{ url_for('carrito') }}'" style="cursor: pointer;">
-            🛒
-            <span class="cart-badge">{{ session.get('carrito', [])|length }}</span>
-        </div>
+      <!-- Carrito -->
+      <div class="cart-icon" onclick="window.location.href='{{ url_for('carrito') }}'">
+        🛒
+        <span class="cart-badge">{{ session.get('carrito', [])|length }}</span>
+      </div>
 
-        {% if session.get('usuario_nombre') %}
-            <span class="user-welcome">Hola, {{ session['usuario_nombre'] }}</span>
-            <a href="{{ url_for('logout') }}" class="btn-nav">Cerrar Sesión</a>
-        {% else %}
-            <a href="{{ url_for('login') }}" class="btn-nav">Iniciar Sesión</a>
-        {% endif %}
+      <!-- Toggle modo claro/oscuro -->
+      <button class="theme-toggle" id="themeToggle" title="Cambiar tema">🌙</button>
+
+      {% if session.get('usuario_nombre') %}
+        <span class="user-welcome">Hola, {{ session['usuario_nombre'] }}</span>
+        <a href="{{ url_for('logout') }}" class="btn-nav">Cerrar Sesión</a>
+      {% else %}
+        <a href="{{ url_for('login') }}" class="btn-nav">Iniciar Sesión</a>
+      {% endif %}
+
+      <!-- Hamburger -->
+      <button class="hamburger" id="hamburger" aria-label="Menú">
+        <span></span>
+        <span></span>
+        <span></span>
+      </button>
     </div>
-</nav>
+  </nav>
+
+  <!-- MENÚ MOBILE -->
+  <div class="mobile-menu" id="mobileMenu">
+    <a href="{{ url_for('index') }}">Inicio</a>
+    <a href="{{ url_for('catalogo') }}">Catálogo</a>
+    <a href="{{ url_for('nosotros') }}">¿Quiénes somos?</a>
+    <a href="{{ url_for('contacto') }}">Contáctanos</a>
+    {% if session.get('usuario_nombre') %}
+      <a href="{{ url_for('logout') }}">Cerrar Sesión</a>
+    {% else %}
+      <a href="{{ url_for('login') }}">Iniciar Sesión</a>
+    {% endif %}
+  </div>
 
   <!-- HERO -->
   <section class="hero">
@@ -762,36 +1194,53 @@
       <h1>Protege lo que<br/>más <span>importa</span></h1>
       <p>Equipos de seguridad profesionales para hogares y empresas. Cámaras CCTV, alarmas, biométricos y más — soluciones confiables para todo el mundo.</p>
       <div class="hero-btns">
-        <a href="catalogo.html" class="btn-primary">Ver Catálogo</a>
+        <a href="{{ url_for('catalogo') }}" class="btn-primary">Ver Catálogo</a>
         <a href="#categorias" class="btn-outline">Conocer Más</a>
       </div>
+      <div class="trust-badges">
+        <div class="trust-badge">
+          <div class="trust-badge-icon">✓</div>
+          Envío garantizado
+        </div>
+        <div class="trust-badge">
+          <div class="trust-badge-icon">🔒</div>
+          Pago seguro
+        </div>
+        <div class="trust-badge">
+          <div class="trust-badge-icon">↩</div>
+          Garantía 1 año
+        </div>
+      </div>
     </div>
+
     <div class="hero-image">
       <div class="hero-placeholder">
-        <img src="/static/img/Cámara.webp" alt="Cámara CCTV" width="200" height="350" class="hero-img">
-        <img src="/static/img/Hero_1.webp" alt="Cámara Bullet" width="200" height="350" class="hero-img hidden">
-        <img src="/static/img/Hero_2.webp" alt="NVR" width="200" height="350" class="hero-img hidden">
-        <img src="/static/img/Hero_3.webp" alt="Biométrico" width="200" height="350" class="hero-img hidden">
-        <img src="/static/img/Hero_4.webp" alt="Alarma" width="200" height="350" class="hero-img hidden">
-        <img src="/static/img/Hero_5.webp" alt="Biométrico" width="200" height="350" class="hero-img hidden">
-        <img src="/static/img/Hero_6.webp" alt="Biométrico" width="200" height="350" class="hero-img hidden">
-        <img src="/static/img/Hero_7.webp" alt="Biométrico" width="200" height="350" class="hero-img hidden">
+        <img src="/static/img/Cámara.webp" alt="Cámara CCTV" class="hero-img">
+        <img src="/static/img/Hero_1.webp" alt="Cámara Bullet" class="hero-img hidden">
+        <img src="/static/img/Hero_2.webp" alt="NVR" class="hero-img hidden">
+        <img src="/static/img/Hero_3.webp" alt="Biométrico" class="hero-img hidden">
+        <img src="/static/img/Hero_4.webp" alt="Alarma" class="hero-img hidden">
+        <img src="/static/img/Hero_5.webp" alt="Sistema" class="hero-img hidden">
+        <img src="/static/img/Hero_6.webp" alt="Control" class="hero-img hidden">
+        <img src="/static/img/Hero_7.webp" alt="Biométrico" class="hero-img hidden">
+        <div class="hero-img-overlay"></div>
+        <div class="hero-dots" id="heroDots"></div>
       </div>
     </div>
   </section>
 
   <!-- STATS -->
-  <div class="stats">
+  <div class="stats reveal">
     <div class="stat">
-      <div class="stat-number">400+</div>
+      <div class="stat-number" data-target="400">0</div>
       <div class="stat-label">Productos</div>
     </div>
     <div class="stat">
-      <div class="stat-number">10K+</div>
+      <div class="stat-number" data-target="10000">0</div>
       <div class="stat-label">Clientes</div>
     </div>
     <div class="stat">
-      <div class="stat-number">10+</div>
+      <div class="stat-number" data-target="10">0</div>
       <div class="stat-label">Países</div>
     </div>
     <div class="stat">
@@ -800,76 +1249,110 @@
     </div>
   </div>
 
+  <!-- MARCAS -->
+  <div class="brands-section reveal">
+    <p class="brands-label">Marcas que distribuimos</p>
+    <div class="brands-row">
+      <span class="brand-item">Hikvision</span>
+      <span class="brand-item">Dahua</span>
+      <span class="brand-item">Hanwha</span>
+      <span class="brand-item">Bosch</span>
+      <span class="brand-item">Axis</span>
+      <span class="brand-item">ZKTeco</span>
+    </div>
+  </div>
+
   <!-- CATEGORÍAS CARRUSEL -->
   <section class="section" id="categorias">
-    <div class="section-header">
-      <div class="section-tag">// Explora</div>
+    <div class="section-header reveal">
+      <div class="section-tag gold">// Explora</div>
       <h2 class="section-title">Nuestras <span>Categorías</span></h2>
     </div>
-    
+
     <div class="carousel-wrapper">
-      <button class="carousel-btn" id="prevBtn" onclick="moveCarousel(-1)">❮</button>
-      
+      <button class="carousel-btn" id="prevBtn" onclick="moveCarousel(-1)" aria-label="Anterior">❮</button>
+
       <div class="carousel-container">
         <div class="carousel-track" id="carouselTrack">
+
           <div class="carousel-slide">
-            <a href="catalogo.html" class="category-card">
-              <div class="cat-icon">
-                <img src="/static/img/Camara.webp" width="200" height="200">
+            <a href="{{ url_for('catalogo') }}" class="category-card">
+              <div class="cat-img-wrap">
+                <img src="/static/img/Camara.webp" alt="Cámaras CCTV" onerror="this.src='https://images.unsplash.com/photo-1557804506-669a67965ba0?w=400&q=80'">
               </div>
-             <!-- <div class="cat-name">Cámaras CCTV</div> -->
+              <div class="cat-name">Cámaras CCTV</div>
+              <div class="cat-count">120+ productos</div>
             </a>
-            <div class="cat-name">Cámaras CCTV</div>
           </div>
-          
+
           <div class="carousel-slide">
-            <a href="catalogo.html" class="category-card">
-              <div class="cat-icon">🖥️</div>
+            <a href="{{ url_for('catalogo') }}" class="category-card">
+              <div class="cat-img-wrap">
+                <!-- Monitor de seguridad CCTV profesional -->
+                <img src="/static/img/monitor_cctv.jpeg" 
+                     alt="Monitor CCTV" 
+                     onerror="this.src='https://images.pexels.com/photos/6771607/pexels-photo-6771607.jpeg?auto=compress&cs=tinysrgb&w=600'">
+              </div>
               <div class="cat-name">Monitores</div>
+              <div class="cat-count">45+ productos</div>
             </a>
-            <div class="cat-count">45+ productos</div>
           </div>
-          
+
           <div class="carousel-slide">
-            <a href="catalogo.html" class="category-card">
-              <div class="cat-icon">🔔</div>
+            <a href="{{ url_for('catalogo') }}" class="category-card">
+              <div class="cat-img-wrap">
+                <img src="/static/img/Alarma.webp" alt="Alarmas" onerror="this.src='https://images.unsplash.com/photo-1558618666-fcd25c85cd64?w=600&q=85'">
+              </div>
               <div class="cat-name">Alarmas</div>
+              <div class="cat-count">80+ productos</div>
             </a>
-            <div class="cat-count">80+ productos</div>
           </div>
-          
+
           <div class="carousel-slide">
-            <a href="catalogo.html" class="category-card">
-              <div class="cat-icon">⚡</div>
+            <a href="{{ url_for('catalogo') }}" class="category-card">
+              <div class="cat-img-wrap">
+                <!-- Cerca eléctrica de seguridad perimetral -->
+                <img src="/static/img/cerca_electrica.avif"
+                     alt="Cerca Eléctrica"
+                     onerror="this.src='https://images.pexels.com/photos/3805983/pexels-photo-3805983.jpeg?auto=compress&cs=tinysrgb&w=600'">
+              </div>
               <div class="cat-name">Cercas Eléctricas</div>
+              <div class="cat-count">30+ productos</div>
             </a>
-            <div class="cat-count">30+ productos</div>
           </div>
-          
+
           <div class="carousel-slide">
-            <a href="catalogo.html" class="category-card">
-              <div class="cat-icon">👆</div>
+            <a href="{{ url_for('catalogo') }}" class="category-card">
+              <div class="cat-img-wrap">
+                <img src="/static/img/biometrico.webp" alt="Biométricos" onerror="this.src='https://images.unsplash.com/photo-1563013544-824ae1b704d3?w=600&q=85'">
+              </div>
               <div class="cat-name">Biométricos</div>
+              <div class="cat-count">60+ productos</div>
             </a>
-            <div class="cat-count">60+ productos</div>
           </div>
-          
+
           <div class="carousel-slide">
-            <a href="catalogo.html" class="category-card">
-              <div class="cat-icon">🔌</div>
+            <a href="{{ url_for('catalogo') }}" class="category-card">
+              <div class="cat-img-wrap">
+                <!-- Fuente de poder para CCTV -->
+                <img src="/static/img/fuente_poder.jpg"
+                     alt="Fuente de Poder CCTV"
+                     onerror="this.src='https://images.pexels.com/photos/257736/pexels-photo-257736.jpeg?auto=compress&cs=tinysrgb&w=600'">
+              </div>
               <div class="cat-name">Fuentes de Poder</div>
+              <div class="cat-count">50+ productos</div>
             </a>
-            <div class="cat-count">50+ productos</div>
           </div>
+
         </div>
       </div>
-      
-      <button class="carousel-btn" id="nextBtn" onclick="moveCarousel(1)">❯</button>
+
+      <button class="carousel-btn" id="nextBtn" onclick="moveCarousel(1)" aria-label="Siguiente">❯</button>
     </div>
   </section>
 
   <!-- PRODUCTOS DESTACADOS -->
-  <section class="section" style="background: var(--bg2); padding-top: 80px; padding-bottom: 80px;">
+  <section class="section reveal" style="background: var(--section-alt);">
     <div class="section-header">
       <div class="section-tag">// Destacados</div>
       <h2 class="section-title">Productos <span>Populares</span></h2>
@@ -877,9 +1360,8 @@
     <div class="products-grid">
 
       <div class="product-card">
-         <div class="product-img">
-          <!--📹--> 
-        <img src="/static/img/Cámara_bullet.webp" width="250" height="185">
+        <div class="product-img">
+          <img src="/static/img/Cámara_bullet.webp" alt="Cámara 4K tipo bullet">
           <span class="product-badge">Nuevo</span>
         </div>
         <div class="product-info">
@@ -887,54 +1369,51 @@
           <div class="product-desc">Visión nocturna 40m, resistente al agua IP67, detección de movimiento.</div>
           <div class="product-footer">
             <div class="product-price">1,100.00 HNL</div>
-            <button class="btn-add">+ Carrito </button>
+            <button class="btn-add" onclick="agregarAlCarrito(1, 'Cámara 4K tipo bullet', 1100)">+ Carrito</button>
           </div>
         </div>
       </div>
 
       <div class="product-card">
         <div class="product-img">
-        <!-- 🖥️ -->        
-        <img src="/static/img/NVR.webp" width="250" height="185">
-          <span class="product-badge">Popular</span>
+          <img src="/static/img/NVR.webp" alt="NVR 16 Canales">
+          <span class="product-badge popular">Popular</span>
         </div>
         <div class="product-info">
           <div class="product-name">NVR 16 Canales</div>
           <div class="product-desc">Pantalla Full HD 21", grabación continua, acceso remoto desde app.</div>
           <div class="product-footer">
             <div class="product-price">4,000.00 HNL</div>
-            <button class="btn-add">+ Carrito </button>
+            <button class="btn-add" onclick="agregarAlCarrito(2, 'NVR 16 Canales', 4000)">+ Carrito</button>
           </div>
         </div>
       </div>
 
       <div class="product-card">
         <div class="product-img">
-        <!-- 👆 -->
-        <img src="/static/img/biometrico.webp" width="250" height="185">
-          <span class="product-badge">Oferta</span>
+          <img src="/static/img/biometrico.webp" alt="Control de acceso biométrico">
+          <span class="product-badge oferta">Oferta</span>
         </div>
         <div class="product-info">
           <div class="product-name">Control de acceso biométrico</div>
           <div class="product-desc">Reconocimiento facial + huella, hasta 3000 usuarios, WiFi integrado.</div>
           <div class="product-footer">
             <div class="product-price">1,700.00 HNL</div>
-            <button class="btn-add">+ Carrito </button>
+            <button class="btn-add" onclick="agregarAlCarrito(3, 'Control de acceso biométrico', 1700)">+ Carrito</button>
           </div>
         </div>
       </div>
 
       <div class="product-card">
         <div class="product-img">
-          <!-- 🔔 -->
-        <img src="/static/img/Alarma.webp" width="250" height="185">  
+          <img src="/static/img/Alarma.webp" alt="Kit Alarma Inalámbrica">
         </div>
         <div class="product-info">
           <div class="product-name">Kit Alarma Inalámbrica</div>
           <div class="product-desc">Central + 6 sensores + sirena, app móvil, batería de respaldo 24h.</div>
           <div class="product-footer">
             <div class="product-price">1,900.00 HNL</div>
-            <button class="btn-add">+ Carrito </button>
+            <button class="btn-add" onclick="agregarAlCarrito(4, 'Kit Alarma Inalámbrica', 1900)">+ Carrito</button>
           </div>
         </div>
       </div>
@@ -943,36 +1422,41 @@
   </section>
 
   <!-- BANNER PROMO -->
-  <div class="promo-banner">
+  <div class="promo-banner reveal">
     <div class="promo-content">
-      <h2>¿Necesitas asesoría personalizada?</h2>
+      <div class="promo-gold-line"></div>
+      <h2>¿Necesitas <span>asesoría</span> personalizada?</h2>
       <p>Nuestro equipo de expertos te ayuda a elegir la solución de seguridad ideal para tu hogar o negocio. Envíos internacionales disponibles.</p>
     </div>
-    <a href="registro.html" class="btn-primary" style="white-space:nowrap">Crear Cuenta</a>
+    <a href="{{ url_for('registro') }}" class="btn-primary" style="white-space:nowrap; position:relative; z-index:1;">Crear Cuenta</a>
   </div>
 
   <!-- FOOTER -->
   <footer>
     <div class="footer-grid">
       <div class="footer-brand">
-        <span class="logo">SECURE<span style="color:var(--blue)">VISION</span></span>
+        <span class="logo">SECURE<span style="color:var(--gold)">VISION</span></span>
         <p>Soluciones de seguridad electrónica profesional para hogares y empresas a nivel mundial.</p>
+        <div class="social-links">
+          <a href="#" class="social-link" title="Facebook">f</a>
+          <a href="#" class="social-link" title="Instagram">ig</a>
+          <a href="#" class="social-link" title="WhatsApp">wa</a>
+        </div>
       </div>
       <div class="footer-col">
         <h4>Productos</h4>
         <ul>
-          <li><a href="#">Cámaras CCTV</a></li>
-          <li><a href="#">Monitores</a></li>
-          <li><a href="#">Alarmas</a></li>
-          <li><a href="#">Biométricos</a></li>
-          <li><a href="#">Cercas Eléctricas</a></li>
+          <li><a href="{{ url_for('catalogo') }}">Cámaras CCTV</a></li>
+          <li><a href="{{ url_for('catalogo') }}">Monitores</a></li>
+          <li><a href="{{ url_for('catalogo') }}">Alarmas</a></li>
+          <li><a href="{{ url_for('catalogo') }}">Biométricos</a></li>
+          <li><a href="{{ url_for('catalogo') }}">Cercas Eléctricas</a></li>
         </ul>
       </div>
       <div class="footer-col">
         <h4>Empresa</h4>
         <ul>
           <li><a href="{{ url_for('nosotros') }}">¿Quiénes somos?</a></li>
-          <li><a href="#">Blog de noticias</a></li>
           <li><a href="{{ url_for('contacto') }}">Contáctanos</a></li>
           <li><a href="#">Preguntas frecuentes</a></li>
         </ul>
@@ -982,7 +1466,7 @@
         <ul>
           <li><a href="{{ url_for('terminos') }}">Términos generales</a></li>
           <li><a href="{{ url_for('privacidad') }}">Privacidad</a></li>
-          <li><a href="{{ url_for('devoluciones') }}">Devoluciones y cambios</a></li>
+          <li><a href="{{ url_for('devoluciones') }}">Devoluciones</a></li>
           <li><a href="{{ url_for('envios') }}">Envíos</a></li>
           <li><a href="{{ url_for('garantia') }}">Garantía</a></li>
         </ul>
@@ -990,54 +1474,80 @@
     </div>
     <div class="footer-bottom">
       <p>© 2026 SecureVision. Todos los derechos reservados.</p>
+      <p>Hecho con ❤️ para la seguridad de tu familia</p>
     </div>
   </footer>
 
+  <!-- Scroll to top -->
+  <button class="scroll-top" id="scrollTop" onclick="window.scrollTo({top:0,behavior:'smooth'})" aria-label="Ir arriba">↑</button>
+
   <script>
+    // El tema se maneja desde /static/js/theme.js (cargado en <head>)
+
+    // ── HAMBURGER MENU ──
+    const hamburger = document.getElementById('hamburger');
+    const mobileMenu = document.getElementById('mobileMenu');
+
+    hamburger.addEventListener('click', () => {
+      hamburger.classList.toggle('open');
+      mobileMenu.classList.toggle('open');
+    });
+
+    // Cerrar menú al hacer click en un enlace
+    mobileMenu.querySelectorAll('a').forEach(link => {
+      link.addEventListener('click', () => {
+        hamburger.classList.remove('open');
+        mobileMenu.classList.remove('open');
+      });
+    });
+
     // ── CARRUSEL DE CATEGORÍAS ──
     let currentIndex = 0;
     const track = document.getElementById('carouselTrack');
     const slides = document.querySelectorAll('.carousel-slide');
-    const slideWidth = slides[0].offsetWidth + 16; // 16px es el gap
-    let autoplayInterval;
+
+    function getSlidesVisible() {
+      return window.innerWidth <= 600 ? 1 : window.innerWidth <= 1024 ? 2 : 3;
+    }
+
+    function getSlideWidth() {
+      const gap = 16;
+      const visible = getSlidesVisible();
+      const containerWidth = document.querySelector('.carousel-container').offsetWidth;
+      return (containerWidth - gap * (visible - 1)) / visible + gap;
+    }
 
     function updateCarousel() {
-      const offset = -currentIndex * slideWidth;
+      const offset = -currentIndex * getSlideWidth();
       track.style.transform = `translateX(${offset}px)`;
       updateButtons();
     }
 
     function moveCarousel(direction) {
-      const maxIndex = slides.length - 2; // Mostrar 2 slides a la vez
+      const maxIndex = slides.length - getSlidesVisible();
       currentIndex += direction;
-
-      if (currentIndex < 0) {
-        currentIndex = maxIndex;
-      } else if (currentIndex > maxIndex) {
-        currentIndex = 0;
-      }
-
+      if (currentIndex < 0) currentIndex = maxIndex;
+      else if (currentIndex > maxIndex) currentIndex = 0;
       updateCarousel();
       resetAutoplay();
     }
 
     function updateButtons() {
-      const maxIndex = slides.length - 2;
+      const maxIndex = slides.length - getSlidesVisible();
       document.getElementById('prevBtn').disabled = currentIndex === 0;
       document.getElementById('nextBtn').disabled = currentIndex === maxIndex;
     }
 
+    let autoplayInterval;
+
     function autoplay() {
-      const maxIndex = slides.length - 2;
-      currentIndex++;
-      if (currentIndex > maxIndex) {
-        currentIndex = 0;
-      }
+      const maxIndex = slides.length - getSlidesVisible();
+      currentIndex = currentIndex >= maxIndex ? 0 : currentIndex + 1;
       updateCarousel();
     }
 
     function startAutoplay() {
-      autoplayInterval = setInterval(autoplay, 4000); // Cambiar cada 4 segundos
+      autoplayInterval = setInterval(autoplay, 4000);
     }
 
     function resetAutoplay() {
@@ -1045,49 +1555,139 @@
       startAutoplay();
     }
 
-    // Inicializar carrusel de categorías
     updateButtons();
     startAutoplay();
 
-    // Pausar autoplay al pasar el mouse
-    document.querySelector('.carousel-wrapper').addEventListener('mouseenter', () => {
-      clearInterval(autoplayInterval);
+    document.querySelector('.carousel-wrapper').addEventListener('mouseenter', () => clearInterval(autoplayInterval));
+    document.querySelector('.carousel-wrapper').addEventListener('mouseleave', startAutoplay);
+    window.addEventListener('resize', updateCarousel);
+
+    // ── CARRUSEL HERO ──
+    let heroIndex = 0;
+    const heroImgs = document.querySelectorAll('.hero-img');
+    const dotsContainer = document.getElementById('heroDots');
+    let heroInterval;
+
+    // Crear dots
+    heroImgs.forEach((_, i) => {
+      const dot = document.createElement('div');
+      dot.className = 'hero-dot' + (i === 0 ? ' active' : '');
+      dot.addEventListener('click', () => { heroIndex = i; updateHero(); resetHeroAutoplay(); });
+      dotsContainer.appendChild(dot);
     });
 
-    document.querySelector('.carousel-wrapper').addEventListener('mouseleave', () => {
-      startAutoplay();
-    });
-
-    // ── CARRUSEL DE IMÁGENES HERO ──
-    let heroImageIndex = 0;
-    const heroImages = document.querySelectorAll('.hero-img');
-    let heroAutoplayInterval;
-
-    function updateHeroImage() {
-      heroImages.forEach(img => img.classList.add('hidden'));
-      heroImages[heroImageIndex].classList.remove('hidden');
+    function updateHero() {
+      heroImgs.forEach(img => img.classList.add('hidden'));
+      heroImgs[heroIndex].classList.remove('hidden');
+      document.querySelectorAll('.hero-dot').forEach((d, i) => {
+        d.classList.toggle('active', i === heroIndex);
+      });
     }
 
-    function rotateHeroImage() {
-      heroImageIndex = (heroImageIndex + 1) % heroImages.length;
-      updateHeroImage();
+    function rotateHero() {
+      heroIndex = (heroIndex + 1) % heroImgs.length;
+      updateHero();
     }
 
-    function startHeroAutoplay() {
-      heroAutoplayInterval = setInterval(rotateHeroImage, 4000); // Cambiar cada 4 segundos
-    }
+    function startHeroAutoplay() { heroInterval = setInterval(rotateHero, 4000); }
+    function resetHeroAutoplay() { clearInterval(heroInterval); startHeroAutoplay(); }
 
-    // Inicializar carrusel de imágenes hero
-    updateHeroImage();
+    updateHero();
     startHeroAutoplay();
 
-    // Pausar autoplay hero al pasar el mouse
-    document.querySelector('.hero-image').addEventListener('mouseenter', () => {
-      clearInterval(heroAutoplayInterval);
-    });
+    // Pausar hero al hover (solo si el elemento existe en el DOM)
+    const heroImageEl = document.querySelector('.hero-image');
+    if (heroImageEl) {
+      heroImageEl.addEventListener('mouseenter', () => clearInterval(heroInterval));
+      heroImageEl.addEventListener('mouseleave', startHeroAutoplay);
+    }
 
-    document.querySelector('.hero-image').addEventListener('mouseleave', () => {
-      startHeroAutoplay();
+    // ── AGREGAR AL CARRITO ──
+    function agregarAlCarrito(id, nombre, precio) {
+      fetch('/agregar_carrito', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ id, nombre, precio, cantidad: 1 })
+      })
+      .then(res => res.json())
+      .then(data => {
+        const badge = document.querySelector('.cart-badge');
+        if (badge && data.total !== undefined) badge.textContent = data.total;
+        showToast(`✓ ${nombre} agregado al carrito`);
+      })
+      .catch(() => {
+        // Si no hay endpoint aún, solo mostrar notificación
+        showToast(`✓ ${nombre} agregado al carrito`);
+      });
+    }
+
+    // ── TOAST NOTIFICACIÓN ──
+    function showToast(msg) {
+      let toast = document.getElementById('toast');
+      if (!toast) {
+        toast = document.createElement('div');
+        toast.id = 'toast';
+        toast.style.cssText = `
+          position:fixed; bottom:80px; right:32px; z-index:999;
+          background:var(--blue); color:#fff; padding:12px 20px;
+          border-radius:6px; font-size:0.82rem; letter-spacing:0.5px;
+          box-shadow:0 4px 20px rgba(0,102,255,0.4);
+          transform:translateY(20px); opacity:0;
+          transition:all 0.3s;
+        `;
+        document.body.appendChild(toast);
+      }
+      toast.textContent = msg;
+      requestAnimationFrame(() => {
+        toast.style.opacity = '1';
+        toast.style.transform = 'translateY(0)';
+      });
+      setTimeout(() => {
+        toast.style.opacity = '0';
+        toast.style.transform = 'translateY(20px)';
+      }, 2800);
+    }
+
+    // ── ANIMACIÓN NÚMEROS STATS ──
+    function animateNumber(el, target) {
+      const duration = 1500;
+      const start = performance.now();
+      const suffix = target >= 1000 ? 'K+' : '+';
+      const displayTarget = target >= 1000 ? target / 1000 : target;
+
+      function update(time) {
+        const progress = Math.min((time - start) / duration, 1);
+        const eased = 1 - Math.pow(1 - progress, 3);
+        const current = Math.floor(eased * displayTarget);
+        el.textContent = current + suffix;
+        if (progress < 1) requestAnimationFrame(update);
+        else el.textContent = displayTarget + suffix;
+      }
+      requestAnimationFrame(update);
+    }
+
+    // ── SCROLL REVEAL ──
+    const revealObserver = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('visible');
+          // Animar números si es la sección stats
+          if (entry.target.classList.contains('stats')) {
+            entry.target.querySelectorAll('[data-target]').forEach(el => {
+              animateNumber(el, parseInt(el.dataset.target));
+            });
+          }
+          revealObserver.unobserve(entry.target);
+        }
+      });
+    }, { threshold: 0.15 });
+
+    document.querySelectorAll('.reveal').forEach(el => revealObserver.observe(el));
+
+    // ── SCROLL TO TOP ──
+    const scrollTopBtn = document.getElementById('scrollTop');
+    window.addEventListener('scroll', () => {
+      scrollTopBtn.classList.toggle('visible', window.scrollY > 400);
     });
   </script>
 
