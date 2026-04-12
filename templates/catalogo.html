@@ -162,23 +162,29 @@
 <body>
 
   <nav>
-    <a href="#" class="logo">SECURE<span>VISION</span></a>
+    <a href="{{ url_for('index') }}" class="logo">SECURE<span>VISION</span></a>
+    
     <ul class="nav-links">
-      <li><a href="#">Inicio</a></li>
-      <li><a href="#" class="active">Catálogo</a></li>
-      <li><a href="#">Nosotros</a></li>
-      <li><a href="#">Contacto</a></li>
+        <li><a href="{{ url_for('index') }}">Inicio</a></li>
+        <li><a href="{{ url_for('catalogo') }}">Catálogo</a></li>
+        <li><a href="{{ url_for('nosotros') }}">¿Quiénes somos?</a></li>
+        <li><a href="{{ url_for('contacto') }}">Contáctanos</a></li>
     </ul>
+
     <div class="nav-actions">
-      <div class="action-icon" id="favModeBtn" onclick="toggleFavMode()" title="Ver Favoritos">
-        ❤ <span class="badge badge-fav" id="favBadge">0</span>
-      </div>
-      <div class="action-icon" onclick="toggleCart(true)">
-        🛒 <span class="badge badge-cart" id="cartBadge">0</span>
-      </div>
-      <a href="#" class="btn-nav">Iniciar Sesión</a>
+        <div class="cart-icon" onclick="window.location.href='{{ url_for('carrito') }}'" style="cursor: pointer;">
+            🛒
+            <span class="cart-badge">{{ session.get('carrito', [])|length }}</span>
+        </div>
+
+        {% if session.get('usuario_nombre') %}
+            <span class="user-welcome">Hola, {{ session['usuario_nombre'] }}</span>
+            <a href="{{ url_for('logout') }}" class="btn-nav">Cerrar Sesión</a>
+        {% else %}
+            <a href="{{ url_for('login') }}" class="btn-nav">Iniciar Sesión</a>
+        {% endif %}
     </div>
-  </nav>
+</nav>
 
   <div class="cart-overlay" id="cartOverlay">
     <div class="cart-header">
