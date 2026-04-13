@@ -1,3 +1,4 @@
+
 from flask import Flask, render_template, request, redirect, url_for, session, flash
 import sqlite3
 import os
@@ -12,6 +13,11 @@ app.secret_key = 'securevision2026'
 
 BASE_DIR = os.path.dirname(os.path.abspath(__file__))
 DB_PATH  = os.path.join(BASE_DIR, 'database', 'tienda.db')
+
+# Ruta para blog de noticias
+@app.route('/blog')
+def blog():
+    return render_template('blog.html')
 
 
 # ── BASE DE DATOS ───────────────────────────────────────────

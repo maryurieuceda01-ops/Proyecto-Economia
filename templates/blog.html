@@ -1,0 +1,275 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Blog de Noticias | SecureVision</title>
+  <link href="https://fonts.googleapis.com/css2?family=Rajdhani:wght@400;600;700&family=Inter:wght@300;400;500&display=swap" rel="stylesheet"/>
+  <style>
+    :root {
+      --bg: #080810;
+      --bg2: #0d0d1a;
+      --blue: #0066ff;
+      --blue-glow: #0044cc;
+      --cyan: #00cfff;
+      --white: #f0f4ff;
+      --gray: #8890aa;
+      --card-bg: #10101e;
+      --border: rgba(0, 102, 255, 0.2);
+    }
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    body {
+      background: var(--bg);
+      color: var(--white);
+      font-family: 'Inter', sans-serif;
+      overflow-x: hidden;
+    }
+    nav {
+      position: fixed;
+      top: 0; left: 0; right: 0;
+      z-index: 100;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 18px 60px;
+      background: rgba(8, 8, 16, 0.85);
+      backdrop-filter: blur(12px);
+      border-bottom: 1px solid var(--border);
+    }
+    .logo {
+      font-family: 'Rajdhani', sans-serif;
+      font-size: 1.6rem;
+      font-weight: 700;
+      letter-spacing: 2px;
+      color: var(--white);
+      text-decoration: none;
+    }
+    .logo span { color: var(--blue); }
+    .nav-links {
+      display: flex;
+      gap: 36px;
+      list-style: none;
+    }
+    .nav-links a {
+      text-decoration: none;
+      color: var(--gray);
+      font-size: 0.85rem;
+      letter-spacing: 1px;
+      text-transform: uppercase;
+      transition: color 0.2s;
+    }
+    .nav-links a:hover, .nav-links a.active { color: var(--white); }
+    .nav-actions {
+      display: flex;
+      align-items: center;
+      gap: 16px;
+    }
+    .btn-nav {
+      background: var(--blue);
+      color: #fff;
+      border: none;
+      padding: 9px 22px;
+      border-radius: 4px;
+      font-size: 0.82rem;
+      letter-spacing: 1px;
+      text-transform: uppercase;
+      cursor: pointer;
+      transition: background 0.2s;
+      text-decoration: none;
+    }
+    .btn-nav:hover { background: var(--blue-glow); }
+    .container {
+      max-width: 900px;
+      margin: 0 auto;
+      background: var(--card-bg);
+      border-radius: 8px;
+      box-shadow: 0 0 40px rgba(0,102,255,0.04);
+      padding: 60px 40px 40px 40px;
+      margin-top: 160px;
+      margin-bottom: 60px;
+    }
+    h1 {
+      font-family: 'Rajdhani', sans-serif;
+      font-size: 2.3rem;
+      color: var(--blue);
+      margin-bottom: 32px;
+      margin-top: 0;
+      text-align: left;
+    }
+    .blog-section {
+      color: var(--gray);
+      font-size: 1.05rem;
+      line-height: 1.8;
+      margin-bottom: 32px;
+      text-align: justify;
+    }
+    .blog-section strong {
+      color: var(--cyan);
+      font-family: 'Rajdhani', sans-serif;
+      font-size: 1.08rem;
+      letter-spacing: 1px;
+    }
+    .blog-list {
+      margin: 12px 0 0 24px;
+      color: var(--gray);
+      font-size: 1.01rem;
+      line-height: 1.7;
+    }
+    .blog-list li {
+      margin-bottom: 8px;
+      text-align: justify;
+    }
+    a { color: var(--cyan); text-decoration: none; }
+    a:hover { text-decoration: underline; }
+    /* FOOTER */
+    footer {
+      background: var(--bg2);
+      border-top: 1px solid var(--border);
+      padding: 60px;
+    }
+    .footer-grid {
+      display: grid;
+      grid-template-columns: 2fr 1fr 1fr 1fr;
+      gap: 40px;
+      margin-bottom: 40px;
+    }
+    .footer-brand .logo {
+      font-size: 1.4rem;
+      margin-bottom: 16px;
+      display: block;
+    }
+    .footer-brand p {
+      color: var(--gray);
+      font-size: 0.82rem;
+      line-height: 1.8;
+      max-width: 260px;
+      text-align: left;
+      margin: 0;
+    }
+    .footer-col h4 {
+      font-family: 'Rajdhani', sans-serif;
+      font-size: 0.85rem;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+      color: var(--white);
+      margin-bottom: 18px;
+    }
+    .footer-col ul { list-style: none; }
+    .footer-col ul li { margin-bottom: 10px; }
+    .footer-col ul li a {
+      color: var(--gray);
+      text-decoration: none;
+      font-size: 0.82rem;
+      transition: color 0.2s;
+    }
+    .footer-col ul li a:hover { color: var(--blue); }
+    .footer-bottom {
+      border-top: 1px solid var(--border);
+      padding-top: 24px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+    .footer-bottom p {
+      color: var(--gray);
+      font-size: 0.75rem;
+      letter-spacing: 1px;
+    }
+    @media (max-width: 900px) {
+      nav { padding: 18px 24px; }
+      .nav-links { display: none; }
+      .container { padding: 40px 12px; margin-top: 120px; }
+      .footer-grid { grid-template-columns: 1fr 1fr; }
+      footer { padding: 40px 24px; }
+    }
+  </style>
+</head>
+<body>
+  <nav>
+    <a href="index.html" class="logo">SECURE<span>VISION</span></a>
+    <ul class="nav-links">
+        <li><a href="index.html">Inicio</a></li>
+        <li><a href="catalogo.html">Catálogo</a></li>
+        <li><a href="nosotros.html">¿Quiénes somos?</a></li>
+        <li><a href="contacto.html">Contáctanos</a></li>
+    </ul>
+    <div class="nav-actions"></div>
+  </nav>
+  <div class="container">
+    <h1>Blog de Noticias</h1>
+    <div class="blog-section">
+      <strong>1. ¿Cámaras con visión nocturna a color? La tecnología que está cambiando el juego</strong><br>
+      ¿Sabías que la mayoría de los incidentes ocurren durante la noche, pero las pruebas suelen ser en blanco y negro y borrosas? En SecureVision hemos introducido la tecnología Full-Color, que permite capturar imágenes con colores vibrantes incluso en condiciones de oscuridad total.<br><br>
+      A diferencia de las cámaras infrarrojas tradicionales, estos sensores de alta sensibilidad identifican colores de ropa, marcas de vehículos y rasgos faciales con precisión quirúrgica. Si buscas seguridad real, ya no tienes que conformarte con sombras. La oscuridad ya no es un escondite.
+    </div>
+    <div class="blog-section">
+      <strong>2. 5 Puntos ciegos en tu negocio que los delincuentes ya conocen</strong><br>
+      Instalar cámaras es fácil; instalarlas estratégicamente es un arte. Muchos dueños de negocios cometen el error de vigilar solo la caja registradora, olvidando áreas críticas:<br><br>
+      <ul class="blog-list">
+        <li>Zonas de carga y descarga: Donde el inventario es más vulnerable.</li>
+        <li>Pasillos entre estantes altos: Lugares ideales para el hurto hormiga.</li>
+        <li>Entradas traseras o de servicio: Generalmente menos iluminadas.</li>
+        <li>Estacionamientos: Donde ocurren daños a vehículos de clientes.</li>
+        <li>Áreas de basura: Utilizadas a veces para ocultar mercancía y extraerla después.</li>
+      </ul>
+      En SecureVision realizamos un análisis de vulnerabilidades para asegurar que cada rincón de tu inversión esté bajo control.
+    </div>
+    <div class="blog-section">
+      <strong>3. Biometría: Por qué las llaves físicas son cosa del pasado</strong><br>
+      ¿Alguna vez has tenido que cambiar todas las cerraduras porque un empleado perdió una llave o fue despedido? El control de acceso biométrico (huella dactilar o reconocimiento facial) elimina este dolor de cabeza y los costos operativos asociados.<br><br>
+      Con nuestros sistemas biométricos, no solo proteges la entrada; obtienes un registro exacto de quién entró y a qué hora. Es la solución ideal para oficinas, bodegas y áreas restringidas donde la seguridad y el control de personal deben ir de la mano. La llave eres tú.
+    </div>
+    <div class="blog-section">
+      <strong>4. El mito del mantenimiento: ¿Por qué fallan los sistemas de seguridad?</strong><br>
+      Un sistema de seguridad que no recibe mantenimiento es un sistema que podría fallar justo cuando más lo necesites. El polvo en los lentes, los insectos en los sensores de movimiento y el desgaste de las baterías en las alarmas son los enemigos silenciosos del CCTV.<br><br>
+      En SecureVision recomendamos un chequeo técnico cada 6 meses. Revisar las fuentes de poder, la integridad del cableado y el estado de salud del disco duro de tu grabador asegura que tu inversión dure años y, lo más importante, que esté encendida cuando ocurra un incidente.
+    </div>
+    <div class="blog-section">
+      <strong>5. Cerca eléctrica vs. Concertina: ¿Cuál es la mejor defensa perimetral?</strong><br>
+      La primera línea de defensa de tu propiedad es el perímetro. Mientras que la concertina actúa como una barrera física difícil de cruzar, la cerca eléctrica añade un factor psicológico y de alerta inmediata.<br><br>
+      Una cerca eléctrica moderna no solo da una descarga no letal pero persuasiva, sino que activa una sirena y te notifica al celular si el cable es cortado o manipulado. En SecureVision integramos ambos sistemas para crear una barrera impenetrable que detiene al intruso antes de que siquiera toque tu puerta.
+    </div>
+  </div>
+  <footer style="background: #0d0d1a; border-top: 1px solid #1a1a2a; padding: 60px;">
+    <div class="footer-grid" style="display: grid; grid-template-columns: 2fr 1fr 1fr 1fr; gap: 40px; margin-bottom: 40px;">
+      <div class="footer-brand">
+        <span class="logo" style="font-size: 1.4rem; color: #f0f4ff; font-family: 'Rajdhani', sans-serif; font-weight: 700; display: block; margin-bottom: 16px;">SECURE<span style="color:#0066ff">VISION</span></span>
+        <p style="color: #8890aa; font-size: 0.82rem; line-height: 1.8; max-width: 260px; margin: 0;">Soluciones de seguridad electrónica profesional para hogares y empresas a nivel mundial.</p>
+      </div>
+      <div class="footer-col">
+        <h4 style="font-family: 'Rajdhani', sans-serif; font-size: 0.85rem; letter-spacing: 2px; text-transform: uppercase; color: #f0f4ff; margin-bottom: 18px;">Productos</h4>
+        <ul style="list-style: none; padding: 0;">
+          <li><a href="#" style="color: #8890aa; text-decoration: none; font-size: 0.82rem;">Cámaras CCTV</a></li>
+          <li><a href="#" style="color: #8890aa; text-decoration: none; font-size: 0.82rem;">Monitores</a></li>
+          <li><a href="#" style="color: #8890aa; text-decoration: none; font-size: 0.82rem;">Alarmas</a></li>
+          <li><a href="#" style="color: #8890aa; text-decoration: none; font-size: 0.82rem;">Biométricos</a></li>
+          <li><a href="#" style="color: #8890aa; text-decoration: none; font-size: 0.82rem;">Cercas Eléctricas</a></li>
+        </ul>
+      </div>
+      <div class="footer-col">
+        <h4 style="font-family: 'Rajdhani', sans-serif; font-size: 0.85rem; letter-spacing: 2px; text-transform: uppercase; color: #f0f4ff; margin-bottom: 18px;">Empresa</h4>
+        <ul style="list-style: none; padding: 0;">
+          <li><a href="{{ url_for('nosotros') }}">¿Quiénes somos?</a></li>
+          <li><a href="{{ url_for('blog') }}">Blog de noticias</a></li>
+          <li><a href="{{ url_for('contacto') }}">Contáctanos</a></li>
+          <li><a href="#">Preguntas frecuentes</a></li>
+        </ul>
+      </div>
+      <div class="footer-col">
+        <h4 style="font-family: 'Rajdhani', sans-serif; font-size: 0.85rem; letter-spacing: 2px; text-transform: uppercase; color: #f0f4ff; margin-bottom: 18px;">Políticas</h4>
+        <ul style="list-style: none; padding: 0;">
+          <li><a href="#" style="color: #8890aa; text-decoration: none; font-size: 0.82rem;">Términos generales</a></li>
+          <li><a href="{{ url_for('privacidad') }}" style="color: #8890aa; text-decoration: none; font-size: 0.82rem;">Privacidad</a></li>
+          <li><a href="{{ url_for('devoluciones') }}">Devoluciones y cambios</a></li>
+          <li><a href="#">Envíos</a></li>
+          <li><a href="#">Garantía</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="footer-bottom" style="border-top: 1px solid #1a1a2a; padding-top: 24px; display: flex; justify-content: space-between; align-items: center;">
+      <p style="color: #8890aa; font-size: 0.75rem; letter-spacing: 1px;">© 2026 SecureVision. Todos los derechos reservados.</p>
+      <p style="color: #8890aa; font-size: 0.75rem; letter-spacing: 1px;">Hecho con 💙 para proteger el mundo.</p>
+    </div>
+  </footer>
+</body>
+</html>

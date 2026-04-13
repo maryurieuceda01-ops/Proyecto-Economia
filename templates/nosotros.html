@@ -1,6 +1,7 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
+    <!-- Animación hover zoom para misión y visión -->
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>¿Quiénes somos? | SecureVision</title>
@@ -27,7 +28,7 @@
       overflow-x: hidden;
     }
 
-    /* ── NAVBAR (Igual al Index) ── */
+    /* ── NAVBAR ── */
     nav {
       position: fixed;
       top: 0; left: 0; right: 0;
@@ -151,16 +152,22 @@
       text-align: justify;
     }
 
+
     .experience-box {
-          .experience-box p {
-            text-align: justify;
-          }
       background: var(--card-bg);
       border: 1px solid var(--border);
       padding: 40px;
       border-radius: 8px;
       position: relative;
       overflow: hidden;
+      transition: transform 0.32s cubic-bezier(.4,0,.2,1), box-shadow 0.32s cubic-bezier(.4,0,.2,1), border-color 0.3s, background 0.3s;
+    }
+    .experience-box:hover {
+      border-color: var(--cyan);
+      background: rgba(0,207,255,0.03);
+      transform: scale(1.09);
+      box-shadow: 0 20px 56px 0 #00cfff55, 0 8px 24px 0 #00336644;
+      z-index: 2;
     }
 
     .experience-box::after {
@@ -181,28 +188,32 @@
       margin-top: 50px;
     }
 
+
     .mv-card {
       background: rgba(255,255,255,0.02);
       border: 1px solid var(--border);
       padding: 40px;
       border-radius: 4px;
-      transition: 0.3s;
+      transition: transform 0.32s cubic-bezier(.4,0,.2,1), box-shadow 0.32s cubic-bezier(.4,0,.2,1), border-color 0.3s, background 0.3s;
+    }
+    .mv-card:hover {
+      border-color: var(--cyan);
+      background: rgba(0,207,255,0.03);
+      transform: scale(1.09);
+      box-shadow: 0 20px 56px 0 #00cfff55, 0 8px 24px 0 #00336644;
+      z-index: 2;
     }
 
-    .mv-card:hover { border-color: var(--cyan); background: rgba(0,207,255,0.03); }
-
     .mv-card h3 {
-          .mv-card p {
-            text-align: justify;
-          }
       font-family: 'Rajdhani', sans-serif;
       color: var(--cyan);
       letter-spacing: 2px;
       text-transform: uppercase;
       margin-bottom: 15px;
     }
+    }
 
-    /* ── STATS (Reutilizado del Index) ── */
+    /* ── STATS ── */
     .stats {
       display: flex;
       justify-content: center;
@@ -216,7 +227,7 @@
     .stat-number { font-family: 'Rajdhani', sans-serif; font-size: 2.5rem; font-weight: 700; color: var(--blue); }
     .stat-label { font-size: 0.75rem; color: var(--gray); letter-spacing: 2px; text-transform: uppercase; }
 
-    /* ── FOOTER (Igual al Index) ── */
+    /* ── FOOTER ── */
     footer { background: var(--bg2); border-top: 1px solid var(--border); padding: 60px; }
     .footer-grid { display: grid; grid-template-columns: 2fr 1fr 1fr 1fr; gap: 40px; margin-bottom: 40px; }
     .footer-col h4 { font-family: 'Rajdhani', sans-serif; font-size: 0.85rem; letter-spacing: 2px; text-transform: uppercase; color: var(--white); margin-bottom: 18px; }
@@ -242,9 +253,20 @@
       .section { padding: 60px 24px; }
       .about-hero h1 { font-size: 2.5rem; }
     }
+
+    .mv-card {
+      transition: transform 0.5s cubic-bezier(.4,0,.2,1), box-shadow 0.5s cubic-bezier(.4,0,.2,1);
+    }
+    .mv-card:hover {
+      transform: scale(1.07);
+      box-shadow: 0 8px 32px 0 #00336644;
+      z-index: 2;
+    }
   </style>
+
 </head>
 <body>
+
 
   <nav>
     <a href="{{ url_for('index') }}" class="logo">SECURE<span>VISION</span></a>
@@ -282,11 +304,44 @@
 
   <!-- NUESTRA HISTORIA -->
   <section class="section" style="padding-top:40px; padding-bottom:40px;">
-    <div style="max-width:900px; margin:0 auto;">
-      <h2 style="font-family:'Rajdhani',sans-serif; font-size:2rem; color:var(--blue); margin-bottom:18px;">Nuestra Historia: <span style="color:var(--white)">Pasión por tu Tranquilidad</span></h2>
-      <p style="color:var(--gray); font-size:1.08rem; line-height:1.8; margin-bottom:10px; text-align:justify;">En <strong>SecureVision</strong>, no solo vendemos cámaras; diseñamos la paz mental que tú y tu familia merecen. Nacimos con la misión de democratizar la seguridad de alta tecnología en Honduras, fusionando años de experiencia en ingeniería de sistemas con el compromiso de proteger lo que más importa.</p>
-      <p style="color:var(--gray); font-size:1.08rem; line-height:1.8; margin-bottom:10px; text-align:justify;">Desde nuestro primer sistema instalado, entendimos que cada hogar y cada negocio es un mundo diferente. Por eso, evolucionamos de ser un proveedor de equipos a convertirnos en el aliado estratégico de miles de clientes que buscan soluciones robustas, inteligentes y fáciles de usar. Hoy, somos referentes en el mercado de CCTV y seguridad electrónica, transformando la vigilancia compleja en una experiencia de control total al alcance de tu mano. Porque tu seguridad no es un lujo, es nuestra prioridad.</p>
+    <div style="max-width:1000px; margin:0 auto; display:grid; grid-template-columns:1.2fr 1fr; gap:48px; align-items:center;">
+      <div>
+        <h2 style="font-family:'Rajdhani',sans-serif; font-size:2rem; color:var(--blue); margin-bottom:18px;">Nuestra Historia: <span style="color:var(--white)">Pasión por tu Tranquilidad</span></h2>
+        <p style="color:var(--gray); font-size:1.08rem; line-height:1.8; margin-bottom:10px; text-align:justify;">En <strong>SecureVision</strong>, no solo vendemos cámaras; diseñamos la paz mental que tú y tu familia merecen. Nacimos con la misión de democratizar la seguridad de alta tecnología en Honduras, fusionando años de experiencia en ingeniería de sistemas con el compromiso de proteger lo que más importa.</p>
+        <p style="color:var(--gray); font-size:1.08rem; line-height:1.8; margin-bottom:10px; text-align:justify;">Desde nuestro primer sistema instalado, entendimos que cada hogar y cada negocio es un mundo diferente. Por eso, evolucionamos de ser un proveedor de equipos a convertirnos en el aliado estratégico de miles de clientes que buscan soluciones robustas, inteligentes y fáciles de usar. Hoy, somos referentes en el mercado de CCTV y seguridad electrónica, transformando la vigilancia compleja en una experiencia de control total al alcance de tu mano. Porque tu seguridad no es un lujo, es nuestra prioridad.</p>
+      </div>
+      <div>
+        <div id="gallery-slider" style="position:relative; width:100%; aspect-ratio:4/5; background:rgba(0,102,255,0.04); border-radius:12px; overflow:hidden; display:flex; align-items:center; justify-content:center; box-shadow:0 2px 24px 0 #001a40a0; border:1px solid var(--border); min-height:340px;">
+          <img id="gallery-image" src="/static/img/Imagen-camara.jpg" alt="Galería SecureVision" style="width:100%; height:100%; object-fit:cover; border-radius:12px; transition: opacity 1s cubic-bezier(.4,0,.2,1); font-family:'Inter',sans-serif; font-size:1.1rem; color:#8890aa; background:#10101e; display:block;" />
+          <div id="gallery-caption" style="position:absolute; bottom:0; left:0; right:0; background:rgba(8,8,16,0.7); color:#f0f4ff; font-family:'Rajdhani',sans-serif; font-size:1rem; padding:10px 18px; letter-spacing:1px; text-align:left;">Cámaras de seguridad en acción</div>
+        </div>
+      </div>
     </div>
+    <script>
+      // Galería de imágenes para la sección "Nuestra Historia"
+      const galleryImages = [
+         { src: '/static/img/Imagen-chica-compu.jpg', caption: 'Seguridad para todos' },
+        { src: '/static/img/Imagen-huella.jpg', caption: 'Tecnología de vigilancia moderna' },
+        { src: '/static/img/Imagen-camara3.jpg', caption: 'Protección en cada ángulo' },
+        { src: '/static/img/Imagen-cerca-electrica.jpg', caption: 'Perímetro seguro: cerca eléctrica' },
+        { src: '/static/img/Imagen-security.jpg', caption: 'Confianza y tranquilidad' },
+        { src: '/static/img/Imagen-camara.jpg', caption: 'Cámaras de seguridad en acción' }
+      
+      ];
+      let currentImg = 0;
+      const imgEl = document.getElementById('gallery-image');
+      const captionEl = document.getElementById('gallery-caption');
+      function showNextImage() {
+        imgEl.style.opacity = 0;
+        setTimeout(() => {
+          currentImg = (currentImg + 1) % galleryImages.length;
+          imgEl.src = galleryImages[currentImg].src;
+          captionEl.textContent = galleryImages[currentImg].caption;
+          imgEl.style.opacity = 1;
+        }, 800);
+      }
+      setInterval(showNextImage, 5000);
+    </script>
   </section>
 
   <section class="section">
@@ -301,6 +356,7 @@
         <div style="letter-spacing:3px; text-transform:uppercase; color:var(--white); margin-top:-10px; margin-bottom:20px;">Años de Experiencia</div>
         <p style="color:var(--gray); font-size:0.9rem;">Operando con los más altos estándares de calidad y certificaciones internacionales en el área de seguridad electrónica.</p>
       </div>
+      </div>
     </div>
 
     <div class="mv-grid">
@@ -312,6 +368,7 @@
         <h3>Nuestra Visión</h3>
         <p style="color:var(--gray); line-height:1.7;">Convertirnos para el 2030 en la principal red de seguridad inteligente a nivel global, liderando la transición hacia ciudades conectadas y entornos protegidos por inteligencia artificial.</p>
       </div>
+
     </div>
   </section>
 
@@ -357,7 +414,7 @@
     </div>
   </div>
 
- <!-- FOOTER ESTILO PRIVACIDAD -->
+ <!-- FOOTER -->
   <footer style="background: #0d0d1a; border-top: 1px solid #1a1a2a; padding: 60px;">
     <div class="footer-grid" style="display: grid; grid-template-columns: 2fr 1fr 1fr 1fr; gap: 40px; margin-bottom: 40px;">
       <div class="footer-brand">
@@ -401,4 +458,11 @@
   </footer>
 
 </body>
+<script>
+    statIndex = (statIndex + 1) % statCount;
+    carousel.style.transform = `translateX(-${statIndex * carousel.children[0].offsetWidth}px)`;
+  }
+  setInterval(moveCarousel, 3000);
+}
+</script>
 </html>
