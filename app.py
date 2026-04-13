@@ -145,24 +145,28 @@ def catalogo():
     offset = (page - 1) * per_page
 
     conn = get_db()
-    
+
     # Lógica de filtrado y conteo para la paginación
     if categoria == 'todos':
         total = conn.execute('SELECT COUNT(*) FROM productos').fetchone()[0]
         productos = conn.execute('SELECT * FROM productos LIMIT ? OFFSET ?', (per_page, offset)).fetchall()
     else:
         total = conn.execute('SELECT COUNT(*) FROM productos WHERE categoria = ?', (categoria,)).fetchone()[0]
-        productos = conn.execute('SELECT * FROM productos WHERE categoria = ? LIMIT ? OFFSET ?', 
+        productos = conn.execute('SELECT * FROM productos WHERE categoria = ? LIMIT ? OFFSET ?',
                                  (categoria, per_page, offset)).fetchall()
     conn.close()
 
     total_pages = (total + per_page - 1) // per_page
 
-    return render_template('catalogo.html', 
-                           productos=productos, 
-                           categoria=categoria, 
-                           current_page=page, 
-                           total_pages=total_pages)
+    # Asegurarse de que carrito siempre esté definido y serializable
+    carrito = session.get('carrito', [])
+
+    return render_template('catalogo.html',
+                           productos=productos,
+                           categoria=categoria,
+                           current_page=page,
+                           total_pages=total_pages,
+                           carrito=carrito)
 
 
 @app.route('/producto/<int:id>')
