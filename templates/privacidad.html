@@ -57,8 +57,21 @@
       letter-spacing: 1px;
       text-transform: uppercase;
       transition: color 0.2s;
+      position: relative;
     }
+
+    .nav-links a::after {
+      content: '';
+      position: absolute;
+      bottom: -4px; left: 0; right: 0;
+      height: 2px;
+      background: linear-gradient(90deg, #fff 0%, var(--blue) 100%);
+      transform: scaleX(0);
+      transition: transform 0.2s;
+    }
+
     .nav-links a:hover, .nav-links a.active { color: var(--white); }
+    .nav-links a:hover::after, .nav-links a.active::after { transform: scaleX(1); }
     .nav-actions {
       display: flex;
       align-items: center;
@@ -212,7 +225,7 @@
     <div class="nav-actions"></div>
   </nav>
   <div class="container">
-    <h1>Política de Privacidad y Protección de Datos</h1>
+    <h1>Política de Privacidad - SecureVision</h1>
     <div class="priv-section">
       <strong>1. Declaración Política</strong><br>
       1.1 SecureVision reconoce que la comercialización e instalación de sistemas de videovigilancia (CCTV), alarmas y controles biométricos desempeña un papel fundamental en la creación de entornos seguros para hogares y empresas. Entendemos que el manejo de estos dispositivos conlleva una responsabilidad respecto a la privacidad de las personas. Nos comprometemos a cumplir con la normativa vigente en materia de protección de datos, garantizando que el tratamiento de la información técnica y personal de nuestros clientes sea lícito, transparente y seguro.

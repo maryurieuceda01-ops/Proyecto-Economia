@@ -138,29 +138,31 @@ def index():
 
 @app.route('/catalogo')
 def catalogo():
+    # Parámetros de búsqueda y página
     categoria = request.args.get('categoria', 'todos')
     page = request.args.get('page', 1, type=int)
     per_page = 16
     offset = (page - 1) * per_page
 
     conn = get_db()
+    
+    # Lógica de filtrado y conteo para la paginación
     if categoria == 'todos':
         total = conn.execute('SELECT COUNT(*) FROM productos').fetchone()[0]
         productos = conn.execute('SELECT * FROM productos LIMIT ? OFFSET ?', (per_page, offset)).fetchall()
     else:
         total = conn.execute('SELECT COUNT(*) FROM productos WHERE categoria = ?', (categoria,)).fetchone()[0]
-        productos = conn.execute('SELECT * FROM productos WHERE categoria = ? LIMIT ? OFFSET ?',
+        productos = conn.execute('SELECT * FROM productos WHERE categoria = ? LIMIT ? OFFSET ?', 
                                  (categoria, per_page, offset)).fetchall()
     conn.close()
 
     total_pages = (total + per_page - 1) // per_page
 
-    return render_template('catalogo.html',
-                           productos=productos,
-                           categoria=categoria,
-                           current_page=page,
-                           total_pages=total_pages,
-                           carrito=session.get('carrito', []))  
+    return render_template('catalogo.html', 
+                           productos=productos, 
+                           categoria=categoria, 
+                           current_page=page, 
+                           total_pages=total_pages)
 
 
 @app.route('/producto/<int:id>')
@@ -279,50 +281,6 @@ def eliminar_carrito(producto_id):
     return redirect(url_for('carrito'))
 
 
-@app.route('/actualizar_carrito/<int:producto_id>/<accion>')
-def actualizar_carrito(producto_id, accion):
-    carrito = session.get('carrito', [])
-    for item in carrito:
-        if item['id'] == producto_id:
-            if accion == 'incrementar':
-                item['cantidad'] += 1
-            elif accion == 'decrementar':
-                item['cantidad'] -= 1
-                if item['cantidad'] < 1:
-                    carrito.remove(item)
-            break
-    session['carrito'] = carrito
-    return redirect(url_for('carrito'))
-
-
-@app.route('/vaciar_carrito')
-def vaciar_carrito():
-    session['carrito'] = []
-    flash('Carrito vaciado.', 'success')
-    return redirect(url_for('carrito'))
-
- 
-@app.route('/sync_carrito', methods=['POST'])
-def sync_carrito():
-    from flask import jsonify
-    data = request.get_json()
-    items = data.get('items', [])
-    
-    carrito = []
-    for item in items:
-        carrito.append({
-            'id':        item.get('id'),
-            'nombre':    item.get('name'),
-            'precio':    float(item.get('price', 0)),
-            'emoji':     item.get('icon', '📦'),
-            'cantidad':  int(item.get('qty', 1)),
-            'categoria': item.get('category', '')
-        })
-    
-    session['carrito'] = carrito
-    return jsonify({'ok': True})
- 
-
 @app.route('/checkout', methods=['GET', 'POST'])
 def checkout():
     carrito = session.get('carrito', [])
@@ -391,28 +349,32 @@ def factura():
 
 
 # ══════════════════════════════════════════════════════════════
-# ── RUTA POLÍTICAS ───────────────────────────────
+# ── RUTA POLÍTICA DE PRIVACIDAD ───────────────────────────────
 # ══════════════════════════════════════════════════════════════
-@app.route('/envios')
-def envios():
-    return render_template('envios.html')
 
 @app.route('/privacidad')
 def privacidad():
     return render_template('privacidad.html')
-
-@app.route('/terminos')
-def terminos():
-    return render_template('terminos.html')
 
 # Ruta para devoluciones
 @app.route('/devoluciones')
 def devoluciones():
     return render_template('devoluciones.html')
 
+# Ruta para garantía
 @app.route('/garantia')
 def garantia():
     return render_template('garantia.html')
+
+# Ruta para envíos
+@app.route('/envios')
+def envios():
+    return render_template('envios.html')
+
+# Ruta para términos generales
+@app.route('/terminos')
+def terminos():
+    return render_template('terminos.html')
 
 # ══════════════════════════════════════════════════════════════
 # ── RUTAS .HTML ───────────────────────────────────────────────
@@ -421,6 +383,11 @@ def garantia():
 @app.route('/index.html')
 def index_html():
     return redirect(url_for('index'))
+
+# Ruta para preguntas frecuentes (FAQ)
+@app.route('/FAQ')
+def FAQ():
+    return render_template('FAQ.html')
 
 @app.route('/catalogo.html')
 def catalogo_html():
