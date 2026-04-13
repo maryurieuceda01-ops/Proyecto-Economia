@@ -945,11 +945,12 @@
         <h4>Empresa</h4>
         <ul>
           <li><a href="{{ url_for('nosotros') }}">¿Quiénes somos?</a></li>
+          <li><a href="{{ url_for('blog') }}">Blog de noticias</a></li>
           <li><a href="{{ url_for('contacto') }}">Contáctanos</a></li>
-          <li><a href="#">Preguntas frecuentes</a></li>
-        </ul>
+          <li><a href="{{ url_for('FAQ') }}">Preguntas frecuentes</a></li>
+        </ul> 
       </div>
-      <div class="footer-col">
+      <div class="footer-col">  
         <h4>Políticas</h4>
         <ul>
           <li><a href="{{ url_for('terminos') }}">Términos generales</a></li>

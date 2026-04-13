@@ -18,17 +18,16 @@
       --card-bg: #10101e;
       --border: rgba(0, 102, 255, 0.2);
     }
-
+ 
     * { margin: 0; padding: 0; box-sizing: border-box; }
-
+ 
     body {
       background: var(--bg);
       color: var(--white);
       font-family: 'Inter', sans-serif;
       overflow-x: hidden;
     }
-
-    /* ── NAVBAR ── */
+ 
     nav {
       position: fixed;
       top: 0; left: 0; right: 0;
@@ -41,7 +40,7 @@
       backdrop-filter: blur(12px);
       border-bottom: 1px solid var(--border);
     }
-
+ 
     .logo {
       font-family: 'Rajdhani', sans-serif;
       font-size: 1.6rem;
@@ -50,15 +49,15 @@
       color: var(--white);
       text-decoration: none;
     }
-
+ 
     .logo span { color: var(--blue); }
-
+ 
     .nav-links {
       display: flex;
       gap: 36px;
       list-style: none;
     }
-
+ 
     .nav-links a {
       text-decoration: none;
       color: var(--gray);
@@ -66,16 +65,28 @@
       letter-spacing: 1px;
       text-transform: uppercase;
       transition: color 0.2s;
+      position: relative;
     }
-
+ 
+    .nav-links a::after {
+      content: '';
+      position: absolute;
+      bottom: -4px; left: 0; right: 0;
+      height: 2px;
+      background: linear-gradient(90deg, #fff 0%, var(--blue) 100%);
+      transform: scaleX(0);
+      transition: transform 0.2s;
+    }
+ 
     .nav-links a:hover, .nav-links a.active { color: var(--white); }
-
+    .nav-links a:hover::after, .nav-links a.active::after { transform: scaleX(1); }
+ 
     .nav-actions {
       display: flex;
       align-items: center;
       gap: 16px;
     }
-
+ 
     .btn-nav {
       background: var(--blue);
       color: #fff;
@@ -89,7 +100,7 @@
       transition: background 0.2s;
       text-decoration: none;
     }
-
+ 
     .cart-icon { position: relative; cursor: pointer; color: var(--gray); font-size: 1.2rem; }
     .cart-badge {
       position: absolute; top: -6px; right: -8px;
@@ -97,30 +108,29 @@
       width: 16px; height: 16px; border-radius: 50%;
       display: flex; align-items: center; justify-content: center;
     }
-
-    /* ── HERO NOSOTROS ── */
+ 
     .about-hero {
       padding: 180px 60px 100px;
       background: linear-gradient(to bottom, var(--bg), var(--bg2));
       position: relative;
       text-align: center;
     }
-
+ 
     .hero-grid {
       position: absolute; inset: 0;
       background-image: linear-gradient(rgba(0,102,255,0.04) 1px, transparent 1px), linear-gradient(90deg, rgba(0,102,255,0.04) 1px, transparent 1px);
       background-size: 50px 50px;
       pointer-events: none;
     }
-
+ 
     .about-hero h1 {
       font-family: 'Rajdhani', sans-serif;
       font-size: 3.5rem;
       margin-bottom: 20px;
     }
-
+ 
     .about-hero h1 span { color: var(--blue); }
-
+ 
     .about-hero p {
       max-width: 700px;
       margin: 0 auto;
@@ -129,8 +139,7 @@
       font-size: 1.1rem;
       text-align: justify;
     }
-
-    /* ── SECCIÓN HISTORIA / RESUMEN ── */
+ 
     .section { padding: 90px 60px; }
     .content-grid {
       display: grid;
@@ -138,21 +147,20 @@
       gap: 60px;
       align-items: center;
     }
-
+ 
     .text-content h2 {
       font-family: 'Rajdhani', sans-serif;
       font-size: 2.2rem;
       margin-bottom: 24px;
     }
-
+ 
     .text-content p {
       color: var(--gray);
       line-height: 1.8;
       margin-bottom: 20px;
       text-align: justify;
     }
-
-
+ 
     .experience-box {
       background: var(--card-bg);
       border: 1px solid var(--border);
@@ -169,7 +177,7 @@
       box-shadow: 0 20px 56px 0 #00cfff55, 0 8px 24px 0 #00336644;
       z-index: 2;
     }
-
+ 
     .experience-box::after {
       content: 'EST. 2011';
       position: absolute;
@@ -179,16 +187,14 @@
       font-weight: 700;
       opacity: 0.03;
     }
-
-    /* ── MISION Y VISION ── */
+ 
     .mv-grid {
       display: grid;
       grid-template-columns: 1fr 1fr;
       gap: 30px;
       margin-top: 50px;
     }
-
-
+ 
     .mv-card {
       background: rgba(255,255,255,0.02);
       border: 1px solid var(--border);
@@ -203,7 +209,7 @@
       box-shadow: 0 20px 56px 0 #00cfff55, 0 8px 24px 0 #00336644;
       z-index: 2;
     }
-
+ 
     .mv-card h3 {
       font-family: 'Rajdhani', sans-serif;
       color: var(--cyan);
@@ -211,79 +217,150 @@
       text-transform: uppercase;
       margin-bottom: 15px;
     }
-    }
-
-    /* ── STATS ── */
-    .stats {
-      display: flex;
-      justify-content: center;
+ 
+    /* ── TESTIMONIALS ── */
+    .testimonials-section {
       background: var(--bg2);
       border-top: 1px solid var(--border);
       border-bottom: 1px solid var(--border);
+      padding: 80px 60px;
     }
-
-    .stat { flex: 1; padding: 40px; text-align: center; border-right: 1px solid var(--border); }
-    .stat:last-child { border-right: none; }
-    .stat-number { font-family: 'Rajdhani', sans-serif; font-size: 2.5rem; font-weight: 700; color: var(--blue); }
-    .stat-label { font-size: 0.75rem; color: var(--gray); letter-spacing: 2px; text-transform: uppercase; }
-
-    /* ── FOOTER ── */
+    .testimonials-header {
+      text-align: center;
+      margin-bottom: 56px;
+    }
+    .testimonials-header .label {
+      color: var(--blue);
+      letter-spacing: 4px;
+      text-transform: uppercase;
+      font-size: 0.75rem;
+      margin-bottom: 14px;
+    }
+    .testimonials-header h2 {
+      font-family: 'Rajdhani', sans-serif;
+      font-size: 2.2rem;
+      color: var(--white);
+    }
+    .testimonials-header h2 span { color: var(--cyan); }
+    .testimonials-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 28px;
+      max-width: 1100px;
+      margin: 0 auto;
+    }
+    .testimonial-card {
+      background: var(--card-bg);
+      border: 1px solid var(--border);
+      border-radius: 10px;
+      overflow: hidden;
+      transition: transform 0.32s cubic-bezier(.4,0,.2,1), box-shadow 0.32s, border-color 0.3s;
+    }
+    .testimonial-card:hover {
+      transform: translateY(-8px);
+      box-shadow: 0 20px 50px rgba(0, 102, 255, 0.18);
+      border-color: var(--blue);
+    }
+    /* Browser chrome bar like image 2 */
+    .testimonial-chrome {
+      background: var(--blue);
+      padding: 10px 16px;
+      display: flex;
+      align-items: center;
+      gap: 6px;
+    }
+    .testimonial-chrome .dot {
+      width: 10px; height: 10px;
+      border-radius: 50%;
+      background: rgba(255,255,255,0.4);
+    }
+    .testimonial-chrome .dot:first-child { background: rgba(255,255,255,0.7); }
+    .testimonial-body {
+      padding: 28px 28px 20px;
+    }
+    .testimonial-stars {
+      color: #ffd700;
+      font-size: 0.9rem;
+      letter-spacing: 2px;
+      margin-bottom: 14px;
+    }
+    .testimonial-text {
+      color: var(--gray);
+      font-size: 0.95rem;
+      line-height: 1.75;
+      font-style: italic;
+      margin-bottom: 24px;
+      min-height: 120px;
+    }
+    .testimonial-text::before { content: '\201C'; color: var(--blue); font-size: 1.3rem; line-height: 0; vertical-align: -4px; margin-right: 2px; }
+    .testimonial-text::after  { content: '\201D'; color: var(--blue); font-size: 1.3rem; line-height: 0; vertical-align: -4px; margin-left: 2px; }
+    .testimonial-author {
+      border-top: 1px solid var(--border);
+      padding-top: 18px;
+      display: flex;
+      align-items: center;
+      gap: 14px;
+    }
+    .testimonial-avatar {
+      width: 44px; height: 44px;
+      border-radius: 50%;
+      background: linear-gradient(135deg, var(--blue), var(--cyan));
+      display: flex; align-items: center; justify-content: center;
+      font-family: 'Rajdhani', sans-serif;
+      font-size: 1rem;
+      font-weight: 700;
+      color: #fff;
+      flex-shrink: 0;
+      border: 2px solid rgba(0,207,255,0.3);
+    }
+    .testimonial-author-name {
+      font-family: 'Rajdhani', sans-serif;
+      font-size: 1rem;
+      color: var(--white);
+      letter-spacing: 0.5px;
+    }
+    .testimonial-author-role {
+      font-size: 0.78rem;
+      color: var(--cyan);
+      opacity: 0.8;
+    }
+ 
     footer { background: var(--bg2); border-top: 1px solid var(--border); padding: 60px; }
     .footer-grid { display: grid; grid-template-columns: 2fr 1fr 1fr 1fr; gap: 40px; margin-bottom: 40px; }
     .footer-col h4 { font-family: 'Rajdhani', sans-serif; font-size: 0.85rem; letter-spacing: 2px; text-transform: uppercase; color: var(--white); margin-bottom: 18px; }
     .footer-col ul { list-style: none; }
     .footer-col ul li { margin-bottom: 10px; }
     .footer-col ul li a { color: var(--gray); text-decoration: none; font-size: 0.82rem; transition: color 0.2s; }
-      .footer-brand p {
-        color: var(--gray);
-        font-size: 0.82rem;
-        line-height: 1.8;
-        max-width: 260px;
-        text-align: left;
-        margin: 0;
-      }
+    .footer-brand p { color: var(--gray); font-size: 0.82rem; line-height: 1.8; max-width: 260px; text-align: left; margin: 0; }
     .footer-col ul li a:hover { color: var(--blue); }
     .footer-bottom { border-top: 1px solid var(--border); padding-top: 24px; display: flex; justify-content: space-between; align-items: center; }
     .footer-bottom p { color: var(--gray); font-size: 0.75rem; }
-
+ 
     @media (max-width: 900px) {
-      .content-grid, .mv-grid, .footer-grid { grid-template-columns: 1fr; }
+      .content-grid, .mv-grid, .footer-grid, .testimonials-grid { grid-template-columns: 1fr; }
       nav { padding: 18px 24px; }
       .nav-links { display: none; }
       .section { padding: 60px 24px; }
       .about-hero h1 { font-size: 2.5rem; }
-    }
-
-    .mv-card {
-      transition: transform 0.5s cubic-bezier(.4,0,.2,1), box-shadow 0.5s cubic-bezier(.4,0,.2,1);
-    }
-    .mv-card:hover {
-      transform: scale(1.07);
-      box-shadow: 0 8px 32px 0 #00336644;
-      z-index: 2;
+      .testimonials-section { padding: 60px 24px; }
     }
   </style>
-
 </head>
 <body>
-
-
+ 
   <nav>
     <a href="{{ url_for('index') }}" class="logo">SECURE<span>VISION</span></a>
-    
     <ul class="nav-links">
         <li><a href="{{ url_for('index') }}">Inicio</a></li>
         <li><a href="{{ url_for('catalogo') }}">Catálogo</a></li>
         <li><a href="{{ url_for('nosotros') }}">¿Quiénes somos?</a></li>
         <li><a href="{{ url_for('contacto') }}">Contáctanos</a></li>
     </ul>
-
     <div class="nav-actions">
         <div class="cart-icon" onclick="window.location.href='{{ url_for('carrito') }}'" style="cursor: pointer;">
             🛒
             <span class="cart-badge">{{ session.get('carrito', [])|length }}</span>
         </div>
-
         {% if session.get('usuario_nombre') %}
             <span class="user-welcome">Hola, {{ session['usuario_nombre'] }}</span>
             <a href="{{ url_for('logout') }}" class="btn-nav">Cerrar Sesión</a>
@@ -291,8 +368,8 @@
             <a href="{{ url_for('login') }}" class="btn-nav">Iniciar Sesión</a>
         {% endif %}
     </div>
-</nav>
-
+  </nav>
+ 
   <section class="about-hero">
     <div class="hero-grid"></div>
     <div style="position:relative; z-index:2">
@@ -301,7 +378,7 @@
       <p>Desde nuestra fundación, hemos redefinido los estándares de protección, fusionando tecnología de vanguardia con soluciones accesibles para cada hogar y empresa.</p>
     </div>
   </section>
-
+ 
   <!-- NUESTRA HISTORIA -->
   <section class="section" style="padding-top:40px; padding-bottom:40px;">
     <div style="max-width:1000px; margin:0 auto; display:grid; grid-template-columns:1.2fr 1fr; gap:48px; align-items:center;">
@@ -318,15 +395,13 @@
       </div>
     </div>
     <script>
-      // Galería de imágenes para la sección "Nuestra Historia"
       const galleryImages = [
-         { src: '/static/img/Imagen-chica-compu.jpg', caption: 'Seguridad para todos' },
+        { src: '/static/img/Imagen-chica-compu.jpg', caption: 'Seguridad para todos' },
         { src: '/static/img/Imagen-huella.jpg', caption: 'Tecnología de vigilancia moderna' },
         { src: '/static/img/Imagen-camara3.jpg', caption: 'Protección en cada ángulo' },
         { src: '/static/img/Imagen-cerca-electrica.jpg', caption: 'Perímetro seguro: cerca eléctrica' },
         { src: '/static/img/Imagen-security.jpg', caption: 'Confianza y tranquilidad' },
         { src: '/static/img/Imagen-camara.jpg', caption: 'Cámaras de seguridad en acción' }
-      
       ];
       let currentImg = 0;
       const imgEl = document.getElementById('gallery-image');
@@ -343,7 +418,7 @@
       setInterval(showNextImage, 5000);
     </script>
   </section>
-
+ 
   <section class="section">
     <div class="content-grid">
       <div class="text-content">
@@ -356,9 +431,8 @@
         <div style="letter-spacing:3px; text-transform:uppercase; color:var(--white); margin-top:-10px; margin-bottom:20px;">Años de Experiencia</div>
         <p style="color:var(--gray); font-size:0.9rem;">Operando con los más altos estándares de calidad y certificaciones internacionales en el área de seguridad electrónica.</p>
       </div>
-      </div>
     </div>
-
+ 
     <div class="mv-grid">
       <div class="mv-card">
         <h3>Nuestra Misión</h3>
@@ -368,53 +442,289 @@
         <h3>Nuestra Visión</h3>
         <p style="color:var(--gray); line-height:1.7;">Convertirnos para el 2030 en la principal red de seguridad inteligente a nivel global, liderando la transición hacia ciudades conectadas y entornos protegidos por inteligencia artificial.</p>
       </div>
-
     </div>
   </section>
-
-    <!-- NUESTROS VALORES -->
-    <section class="section" style="padding-top:40px; padding-bottom:40px;">
-      <div style="max-width:900px; margin:0 auto;">
-        <h2 style="font-family:'Rajdhani',sans-serif; font-size:2rem; color:var(--blue); margin-bottom:18px;">Nuestros Valores: <span style="color:var(--white)">El ADN de nuestra protección</span></h2>
-        <div style="display:grid; grid-template-columns:1fr 1fr; gap:36px;">
-          <div>
-            <h4 style="color:var(--cyan); font-family:'Rajdhani',sans-serif; font-size:1.1rem; margin-bottom:8px; letter-spacing:1px;">Pasión por el Cliente</h4>
-            <p style="color:var(--gray); font-size:1.01rem; line-height:1.7; margin-bottom:18px; text-align:justify;">Tu tranquilidad es nuestra razón de ser. Nos obsesionamos con entender tus necesidades para ofrecerte la solución exacta, ni más, ni menos.</p>
-            <h4 style="color:var(--cyan); font-family:'Rajdhani',sans-serif; font-size:1.1rem; margin-bottom:8px; letter-spacing:1px;">Innovación Sin Límites</h4>
-            <p style="color:var(--gray); font-size:1.01rem; line-height:1.7; margin-bottom:18px; text-align:justify;">El mundo cambia y nosotros vamos un paso adelante. Traemos la tecnología de punta antes que nadie para que siempre estés protegido con lo mejor.</p>
-            <h4 style="color:var(--cyan); font-family:'Rajdhani',sans-serif; font-size:1.1rem; margin-bottom:8px; letter-spacing:1px;">Confianza Blindada</h4>
-            <p style="color:var(--gray); font-size:1.01rem; line-height:1.7; margin-bottom:18px; text-align:justify;">La honestidad es nuestra mejor herramienta. Hablamos claro, cumplimos promesas y garantizamos que cada equipo instalado sea una inversión segura.</p>
-          </div>
-          <div>
-            <h4 style="color:var(--cyan); font-family:'Rajdhani',sans-serif; font-size:1.1rem; margin-bottom:8px; letter-spacing:1px;">Calidad de Excelencia</h4>
-            <p style="color:var(--gray); font-size:1.01rem; line-height:1.7; margin-bottom:18px; text-align:justify;">No instalamos nada que no pondríamos en nuestras propias casas. Seleccionamos cada sensor, cámara y alarma bajo los estándares más estrictos de durabilidad.</p>
-            <h4 style="color:var(--cyan); font-family:'Rajdhani',sans-serif; font-size:1.1rem; margin-bottom:8px; letter-spacing:1px;">Agilidad y Respuesta</h4>
-            <p style="color:var(--gray); font-size:1.01rem; line-height:1.7; margin-bottom:18px; text-align:justify;">Sabemos que en seguridad, cada segundo cuenta. Por eso, nos distinguimos por un servicio técnico rápido, eficiente y siempre listo para apoyarte.</p>
+ 
+  <!-- NUESTROS VALORES -->
+  <section class="section" style="padding-top:40px; padding-bottom:60px;">
+    <div style="max-width:1000px; margin:0 auto;">
+      <h2 style="font-family:'Rajdhani',sans-serif; font-size:2rem; color:var(--blue); margin-bottom:10px;">Nuestros Valores: <span style="color:var(--white)">El ADN de nuestra protección</span></h2>
+      <p style="color:var(--gray); font-size:0.88rem; margin-bottom:36px; letter-spacing:0.5px;">Haz clic en cada valor para conocerlo a fondo.</p>
+ 
+      <!-- Tab buttons -->
+      <div id="valores-tabs" style="display:flex; flex-wrap:nowrap; gap:8px; margin-bottom:32px;">
+        <button class="val-tab val-tab-active" data-idx="0" onclick="selectValor(0)">❤️ Pasión por el Cliente</button>
+        <button class="val-tab" data-idx="1" onclick="selectValor(1)">🚀 Innovación Sin Límites</button>
+        <button class="val-tab" data-idx="2" onclick="selectValor(2)">🔒 Confianza Blindada</button>
+        <button class="val-tab" data-idx="3" onclick="selectValor(3)">⭐ Calidad de Excelencia</button>
+        <button class="val-tab" data-idx="4" onclick="selectValor(4)">⚡ Agilidad y Respuesta</button>
+      </div>
+ 
+      <!-- Content panel -->
+      <div id="valor-panel" style="
+        background: var(--card-bg);
+        border: 1px solid var(--border);
+        border-radius: 10px;
+        padding: 40px 44px;
+        display: flex;
+        gap: 40px;
+        align-items: center;
+        min-height: 200px;
+        transition: border-color 0.3s;
+        position: relative;
+        overflow: hidden;
+      ">
+        <!-- big ghost icon bg -->
+        <div id="valor-bg-icon" style="position:absolute;right:32px;top:50%;transform:translateY(-50%);font-size:9rem;opacity:0.05;pointer-events:none;transition:opacity 0.3s;user-select:none;"></div>
+ 
+        <!-- icon circle -->
+        <div id="valor-icon" style="
+          width:80px; height:80px; flex-shrink:0;
+          border-radius:50%;
+          background: rgba(0,102,255,0.12);
+          border: 2px solid rgba(0,102,255,0.35);
+          display:flex; align-items:center; justify-content:center;
+          font-size:2.2rem;
+          transition: background 0.3s, border-color 0.3s, transform 0.4s;
+        "></div>
+ 
+        <div style="flex:1; position:relative; z-index:1;">
+          <h3 id="valor-title" style="font-family:'Rajdhani',sans-serif; color:var(--cyan); font-size:1.5rem; letter-spacing:1px; margin-bottom:14px; text-transform:uppercase;"></h3>
+          <p id="valor-desc" style="color:var(--gray); font-size:1.01rem; line-height:1.8; text-align:justify;"></p>
+        </div>
+      </div>
+ 
+      <!-- Progress dots -->
+      <div style="display:flex; gap:8px; justify-content:center; margin-top:22px;" id="valor-dots"></div>
+    </div>
+  </section>
+ 
+  <style>
+    .val-tab {
+      background: var(--card-bg);
+      border: 1px solid var(--border);
+      color: var(--gray);
+      padding: 7px 13px;
+      border-radius: 4px;
+      font-family: 'Rajdhani', sans-serif;
+      font-size: 0.82rem;
+      letter-spacing: 0.5px;
+      cursor: pointer;
+      white-space: nowrap;
+      flex-shrink: 0;
+      transition: background 0.2s, border-color 0.25s, color 0.2s, transform 0.15s, box-shadow 0.2s;
+    }
+    .val-tab:hover {
+      border-color: var(--blue);
+      color: var(--white);
+      transform: translateY(-2px);
+      box-shadow: 0 4px 16px rgba(0,102,255,0.2);
+    }
+    .val-tab-active {
+      background: var(--blue) !important;
+      border-color: var(--blue) !important;
+      color: #fff !important;
+      box-shadow: 0 4px 18px rgba(0,102,255,0.35) !important;
+      transform: translateY(-2px) !important;
+    }
+    .val-dot {
+      width: 10px; height: 10px;
+      border-radius: 50%;
+      background: var(--border);
+      border: 1px solid rgba(0,102,255,0.3);
+      cursor: pointer;
+      transition: background 0.2s, transform 0.2s;
+    }
+    .val-dot-active {
+      background: var(--blue) !important;
+      transform: scale(1.3);
+    }
+    @keyframes valorFadeIn {
+      from { opacity: 0; transform: translateX(18px); }
+      to   { opacity: 1; transform: translateX(0); }
+    }
+    .valor-animate {
+      animation: valorFadeIn 0.35s ease both;
+    }
+  </style>
+ 
+  <script>
+    const valores = [
+      {
+        icon: '❤️',
+        title: 'Pasión por el Cliente',
+        desc: 'Tu tranquilidad es nuestra razón de ser. Nos obsesionamos con entender tus necesidades para ofrecerte la solución exacta, ni más, ni menos. Cada instalación es una promesa: tu familia y tu negocio estarán protegidos con lo mejor que la tecnología puede ofrecer.',
+        color: 'rgba(255,60,80,0.15)',
+        borderColor: 'rgba(255,60,80,0.5)'
+      },
+      {
+        icon: '🚀',
+        title: 'Innovación Sin Límites',
+        desc: 'El mundo cambia y nosotros vamos un paso adelante. Traemos la tecnología de punta antes que nadie para que siempre estés protegido con lo mejor. Inteligencia artificial, visión nocturna a color y analítica de video son solo el comienzo.',
+        color: 'rgba(0,102,255,0.15)',
+        borderColor: 'rgba(0,102,255,0.5)'
+      },
+      {
+        icon: '🔒',
+        title: 'Confianza Blindada',
+        desc: 'La honestidad es nuestra mejor herramienta. Hablamos claro, cumplimos promesas y garantizamos que cada equipo instalado sea una inversión segura. No hay letra pequeña ni sorpresas: contigo desde el primer día hasta el último.',
+        color: 'rgba(0,207,255,0.1)',
+        borderColor: 'rgba(0,207,255,0.4)'
+      },
+      {
+        icon: '⭐',
+        title: 'Calidad de Excelencia',
+        desc: 'No instalamos nada que no pondríamos en nuestras propias casas. Seleccionamos cada sensor, cámara y alarma bajo los estándares más estrictos de durabilidad y rendimiento. Certificaciones internacionales respaldan cada producto que distribuimos.',
+        color: 'rgba(255,200,0,0.1)',
+        borderColor: 'rgba(255,200,0,0.4)'
+      },
+      {
+        icon: '⚡',
+        title: 'Agilidad y Respuesta',
+        desc: 'Sabemos que en seguridad, cada segundo cuenta. Por eso, nos distinguimos por un servicio técnico rápido, eficiente y siempre listo para apoyarte. Soporte 24/7, tiempos de respuesta récord y técnicos certificados a tu disposición en todo momento.',
+        color: 'rgba(255,140,0,0.1)',
+        borderColor: 'rgba(255,140,0,0.4)'
+      }
+    ];
+ 
+    let activeValor = 0;
+ 
+    function buildDots() {
+      const dotsEl = document.getElementById('valor-dots');
+      dotsEl.innerHTML = '';
+      valores.forEach((_, i) => {
+        const d = document.createElement('div');
+        d.className = 'val-dot' + (i === activeValor ? ' val-dot-active' : '');
+        d.onclick = () => selectValor(i);
+        dotsEl.appendChild(d);
+      });
+    }
+ 
+    function selectValor(idx) {
+      activeValor = idx;
+      const v = valores[idx];
+ 
+      // Update tabs
+      document.querySelectorAll('.val-tab').forEach((t, i) => {
+        t.classList.toggle('val-tab-active', i === idx);
+      });
+ 
+      // Update panel with animation
+      const panel = document.getElementById('valor-panel');
+      const iconEl = document.getElementById('valor-icon');
+      const titleEl = document.getElementById('valor-title');
+      const descEl = document.getElementById('valor-desc');
+      const bgIcon = document.getElementById('valor-bg-icon');
+ 
+      panel.style.borderColor = v.borderColor;
+      iconEl.style.background = v.color;
+      iconEl.style.borderColor = v.borderColor;
+      iconEl.style.transform = 'scale(1.15) rotate(8deg)';
+      setTimeout(() => { iconEl.style.transform = 'scale(1) rotate(0deg)'; }, 300);
+ 
+      // Fade out then in
+      titleEl.style.opacity = '0';
+      descEl.style.opacity = '0';
+      bgIcon.style.opacity = '0';
+ 
+      setTimeout(() => {
+        iconEl.textContent = v.icon;
+        bgIcon.textContent = v.icon;
+        titleEl.textContent = v.title;
+        descEl.textContent = v.desc;
+        titleEl.style.opacity = '1';
+        descEl.style.opacity = '1';
+        bgIcon.style.opacity = '0.05';
+        titleEl.classList.remove('valor-animate');
+        descEl.classList.remove('valor-animate');
+        void titleEl.offsetWidth;
+        titleEl.classList.add('valor-animate');
+        descEl.classList.add('valor-animate');
+      }, 180);
+ 
+      buildDots();
+    }
+ 
+    // Auto-cycle every 5s
+    let valorTimer = setInterval(() => selectValor((activeValor + 1) % valores.length), 5000);
+    document.getElementById('valores-tabs').addEventListener('click', () => {
+      clearInterval(valorTimer);
+      valorTimer = setInterval(() => selectValor((activeValor + 1) % valores.length), 5000);
+    });
+ 
+    // Init
+    selectValor(0);
+  </script>
+ 
+  <!-- ¿QUÉ DICEN NUESTROS CLIENTES? -->
+  <section class="testimonials-section">
+    <div class="testimonials-header">
+      <div class="label">// Testimonios</div>
+      <h2>¿Qué dicen nuestros <span>clientes</span>?</h2>
+    </div>
+    <div class="testimonials-grid">
+ 
+      <div class="testimonial-card">
+        <div class="testimonial-chrome">
+          <div class="dot"></div>
+          <div class="dot"></div>
+          <div class="dot"></div>
+        </div>
+        <div class="testimonial-body">
+          <div class="testimonial-stars">★★★★★</div>
+          <p class="testimonial-text">Instalaron las cámaras en mi negocio en menos de un día. La calidad de imagen nocturna es impresionante; ahora duermo tranquilo sabiendo que todo está vigilado las 24 horas.</p>
+          <div class="testimonial-author">
+            <div class="testimonial-avatar">CM</div>
+            <div>
+              <div class="testimonial-author-name">Carlos Martínez</div>
+              <div class="testimonial-author-role">Propietario — Ferretería El Clavo, Tegucigalpa</div>
+            </div>
           </div>
         </div>
       </div>
-    </section>
-
-  <div class="stats">
-    <div class="stat">
-      <div class="stat-number">18+</div>
-      <div class="stat-label">Sedes Nacionales</div>
+ 
+      <div class="testimonial-card">
+        <div class="testimonial-chrome">
+          <div class="dot"></div>
+          <div class="dot"></div>
+          <div class="dot"></div>
+        </div>
+        <div class="testimonial-body">
+          <div class="testimonial-stars">★★★★★</div>
+          <p class="testimonial-text">El sistema biométrico que instalaron en nuestra oficina es increíble. Ya no hay problemas con llaves perdidas y tenemos un registro exacto de entradas y salidas de todo el personal.</p>
+          <div class="testimonial-author">
+            <div class="testimonial-avatar">AL</div>
+            <div>
+              <div class="testimonial-author-name">Andrea López</div>
+              <div class="testimonial-author-role">Gerente General — Constructora Nova, San Pedro Sula</div>
+            </div>
+          </div>
+        </div>
+      </div>
+ 
+      <div class="testimonial-card">
+        <div class="testimonial-chrome">
+          <div class="dot"></div>
+          <div class="dot"></div>
+          <div class="dot"></div>
+        </div>
+        <div class="testimonial-body">
+          <div class="testimonial-stars">★★★★★</div>
+          <p class="testimonial-text">Llevamos 3 años como clientes de SecureVision y el soporte técnico siempre ha sido excepcional. Responden rápido y resuelven cualquier problema de forma remota. Muy recomendados.</p>
+          <div class="testimonial-author">
+            <div class="testimonial-avatar">RD</div>
+            <div>
+              <div class="testimonial-author-name">Roberto Díaz</div>
+              <div class="testimonial-author-role">Director — Colegio Bilingüe Horizonte, La Ceiba</div>
+            </div>
+          </div>
+        </div>
+      </div>
+ 
     </div>
-    <div class="stat">
-      <div class="stat-number">250k</div>
-      <div class="stat-label">Dispositivos Activos</div>
-    </div>
-    <div class="stat">
-      <div class="stat-number">100%</div>
-      <div class="stat-label">Presencia Nacional</div>
-    </div>
-    <div class="stat">
-      <div class="stat-number">24/7</div>
-      <div class="stat-label">Monitoreo</div>
-    </div>
-  </div>
-
- <!-- FOOTER -->
+  </section>
+ 
+  <!-- FOOTER -->
   <footer style="background: #0d0d1a; border-top: 1px solid #1a1a2a; padding: 60px;">
     <div class="footer-grid" style="display: grid; grid-template-columns: 2fr 1fr 1fr 1fr; gap: 40px; margin-bottom: 40px;">
       <div class="footer-brand">
@@ -434,10 +744,10 @@
       <div class="footer-col">
         <h4 style="font-family: 'Rajdhani', sans-serif; font-size: 0.85rem; letter-spacing: 2px; text-transform: uppercase; color: #f0f4ff; margin-bottom: 18px;">Empresa</h4>
         <ul style="list-style: none; padding: 0;">
-          <li><a href="{{ url_for('nosotros') }}">¿Quiénes somos?</a></li>
-          <li><a href="#">Blog de noticias</a></li>
-          <li><a href="{{ url_for('contacto') }}">Contáctanos</a></li>
-          <li><a href="#">Preguntas frecuentes</a></li>
+          <li><a href="{{ url_for('nosotros') }}" style="color: #8890aa; text-decoration: none; font-size: 0.82rem;">¿Quiénes somos?</a></li>
+          <li><a href="#" style="color: #8890aa; text-decoration: none; font-size: 0.82rem;">Blog de noticias</a></li>
+          <li><a href="{{ url_for('contacto') }}" style="color: #8890aa; text-decoration: none; font-size: 0.82rem;">Contáctanos</a></li>
+          <li><a href="#" style="color: #8890aa; text-decoration: none; font-size: 0.82rem;">Preguntas frecuentes</a></li>
         </ul>
       </div>
       <div class="footer-col">
@@ -445,9 +755,9 @@
         <ul style="list-style: none; padding: 0;">
           <li><a href="#" style="color: #8890aa; text-decoration: none; font-size: 0.82rem;">Términos generales</a></li>
           <li><a href="{{ url_for('privacidad') }}" style="color: #8890aa; text-decoration: none; font-size: 0.82rem;">Privacidad</a></li>
-          <li><a href="{{ url_for('devoluciones') }}">Devoluciones y cambios</a></li>
-          <li><a href="#">Envíos</a></li>
-          <li><a href="#">Garantía</a></li>
+          <li><a href="{{ url_for('devoluciones') }}" style="color: #8890aa; text-decoration: none; font-size: 0.82rem;">Devoluciones y cambios</a></li>
+          <li><a href="#" style="color: #8890aa; text-decoration: none; font-size: 0.82rem;">Envíos</a></li>
+          <li><a href="#" style="color: #8890aa; text-decoration: none; font-size: 0.82rem;">Garantía</a></li>
         </ul>
       </div>
     </div>
@@ -456,13 +766,21 @@
       <p style="color: #8890aa; font-size: 0.75rem; letter-spacing: 1px;">Hecho con 💙 para proteger el mundo.</p>
     </div>
   </footer>
-
+ 
 </body>
-<script>
-    statIndex = (statIndex + 1) % statCount;
-    carousel.style.transform = `translateX(-${statIndex * carousel.children[0].offsetWidth}px)`;
-  }
-  setInterval(moveCarousel, 3000);
-}
-</script>
+ 
+  <button id="scrollTop" style="position:fixed;bottom:32px;right:32px;display:none;z-index:999;background:#0066ff;color:#fff;border:none;border-radius:50%;width:48px;height:48px;font-size:1.6rem;box-shadow:0 4px 18px rgba(0,102,255,.18);cursor:pointer;transition:opacity .2s;opacity:0;align-items:center;justify-content:center;" onclick="window.scrollTo({top:0,behavior:'smooth'})">&#8679;</button>
+  <script>
+    const scrollTopBtn = document.getElementById('scrollTop');
+    window.addEventListener('scroll', () => {
+      if(window.scrollY > 400){
+        scrollTopBtn.style.display = 'flex';
+        scrollTopBtn.style.opacity = 1;
+      } else {
+        scrollTopBtn.style.opacity = 0;
+        setTimeout(()=>{scrollTopBtn.style.display='none';},200);
+      }
+    });
+  </script>
 </html>
+ 

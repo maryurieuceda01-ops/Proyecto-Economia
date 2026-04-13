@@ -1,0 +1,631 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Preguntas Frecuentes | SecureVision</title>
+  <link href="https://fonts.googleapis.com/css2?family=Rajdhani:wght@400;600;700&family=Inter:wght@300;400;500&display=swap" rel="stylesheet"/>
+  <style>
+    :root {
+      --bg: #080810;
+      --bg2: #0d0d1a;
+      --blue: #0066ff;
+      --blue-glow: #0044cc;
+      --cyan: #00cfff;
+      --white: #f0f4ff;
+      --gray: #8890aa;
+      --card-bg: #10101e;
+      --border: rgba(0, 102, 255, 0.2);
+    }
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    body { background: var(--bg); color: var(--white); font-family: 'Inter', sans-serif; overflow-x: hidden; }
+
+    /* ── NAV ── */
+    nav {
+      position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+      display: flex; align-items: center; justify-content: space-between;
+      padding: 18px 60px;
+      background: rgba(8,8,16,0.85); backdrop-filter: blur(12px);
+      border-bottom: 1px solid var(--border);
+    }
+    .logo { font-family: 'Rajdhani', sans-serif; font-size: 1.6rem; font-weight: 700; letter-spacing: 2px; color: var(--white); text-decoration: none; }
+    .logo span { color: var(--blue); }
+    .nav-links { display: flex; gap: 36px; list-style: none; }
+    .nav-links a { text-decoration: none; color: var(--gray); font-size: 0.85rem; letter-spacing: 1px; text-transform: uppercase; transition: color 0.2s; position: relative; }
+    .nav-links a::after { content: ''; position: absolute; bottom: -4px; left: 0; right: 0; height: 2px; background: linear-gradient(90deg,#fff 0%,var(--blue) 100%); transform: scaleX(0); transition: transform 0.2s; }
+    .nav-links a:hover, .nav-links a.active { color: var(--white); }
+    .nav-links a:hover::after, .nav-links a.active::after { transform: scaleX(1); }
+    .nav-actions { display: flex; align-items: center; gap: 16px; }
+    .btn-nav { background: var(--blue); color: #fff; border: none; padding: 9px 22px; border-radius: 4px; font-size: 0.82rem; letter-spacing: 1px; text-transform: uppercase; cursor: pointer; transition: background 0.2s; text-decoration: none; }
+    .btn-nav:hover { background: var(--blue-glow); }
+    .cart-icon { position: relative; cursor: pointer; color: var(--gray); font-size: 1.2rem; }
+    .cart-badge { position: absolute; top: -6px; right: -8px; background: var(--blue); color: #fff; font-size: 0.6rem; width: 16px; height: 16px; border-radius: 50%; display: flex; align-items: center; justify-content: center; }
+
+    /* ── HERO ── */
+    .faq-hero {
+      padding: 160px 60px 80px;
+      position: relative;
+      text-align: center;
+      background: linear-gradient(to bottom, var(--bg), var(--bg2));
+      overflow: hidden;
+    }
+    .hero-grid {
+      position: absolute; inset: 0;
+      background-image: linear-gradient(rgba(0,102,255,0.04) 1px, transparent 1px), linear-gradient(90deg, rgba(0,102,255,0.04) 1px, transparent 1px);
+      background-size: 50px 50px;
+      pointer-events: none;
+    }
+    .faq-hero h1 { font-family: 'Rajdhani', sans-serif; font-size: 3.2rem; margin-bottom: 16px; position: relative; z-index: 2; }
+    .faq-hero h1 span { color: var(--blue); }
+    .faq-hero p { color: var(--gray); font-size: 1.05rem; max-width: 580px; margin: 0 auto 36px; line-height: 1.7; position: relative; z-index: 2; }
+
+    /* Search bar */
+    .faq-search-wrap { position: relative; z-index: 2; max-width: 560px; margin: 0 auto; }
+    .faq-search-wrap input {
+      width: 100%;
+      background: var(--card-bg);
+      border: 1px solid var(--border);
+      color: var(--white);
+      padding: 14px 50px 14px 20px;
+      border-radius: 6px;
+      font-size: 0.97rem;
+      outline: none;
+      font-family: 'Inter', sans-serif;
+      transition: border-color 0.25s, box-shadow 0.25s;
+    }
+    .faq-search-wrap input::placeholder { color: var(--gray); }
+    .faq-search-wrap input:focus { border-color: var(--blue); box-shadow: 0 0 0 3px rgba(0,102,255,0.15); }
+    .faq-search-icon {
+      position: absolute; right: 16px; top: 50%; transform: translateY(-50%);
+      color: var(--gray); font-size: 1.1rem; pointer-events: none;
+    }
+    .search-count { font-size: 0.8rem; color: var(--gray); margin-top: 10px; text-align: center; position: relative; z-index: 2; }
+
+    /* ── CATEGORY GRID (like Zendesk image) ── */
+    .faq-categories {
+      max-width: 1100px; margin: 0 auto;
+      padding: 60px 24px 40px;
+    }
+    .cat-label { color: var(--blue); letter-spacing: 4px; text-transform: uppercase; font-size: 0.72rem; margin-bottom: 24px; }
+    .cat-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 18px;
+      margin-bottom: 60px;
+    }
+    .cat-card {
+      background: var(--card-bg);
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      padding: 28px 20px 24px;
+      text-align: center;
+      cursor: pointer;
+      transition: border-color 0.25s, transform 0.25s, box-shadow 0.25s, background 0.25s;
+    }
+    .cat-card:hover, .cat-card.active {
+      border-color: var(--blue);
+      background: rgba(0,102,255,0.06);
+      transform: translateY(-4px);
+      box-shadow: 0 12px 36px rgba(0,102,255,0.18);
+    }
+    .cat-card.active { border-color: var(--cyan); background: rgba(0,207,255,0.05); }
+    .cat-icon { font-size: 2.6rem; margin-bottom: 14px; display: block; }
+    .cat-title { font-family: 'Rajdhani', sans-serif; font-size: 1.1rem; color: var(--white); margin-bottom: 8px; letter-spacing: 0.5px; }
+    .cat-desc { font-size: 0.82rem; color: var(--gray); line-height: 1.6; }
+    .cat-count {
+      display: inline-block; margin-top: 12px;
+      background: rgba(0,102,255,0.15); color: var(--cyan);
+      font-size: 0.7rem; padding: 2px 10px; border-radius: 20px;
+      border: 1px solid rgba(0,207,255,0.2);
+      font-family: 'Rajdhani', sans-serif; letter-spacing: 1px;
+    }
+
+    /* ── FAQ ACCORDION ── */
+    .faq-section { max-width: 860px; margin: 0 auto; padding: 0 24px 80px; }
+    .faq-section-title {
+      font-family: 'Rajdhani', sans-serif; font-size: 1.5rem;
+      color: var(--white); margin-bottom: 6px;
+      display: flex; align-items: center; gap: 12px;
+    }
+    .faq-section-title span { color: var(--cyan); }
+    .faq-section-sub { color: var(--gray); font-size: 0.85rem; margin-bottom: 28px; }
+
+    .faq-group { display: none; }
+    .faq-group.active { display: block; animation: fadeSlideUp 0.35s ease both; }
+
+    @keyframes fadeSlideUp {
+      from { opacity: 0; transform: translateY(16px); }
+      to   { opacity: 1; transform: translateY(0); }
+    }
+
+    .faq-item {
+      background: var(--card-bg);
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      margin-bottom: 12px;
+      overflow: hidden;
+      transition: border-color 0.25s, box-shadow 0.25s;
+    }
+    .faq-item:hover { border-color: rgba(0,102,255,0.45); }
+    .faq-item.open { border-color: var(--blue); box-shadow: 0 4px 24px rgba(0,102,255,0.12); }
+
+    .faq-question {
+      display: flex; align-items: center; justify-content: space-between;
+      padding: 20px 24px;
+      cursor: pointer;
+      user-select: none;
+      gap: 16px;
+    }
+    .faq-question-text { font-size: 0.97rem; color: var(--white); line-height: 1.5; font-weight: 500; }
+    .faq-item.open .faq-question-text { color: var(--cyan); }
+    .faq-chevron {
+      width: 28px; height: 28px; flex-shrink: 0;
+      border-radius: 50%; border: 1px solid var(--border);
+      display: flex; align-items: center; justify-content: center;
+      font-size: 0.75rem; color: var(--gray);
+      transition: transform 0.3s, background 0.25s, border-color 0.25s;
+    }
+    .faq-item.open .faq-chevron {
+      transform: rotate(180deg);
+      background: var(--blue); border-color: var(--blue); color: #fff;
+    }
+    .faq-answer {
+      max-height: 0; overflow: hidden;
+      transition: max-height 0.4s cubic-bezier(.4,0,.2,1), padding 0.3s;
+      padding: 0 24px;
+    }
+    .faq-item.open .faq-answer { max-height: 400px; padding: 0 24px 22px; }
+    .faq-answer p { color: var(--gray); font-size: 0.93rem; line-height: 1.8; }
+    .faq-answer a { color: var(--cyan); text-decoration: underline; }
+
+    /* no results */
+    .faq-no-results { text-align: center; padding: 60px 0; color: var(--gray); display: none; }
+    .faq-no-results .big { font-size: 3rem; margin-bottom: 16px; }
+    .faq-no-results p { font-size: 0.97rem; }
+
+    /* ── CONTACT CTA ── */
+    .faq-cta {
+      background: var(--bg2);
+      border-top: 1px solid var(--border);
+      border-bottom: 1px solid var(--border);
+      padding: 70px 60px;
+      text-align: center;
+    }
+    .faq-cta h2 { font-family: 'Rajdhani', sans-serif; font-size: 2rem; margin-bottom: 14px; }
+    .faq-cta h2 span { color: var(--blue); }
+    .faq-cta p { color: var(--gray); font-size: 0.97rem; margin-bottom: 30px; }
+    .cta-btns { display: flex; gap: 16px; justify-content: center; flex-wrap: wrap; }
+    .btn-primary {
+      background: var(--blue); color: #fff; border: none;
+      padding: 12px 30px; border-radius: 4px; font-size: 0.9rem;
+      letter-spacing: 1px; text-transform: uppercase; cursor: pointer;
+      transition: background 0.2s, transform 0.15s, box-shadow 0.2s;
+      text-decoration: none; display: inline-block;
+    }
+    .btn-primary:hover { background: var(--blue-glow); transform: translateY(-2px); box-shadow: 0 6px 20px rgba(0,102,255,0.35); }
+    .btn-outline {
+      background: transparent; color: var(--white);
+      border: 1px solid rgba(255,255,255,0.25);
+      padding: 12px 30px; border-radius: 4px; font-size: 0.9rem;
+      letter-spacing: 1px; text-transform: uppercase; cursor: pointer;
+      transition: border-color 0.2s, background 0.2s, transform 0.15s;
+      text-decoration: none; display: inline-block;
+    }
+    .btn-outline:hover { border-color: var(--white); background: rgba(255,255,255,0.06); transform: translateY(-2px); }
+
+    /* ── FOOTER ── */
+    footer { background: var(--bg2); border-top: 1px solid var(--border); padding: 60px; }
+    .footer-grid { display: grid; grid-template-columns: 2fr 1fr 1fr 1fr; gap: 40px; margin-bottom: 40px; }
+    .footer-col h4 { font-family: 'Rajdhani', sans-serif; font-size: 0.85rem; letter-spacing: 2px; text-transform: uppercase; color: var(--white); margin-bottom: 18px; }
+    .footer-col ul { list-style: none; }
+    .footer-col ul li { margin-bottom: 10px; }
+    .footer-col ul li a { color: var(--gray); text-decoration: none; font-size: 0.82rem; transition: color 0.2s; }
+    .footer-col ul li a:hover { color: var(--blue); }
+    .footer-brand p { color: var(--gray); font-size: 0.82rem; line-height: 1.8; max-width: 260px; margin: 0; }
+    .footer-bottom { border-top: 1px solid var(--border); padding-top: 24px; display: flex; justify-content: space-between; align-items: center; }
+    .footer-bottom p { color: var(--gray); font-size: 0.75rem; letter-spacing: 1px; }
+
+    .scroll-top { position: fixed; bottom: 32px; right: 32px; display: none; z-index: 999; background: var(--blue); color: #fff; border: none; border-radius: 50%; width: 48px; height: 48px; font-size: 1.6rem; box-shadow: 0 4px 18px rgba(0,102,255,.18); cursor: pointer; transition: opacity .2s; opacity: 0; align-items: center; justify-content: center; }
+
+    @media (max-width: 900px) {
+      nav { padding: 18px 24px; }
+      .nav-links { display: none; }
+      .faq-hero { padding: 130px 24px 60px; }
+      .faq-hero h1 { font-size: 2.2rem; }
+      .cat-grid { grid-template-columns: repeat(2, 1fr); }
+      footer { padding: 40px 24px; }
+      .footer-grid { grid-template-columns: 1fr 1fr; }
+      .faq-cta { padding: 50px 24px; }
+    }
+    @media (max-width: 560px) {
+      .cat-grid { grid-template-columns: 1fr; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- NAV -->
+  <nav>
+    <a href="{{ url_for('index') }}" class="logo">SECURE<span>VISION</span></a>
+    <ul class="nav-links">
+      <li><a href="{{ url_for('index') }}">Inicio</a></li>
+      <li><a href="{{ url_for('catalogo') }}">Catálogo</a></li>
+      <li><a href="{{ url_for('nosotros') }}">¿Quiénes somos?</a></li>
+      <li><a href="{{ url_for('contacto') }}">Contáctanos</a></li>
+    </ul>
+    <div class="nav-actions">
+      <div class="cart-icon" onclick="window.location.href='{{ url_for('carrito') }}'" style="cursor:pointer;">
+        🛒 <span class="cart-badge">{{ session.get('carrito', [])|length }}</span>
+      </div>
+      {% if session.get('usuario_nombre') %}
+        <span style="color:var(--gray);font-size:0.85rem;">Hola, {{ session['usuario_nombre'] }}</span>
+        <a href="{{ url_for('logout') }}" class="btn-nav">Cerrar Sesión</a>
+      {% else %}
+        <a href="{{ url_for('login') }}" class="btn-nav">Iniciar Sesión</a>
+      {% endif %}
+    </div>
+  </nav>
+
+  <!-- HERO -->
+  <section class="faq-hero">
+    <div class="hero-grid"></div>
+    <div style="color:var(--blue);letter-spacing:4px;text-transform:uppercase;font-size:0.75rem;margin-bottom:14px;position:relative;z-index:2;">// Centro de Ayuda</div>
+    <h1>Preguntas <span>Frecuentes</span></h1>
+    <p>¿Tienes dudas sobre nuestros productos o servicios? Aquí encontrarás respuestas rápidas a las consultas más comunes de nuestros clientes.</p>
+    <div class="faq-search-wrap">
+      <input type="text" id="faq-search" placeholder="Busca tu pregunta aquí..." oninput="filterFAQ(this.value)" autocomplete="off"/>
+      <span class="faq-search-icon">🔍</span>
+    </div>
+    <div class="search-count" id="search-count"></div>
+  </section>
+
+  <!-- CATEGORY CARDS -->
+  <div class="faq-categories">
+    <div class="cat-label">// Explorar por categoría</div>
+    <div class="cat-grid">
+      <div class="cat-card active" onclick="selectCat('productos')" id="cat-productos">
+        <span class="cat-icon">📷</span>
+        <div class="cat-title">Productos y Equipos</div>
+        <div class="cat-desc">Cámaras, alarmas, biométricos y más</div>
+        <span class="cat-count">6 PREGUNTAS</span>
+      </div>
+      <div class="cat-card" onclick="selectCat('instalacion')" id="cat-instalacion">
+        <span class="cat-icon">🔧</span>
+        <div class="cat-title">Instalación y Configuración</div>
+        <div class="cat-desc">Todo sobre el proceso de instalación</div>
+        <span class="cat-count">5 PREGUNTAS</span>
+      </div>
+      <div class="cat-card" onclick="selectCat('soporte')" id="cat-soporte">
+        <span class="cat-icon">🛡️</span>
+        <div class="cat-title">Soporte y Garantía</div>
+        <div class="cat-desc">Mantenimiento, fallas y garantías</div>
+        <span class="cat-count">5 PREGUNTAS</span>
+      </div>
+      <div class="cat-card" onclick="selectCat('pagos')" id="cat-pagos">
+        <span class="cat-icon">💳</span>
+        <div class="cat-title">Pagos y Envíos</div>
+        <div class="cat-desc">Métodos de pago, envíos y facturación</div>
+        <span class="cat-count">4 PREGUNTAS</span>
+      </div>
+      <div class="cat-card" onclick="selectCat('monitoreo')" id="cat-monitoreo">
+        <span class="cat-icon">📱</span>
+        <div class="cat-title">Monitoreo Remoto</div>
+        <div class="cat-desc">App móvil, alertas y acceso remoto</div>
+        <span class="cat-count">4 PREGUNTAS</span>
+      </div>
+      <div class="cat-card" onclick="selectCat('empresa')" id="cat-empresa">
+        <span class="cat-icon">🏢</span>
+        <div class="cat-title">Sobre SecureVision</div>
+        <div class="cat-desc">Quiénes somos, cobertura y servicios</div>
+        <span class="cat-count">4 PREGUNTAS</span>
+      </div>
+    </div>
+
+    <!-- FAQ ACCORDION AREA -->
+    <div class="faq-section">
+
+      <!-- SEARCH MODE -->
+      <div id="faq-search-results" style="display:none;"></div>
+      <div class="faq-no-results" id="faq-no-results">
+        <div class="big">🔍</div>
+        <p>No se encontraron resultados para tu búsqueda.<br>Intenta con otras palabras clave.</p>
+      </div>
+
+      <!-- PRODUCTOS -->
+      <div class="faq-group active" id="group-productos">
+        <div class="faq-section-title">📷 <span>Productos</span> y Equipos</div>
+        <p class="faq-section-sub">Todo lo que necesitas saber sobre nuestro catálogo de productos.</p>
+        <div class="faq-item" onclick="toggleFAQ(this)">
+          <div class="faq-question"><span class="faq-question-text">¿Qué tipos de cámaras de seguridad ofrecen?</span><div class="faq-chevron">▼</div></div>
+          <div class="faq-answer"><p>Contamos con una amplia gama: cámaras domo para interiores, bullet para exteriores, PTZ motorizadas con zoom óptico, cámaras con visión nocturna Full-Color que graban en color incluso sin luz, y cámaras de reconocimiento facial con IA. Todos los equipos son de marcas certificadas como Hikvision y Dahua con resolución desde 2MP hasta 8MP (4K).</p></div>
+        </div>
+        <div class="faq-item" onclick="toggleFAQ(this)">
+          <div class="faq-question"><span class="faq-question-text">¿Las cámaras funcionan de noche?</span><div class="faq-chevron">▼</div></div>
+          <div class="faq-answer"><p>Sí. Nuestras cámaras cuentan con tecnología de visión nocturna infrarroja (IR) con alcance de hasta 60 metros, y también disponemos de cámaras Full-Color que capturan imágenes a color incluso en oscuridad total gracias a sus iluminadores LED de alta intensidad. Esto hace que las grabaciones nocturnas sean mucho más útiles como evidencia.</p></div>
+        </div>
+        <div class="faq-item" onclick="toggleFAQ(this)">
+          <div class="faq-question"><span class="faq-question-text">¿Qué es un sistema biométrico y para qué sirve?</span><div class="faq-chevron">▼</div></div>
+          <div class="faq-answer"><p>Un sistema biométrico controla el acceso a espacios físicos mediante características únicas de cada persona: huella dactilar, reconocimiento facial o del iris. Elimina el uso de llaves o tarjetas que pueden perderse o copiarse. Cada acceso queda registrado con fecha, hora e identidad, ideal para empresas, oficinas, colegios y condominios.</p></div>
+        </div>
+        <div class="faq-item" onclick="toggleFAQ(this)">
+          <div class="faq-question"><span class="faq-question-text">¿Ofrecen cercas eléctricas? ¿Son peligrosas?</span><div class="faq-chevron">▼</div></div>
+          <div class="faq-answer"><p>Sí ofrecemos cercas eléctricas perimetrales. Las descargas son de alta tensión pero muy corta duración (no letales), diseñadas para disuadir y alertar, no para causar daño permanente. Cumplen con normativas de seguridad internacionales. Al detectar un contacto, la cerca activa automáticamente una alarma y puede enviar una notificación a tu teléfono.</p></div>
+        </div>
+        <div class="faq-item" onclick="toggleFAQ(this)">
+          <div class="faq-question"><span class="faq-question-text">¿Las alarmas son inalámbricas?</span><div class="faq-chevron">▼</div></div>
+          <div class="faq-answer"><p>Contamos con sistemas cableados e inalámbricos. Las alarmas inalámbricas son ideales para instalaciones donde no se puede cablear, son fáciles de instalar y ampliar. Incluyen sensores de movimiento PIR, detectores de apertura de puertas y ventanas, sirenas interiores y exteriores, y comunicación con central de monitoreo o directo a tu celular.</p></div>
+        </div>
+        <div class="faq-item" onclick="toggleFAQ(this)">
+          <div class="faq-question"><span class="faq-question-text">¿Cuánto almacenamiento necesito para las grabaciones?</span><div class="faq-chevron">▼</div></div>
+          <div class="faq-answer"><p>Depende del número de cámaras, la resolución y los días de retención que necesites. Como referencia, 4 cámaras a 1080p graban aproximadamente 30 días con un disco de 2TB. Ofrecemos DVR y NVR con soporte hasta 32 canales y discos de hasta 10TB, además de soluciones de almacenamiento en la nube para mayor seguridad de los datos.</p></div>
+        </div>
+      </div>
+
+      <!-- INSTALACIÓN -->
+      <div class="faq-group" id="group-instalacion">
+        <div class="faq-section-title">🔧 <span>Instalación</span> y Configuración</div>
+        <p class="faq-section-sub">Información sobre nuestro proceso de instalación profesional.</p>
+        <div class="faq-item" onclick="toggleFAQ(this)">
+          <div class="faq-question"><span class="faq-question-text">¿Ustedes realizan la instalación o solo venden los equipos?</span><div class="faq-chevron">▼</div></div>
+          <div class="faq-answer"><p>Hacemos ambas cosas. Vendemos los equipos para instalación propia (incluimos manuales y soporte telefónico), y también ofrecemos el servicio de instalación profesional con técnicos certificados. Para instalaciones pequeñas, el proceso toma 1 día. Para proyectos más grandes, realizamos una visita de diagnóstico previa sin costo.</p></div>
+        </div>
+        <div class="faq-item" onclick="toggleFAQ(this)">
+          <div class="faq-question"><span class="faq-question-text">¿Cuánto tiempo tarda la instalación?</span><div class="faq-chevron">▼</div></div>
+          <div class="faq-answer"><p>Un sistema residencial estándar de 4–8 cámaras se instala en 4–6 horas. Sistemas más complejos para empresas o condominios pueden requerir 1–3 días. Trabajamos con agilidad y limpieza, minimizando cualquier interrupción a tus actividades. Al finalizar, hacemos una demostración completa del sistema instalado.</p></div>
+        </div>
+        <div class="faq-item" onclick="toggleFAQ(this)">
+          <div class="faq-question"><span class="faq-question-text">¿Necesito internet para que funcione el sistema?</span><div class="faq-chevron">▼</div></div>
+          <div class="faq-answer"><p>No necesariamente. Los sistemas CCTV locales (DVR/NVR) funcionan sin internet para grabación y visualización en el sitio. Sin embargo, para acceso remoto desde tu celular, notificaciones push y monitoreo en tiempo real desde cualquier lugar, sí se requiere conexión a internet. Recomendamos al menos 4 Mbps de subida para monitoreo fluido.</p></div>
+        </div>
+        <div class="faq-item" onclick="toggleFAQ(this)">
+          <div class="faq-question"><span class="faq-question-text">¿Pueden instalar en edificios con varios pisos?</span><div class="faq-chevron">▼</div></div>
+          <div class="faq-answer"><p>Sí, tenemos experiencia en instalaciones en edificios residenciales y comerciales de múltiples pisos. Realizamos el cableado estructurado, instalación de canaletas o ductos, y configuración centralizada del sistema. Cada proyecto cuenta con un plano de cobertura previo que garantiza que no queden ángulos ciegos.</p></div>
+        </div>
+        <div class="faq-item" onclick="toggleFAQ(this)">
+          <div class="faq-question"><span class="faq-question-text">¿Cómo configuro el acceso remoto desde mi teléfono?</span><div class="faq-chevron">▼</div></div>
+          <div class="faq-answer"><p>Nuestros técnicos configuran el acceso remoto como parte del servicio de instalación. Descargamos la app correspondiente (iVMS-4500, Hik-Connect o DMSS según el equipo), la vinculamos a tu cuenta, probamos la conexión y te explicamos cómo usarla. Si en algún momento necesitas reconfigurarla, nuestro soporte técnico te guía paso a paso.</p></div>
+        </div>
+      </div>
+
+      <!-- SOPORTE -->
+      <div class="faq-group" id="group-soporte">
+        <div class="faq-section-title">🛡️ <span>Soporte</span> y Garantía</div>
+        <p class="faq-section-sub">Respaldo técnico y cobertura de garantía para tus equipos.</p>
+        <div class="faq-item" onclick="toggleFAQ(this)">
+          <div class="faq-question"><span class="faq-question-text">¿Qué garantía tienen los equipos?</span><div class="faq-chevron">▼</div></div>
+          <div class="faq-answer"><p>Todos nuestros equipos cuentan con garantía oficial del fabricante de 1 a 3 años dependiendo del producto. Adicionalmente, ofrecemos garantía en mano de obra de instalación por 6 meses. Si un equipo falla dentro del período de garantía por defecto de fábrica, lo reparamos o sustituimos sin costo adicional.</p></div>
+        </div>
+        <div class="faq-item" onclick="toggleFAQ(this)">
+          <div class="faq-question"><span class="faq-question-text">¿Ofrecen servicio de mantenimiento preventivo?</span><div class="faq-chevron">▼</div></div>
+          <div class="faq-answer"><p>Sí. Ofrecemos planes de mantenimiento preventivo trimestral, semestral y anual. El mantenimiento incluye limpieza física de cámaras y sensores, verificación de conexiones, actualización de firmware, revisión del disco duro y ajuste de ángulos de visión. Un sistema bien mantenido puede durar más del doble que uno sin mantenimiento.</p></div>
+        </div>
+        <div class="faq-item" onclick="toggleFAQ(this)">
+          <div class="faq-question"><span class="faq-question-text">¿Qué hago si mi sistema deja de grabar o mostrar imagen?</span><div class="faq-chevron">▼</div></div>
+          <div class="faq-answer"><p>Primero verifica que el equipo tenga corriente y que el disco duro no esté lleno. Si el problema persiste, contáctanos por WhatsApp o al número de soporte técnico y un técnico te asistirá de forma remota en la mayoría de los casos. Si se requiere visita técnica presencial, la agendamos en las siguientes 24–48 horas hábiles.</p></div>
+        </div>
+        <div class="faq-item" onclick="toggleFAQ(this)">
+          <div class="faq-question"><span class="faq-question-text">¿El soporte técnico tiene costo?</span><div class="faq-chevron">▼</div></div>
+          <div class="faq-answer"><p>El soporte técnico remoto por teléfono o WhatsApp es gratuito para todos nuestros clientes. Las visitas técnicas presenciales tienen un costo de diagnóstico que se descuenta si contratas el servicio de reparación con nosotros. Los clientes con plan de mantenimiento activo tienen prioridad y las visitas de urgencia son sin costo adicional.</p></div>
+        </div>
+        <div class="faq-item" onclick="toggleFAQ(this)">
+          <div class="faq-question"><span class="faq-question-text">¿Qué pasa si un ladrón destruye las cámaras?</span><div class="faq-chevron">▼</div></div>
+          <div class="faq-answer"><p>Nuestros sistemas están diseñados con múltiples capas de protección. Las grabaciones pueden almacenarse en la nube en tiempo real, por lo que aunque destruyan el equipo físico, las imágenes previas permanecen guardadas. Además recomendamos instalar el DVR/NVR en un lugar seguro y oculto. Ante vandalismo, podemos tramitar el reemplazo y asesorarte con tu seguro.</p></div>
+        </div>
+      </div>
+
+      <!-- PAGOS -->
+      <div class="faq-group" id="group-pagos">
+        <div class="faq-section-title">💳 <span>Pagos</span> y Envíos</div>
+        <p class="faq-section-sub">Métodos de pago disponibles, facturación y logística de entrega.</p>
+        <div class="faq-item" onclick="toggleFAQ(this)">
+          <div class="faq-question"><span class="faq-question-text">¿Qué métodos de pago aceptan?</span><div class="faq-chevron">▼</div></div>
+          <div class="faq-answer"><p>Aceptamos efectivo, transferencia bancaria, tarjetas de crédito y débito Visa/MasterCard, pago por BAC Credomatic y PayPal. Para proyectos empresariales ofrecemos crédito a 30/60 días previa evaluación. También manejamos financiamiento en cuotas sin intereses con tarjetas participantes para compras superiores a L. 5,000.</p></div>
+        </div>
+        <div class="faq-item" onclick="toggleFAQ(this)">
+          <div class="faq-question"><span class="faq-question-text">¿Hacen envíos a todo Honduras?</span><div class="faq-chevron">▼</div></div>
+          <div class="faq-answer"><p>Sí, realizamos envíos a todo el territorio nacional a través de Guatex, Cargo Express y envíos propios en Tegucigalpa y San Pedro Sula. El tiempo de entrega es de 1–2 días hábiles en las principales ciudades y 3–5 días en el interior del país. Para pedidos mayores a L. 3,000, el envío es gratuito dentro del casco urbano.</p></div>
+        </div>
+        <div class="faq-item" onclick="toggleFAQ(this)">
+          <div class="faq-question"><span class="faq-question-text">¿Emiten factura fiscal?</span><div class="faq-chevron">▼</div></div>
+          <div class="faq-answer"><p>Sí, somos contribuyentes formales ante el SAR y emitimos factura fiscal para todas las compras. Para empresas que requieran factura a nombre de persona jurídica, proporciona tu RTN y razón social al momento de realizar tu pedido y la factura se generará correctamente para efectos de deducción fiscal.</p></div>
+        </div>
+        <div class="faq-item" onclick="toggleFAQ(this)">
+          <div class="faq-question"><span class="faq-question-text">¿Puedo devolver un producto si no me satisface?</span><div class="faq-chevron">▼</div></div>
+          <div class="faq-answer"><p>Aceptamos devoluciones dentro de los primeros 7 días calendario desde la entrega, siempre que el producto esté en su empaque original, sin daños físicos y sin señales de uso. Equipos instalados o con empaque abierto aplican a cambio por el mismo producto en caso de defecto de fábrica. Consulta nuestra política completa de devoluciones para más detalles.</p></div>
+        </div>
+      </div>
+
+      <!-- MONITOREO -->
+      <div class="faq-group" id="group-monitoreo">
+        <div class="faq-section-title">📱 <span>Monitoreo</span> Remoto</div>
+        <p class="faq-section-sub">Acceso desde tu celular, alertas y control en tiempo real.</p>
+        <div class="faq-item" onclick="toggleFAQ(this)">
+          <div class="faq-question"><span class="faq-question-text">¿Puedo ver mis cámaras desde el extranjero?</span><div class="faq-chevron">▼</div></div>
+          <div class="faq-answer"><p>Sí. Mientras tengas conexión a internet en tu dispositivo móvil o computadora y el sistema en tu propiedad esté encendido y conectado a internet, puedes ver tus cámaras en tiempo real desde cualquier parte del mundo. Las apps compatibles están disponibles para iOS y Android de forma gratuita.</p></div>
+        </div>
+        <div class="faq-item" onclick="toggleFAQ(this)">
+          <div class="faq-question"><span class="faq-question-text">¿El sistema me manda alertas automáticas?</span><div class="faq-chevron">▼</div></div>
+          <div class="faq-answer"><p>Sí. Los sistemas con detección de movimiento inteligente envían notificaciones push a tu celular cuando detectan actividad en las áreas vigiladas. Puedes configurar zonas de detección, horarios de alerta y el nivel de sensibilidad para evitar falsas alarmas por mascotas o movimiento de vegetación.</p></div>
+        </div>
+        <div class="faq-item" onclick="toggleFAQ(this)">
+          <div class="faq-question"><span class="faq-question-text">¿Cuántos usuarios pueden acceder al sistema simultáneamente?</span><div class="faq-chevron">▼</div></div>
+          <div class="faq-answer"><p>La mayoría de nuestros equipos permiten entre 3 y 10 usuarios simultáneos con diferentes niveles de permiso. Puedes crear cuentas de administrador (acceso total), operador (visualización y reproducción) y usuario básico (solo visualización en tiempo real). Ideal para empresas donde el gerente, el jefe de seguridad y la recepción necesitan acceso diferenciado.</p></div>
+        </div>
+        <div class="faq-item" onclick="toggleFAQ(this)">
+          <div class="faq-question"><span class="faq-question-text">¿Qué pasa si se va la luz? ¿Se pierden las grabaciones?</span><div class="faq-chevron">▼</div></div>
+          <div class="faq-answer"><p>Las grabaciones almacenadas en el disco duro no se pierden ante un corte de luz. Para mantener el sistema operativo durante apagones, recomendamos instalar un UPS (sistema de alimentación ininterrumpida) que proporciona entre 1–4 horas de autonomía dependiendo del modelo. También ofrecemos cámaras con batería integrada para zonas sin cableado.</p></div>
+        </div>
+      </div>
+
+      <!-- EMPRESA -->
+      <div class="faq-group" id="group-empresa">
+        <div class="faq-section-title">🏢 Sobre <span>SecureVision</span></div>
+        <p class="faq-section-sub">Conoce más sobre nuestra empresa, cobertura y propuesta de valor.</p>
+        <div class="faq-item" onclick="toggleFAQ(this)">
+          <div class="faq-question"><span class="faq-question-text">¿Dónde están ubicados y en qué ciudades operan?</span><div class="faq-chevron">▼</div></div>
+          <div class="faq-answer"><p>Tenemos presencia en las principales ciudades de Honduras: Tegucigalpa, San Pedro Sula, La Ceiba, Choloma, El Progreso, Choluteca y Santa Rosa de Copán. Nuestra oficina principal está en Tegucigalpa. A través de nuestra red de distribuidores certificados, brindamos cobertura a nivel nacional en las 18 cabeceras departamentales.</p></div>
+        </div>
+        <div class="faq-item" onclick="toggleFAQ(this)">
+          <div class="faq-question"><span class="faq-question-text">¿Trabajan con proyectos para empresas grandes o solo residencial?</span><div class="faq-chevron">▼</div></div>
+          <div class="faq-answer"><p>Trabajamos con ambos segmentos. Nuestros clientes van desde hogares con 2–4 cámaras hasta proyectos corporativos con más de 200 cámaras en múltiples sedes. Tenemos un departamento especializado en licitaciones y proyectos institucionales, con experiencia en centros comerciales, hospitales, colegios, bodegas y residenciales cerrados.</p></div>
+        </div>
+        <div class="faq-item" onclick="toggleFAQ(this)">
+          <div class="faq-question"><span class="faq-question-text">¿Los equipos que venden son originales y con garantía de fábrica?</span><div class="faq-chevron">▼</div></div>
+          <div class="faq-answer"><p>100% sí. Somos distribuidores autorizados de marcas como Hikvision, Dahua, Bosch y otras marcas líderes a nivel mundial. Todos nuestros equipos vienen con número de serie verificable, empaque original y garantía oficial del fabricante. No trabajamos con equipos de imitación o reacondicionados.</p></div>
+        </div>
+        <div class="faq-item" onclick="toggleFAQ(this)">
+          <div class="faq-question"><span class="faq-question-text">¿Puedo solicitar una cotización sin compromiso?</span><div class="faq-chevron">▼</div></div>
+          <div class="faq-answer"><p>Por supuesto. Ofrecemos cotizaciones completamente gratuitas y sin compromiso. Para proyectos residenciales puedes solicitar tu cotización por WhatsApp o a través de nuestro formulario de contacto. Para proyectos empresariales, un asesor técnico agenda una visita de diagnóstico sin costo para evaluar tus necesidades y proponer la solución más eficiente.</p></div>
+        </div>
+      </div>
+
+    </div><!-- end .faq-section -->
+  </div><!-- end .faq-categories -->
+
+  <!-- CTA -->
+  <section class="faq-cta">
+    <div style="color:var(--blue);letter-spacing:4px;text-transform:uppercase;font-size:0.72rem;margin-bottom:14px;">// ¿Aún tienes dudas?</div>
+    <h2>¿No encontraste lo que <span>buscabas</span>?</h2>
+    <p>Nuestro equipo está listo para atenderte de lunes a sábado de 8am a 6pm.<br>También puedes escribirnos por WhatsApp en cualquier momento.</p>
+    <div class="cta-btns">
+      <a href="{{ url_for('contacto') }}" class="btn-primary">📩 Contáctanos</a>
+      <a href="https://wa.me/50412345678" class="btn-outline" target="_blank">💬 WhatsApp</a>
+    </div>
+  </section>
+
+  <!-- FOOTER -->
+  <footer style="background:#0d0d1a; border-top:1px solid #1a1a2a; padding:60px;">
+    <div class="footer-grid" style="display:grid; grid-template-columns:2fr 1fr 1fr 1fr; gap:40px; margin-bottom:40px;">
+      <div class="footer-brand">
+        <span class="logo" style="font-size:1.4rem;color:#f0f4ff;font-family:'Rajdhani',sans-serif;font-weight:700;display:block;margin-bottom:16px;">SECURE<span style="color:#0066ff">VISION</span></span>
+        <p style="color:#8890aa;font-size:0.82rem;line-height:1.8;max-width:260px;margin:0;">Soluciones de seguridad electrónica profesional para hogares y empresas a nivel mundial.</p>
+      </div>
+      <div class="footer-col">
+        <h4>Productos</h4>
+        <ul>
+          <li><a href="#">Cámaras CCTV</a></li>
+          <li><a href="#">Monitores</a></li>
+          <li><a href="#">Alarmas</a></li>
+          <li><a href="#">Biométricos</a></li>
+          <li><a href="#">Cercas Eléctricas</a></li>
+        </ul>
+      </div>
+      <div class="footer-col">
+        <h4>Empresa</h4>
+        <ul>
+          <li><a href="{{ url_for('nosotros') }}">¿Quiénes somos?</a></li>
+          <li><a href="#">Blog de noticias</a></li>
+          <li><a href="{{ url_for('contacto') }}">Contáctanos</a></li>
+          <li><a href="#">Preguntas frecuentes</a></li>
+        </ul>
+      </div>
+      <div class="footer-col">
+        <h4>Políticas</h4>
+        <ul>
+          <li><a href="#">Términos generales</a></li>
+          <li><a href="{{ url_for('privacidad') }}">Privacidad</a></li>
+          <li><a href="{{ url_for('devoluciones') }}">Devoluciones y cambios</a></li>
+          <li><a href="#">Envíos</a></li>
+          <li><a href="#">Garantía</a></li>
+        </ul>
+      </div>
+    </div>
+    <div style="border-top:1px solid #1a1a2a;padding-top:24px;display:flex;justify-content:space-between;align-items:center;">
+      <p style="color:#8890aa;font-size:0.75rem;letter-spacing:1px;">© 2026 SecureVision. Todos los derechos reservados.</p>
+      <p style="color:#8890aa;font-size:0.75rem;letter-spacing:1px;">Hecho con 💙 para proteger el mundo.</p>
+    </div>
+  </footer>
+
+  <button id="scrollTop" class="scroll-top" onclick="window.scrollTo({top:0,behavior:'smooth'})">&#8679;</button>
+
+  <script>
+    // ── SCROLL TOP ──
+    const scrollTopBtn = document.getElementById('scrollTop');
+    window.addEventListener('scroll', () => {
+      if (window.scrollY > 400) { scrollTopBtn.style.display = 'flex'; scrollTopBtn.style.opacity = 1; }
+      else { scrollTopBtn.style.opacity = 0; setTimeout(() => { scrollTopBtn.style.display = 'none'; }, 200); }
+    });
+
+    // ── ACCORDION ──
+    function toggleFAQ(item) {
+      const isOpen = item.classList.contains('open');
+      // Close all in same group
+      item.closest('.faq-group, #faq-search-results').querySelectorAll('.faq-item').forEach(i => i.classList.remove('open'));
+      if (!isOpen) item.classList.add('open');
+    }
+
+    // ── CATEGORY SELECT ──
+    function selectCat(cat) {
+      // Reset search
+      document.getElementById('faq-search').value = '';
+      document.getElementById('search-count').textContent = '';
+      document.getElementById('faq-search-results').style.display = 'none';
+      document.getElementById('faq-no-results').style.display = 'none';
+
+      document.querySelectorAll('.cat-card').forEach(c => c.classList.remove('active'));
+      document.getElementById('cat-' + cat).classList.add('active');
+      document.querySelectorAll('.faq-group').forEach(g => g.classList.remove('active'));
+      const group = document.getElementById('group-' + cat);
+      group.classList.add('active');
+      group.scrollIntoView({ behavior: 'smooth', block: 'start' });
+    }
+
+    // ── SEARCH ──
+    function filterFAQ(query) {
+      const q = query.trim().toLowerCase();
+      const searchResults = document.getElementById('faq-search-results');
+      const noResults = document.getElementById('faq-no-results');
+
+      if (!q) {
+        searchResults.style.display = 'none';
+        noResults.style.display = 'none';
+        document.getElementById('search-count').textContent = '';
+        // Re-show active group
+        const activeCat = document.querySelector('.cat-card.active');
+        if (activeCat) {
+          const id = activeCat.id.replace('cat-', '');
+          document.querySelectorAll('.faq-group').forEach(g => g.classList.remove('active'));
+          document.getElementById('group-' + id).classList.add('active');
+        }
+        return;
+      }
+
+      // Hide all groups
+      document.querySelectorAll('.faq-group').forEach(g => g.classList.remove('active'));
+
+      // Search all questions
+      const allItems = document.querySelectorAll('.faq-group .faq-item');
+      const matches = [];
+      allItems.forEach(item => {
+        const qText = item.querySelector('.faq-question-text').textContent.toLowerCase();
+        const aText = item.querySelector('.faq-answer p').textContent.toLowerCase();
+        if (qText.includes(q) || aText.includes(q)) matches.push(item.cloneNode(true));
+      });
+
+      searchResults.innerHTML = '';
+      if (matches.length === 0) {
+        searchResults.style.display = 'none';
+        noResults.style.display = 'block';
+        document.getElementById('search-count').textContent = 'Sin resultados';
+      } else {
+        noResults.style.display = 'none';
+        const header = document.createElement('div');
+        header.className = 'faq-section-title';
+        header.innerHTML = `🔍 Resultados para: <span>"${query}"</span>`;
+        searchResults.appendChild(header);
+        const sub = document.createElement('p');
+        sub.className = 'faq-section-sub';
+        sub.textContent = `Se encontraron ${matches.length} resultado${matches.length > 1 ? 's' : ''}.`;
+        searchResults.appendChild(sub);
+        matches.forEach(m => {
+          m.addEventListener('click', () => toggleFAQ(m));
+          searchResults.appendChild(m);
+        });
+        searchResults.style.display = 'block';
+        document.getElementById('search-count').textContent = `${matches.length} resultado${matches.length > 1 ? 's' : ''} encontrado${matches.length > 1 ? 's' : ''}`;
+      }
+    }
+  </script>
+
+</body>
+</html>
