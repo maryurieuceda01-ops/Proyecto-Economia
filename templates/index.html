@@ -689,13 +689,11 @@
 
     <div class="nav-actions">
 
-      <!-- ✅ CARRITO CORREGIDO -->
       <a href="{{ url_for('carrito') }}" class="cart-icon" title="Ver carrito">
         🛒
         <span class="cart-badge">{{ session.get('carrito', [])|length }}</span>
       </a>
 
-      <!-- Toggle modo claro/oscuro -->
       <button class="theme-toggle" id="themeToggle" title="Cambiar tema">🌙</button>
 
       {% if session.get('usuario_nombre') %}
@@ -791,43 +789,49 @@
       <div class="carousel-container">
         <div class="carousel-track" id="carouselTrack">
 
+          <!-- ── CÁMARAS CCTV ── -->
           <div class="carousel-slide">
-            <a href="{{ url_for('catalogo') }}" class="category-card">
+            <a href="{{ url_for('catalogo') }}?categoria=camaras" class="category-card">
               <div class="cat-img-wrap"><img src="/static/img/Camara.webp" alt="Cámaras CCTV" onerror="this.src='https://images.unsplash.com/photo-1557804506-669a67965ba0?w=400&q=80'"></div>
               <div class="cat-name">Cámaras CCTV</div><div class="cat-count">120+ productos</div>
             </a>
           </div>
 
+          <!-- ── MONITORES ── -->
           <div class="carousel-slide">
-            <a href="{{ url_for('catalogo') }}" class="category-card">
+            <a href="{{ url_for('catalogo') }}?categoria=monitores" class="category-card">
               <div class="cat-img-wrap"><img src="/static/img/monitor_cctv.jpeg" alt="Monitor CCTV" onerror="this.src='https://images.pexels.com/photos/6771607/pexels-photo-6771607.jpeg?auto=compress&cs=tinysrgb&w=600'"></div>
               <div class="cat-name">Monitores</div><div class="cat-count">45+ productos</div>
             </a>
           </div>
 
+          <!-- ── ALARMAS ── -->
           <div class="carousel-slide">
-            <a href="{{ url_for('catalogo') }}" class="category-card">
+            <a href="{{ url_for('catalogo') }}?categoria=alarmas" class="category-card">
               <div class="cat-img-wrap"><img src="/static/img/Alarma.webp" alt="Alarmas" onerror="this.src='https://images.unsplash.com/photo-1558618666-fcd25c85cd64?w=600&q=85'"></div>
               <div class="cat-name">Alarmas</div><div class="cat-count">80+ productos</div>
             </a>
           </div>
 
+          <!-- ── CERCAS ELÉCTRICAS ── -->
           <div class="carousel-slide">
-            <a href="{{ url_for('catalogo') }}" class="category-card">
+            <a href="{{ url_for('catalogo') }}?categoria=cercas" class="category-card">
               <div class="cat-img-wrap"><img src="/static/img/cerca_electrica.avif" alt="Cerca Eléctrica" onerror="this.src='https://images.pexels.com/photos/3805983/pexels-photo-3805983.jpeg?auto=compress&cs=tinysrgb&w=600'"></div>
               <div class="cat-name">Cercas Eléctricas</div><div class="cat-count">30+ productos</div>
             </a>
           </div>
 
+          <!-- ── BIOMÉTRICOS ── -->
           <div class="carousel-slide">
-            <a href="{{ url_for('catalogo') }}" class="category-card">
+            <a href="{{ url_for('catalogo') }}?categoria=biometricos" class="category-card">
               <div class="cat-img-wrap"><img src="/static/img/biometrico.webp" alt="Biométricos" onerror="this.src='https://images.unsplash.com/photo-1563013544-824ae1b704d3?w=600&q=85'"></div>
               <div class="cat-name">Biométricos</div><div class="cat-count">60+ productos</div>
             </a>
           </div>
 
+          <!-- ── FUENTES DE PODER ── -->
           <div class="carousel-slide">
-            <a href="{{ url_for('catalogo') }}" class="category-card">
+            <a href="{{ url_for('catalogo') }}?categoria=fuentes" class="category-card">
               <div class="cat-img-wrap"><img src="/static/img/fuente_poder.jpg" alt="Fuente de Poder" onerror="this.src='https://images.pexels.com/photos/257736/pexels-photo-257736.jpeg?auto=compress&cs=tinysrgb&w=600'"></div>
               <div class="cat-name">Fuentes de Poder</div><div class="cat-count">50+ productos</div>
             </a>
@@ -848,12 +852,14 @@
     <div class="products-grid">
 
       <div class="product-card">
-        <div class="product-img">
-          <img src="/static/img/Cámara_bullet.webp" alt="Cámara 4K tipo bullet">
-          <span class="product-badge">Nuevo</span>
-        </div>
+        <a href="{{ url_for('producto', id=1) }}">
+          <div class="product-img">
+            <img src="/static/img/Cámara_bullet.webp" alt="Cámara 4K tipo bullet">
+            <span class="product-badge">Nuevo</span>
+          </div>
+        </a>
         <div class="product-info">
-          <div class="product-name">Cámara 4K tipo bullet</div>
+          <div class="product-name"><a href="{{ url_for('producto', id=1) }}" style="color:inherit;text-decoration:underline;">Cámara 4K tipo bullet</a></div>
           <div class="product-desc">Visión nocturna 40m, resistente al agua IP67, detección de movimiento.</div>
           <div class="product-footer">
             <div class="product-price">1,100.00 HNL</div>
@@ -863,12 +869,14 @@
       </div>
 
       <div class="product-card">
-        <div class="product-img">
-          <img src="/static/img/NVR.webp" alt="NVR 16 Canales">
-          <span class="product-badge popular">Popular</span>
-        </div>
+        <a href="{{ url_for('producto', id=2) }}">
+          <div class="product-img">
+            <img src="/static/img/NVR.webp" alt="NVR 16 Canales">
+            <span class="product-badge popular">Popular</span>
+          </div>
+        </a>
         <div class="product-info">
-          <div class="product-name">NVR 16 Canales</div>
+          <div class="product-name"><a href="{{ url_for('producto', id=2) }}" style="color:inherit;text-decoration:underline;">NVR 16 Canales</a></div>
           <div class="product-desc">Pantalla Full HD 21", grabación continua, acceso remoto desde app.</div>
           <div class="product-footer">
             <div class="product-price">4,000.00 HNL</div>
@@ -878,12 +886,14 @@
       </div>
 
       <div class="product-card">
-        <div class="product-img">
-          <img src="/static/img/biometrico.webp" alt="Control biométrico">
-          <span class="product-badge oferta">Oferta</span>
-        </div>
+        <a href="{{ url_for('producto', id=3) }}">
+          <div class="product-img">
+            <img src="/static/img/biometrico.webp" alt="Control biométrico">
+            <span class="product-badge oferta">Oferta</span>
+          </div>
+        </a>
         <div class="product-info">
-          <div class="product-name">Control de acceso biométrico</div>
+          <div class="product-name"><a href="{{ url_for('producto', id=3) }}" style="color:inherit;text-decoration:underline;">Control de acceso biométrico</a></div>
           <div class="product-desc">Reconocimiento facial + huella, hasta 3000 usuarios, WiFi integrado.</div>
           <div class="product-footer">
             <div class="product-price">1,700.00 HNL</div>
@@ -893,11 +903,13 @@
       </div>
 
       <div class="product-card">
-        <div class="product-img">
-          <img src="/static/img/Alarma.webp" alt="Kit Alarma Inalámbrica">
-        </div>
+        <a href="{{ url_for('producto', id=4) }}">
+          <div class="product-img">
+            <img src="/static/img/Alarma.webp" alt="Kit Alarma Inalámbrica">
+          </div>
+        </a>
         <div class="product-info">
-          <div class="product-name">Kit Alarma Inalámbrica</div>
+          <div class="product-name"><a href="{{ url_for('producto', id=4) }}" style="color:inherit;text-decoration:underline;">Kit Alarma Inalámbrica</a></div>
           <div class="product-desc">Central + 6 sensores + sirena, app móvil, batería de respaldo 24h.</div>
           <div class="product-footer">
             <div class="product-price">1,900.00 HNL</div>
@@ -926,19 +938,19 @@
         <span class="logo">SECURE<span style="color:var(--gold)">VISION</span></span>
         <p>Soluciones de seguridad electrónica profesional para hogares y empresas a nivel mundial.</p>
         <div class="social-links">
-         <a href="https://www.facebook.com/share/1DSWHvcYjx/" class="social-link">f</a>
-        <a href="https://www.instagram.com/securevisionunah?igsh=MWtqMGJ0cGpwajdjOQ==" class="social-link">ig</a>
+          <a href="https://www.facebook.com/share/1DSWHvcYjx/" class="social-link">f</a>
+          <a href="https://www.instagram.com/securevisionunah?igsh=MWtqMGJ0cGpwajdjOQ==" class="social-link">ig</a>
           <a href="#" class="social-link">wa</a>
         </div>
       </div>
       <div class="footer-col">
         <h4>Productos</h4>
         <ul>
-          <li><a href="{{ url_for('catalogo') }}">Cámaras CCTV</a></li>
-          <li><a href="{{ url_for('catalogo') }}">Monitores</a></li>
-          <li><a href="{{ url_for('catalogo') }}">Alarmas</a></li>
-          <li><a href="{{ url_for('catalogo') }}">Biométricos</a></li>
-          <li><a href="{{ url_for('catalogo') }}">Cercas Eléctricas</a></li>
+          <li><a href="{{ url_for('catalogo') }}?categoria=camaras">Cámaras CCTV</a></li>
+          <li><a href="{{ url_for('catalogo') }}?categoria=monitores">Monitores</a></li>
+          <li><a href="{{ url_for('catalogo') }}?categoria=alarmas">Alarmas</a></li>
+          <li><a href="{{ url_for('catalogo') }}?categoria=biometricos">Biométricos</a></li>
+          <li><a href="{{ url_for('catalogo') }}?categoria=cercas">Cercas Eléctricas</a></li>
         </ul>
       </div>
       <div class="footer-col">
@@ -948,9 +960,9 @@
           <li><a href="{{ url_for('blog') }}">Blog de noticias</a></li>
           <li><a href="{{ url_for('contacto') }}">Contáctanos</a></li>
           <li><a href="{{ url_for('FAQ') }}">Preguntas frecuentes</a></li>
-        </ul> 
+        </ul>
       </div>
-      <div class="footer-col">  
+      <div class="footer-col">
         <h4>Políticas</h4>
         <ul>
           <li><a href="{{ url_for('terminos') }}">Términos generales</a></li>
@@ -1054,16 +1066,14 @@
       heroImageEl.addEventListener('mouseleave', startHeroAutoplay);
     }
 
-    // ── AGREGAR AL CARRITO (Index → sincroniza con Flask) ──
+    // ── AGREGAR AL CARRITO ──
     async function agregarAlCarrito(id, nombre, precio) {
       try {
-        // Primero sincronizamos un solo producto con la sesión Flask
         await fetch('/sync_carrito', {
           method: 'POST',
           headers: { 'Content-Type': 'application/json' },
           body: JSON.stringify({ items: [{ id, name: nombre, price: precio, icon: '📦', category: '', qty: 1 }] })
         });
-        // Actualizar badge
         const badge = document.querySelector('.cart-badge');
         if (badge) badge.textContent = parseInt(badge.textContent || 0) + 1;
         showToast('✓ ' + nombre + ' agregado al carrito');

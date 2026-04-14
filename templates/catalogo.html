@@ -345,14 +345,14 @@
   <aside class="sidebar">
     <div class="sidebar-section">
       <div class="sidebar-title">Categorías</div>
-      <button class="filter-btn active" onclick="filterCategory(this,'todos')">Todos los productos</button>
-      <button class="filter-btn" onclick="filterCategory(this,'camaras')"> <!--📹--> Cámaras CCTV</button>
-      <button class="filter-btn" onclick="filterCategory(this,'monitores')"> <!--🖥️--> Monitores / NVR</button>
-      <button class="filter-btn" onclick="filterCategory(this,'alarmas')"><!--🔔--> Alarmas</button>
-      <button class="filter-btn" onclick="filterCategory(this,'biometricos')"> <!--👆--> Biométricos</button>
-      <button class="filter-btn" onclick="filterCategory(this,'cercas')"> <!--⚡--> Cercas Eléctricas</button>
-      <button class="filter-btn" onclick="filterCategory(this,'fuentes')"> <!--🔌--> Fuentes zde Poder</button>
-      <button class="filter-btn" onclick="filterCategory(this,'almacenamiento')"> <!--💾--> Almacenamiento</button>
+      <button class="filter-btn active" id="filter-todos"        onclick="filterCategory(this,'todos')">Todos los productos</button>
+      <button class="filter-btn"        id="filter-camaras"      onclick="filterCategory(this,'camaras')">Cámaras CCTV</button>
+      <button class="filter-btn"        id="filter-monitores"    onclick="filterCategory(this,'monitores')">Monitores / NVR</button>
+      <button class="filter-btn"        id="filter-alarmas"      onclick="filterCategory(this,'alarmas')">Alarmas</button>
+      <button class="filter-btn"        id="filter-biometricos"  onclick="filterCategory(this,'biometricos')">Biométricos</button>
+      <button class="filter-btn"        id="filter-cercas"       onclick="filterCategory(this,'cercas')">Cercas Eléctricas</button>
+      <button class="filter-btn"        id="filter-fuentes"      onclick="filterCategory(this,'fuentes')">Fuentes de Poder</button>
+      <button class="filter-btn"        id="filter-almacenamiento" onclick="filterCategory(this,'almacenamiento')">Almacenamiento</button>
     </div>
     <div class="sidebar-section">
       <div class="sidebar-title">Precio (HNL)</div>
@@ -401,13 +401,15 @@
       <!-- 1. CÁMARAS CCTV -->
       <div class="product-card" data-id="1" data-category="camaras" data-brand="hikvision" data-price="8400" data-new="1">
         <div class="product-img">
-          <img src="/static/img/Cámara_bullet.webp" alt="Cámara IP 4K" onerror="this.style.display='none'">
+          <a href="{{ url_for('producto', id=1) }}">
+            <img src="/static/img/Cámara_bullet.webp" alt="Cámara IP 4K" onerror="this.style.display='none'">
+          </a>
           <span class="product-badge nuevo">Nuevo</span>
           <button class="btn-wishlist" id="wb1" onclick="toggleFav(1,'Cámara IP 4K Exterior Hikvision',8400,'📹','camaras')">♡</button>
         </div>
         <div class="product-info">
           <div class="product-category">Cámaras CCTV</div>
-          <div class="product-name">Cámara IP 4K Exterior Hikvision</div>
+          <div class="product-name"><a href="{{ url_for('producto', id=1) }}" style="color:inherit;text-decoration:underline;">Cámara IP 4K Exterior Hikvision</a></div>
           <div class="product-desc">Visión nocturna 40m, IP67, detección de movimiento con IA avanzada.</div>
           <div class="product-footer">
             <div class="price-block"><span class="product-price">1,100.00 HNL</span></div>
@@ -423,12 +425,14 @@
       <!-- 2. MONITORES / NVR -->
       <div class="product-card" data-id="2" data-category="monitores" data-brand="hikvision" data-price="4500">
         <div class="product-img">
-          <img src="/static/img/NVR.webp" alt="NVR" onerror="this.style.display='none'">
+          <a href="{{ url_for('producto', id=2) }}">
+            <img src="/static/img/NVR.webp" alt="NVR" onerror="this.style.display='none'">
+          </a>
           <button class="btn-wishlist" id="wb2" onclick="toggleFav(2,'NVR Hikvision 8 Canales 4K',4500,'📼','monitores')">♡</button>
         </div>
         <div class="product-info">
           <div class="product-category">Grabadores / NVR</div>
-          <div class="product-name">NVR Hikvision 16 Canales</div>
+          <div class="product-name"><a href="{{ url_for('producto', id=2) }}" style="color:inherit;text-decoration:underline;">NVR Hikvision 16 Canales</a></div>
           <div class="product-desc">Soporta cámaras hasta 8MP, salida HDMI/VGA, disco duro incluido.</div>
           <div class="product-footer">
             <div class="price-block"><span class="product-price">4,000.00 HNL</span></div>
@@ -444,12 +448,14 @@
       <!-- 3. ALARMAS -->
       <div class="product-card" data-id="3" data-category="alarmas" data-brand="tp-link" data-price="3200">
         <div class="product-img">
-          <img src="/static/img/Alarma.webp" alt="Alarma" onerror="this.style.display='none'">
+          <a href="{{ url_for('producto', id=3) }}">
+            <img src="/static/img/Alarma.webp" alt="Alarma" onerror="this.style.display='none'">
+          </a>
           <button class="btn-wishlist" id="wb3" onclick="toggleFav(3,'Kit Alarma Inalámbrica 6 Zonas',3200,'🔔','alarmas')">♡</button>
         </div>
         <div class="product-info">
           <div class="product-category">Alarmas</div>
-          <div class="product-name">Kit Alarma Inalámbrica 6 Zonas</div>
+          <div class="product-name"><a href="{{ url_for('producto', id=3) }}" style="color:inherit;text-decoration:underline;">Kit Alarma Inalámbrica 6 Zonas</a></div>
           <div class="product-desc">Central + 6 sensores + sirena, app móvil, batería de respaldo 24h.</div>
           <div class="product-footer">
             <div class="price-block"><span class="product-price">1,900.00 HNL</span></div>
@@ -465,13 +471,15 @@
       <!-- 4. BIOMÉTRICOS -->
       <div class="product-card" data-id="4" data-category="biometricos" data-brand="hikvision" data-price="3700" data-sale="1">
         <div class="product-img">
-          <img src="/static/img/biometrico.webp" alt="Biométrico" onerror="this.style.display='none'">
+          <a href="{{ url_for('producto', id=4) }}">
+            <img src="/static/img/biometrico.webp" alt="Biométrico" onerror="this.style.display='none'">
+          </a>
           <span class="product-badge oferta">Oferta</span>
           <button class="btn-wishlist" id="wb4" onclick="toggleFav(4,'Control Biométrico Facial + Huella',3700,'👆','biometricos')">♡</button>
         </div>
         <div class="product-info">
           <div class="product-category">Biométricos</div>
-          <div class="product-name">Control de acceso biométrico</div>
+          <div class="product-name"><a href="{{ url_for('producto', id=4) }}" style="color:inherit;text-decoration:underline;">Control de acceso biométrico</a></div>
           <div class="product-desc">3000 usuarios, WiFi, reconocimiento facial en 0.3 segundos.</div>
           <div class="product-footer">
             <div class="price-block">
@@ -489,14 +497,16 @@
 
       <!-- 5. CERCAS ELÉCTRICAS -->
       <div class="product-card" data-id="5" data-category="cercas" data-brand="uniview" data-price="1890" data-new="1">
-        <div class="product-img"> <!--⚡-->
-          <img src="/static/img/cerca_electrica.avif" alt="Kit Cerca Eléctrica 500m" onerror="this.style.display='none'">
+        <div class="product-img">
+          <a href="{{ url_for('producto', id=5) }}">
+            <img src="/static/img/cerca_electrica.avif" alt="Kit Cerca Eléctrica 500m" onerror="this.style.display='none'">
+          </a>
           <span class="product-badge nuevo">Nuevo</span>
           <button class="btn-wishlist" id="wb5" onclick="toggleFav(5,'Kit Cerca Eléctrica 500m',1890,'⚡','cercas')">♡</button>
         </div>
         <div class="product-info">
           <div class="product-category">Cercas Eléctricas</div>
-          <div class="product-name">Kit Cerca Eléctrica 500m</div>
+          <div class="product-name"><a href="{{ url_for('producto', id=5) }}" style="color:inherit;text-decoration:underline;">Kit Cerca Eléctrica 500m</a></div>
           <div class="product-desc">Energizador 5J, alarma integrada, resistente a lluvia y condiciones extremas.</div>
           <div class="product-footer">
             <div class="price-block"><span class="product-price">1,890.00 HNL</span></div>
@@ -511,13 +521,15 @@
 
       <!-- 6. FUENTES DE PODER -->
       <div class="product-card" data-id="6" data-category="fuentes" data-brand="dahua" data-price="600">
-        <div class="product-img"> <!--🔌-->
-          <img src="/static/img/Fuente_con_respaldo.webp" alt="Fuente 12V 10A con Respaldo" onerror="this.style.display='none'">
+        <div class="product-img">
+          <a href="{{ url_for('producto', id=6) }}">
+            <img src="/static/img/Fuente_con_respaldo.webp" alt="Fuente 12V 10A con Respaldo" onerror="this.style.display='none'">
+          </a>
           <button class="btn-wishlist" id="wb6" onclick="toggleFav(6,'Fuente 12V 10A con Respaldo',600,'🔌','fuentes')">♡</button>
         </div>
         <div class="product-info">
           <div class="product-category">Fuentes de Poder</div>
-          <div class="product-name">Fuente 12V 10A con Respaldo</div>
+          <div class="product-name"><a href="{{ url_for('producto', id=6) }}" style="color:inherit;text-decoration:underline;">Fuente 12V 10A con Respaldo</a></div>
           <div class="product-desc">Para 8 cámaras simultáneas, batería de respaldo incluida, caja metálica.</div>
           <div class="product-footer">
             <div class="price-block"><span class="product-price">900.00 HNL</span></div>
@@ -532,14 +544,16 @@
 
       <!-- 7. ALMACENAMIENTO -->
       <div class="product-card" data-id="7" data-category="almacenamiento" data-brand="wd" data-price="2900" data-sale="1">
-        <div class="product-img"> <!--💾-->
-          <img src="/static/img/Disco_duro_WD.webp" alt="Disco Duro WD Purple 4TB" onerror="this.style.display='none'">
+        <div class="product-img">
+          <a href="{{ url_for('producto', id=7) }}">
+            <img src="/static/img/Disco_duro_WD.webp" alt="Disco Duro WD Purple 4TB" onerror="this.style.display='none'">
+          </a>
           <span class="product-badge oferta">Oferta</span>
           <button class="btn-wishlist" id="wb7" onclick="toggleFav(7,'Disco Duro WD Purple 4TB',2900,'💾','almacenamiento')">♡</button>
         </div>
         <div class="product-info">
           <div class="product-category">Almacenamiento</div>
-          <div class="product-name">Disco Duro WD Purple 4TB</div>
+          <div class="product-name"><a href="{{ url_for('producto', id=7) }}" style="color:inherit;text-decoration:underline;">Disco Duro WD Purple 4TB</a></div>
           <div class="product-desc">Especial para videovigilancia 24/7, tecnología AllFrame para mínimas pérdidas.</div>
           <div class="product-footer">
             <div class="price-block">
@@ -565,7 +579,7 @@
       <span class="logo">SECURE<span style="color:var(--gold)">VISION</span></span>
       <p>Soluciones de seguridad electrónica profesional para hogares y empresas a nivel mundial.</p>
       <div class="social-links">
-       <a href="https://www.facebook.com/share/1DSWHvcYjx/" class="social-link">f</a>
+        <a href="https://www.facebook.com/share/1DSWHvcYjx/" class="social-link">f</a>
         <a href="https://www.instagram.com/securevisionunah?igsh=MWtqMGJ0cGpwajdjOQ==" class="social-link">ig</a>
         <a href="#" class="social-link">wa</a>
       </div>
@@ -573,11 +587,11 @@
     <div class="footer-col">
       <h4>Productos</h4>
       <ul>
-        <li><a href="{{ url_for('catalogo') }}">Cámaras CCTV</a></li>
-        <li><a href="{{ url_for('catalogo') }}">Monitores</a></li>
-        <li><a href="{{ url_for('catalogo') }}">Alarmas</a></li>
-        <li><a href="{{ url_for('catalogo') }}">Biométricos</a></li>
-        <li><a href="{{ url_for('catalogo') }}">Cercas Eléctricas</a></li>
+        <li><a href="{{ url_for('catalogo') }}?categoria=camaras">Cámaras CCTV</a></li>
+        <li><a href="{{ url_for('catalogo') }}?categoria=monitores">Monitores</a></li>
+        <li><a href="{{ url_for('catalogo') }}?categoria=alarmas">Alarmas</a></li>
+        <li><a href="{{ url_for('catalogo') }}?categoria=biometricos">Biométricos</a></li>
+        <li><a href="{{ url_for('catalogo') }}?categoria=cercas">Cercas Eléctricas</a></li>
       </ul>
     </div>
     <div class="footer-col">
@@ -926,9 +940,27 @@
   }
 
   document.getElementById('searchInput').addEventListener('input', applyFilters);
-  applyFilters();
-  renderCart();
-  renderFavs();
+
+  // ── LEER CATEGORÍA DESDE URL AL CARGAR ───────────────────────────────────
+  // Ejemplo: /catalogo?categoria=alarmas → activa el filtro "alarmas" automáticamente
+  (function initFromURL() {
+    const params = new URLSearchParams(window.location.search);
+    const cat = params.get('categoria');
+
+    if (cat && cat !== 'todos') {
+      const targetBtn = document.getElementById('filter-' + cat);
+      if (targetBtn) {
+        // Desactivar "Todos" y activar la categoría recibida
+        document.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('active'));
+        targetBtn.classList.add('active');
+        currentCategory = cat;
+      }
+    }
+
+    applyFilters();
+    renderCart();
+    renderFavs();
+  })();
 </script>
 </body>
 </html>

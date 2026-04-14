@@ -1,9 +1,4 @@
-10) imagenes 
 13) enlaces del pie de pagina 
-14) probar el chekout 
-15) descargar pdf e imprimir factura
 16) sello de verificacion Código de verificación, Simulación de QR que funcionen 
-18) enlace de producto en catalogo 
-19) contador dinamico de carrito 
 20) funcione los botones de resolucion y colores del producto
 21) botones de redes sociales en producto 
