@@ -621,6 +621,16 @@
     .footer-bottom { border-top: 1px solid var(--border); padding-top: 24px; display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 12px; }
     .footer-bottom p { color: var(--gray); font-size: 0.75rem; letter-spacing: 1px; }
 
+    footer a {
+  color: #fff;
+  font-size: 24px;
+  margin: 0 10px;
+  transition: color 0.3s ease;
+}
+footer a:hover {
+  color:#0066ff; /* Cambia el color al pasar el mouse */
+}
+
     .scroll-top {
       position: fixed; bottom: 32px; right: 32px;
       width: 44px; height: 44px;
@@ -675,6 +685,7 @@
   </style>
 </head>
 <body>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
 
   <!-- NAVBAR -->
   <nav>
@@ -930,9 +941,12 @@
         <span class="logo">SECURE<span style="color:var(--blue)">VISION</span></span>
         <p>Soluciones de seguridad electrónica profesional para hogares y empresas a nivel mundial.</p>
         <div class="social-links">
-          <a href="https://www.facebook.com/share/1DSWHvcYjx/" class="social-link">f</a>
+          <!--<a href="https://www.facebook.com/share/1DSWHvcYjx/" class="social-link">f</a>
           <a href="https://www.instagram.com/securevisionunah?igsh=MWtqMGJ0cGpwajdjOQ==" class="social-link">ig</a>
-          <a href="#" class="social-link">wa</a>
+          <a href="#" class="social-link">wa</a> -->
+           <a href="social-link" target="_blank"><i class="fab fa-whatsapp"></i></a>
+           <a href="https://www.instagram.com/securevisionunah?igsh=MWtqMGJ0cGpwajdjOQ==" target="_blank"><i class="fab fa-instagram"></i></a>
+           <a href="https://www.facebook.com/share/1DSWHvcYjx/" target="_blank"><i class="fab fa-facebook"></i></a>
         </div>
       </div>
       <div class="footer-col">
@@ -967,7 +981,7 @@
     </div>
     <div class="footer-bottom">
       <p>© 2026 SecureVision. Todos los derechos reservados.</p>
-      <p>Hecho con ❤️ para la seguridad de tu familia</p>
+      <p>Hecho con 💙 para la seguridad de tu familia</p>
     </div>
   </footer>
 
