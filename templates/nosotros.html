@@ -327,11 +327,15 @@
  
     footer { background: var(--bg2); border-top: 1px solid var(--border); padding: 60px; }
     .footer-grid { display: grid; grid-template-columns: 2fr 1fr 1fr 1fr; gap: 40px; margin-bottom: 40px; }
+    .footer-brand .logo { font-size: 1.4rem; margin-bottom: 13px; display: block; }
+    .footer-brand p { color: var(--gray); font-size: 0.82rem; line-height: 1.8; max-width: 260px; text-align: left; margin: 0; }
+    .social-links { display: flex; gap: 8px; }
+    .social-link { width: 31px; height: 31px; border: 1px solid var(--border); border-radius: 6px; display: flex; align-items: center; justify-content: center; color: var(--gray); font-size: 0.78rem; text-decoration: none; transition: all 0.2s; }
+    .social-link:hover { border-color: var(--blue); color: var(--blue); background: rgba(0,102,255,0.15); }
     .footer-col h4 { font-family: 'Rajdhani', sans-serif; font-size: 0.85rem; letter-spacing: 2px; text-transform: uppercase; color: var(--white); margin-bottom: 18px; }
     .footer-col ul { list-style: none; }
     .footer-col ul li { margin-bottom: 10px; }
     .footer-col ul li a { color: var(--gray); text-decoration: none; font-size: 0.82rem; transition: color 0.2s; }
-    .footer-brand p { color: var(--gray); font-size: 0.82rem; line-height: 1.8; max-width: 260px; text-align: left; margin: 0; }
     .footer-col ul li a:hover { color: var(--blue); }
     .footer-bottom { border-top: 1px solid var(--border); padding-top: 24px; display: flex; justify-content: space-between; align-items: center; }
     .footer-bottom p { color: var(--gray); font-size: 0.75rem; }
@@ -453,11 +457,11 @@
  
       <!-- Tab buttons -->
       <div id="valores-tabs" style="display:flex; flex-wrap:nowrap; gap:8px; margin-bottom:32px;">
-        <button class="val-tab val-tab-active" data-idx="0" onclick="selectValor(0)">❤️ Pasión por el Cliente</button>
-        <button class="val-tab" data-idx="1" onclick="selectValor(1)">🚀 Innovación Sin Límites</button>
-        <button class="val-tab" data-idx="2" onclick="selectValor(2)">🔒 Confianza Blindada</button>
-        <button class="val-tab" data-idx="3" onclick="selectValor(3)">⭐ Calidad de Excelencia</button>
-        <button class="val-tab" data-idx="4" onclick="selectValor(4)">⚡ Agilidad y Respuesta</button>
+        <button class="val-tab val-tab-active" data-idx="0" onclick="selectValor(0)"> <!--❤️--> Pasión por el Cliente</button>
+        <button class="val-tab" data-idx="1" onclick="selectValor(1)"> <!--🚀--> Innovación Sin Límites</button>
+        <button class="val-tab" data-idx="2" onclick="selectValor(2)"> <!--🔒--> Confianza Blindada</button>
+        <button class="val-tab" data-idx="3" onclick="selectValor(3)"> <!--⭐--> Calidad de Excelencia</button>
+        <button class="val-tab" data-idx="4" onclick="selectValor(4)"> <!--⚡--> Agilidad y Respuesta</button>
       </div>
  
       <!-- Content panel -->

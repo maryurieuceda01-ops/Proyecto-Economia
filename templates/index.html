@@ -390,11 +390,11 @@
       width: 100%;
       aspect-ratio: 4/3;
       background: var(--card-bg);
-      border: 1px solid var(--gold-border);
+      border: 1px solid var(--tag-border);
       border-radius: 12px;
       display: flex; align-items: center; justify-content: center;
       overflow: hidden;
-      box-shadow: 0 0 60px rgba(0,102,255,0.15), 0 0 30px var(--gold-glow), 0 0 0 1px var(--gold-border);
+      box-shadow: 0 0 60px rgba(0,102,255,0.15), 0 0 30px var(--blue-glow), 0 0 0 1px var(--tag-border);
       position: relative;
     }
 
@@ -402,7 +402,7 @@
       content: '';
       position: absolute;
       width: 24px; height: 24px;
-      border-color: var(--gold);
+      border-color: var(--blue);
       border-style: solid;
       z-index: 3;
     }
@@ -467,14 +467,14 @@
     .stat:hover { background: var(--stat-hover); }
 
     .stat-number { font-family: 'Rajdhani', sans-serif; font-size: 2.4rem; font-weight: 700; color: var(--blue); line-height: 1; }
-    .stat:first-child .stat-number { color: var(--gold); }
+    .stat:first-child .stat-number { color: var(--blue); }
     .stat-label { font-size: 0.72rem; color: var(--gray); letter-spacing: 2px; text-transform: uppercase; margin-top: 6px; }
 
     /* ── SECCIONES ── */
     .section { padding: 90px 60px; }
     .section-header { margin-bottom: 50px; }
     .section-tag { font-size: 0.72rem; letter-spacing: 3px; text-transform: uppercase; color: var(--blue); margin-bottom: 12px; }
-    .section-tag.gold { color: var(--gold); }
+    .section-tag.gold { color: var(--blue); }
     .section-title { font-family: 'Rajdhani', sans-serif; font-size: 2.4rem; font-weight: 700; letter-spacing: 1px; }
     .section-title span { color: var(--blue); }
 
@@ -507,13 +507,13 @@
     }
 
     .category-card:hover::before { opacity: 1; }
-    .category-card:hover { border-color: var(--gold); transform: translateY(-6px); box-shadow: 0 16px 40px rgba(201,168,76,0.18), 0 0 0 1px var(--gold-border); }
+    .category-card:hover { border-color: var(--blue-glow); transform: translateY(-6px); box-shadow: 0 16px 40px rgba(201,168,76,0.18), 0 0 0 1px var(--tag-border); }
 
     .cat-img-wrap { width: 100%; height: 200px; margin-bottom: 16px; border-radius: 6px; overflow: hidden; border: 1px solid var(--border); }
     .cat-img-wrap img { width: 100%; height: 100%; object-fit: cover; transition: transform 0.4s ease; }
     .category-card:hover .cat-img-wrap img { transform: scale(1.07); }
     .cat-name { font-family: 'Rajdhani', sans-serif; font-size: 1rem; font-weight: 600; letter-spacing: 1px; text-transform: uppercase; color: var(--white); transition: color 0.25s; }
-    .category-card:hover .cat-name { color: var(--gold-light); }
+    .category-card:hover .cat-name { color: var(--blue); }
     .cat-count { font-size: 0.72rem; color: var(--gray); margin-top: 4px; }
 
     .carousel-btn {
@@ -594,8 +594,8 @@
 
     .promo-content { position: relative; z-index: 1; }
     .promo-content h2 { font-family: 'Rajdhani', sans-serif; font-size: 2rem; font-weight: 700; margin-bottom: 10px; }
-    .promo-content h2 span { color: var(--gold); }
-    .promo-gold-line { width: 48px; height: 2px; background: linear-gradient(90deg, var(--gold), transparent); margin-bottom: 16px; }
+    .promo-content h2 span { color: var(--blue-glow); }
+    .promo-gold-line { width: 48px; height: 2px; background: linear-gradient(90deg, var(--blue-glow), transparent); margin-bottom: 16px; }
     .promo-content p { color: var(--gray); font-size: 0.9rem; max-width: 400px; line-height: 1.7; }
 
     /* ── MARCAS ── */
@@ -603,7 +603,7 @@
     .brands-label { text-align: center; font-size: 0.7rem; letter-spacing: 3px; text-transform: uppercase; color: var(--gray); margin-bottom: 28px; }
     .brands-row { display: flex; justify-content: center; align-items: center; gap: 48px; flex-wrap: wrap; }
     .brand-item { font-family: 'Rajdhani', sans-serif; font-size: 1.1rem; font-weight: 700; letter-spacing: 2px; color: var(--gray); text-transform: uppercase; opacity: 0.5; transition: opacity 0.2s; }
-    .brand-item:hover { opacity: 1; color: var(--gold); }
+    /*.brand-item:hover { opacity: 1; color: var(--blue-glow); }
 
     /* ── FOOTER ── */
     footer { background: var(--footer-bg); border-top: 1px solid var(--border); padding: 60px; }
@@ -612,12 +612,12 @@
     .footer-brand p { color: var(--gray); font-size: 0.82rem; line-height: 1.8; max-width: 260px; margin-bottom: 20px; }
     .social-links { display: flex; gap: 10px; }
     .social-link { width: 34px; height: 34px; border: 1px solid var(--border); border-radius: 6px; display: flex; align-items: center; justify-content: center; color: var(--gray); font-size: 0.9rem; text-decoration: none; transition: all 0.2s; }
-    .social-link:hover { border-color: var(--gold); color: var(--gold); background: var(--gold-glow); }
+    .social-link:hover { border-color: var(--blue); color: var(--blue); background: var(--blue-glow); }
     .footer-col h4 { font-family: 'Rajdhani', sans-serif; font-size: 0.85rem; letter-spacing: 2px; text-transform: uppercase; color: var(--white); margin-bottom: 18px; }
     .footer-col ul { list-style: none; }
     .footer-col ul li { margin-bottom: 10px; }
     .footer-col ul li a { color: var(--gray); text-decoration: none; font-size: 0.82rem; transition: color 0.2s; }
-    .footer-col ul li a:hover { color: var(--gold); }
+    .footer-col ul li a:hover { color: var(--blue-glow); }
     .footer-bottom { border-top: 1px solid var(--border); padding-top: 24px; display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 12px; }
     .footer-bottom p { color: var(--gray); font-size: 0.75rem; letter-spacing: 1px; }
 
@@ -923,7 +923,7 @@
   <footer>
     <div class="footer-grid">
       <div class="footer-brand">
-        <span class="logo">SECURE<span style="color:var(--gold)">VISION</span></span>
+        <span class="logo">SECURE<span style="color:var(--blue)">VISION</span></span>
         <p>Soluciones de seguridad electrónica profesional para hogares y empresas a nivel mundial.</p>
         <div class="social-links">
          <a href="https://www.facebook.com/share/1DSWHvcYjx/" class="social-link">f</a>
