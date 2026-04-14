@@ -621,109 +621,95 @@
 </footer>
 
 <script>
-  var _carritoRaw = {{ carrito | tojson }};
+  // --- CONFIGURACIÓN DE DATOS INICIALES Y PERSISTENCIA ---
+  var _carritoRaw = {{ carrito | tojson if carrito else '[]' }};
   var _urlCarrito = "{{ url_for('carrito') }}";
-</script>
-<script>
-  let cart = _carritoRaw.map(item => ({
-    id: item.id, name: item.nombre, price: item.precio,
-    icon: item.emoji, category: item.categoria, qty: item.cantidad
-  }));
 
-  let favs = {};
+  // Inicialización: Prioriza LocalStorage sobre los datos del servidor para mantener la sesión
+  let cart = [];
+  try {
+    const savedCart = localStorage.getItem('sc_cart');
+    if (savedCart && savedCart !== '[]') {
+      cart = JSON.parse(savedCart);
+    } else {
+      cart = _carritoRaw.map(item => ({
+        id: Number(item.id), 
+        name: item.nombre, 
+        price: parseFloat(item.precio),
+        icon: item.emoji || '📦', 
+        category: item.categoria, 
+        qty: item.cantidad || 1
+      }));
+    }
+  } catch (e) { cart = []; }
+
+  let favs = JSON.parse(localStorage.getItem('sc_favs')) || [];
   let currentCategory = 'todos';
   let activeDiscount = 0;
 
+  // Al cargar el documento
+  document.addEventListener('DOMContentLoaded', () => {
+    syncStorage();
+    renderCart();
+    renderFavs();
+    applyFilters();
+  });
+
+  function syncStorage() {
+    localStorage.setItem('sc_cart', JSON.stringify(cart));
+    localStorage.setItem('sc_favs', JSON.stringify(favs));
+  }
+
   // ── Datos para el modal de vista previa ──────────────────────────────────
   const PREVIEW_DATA = {
-    1: {
-      name: 'Cámara IP 4K Exterior Hikvision', cat: 'Cámaras CCTV',
-      price: 8400, priceOld: null, icon: '📹', imgSrc: '/static/img/Cámara_bullet.webp', category: 'camaras',
-      desc: 'Cámara bullet de alta resolución diseñada para exteriores exigentes. Ideal para vigilar perímetros, estacionamientos y áreas industriales con imagen nítida en cualquier condición de luz.',
-      specs: ['Resolución 4K (8 MP)', 'Visión nocturna infrarroja hasta 40 m', 'Resistencia IP67 a agua y polvo', 'Detección de movimiento con inteligencia artificial', 'PoE integrado — un solo cable de datos y alimentación']
-    },
-    2: {
-      name: 'NVR Hikvision 8 Canales 4K', cat: 'Grabadores / NVR',
-      price: 4500, priceOld: null, icon: '📼', imgSrc: '/static/img/NVR.webp', category: 'monitores',
-      desc: 'Grabador de video en red de alto rendimiento para sistemas de hasta 8 cámaras IP. Diseñado para instalaciones residenciales y comerciales que requieren grabación continua y acceso remoto.',
-      specs: ['8 canales con soporte hasta 8 MP por cámara', 'Salidas HDMI y VGA simultáneas', 'Disco duro incluido para grabación 24/7', 'Acceso remoto vía app móvil Hik-Connect', 'Detección de movimiento inteligente']
-    },
-    3: {
-      name: 'Kit Alarma Inalámbrica 6 Zonas', cat: 'Alarmas',
-      price: 3200, priceOld: null, icon: '🔔', imgSrc: '/static/img/Alarma.webp', category: 'alarmas',
-      desc: 'Sistema de alarma completo listo para instalar. Incluye central, sensores y sirena. Control total desde tu smartphone, sin necesidad de técnico para la configuración básica.',
-      specs: ['Central inalámbrica con 6 zonas independientes', '6 sensores de movimiento PIR incluidos', 'Sirena de 110 dB integrada', 'Batería de respaldo de 24 horas', 'App móvil con notificaciones en tiempo real']
-    },
-    4: {
-      name: 'Control Biométrico Facial + Huella', cat: 'Biométricos',
-      price: 3700, priceOld: 4890, icon: '👆', imgSrc: '/static/img/biometrico.webp', category: 'biometricos',
-      desc: 'Terminal de control de acceso de doble verificación: reconocimiento facial y huella dactilar. Perfecto para empresas, oficinas y condominios que requieren registro de asistencia y control de entradas.',
-      specs: ['Capacidad para 3,000 usuarios registrados', 'Reconocimiento facial en menos de 0.3 segundos', 'Conectividad WiFi y LAN', 'Pantalla táctil a color de 4.3"', 'Exportación de reportes de asistencia en Excel']
-    },
-    5: {
-      name: 'Kit Cerca Eléctrica 500m', cat: 'Cercas Eléctricas',
-      price: 1890, priceOld: null, icon: '⚡', imgSrc: null, category: 'cercas',
-      desc: 'Kit completo para instalación de cerca eléctrica perimetral de hasta 500 metros. Proporciona una barrera disuasiva eficaz para propiedades residenciales e industriales.',
-      specs: ['Energizador de 5 Joules de alta potencia', 'Alarma sonora integrada ante corte o cortocircuito', 'Resistente a lluvia, humedad y corrosión', 'Cobertura perimetral de hasta 500 m lineales', 'Panel de control con indicadores LED de estado']
-    },
-    6: {
-      name: 'Fuente 12V 10A con Respaldo', cat: 'Fuentes de Poder',
-      price: 600, priceOld: null, icon: '🔌', imgSrc: null, category: 'fuentes',
-      desc: 'Fuente de alimentación regulada para sistemas de videovigilancia. Con batería de respaldo integrada garantiza la continuidad del sistema ante cortes de energía eléctrica.',
-      specs: ['Voltaje de salida 12V DC estabilizado', 'Corriente máxima 10A — alimenta hasta 8 cámaras', 'Batería de respaldo incluida (UPS integrado)', 'Caja metálica con protección contra cortocircuitos', 'Indicadores de carga y estado de batería']
-    },
-    7: {
-      name: 'Disco Duro WD Purple 4TB', cat: 'Almacenamiento',
-      price: 2900, priceOld: 3400, icon: '💾', imgSrc: null, category: 'almacenamiento',
-      desc: 'Disco duro diseñado exclusivamente para sistemas de videovigilancia con grabación continua. La tecnología AllFrame optimiza la compatibilidad con DVR y NVR reduciendo la pérdida de fotogramas.',
-      specs: ['Capacidad de 4 TB para almacenamiento extendido', 'Operación continua 24 horas, 7 días a la semana', 'Tecnología AllFrame para grabación sin pérdidas', 'Compatible con la mayoría de DVR y NVR del mercado', 'Garantía de 3 años por el fabricante']
-    }
+    1: { name: 'Cámara IP 4K Exterior Hikvision', cat: 'Cámaras CCTV', price: 8400, priceOld: null, icon: '📹', imgSrc: '/static/img/Cámara_bullet.webp', category: 'camaras', desc: 'Cámara bullet de alta resolución diseñada para exteriores exigentes.', specs: ['Resolución 4K (8 MP)', 'Visión nocturna infrarroja hasta 40 m', 'Resistencia IP67', 'PoE integrado'] },
+    2: { name: 'NVR Hikvision 8 Canales 4K', cat: 'Grabadores / NVR', price: 4500, priceOld: null, icon: '📼', imgSrc: '/static/img/NVR.webp', category: 'monitores', desc: 'Grabador de video en red de alto rendimiento.', specs: ['8 canales', 'Salidas HDMI/VGA', 'Acceso remoto Hik-Connect'] },
+    3: { name: 'Kit Alarma Inalámbrica 6 Zonas', cat: 'Alarmas', price: 3200, priceOld: null, icon: '🔔', imgSrc: '/static/img/Alarma.webp', category: 'alarmas', desc: 'Sistema de alarma completo listo para instalar.', specs: ['6 zonas independientes', 'Sirena 110 dB', 'Notificaciones app'] },
+    4: { name: 'Control Biométrico Facial + Huella', cat: 'Biométricos', price: 3700, priceOld: 4890, icon: '👆', imgSrc: '/static/img/biometrico.webp', category: 'biometricos', desc: 'Terminal de control de acceso de doble verificación.', specs: ['3,000 usuarios', 'Reconocimiento facial < 0.3s', 'WiFi y LAN'] },
+    5: { name: 'Kit Cerca Eléctrica 500m', cat: 'Cercas Eléctricas', price: 1890, priceOld: null, icon: '⚡', imgSrc: null, category: 'cercas', desc: 'Kit completo para cerca eléctrica perimetral.', specs: ['Energizador 5 Joules', 'Alarma por corte', 'Hasta 500m'] },
+    6: { name: 'Fuente 12V 10A con Respaldo', cat: 'Fuentes de Poder', price: 600, priceOld: null, icon: '🔌', imgSrc: null, category: 'fuentes', desc: 'Fuente regulada con batería de respaldo.', specs: ['Salida 12V DC', 'Corriente 10A', 'Caja metálica'] },
+    7: { name: 'Disco Duro WD Purple 4TB', cat: 'Almacenamiento', price: 2900, priceOld: 3400, icon: '💾', imgSrc: null, category: 'almacenamiento', desc: 'Disco duro diseñado para videovigilancia 24/7.', specs: ['Capacidad 4 TB', 'Tecnología AllFrame', 'Garantía 3 años'] }
   };
 
   // ── Vista previa ─────────────────────────────────────────────────────────
   function openPreview(id) {
     const p = PREVIEW_DATA[id];
     if (!p) return;
-
     const imgEl = document.getElementById('previewImg');
-    if (p.imgSrc) {
-      imgEl.innerHTML = '<img src="' + p.imgSrc + '" alt="' + p.name + '" onerror="this.parentElement.innerHTML=\'' + p.icon + '\'">';
-    } else {
-      imgEl.innerHTML = p.icon;
-    }
-
+    imgEl.innerHTML = p.imgSrc ? `<img src="${p.imgSrc}" alt="${p.name}" onerror="this.parentElement.innerHTML='${p.icon}'">` : p.icon;
     document.getElementById('previewCat').textContent = p.cat;
     document.getElementById('previewName').textContent = p.name;
     document.getElementById('previewDesc').textContent = p.desc;
-    document.getElementById('previewSpecs').innerHTML = p.specs.map(s => '<li>' + s + '</li>').join('');
+    document.getElementById('previewSpecs').innerHTML = p.specs.map(s => `<li>${s}</li>`).join('');
     document.getElementById('previewPrice').textContent = p.price.toLocaleString('es-HN', {minimumFractionDigits: 2}) + ' HNL';
 
     const oldEl = document.getElementById('previewPriceOld');
     if (p.priceOld) {
       oldEl.textContent = p.priceOld.toLocaleString('es-HN', {minimumFractionDigits: 2}) + ' HNL';
       oldEl.style.display = 'block';
-    } else {
-      oldEl.style.display = 'none';
-    }
+    } else { oldEl.style.display = 'none'; }
 
+    const isFav = favs.some(f => Number(f.id) === Number(id));
     const favBtn = document.getElementById('previewFavBtn');
-    favBtn.textContent = favs[id] ? '♥' : '♡';
-    favBtn.className = 'btn-fav-card' + (favs[id] ? ' active' : '');
+    favBtn.textContent = isFav ? '♥' : '♡';
+    favBtn.className = 'btn-fav-card' + (isFav ? ' active' : '');
     favBtn.onclick = () => { toggleFav(id, p.name, p.price, p.icon, p.category); syncPreviewFav(id); };
 
     document.getElementById('previewCartBtn').onclick = () => {
       addToCart(id, p.name, p.price, p.icon, p.category);
       closePreview();
     };
-
     document.getElementById('previewOverlay').classList.add('show');
     document.body.style.overflow = 'hidden';
   }
 
   function syncPreviewFav(id) {
+    const isFav = favs.some(f => Number(f.id) === Number(id));
     const favBtn = document.getElementById('previewFavBtn');
-    favBtn.textContent = favs[id] ? '♥' : '♡';
-    favBtn.className = 'btn-fav-card' + (favs[id] ? ' active' : '');
+    if(favBtn) {
+        favBtn.textContent = isFav ? '♥' : '♡';
+        favBtn.classList.toggle('active', isFav);
+    }
   }
 
   function closePreview() {
@@ -731,17 +717,12 @@
     document.body.style.overflow = '';
   }
 
-  function handleOverlayClick(e) {
-    if (e.target === document.getElementById('previewOverlay')) closePreview();
-  }
-
-  // ── Hamburger ────────────────────────────────────────────────────────────
+  // ── Hamburger & Paneles ──────────────────────────────────────────────────
   const hbg = document.getElementById('hamburger');
   const mmenu = document.getElementById('mobileMenu');
   hbg.addEventListener('click', () => { hbg.classList.toggle('open'); mmenu.classList.toggle('open'); });
   mmenu.querySelectorAll('a').forEach(a => a.addEventListener('click', () => { hbg.classList.remove('open'); mmenu.classList.remove('open'); }));
 
-  // ── Panels ───────────────────────────────────────────────────────────────
   function openPanel(t) {
     closePanel();
     document.getElementById(t === 'cart' ? 'cartPanel' : 'favPanel').classList.add('open');
@@ -752,7 +733,6 @@
     document.getElementById('panelOverlay').classList.remove('show');
   }
 
-  // ── Toast ────────────────────────────────────────────────────────────────
   function showToast(msg, type = 'blue') {
     const t = document.getElementById('toast');
     t.textContent = msg; t.className = 'show ' + type;
@@ -760,11 +740,18 @@
     t._t = setTimeout(() => t.className = '', 2600);
   }
 
-  // ── Carrito ──────────────────────────────────────────────────────────────
+  // ── Carrito (Lógica Corregida) ──────────────────────────────────────────
   function addToCart(id, name, price, icon, category) {
-    const item = cart.find(i => i.id === id);
-    if (item) item.qty++;
-    else cart.push({id, name, price, icon, category, qty: 1});
+    const numericId = Number(id);
+    const item = cart.find(i => Number(i.id) === numericId);
+
+    if (item) {
+      item.qty++;
+    } else {
+      cart.push({id: numericId, name, price: parseFloat(price), icon, category, qty: 1});
+    }
+    
+    syncStorage();
     renderCart();
     openPanel('cart');
     showToast('✓ ' + name + ' agregado', 'blue');
@@ -772,10 +759,13 @@
   }
 
   function changeQty(id, delta) {
-    const item = cart.find(i => i.id === id);
+    const numericId = Number(id);
+    const item = cart.find(i => Number(i.id) === numericId);
     if (!item) return;
     item.qty += delta;
-    if (item.qty <= 0) cart = cart.filter(i => i.id !== id);
+    if (item.qty <= 0) cart = cart.filter(i => Number(i.id) !== numericId);
+    
+    syncStorage();
     renderCart();
     syncCarritoSilencioso();
   }
@@ -799,7 +789,19 @@
     } else {
       body.innerHTML = cart.map(item => {
         sub += item.price * item.qty; count += item.qty;
-        return '<div class="cart-item"><div class="cart-item-img">' + item.icon + '</div><div class="cart-item-info"><div class="cart-item-name">' + item.name + '</div><div class="cart-item-price">' + item.price.toLocaleString() + ' HNL</div><div class="cart-item-actions"><button class="qty-btn" onclick="changeQty(' + item.id + ',-1)">−</button><span class="qty-num">' + item.qty + '</span><button class="qty-btn" onclick="changeQty(' + item.id + ',1)">+</button><button class="btn-remove" onclick="changeQty(' + item.id + ',-' + item.qty + ')">Eliminar</button></div></div></div>';
+        return `<div class="cart-item">
+            <div class="cart-item-img">${item.icon}</div>
+            <div class="cart-item-info">
+                <div class="cart-item-name">${item.name}</div>
+                <div class="cart-item-price">${item.price.toLocaleString()} HNL</div>
+                <div class="cart-item-actions">
+                    <button class="qty-btn" onclick="changeQty(${item.id},-1)">−</button>
+                    <span class="qty-num">${item.qty}</span>
+                    <button class="qty-btn" onclick="changeQty(${item.id},1)">+</button>
+                    <button class="btn-remove" onclick="changeQty(${item.id},-${item.qty})">Eliminar</button>
+                </div>
+            </div>
+        </div>`;
       }).join('');
     }
     const desc = sub * activeDiscount;
@@ -810,7 +812,7 @@
     document.getElementById('cartTotal').textContent = (sub - desc).toLocaleString('es-HN', {minimumFractionDigits: 2}) + ' HNL';
   }
 
-  // ── Cupón ────────────────────────────────────────────────────────────────
+  // ── Cupones y Checkout ──────────────────────────────────────────────────
   function validateCoupon() {
     const val = document.getElementById('couponInput').value.trim().toUpperCase();
     const msg = document.getElementById('couponMsg');
@@ -819,7 +821,7 @@
       activeDiscount = codes[val];
       msg.style.cssText = 'display:block;color:#2dc653';
       msg.textContent = val + ': ' + Math.round(activeDiscount * 100) + '% aplicado!';
-      showToast('Cupón ' + val + ' aplicado ✓', 'gold');
+      showToast('Cupón aplicado ✓', 'gold');
     } else {
       activeDiscount = 0;
       msg.style.cssText = 'display:block;color:#e63946';
@@ -836,45 +838,60 @@
 
   // ── Favoritos ────────────────────────────────────────────────────────────
   function toggleFav(id, name, price, icon, category) {
-    const wb = document.getElementById('wb' + id);
-    const fb = document.getElementById('fb' + id);
-    if (favs[id]) {
-      delete favs[id];
-      if (wb) { wb.classList.remove('active'); wb.textContent = '♡'; }
-      if (fb) { fb.classList.remove('active'); fb.textContent = '♡'; }
+    const numericId = Number(id);
+    const idx = favs.findIndex(f => Number(f.id) === numericId);
+    
+    if (idx > -1) {
+      favs.splice(idx, 1);
       showToast('Eliminado de favoritos', 'red');
     } else {
-      favs[id] = {id, name, price, icon, category};
-      if (wb) { wb.classList.add('active'); wb.textContent = '♥'; }
-      if (fb) { fb.classList.add('active'); fb.textContent = '♥'; }
+      favs.push({id: numericId, name, price, icon, category});
       showToast('♥ Agregado a favoritos', 'gold');
     }
+    
+    syncStorage();
     renderFavs();
+    
+    // Actualización visual de botones en la rejilla
+    const wb = document.getElementById('wb' + id);
+    if (wb) {
+      wb.classList.toggle('active', idx === -1);
+      wb.textContent = idx === -1 ? '♥' : '♡';
+    }
   }
 
   function removeFav(id) {
-    delete favs[id];
+    favs = favs.filter(f => Number(f.id) !== Number(id));
     const wb = document.getElementById('wb' + id);
-    const fb = document.getElementById('fb' + id);
     if (wb) { wb.classList.remove('active'); wb.textContent = '♡'; }
-    if (fb) { fb.classList.remove('active'); fb.textContent = '♡'; }
+    syncStorage();
     renderFavs();
+    syncPreviewFav(id);
   }
 
   function renderFavs() {
     const body = document.getElementById('favBody');
-    const items = Object.values(favs);
-    document.getElementById('favBadge').textContent = items.length;
-    if (!items.length) {
+    if (document.getElementById('favBadge')) document.getElementById('favBadge').textContent = favs.length;
+    if (!favs.length) {
       body.innerHTML = '<div class="panel-empty"><div class="panel-empty-icon">♡</div><p>Aún no tienes favoritos</p></div>';
       return;
     }
-    body.innerHTML = items.map(item =>
-      '<div class="fav-item"><div class="fav-item-img">' + item.icon + '</div><div class="fav-item-info"><div class="fav-item-name">' + item.name + '</div><div class="fav-item-price">' + item.price.toLocaleString() + ' HNL</div></div><div class="fav-actions"><button class="btn-fav-to-cart" onclick="addToCart(' + item.id + ',\'' + item.name.replace(/'/g, "\\'") + "'," + item.price + ",'" + item.icon + "','" + item.category + '\')">+ Carrito</button><button class="btn-fav-del" onclick="removeFav(' + item.id + ')">✕</button></div></div>'
+    body.innerHTML = favs.map(item =>
+      `<div class="fav-item">
+        <div class="fav-item-img">${item.icon}</div>
+        <div class="fav-item-info">
+            <div class="fav-item-name">${item.name}</div>
+            <div class="fav-item-price">${item.price.toLocaleString()} HNL</div>
+        </div>
+        <div class="fav-actions">
+            <button class="btn-fav-to-cart" onclick="addToCart(${item.id},'${item.name.replace(/'/g, "\\'")}',${item.price},'${item.icon}','${item.category}')">+ Carrito</button>
+            <button class="btn-fav-del" onclick="removeFav(${item.id})">✕</button>
+        </div>
+      </div>`
     ).join('');
   }
 
-  // ── Filtros ──────────────────────────────────────────────────────────────
+  // ── Filtros  ─────────────────────────────
   function filterCategory(btn, cat) {
     document.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('active'));
     btn.classList.add('active');
@@ -883,43 +900,50 @@
   }
 
   function applyFilters() {
-    const query    = document.getElementById('searchInput').value.toLowerCase().trim();
-    const minP     = parseFloat(document.getElementById('minPrice').value) || 0;
-    const maxP     = parseFloat(document.getElementById('maxPrice').value) || Infinity;
-    const brands   = Array.from(document.querySelectorAll('.brand-check:checked')).map(c => c.value);
-    const onlyNew  = document.getElementById('onlyNew').checked;
+    const query = document.getElementById('searchInput').value.toLowerCase().trim();
+    const minP = parseFloat(document.getElementById('minPrice').value) || 0;
+    const maxP = parseFloat(document.getElementById('maxPrice').value) || Infinity;
+    const brands = Array.from(document.querySelectorAll('.brand-check:checked')).map(c => c.value);
+    const onlyNew = document.getElementById('onlyNew').checked;
     const onlySale = document.getElementById('onlySale').checked;
-    const sort     = document.getElementById('sortSelect').value;
+    const sort = document.getElementById('sortSelect').value;
 
     const cards = Array.from(document.querySelectorAll('.product-card'));
     let visible = [];
 
     cards.forEach(card => {
-      const name  = card.querySelector('.product-name').textContent.toLowerCase();
-      const desc  = card.querySelector('.product-desc').textContent.toLowerCase();
-      const cat   = card.dataset.category;
+      const name = card.querySelector('.product-name').textContent.toLowerCase();
+      const desc = card.querySelector('.product-desc').textContent.toLowerCase();
+      const cat = card.dataset.category;
       const brand = card.dataset.brand;
       const price = parseFloat(card.dataset.price) || 0;
-      const isNew  = card.dataset.new === '1';
+      const isNew = card.dataset.new === '1';
       const isSale = card.dataset.sale === '1';
 
-      const ok =
-        (currentCategory === 'todos' || cat === currentCategory) &&
-        (query === '' || name.includes(query) || desc.includes(query)) &&
-        price >= minP && price <= maxP &&
-        (brands.length === 0 || brands.includes(brand)) &&
-        (!onlyNew  || isNew) &&
-        (!onlySale || isSale);
+      const ok = (currentCategory === 'todos' || cat === currentCategory) &&
+                 (query === '' || name.includes(query) || desc.includes(query)) &&
+                 price >= minP && price <= maxP &&
+                 (brands.length === 0 || brands.includes(brand)) &&
+                 (!onlyNew || isNew) &&
+                 (!onlySale || isSale);
 
       card.style.display = ok ? 'flex' : 'none';
-      if (ok) visible.push({card, price, name});
+      if (ok) {
+          visible.push({card, price, name});
+          const id = card.querySelector('.btn-fav-card') ? card.querySelector('.btn-fav-card').id.replace('wb', '') : null;
+          if (id) {
+            const isFav = favs.some(f => Number(f.id) === Number(id));
+            const btn = document.getElementById('wb' + id);
+            if(btn) { btn.classList.toggle('active', isFav); btn.textContent = isFav ? '♥' : '♡'; }
+          }
+      }
     });
 
     if (sort !== 'default') {
       visible.sort((a, b) => {
-        if (sort === 'price-asc')  return a.price - b.price;
+        if (sort === 'price-asc') return a.price - b.price;
         if (sort === 'price-desc') return b.price - a.price;
-        if (sort === 'name-asc')   return a.name.localeCompare(b.name);
+        if (sort === 'name-asc') return a.name.localeCompare(b.name);
         return 0;
       });
       const grid = document.getElementById('productsGrid');
@@ -935,8 +959,7 @@
         document.getElementById('productsGrid').appendChild(empty);
       }
     } else if (empty) empty.remove();
-
-    document.getElementById('countShown').textContent = visible.length;
+    if (document.getElementById('countShown')) document.getElementById('countShown').textContent = visible.length;
   }
 
   document.getElementById('searchInput').addEventListener('input', applyFilters);
