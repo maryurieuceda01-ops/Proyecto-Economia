@@ -6,7 +6,8 @@
   <title>Contacto | SecureVision</title>
   <link href="https://fonts.googleapis.com/css2?family=Rajdhani:wght@400;600;700&family=Inter:wght@300;400;500&display=swap" rel="stylesheet"/>
   <style>
-    :root {
+    :root,
+    [data-theme="dark"] {
       --bg: #080810;
       --bg2: #0d0d1a;
       --blue: #0066ff;
@@ -18,6 +19,41 @@
       --border: rgba(0, 102, 255, 0.2);
     }
 
+    [data-theme="light"] {
+      --bg: #f0f4ff;
+      --bg2: #e2e8f8;
+      --blue: #0055dd;
+      --blue-glow: #0044cc;
+      --cyan: #0077cc;
+      --white: #0a0a1a;
+      --gray: #444e6a;
+      --card-bg: #ffffff;
+      --border: rgba(0, 85, 221, 0.2);
+    }
+
+    [data-theme="light"] nav {
+      background: rgba(240, 244, 255, 0.95) !important;
+    }
+
+    [data-theme="light"] footer {
+      background: #e2e8f8;
+    }
+
+    [data-theme="light"] .contact-form {
+      background: linear-gradient(135deg, #ffffff 80%, #e8eeff 100%);
+    }
+
+    [data-theme="light"] .form-group input,
+    [data-theme="light"] .form-group textarea {
+      background: #f0f4ff;
+      color: #0a0a1a;
+      border-color: rgba(0, 85, 221, 0.3);
+    }
+
+    [data-theme="light"] .map-wrapper iframe {
+      filter: grayscale(0.2) invert(0);
+    }
+
     * { margin: 0; padding: 0; box-sizing: border-box; }
 
     body {
@@ -25,6 +61,7 @@
       color: var(--white);
       font-family: 'Inter', sans-serif;
       overflow-x: hidden;
+      transition: background 0.3s, color 0.3s;
     }
 
     /* ── NAVBAR ── */
@@ -39,6 +76,7 @@
       background: rgba(8, 8, 16, 0.85);
       backdrop-filter: blur(12px);
       border-bottom: 1px solid var(--border);
+      transition: background 0.3s;
     }
 
     .logo {
@@ -103,6 +141,27 @@
 
     .btn-nav:hover { background: var(--blue-glow); }
 
+    /* Theme toggle button */
+    #themeToggle {
+      background: transparent;
+      border: 1px solid var(--border);
+      border-radius: 50%;
+      width: 36px;
+      height: 36px;
+      font-size: 1.1rem;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      transition: border-color 0.2s, background 0.2s;
+      color: var(--white);
+    }
+
+    #themeToggle:hover {
+      border-color: var(--blue);
+      background: rgba(0, 102, 255, 0.1);
+    }
+
     .cart-icon {
       position: relative;
       cursor: pointer;
@@ -157,10 +216,9 @@
 
     .section-title span { color: var(--blue); }
 
-    /* Grid Modificado para Redes Sociales */
     .contact-grid {
       display: grid;
-      grid-template-columns: repeat(3, 1fr); 
+      grid-template-columns: repeat(3, 1fr);
       gap: 20px;
       margin-bottom: 60px;
       width: 100%;
@@ -222,6 +280,7 @@
       height: 100%;
       border: none;
       filter: grayscale(1) invert(90%) hue-rotate(180deg);
+      transition: filter 0.3s;
     }
 
     /* ── FOOTER ── */
@@ -229,6 +288,7 @@
       background: var(--bg2);
       border-top: 1px solid var(--border);
       padding: 60px;
+      transition: background 0.3s;
     }
 
     .footer-grid {
@@ -299,6 +359,7 @@
       flex-direction: column;
       align-items: center;
       gap: 0.5rem;
+      transition: background 0.3s;
     }
     .form-icon {
       background: linear-gradient(135deg, var(--blue) 60%, var(--cyan) 100%);
@@ -344,6 +405,11 @@
       font-family: 'Inter', sans-serif;
       box-shadow: 0 1.5px 0 0 var(--blue-glow);
     }
+    .form-group input:focus,
+    .form-group textarea:focus {
+      border-color: var(--blue);
+      box-shadow: 0 0 0 3px rgba(0, 102, 255, 0.15);
+    }
     .btn-form {
       width: 100%;
       font-size: 1.08rem;
@@ -355,6 +421,11 @@
       padding: 13px 0;
       border-radius: 8px;
       cursor: pointer;
+      transition: opacity 0.2s, transform 0.15s;
+    }
+    .btn-form:hover {
+      opacity: 0.9;
+      transform: translateY(-1px);
     }
 
     @media (max-width: 900px) {
@@ -363,6 +434,13 @@
       nav { padding: 15px 20px; }
     }
   </style>
+  <!-- Aplica el tema ANTES de pintar para evitar flash -->
+  <script>
+    (function() {
+      const saved = localStorage.getItem('sv-theme') || 'dark';
+      document.documentElement.setAttribute('data-theme', saved);
+    })();
+  </script>
 </head>
 <body>
 
@@ -375,6 +453,7 @@
         <li><a href="{{ url_for('contacto') }}">Contáctanos</a></li>
     </ul>
     <div class="nav-actions">
+        <button id="themeToggle" aria-label="Cambiar tema">🌙</button>
         <div class="cart-icon" onclick="window.location.href='{{ url_for('carrito') }}'">
             🛒 <span class="cart-badge">{{ session.get('carrito', [])|length }}</span>
         </div>
@@ -432,7 +511,7 @@
     <div class="map-wrapper">
       <iframe 
         src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d15474.965766258416!2d-87.1895632!3d14.0858175!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x8f6fa2e361287041%3A0x66089868770283b5!2sBlvd.%20Centroam%C3%A9rica%2C%20Tegucigalpa!5e0!3m2!1ses!2shn!4v1710000000000!5m2!1ses!2shn" 
-        allowfullscreen="" loading="lazy">
+        allowfullscreen="" loading="lazy" id="map-iframe">
       </iframe>
     </div>
 
@@ -471,11 +550,6 @@
       <div class="footer-brand">
         <span class="logo">SECURE<span style="color:var(--blue)">VISION</span></span>
         <p>Soluciones de seguridad electrónica profesional para hogares y empresas a nivel mundial.</p>
-        <div class="social-links">
-          <a href="https://www.facebook.com/share/1DSWHvcYjx/" class="social-link">f</a>
-          <a href="https://www.instagram.com/securevisionunah?igsh=MWtqMGJ0cGpwajdjOQ==" class="social-link">ig</a>
-          <a href="#" class="social-link">wa</a>
-        </div>
       </div>
       <div class="footer-col">
         <h4>Productos</h4>
@@ -495,7 +569,7 @@
         </ul> 
       </div>
       <div class="footer-col">  
-        <h4>Políticas</h4>
+        <h4>Redes Sociales</h4>
         <ul>
           <li><a href="https://www.facebook.com/profile.php?id=61573631955057" target="_blank">Facebook</a></li>
           <li><a href="https://www.instagram.com/securevisionunah" target="_blank">Instagram</a></li>
@@ -507,6 +581,9 @@
     </div>
   </footer>
 
+  <!-- theme.js debe estar en static/js/theme.js -->
+  <script src="{{ url_for('static', filename='js/theme.js') }}"></script>
+
   <script>
     function enviarFormulario(event) {
       event.preventDefault();
@@ -517,6 +594,23 @@
       }, 3000);
       return false;
     }
+
+    // Actualizar filtro del mapa según tema
+    function updateMapFilter() {
+      const theme = document.documentElement.getAttribute('data-theme');
+      const iframe = document.getElementById('map-iframe');
+      if (iframe) {
+        iframe.style.filter = theme === 'light'
+          ? 'grayscale(0.2)'
+          : 'grayscale(1) invert(90%) hue-rotate(180deg)';
+      }
+    }
+
+    // Observar cambios de tema para actualizar el mapa
+    const observer = new MutationObserver(updateMapFilter);
+    observer.observe(document.documentElement, { attributes: true, attributeFilter: ['data-theme'] });
+    updateMapFilter(); // aplicar al cargar
   </script>
+
 </body>
 </html>

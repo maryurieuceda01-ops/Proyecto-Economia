@@ -5,364 +5,70 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>Recuperar Contraseña | SecureVision</title>
   <link href="https://fonts.googleapis.com/css2?family=Rajdhani:wght@400;600;700&family=Inter:wght@300;400;500&display=swap" rel="stylesheet"/>
+  <script>(function(){ document.documentElement.setAttribute('data-theme', localStorage.getItem('sv-theme')||'dark'); })();</script>
   <style>
-    :root {
-      --bg: #080810;
-      --bg2: #0d0d1a;
-      --blue: #0066ff;
-      --blue-glow: #0044cc;
-      --cyan: #00cfff;
-      --white: #f0f4ff;
-      --gray: #8890aa;
-      --card-bg: #10101e;
-      --border: rgba(0, 102, 255, 0.2);
-      --error: #e63946;
-      --success: #2dc653;
-    }
-
-    * { margin: 0; padding: 0; box-sizing: border-box; }
-
-    body {
-      background: var(--bg);
-      color: var(--white);
-      font-family: 'Inter', sans-serif;
-      min-height: 100vh;
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-    }
-
-    /* ── LADO IZQUIERDO ── */
-    .left-panel {
-      background: var(--bg2);
-      border-right: 1px solid var(--border);
-      display: flex;
-      flex-direction: column;
-      justify-content: center;
-      align-items: center;
-      padding: 60px;
-      position: relative;
-      overflow: hidden;
-    }
-
-    .left-panel::before {
-      content: '';
-      position: absolute;
-      top: -150px; left: -150px;
-      width: 500px; height: 500px;
-      background: radial-gradient(circle, rgba(0,102,255,0.12) 0%, transparent 70%);
-      pointer-events: none;
-    }
-
-    .left-panel::after {
-      content: '';
-      position: absolute;
-      bottom: -100px; right: -100px;
-      width: 400px; height: 400px;
-      background: radial-gradient(circle, rgba(0,207,255,0.06) 0%, transparent 70%);
-      pointer-events: none;
-    }
-
-    .bg-grid {
-      position: absolute;
-      inset: 0;
-      background-image:
-        linear-gradient(rgba(0,102,255,0.04) 1px, transparent 1px),
-        linear-gradient(90deg, rgba(0,102,255,0.04) 1px, transparent 1px);
-      background-size: 40px 40px;
-      pointer-events: none;
-    }
-
-    .left-content {
-      position: relative;
-      z-index: 2;
-      text-align: center;
-      max-width: 400px;
-    }
-
-    .logo {
-      font-family: 'Rajdhani', sans-serif;
-      font-size: 2rem;
-      font-weight: 700;
-      letter-spacing: 3px;
-      color: var(--white);
-      text-decoration: none;
-      display: block;
-      margin-bottom: 48px;
-    }
-
-    .logo span { color: var(--blue); }
-
-    .key-icon {
-      font-size: 5rem;
-      margin-bottom: 28px;
-      display: block;
-      filter: drop-shadow(0 0 20px rgba(0,102,255,0.4));
-    }
-
-    .left-content h2 {
-      font-family: 'Rajdhani', sans-serif;
-      font-size: 1.8rem;
-      font-weight: 700;
-      margin-bottom: 14px;
-      letter-spacing: 1px;
-    }
-
-    .left-content h2 span { color: var(--blue); }
-
-    .left-content p {
-      color: var(--gray);
-      font-size: 0.88rem;
-      line-height: 1.8;
-      margin-bottom: 36px;
-    }
-
-    .features {
-      display: flex;
-      flex-direction: column;
-      gap: 14px;
-      text-align: left;
-    }
-
-    .feature {
-      display: flex;
-      align-items: center;
-      gap: 12px;
-      background: rgba(0,102,255,0.08);
-      border: 1px solid var(--border);
-      border-radius: 6px;
-      padding: 12px 16px;
-    }
-
-    .feature-icon { font-size: 1.2rem; }
-
-    .feature-text {
-      font-size: 0.82rem;
-      color: var(--gray);
-    }
-
-    .feature-text strong {
-      color: var(--white);
-      display: block;
-      font-size: 0.85rem;
-      margin-bottom: 2px;
-    }
-
-    /* ── LADO DERECHO ── */
-    .right-panel {
-      display: flex;
-      flex-direction: column;
-      justify-content: center;
-      align-items: center;
-      padding: 60px;
-    }
-
-    .form-container {
-      width: 100%;
-      max-width: 420px;
-      animation: fadeUp 0.6s ease both;
-    }
-
-    .form-header {
-      margin-bottom: 36px;
-    }
-
-    .form-tag {
-      font-size: 0.7rem;
-      letter-spacing: 3px;
-      text-transform: uppercase;
-      color: var(--blue);
-      margin-bottom: 10px;
-    }
-
-    .form-header h1 {
-      font-family: 'Rajdhani', sans-serif;
-      font-size: 2rem;
-      font-weight: 700;
-      letter-spacing: 1px;
-    }
-
-    .form-header p {
-      color: var(--gray);
-      font-size: 0.85rem;
-      margin-top: 8px;
-      line-height: 1.6;
-    }
-
-    .form-header p a {
-      color: var(--blue);
-      text-decoration: none;
-      transition: color 0.2s;
-    }
-
-    .form-header p a:hover { color: var(--cyan); }
-
-    /* Campos */
-    .form-group {
-      margin-bottom: 20px;
-    }
-
-    .form-label {
-      display: block;
-      font-size: 0.78rem;
-      letter-spacing: 1px;
-      text-transform: uppercase;
-      color: var(--gray);
-      margin-bottom: 8px;
-    }
-
-    .input-wrapper { position: relative; }
-
-    .input-icon {
-      position: absolute;
-      left: 14px;
-      top: 50%;
-      transform: translateY(-50%);
-      font-size: 1rem;
-      pointer-events: none;
-    }
-
-    .form-input {
-      width: 100%;
-      background: var(--card-bg);
-      border: 1px solid var(--border);
-      color: var(--white);
-      padding: 13px 14px 13px 42px;
-      border-radius: 5px;
-      font-size: 0.88rem;
-      font-family: 'Inter', sans-serif;
-      transition: border-color 0.2s, box-shadow 0.2s;
-    }
-
-    .form-input:focus {
-      outline: none;
-      border-color: var(--blue);
-      box-shadow: 0 0 0 3px rgba(0,102,255,0.1);
-    }
-
-    .form-input::placeholder { color: var(--gray); }
-    .form-input.error { border-color: var(--error); }
-
-    .toggle-password {
-      position: absolute;
-      right: 14px;
-      top: 50%;
-      transform: translateY(-50%);
-      background: none;
-      border: none;
-      color: var(--gray);
-      cursor: pointer;
-      font-size: 1rem;
-      transition: color 0.2s;
-    }
-
-    .toggle-password:hover { color: var(--white); }
-
-    .error-msg {
-      font-size: 0.72rem;
-      color: var(--error);
-      margin-top: 6px;
-      display: none;
-    }
-
-    /* Alertas */
-    .alert {
-      border-radius: 5px;
-      padding: 12px 16px;
-      font-size: 0.82rem;
-      margin-bottom: 20px;
-    }
-
-    .alert-error {
-      background: rgba(230,57,70,0.1);
-      border: 1px solid rgba(230,57,70,0.3);
-      color: var(--error);
-    }
-
-    .alert-success {
-      background: rgba(45,198,83,0.1);
-      border: 1px solid rgba(45,198,83,0.3);
-      color: var(--success);
-    }
-
-    /* Botón */
-    .btn-submit {
-      width: 100%;
-      background: var(--blue);
-      color: #fff;
-      border: none;
-      padding: 14px;
-      border-radius: 5px;
-      font-size: 0.88rem;
-      letter-spacing: 2px;
-      text-transform: uppercase;
-      cursor: pointer;
-      font-family: 'Inter', sans-serif;
-      font-weight: 500;
-      transition: all 0.2s;
-      margin-bottom: 20px;
-    }
-
-    .btn-submit:hover {
-      background: var(--blue-glow);
-      transform: translateY(-1px);
-      box-shadow: 0 8px 20px rgba(0,102,255,0.3);
-    }
-
-    .back-link {
-      text-align: center;
-      font-size: 0.83rem;
-      color: var(--gray);
-    }
-
-    .back-link a {
-      color: var(--blue);
-      text-decoration: none;
-      font-weight: 500;
-      transition: color 0.2s;
-    }
-
-    .back-link a:hover { color: var(--cyan); }
-
-    /* Info de contraseña encontrada */
-    .password-strength {
-      margin-top: 8px;
-    }
-
-    .strength-bar {
-      height: 3px;
-      background: var(--border);
-      border-radius: 2px;
-      overflow: hidden;
-      margin-bottom: 5px;
-    }
-
-    .strength-fill {
-      height: 100%;
-      width: 0%;
-      transition: width 0.3s, background 0.3s;
-      border-radius: 2px;
-    }
-
-    .strength-text {
-      font-size: 0.7rem;
-      color: var(--gray);
-    }
-
-    @keyframes fadeUp {
-      from { opacity: 0; transform: translateY(20px); }
-      to   { opacity: 1; transform: translateY(0); }
-    }
-
-    @media (max-width: 768px) {
-      body { grid-template-columns: 1fr; }
-      .left-panel { display: none; }
-      .right-panel { padding: 40px 24px; }
-    }
+    :root,[data-theme="dark"]{ --bg:#080810;--bg2:#0d0d1a;--blue:#0066ff;--blue-glow:#0044cc;--cyan:#00cfff;--white:#f0f4ff;--gray:#8890aa;--card-bg:#10101e;--border:rgba(0,102,255,0.2);--error:#e63946;--success:#2dc653; }
+    [data-theme="light"]{ --bg:#f0f4ff;--bg2:#e2e8f8;--blue:#0055dd;--blue-glow:#0044cc;--cyan:#0077cc;--white:#0a0a1a;--gray:#444e6a;--card-bg:#ffffff;--border:rgba(0,85,221,0.2);--error:#cc2233;--success:#1a9e3f; }
+    [data-theme="light"] .left-panel{ background:#dce8f8; }
+    [data-theme="light"] .feature{ background:rgba(0,85,221,0.06); }
+    [data-theme="light"] .form-input{ background:#f0f4ff;color:#0a0a1a; }
+    *{margin:0;padding:0;box-sizing:border-box;}
+    body{background:var(--bg);color:var(--white);font-family:'Inter',sans-serif;min-height:100vh;display:grid;grid-template-columns:1fr 1fr;transition:background .3s,color .3s;}
+    .left-panel{background:var(--bg2);border-right:1px solid var(--border);display:flex;flex-direction:column;justify-content:center;align-items:center;padding:60px;position:relative;overflow:hidden;transition:background .3s;}
+    .left-panel::before{content:'';position:absolute;top:-150px;left:-150px;width:500px;height:500px;background:radial-gradient(circle,rgba(0,102,255,0.12) 0%,transparent 70%);pointer-events:none;}
+    .left-panel::after{content:'';position:absolute;bottom:-100px;right:-100px;width:400px;height:400px;background:radial-gradient(circle,rgba(0,207,255,0.06) 0%,transparent 70%);pointer-events:none;}
+    .bg-grid{position:absolute;inset:0;background-image:linear-gradient(rgba(0,102,255,0.04) 1px,transparent 1px),linear-gradient(90deg,rgba(0,102,255,0.04) 1px,transparent 1px);background-size:40px 40px;pointer-events:none;}
+    .left-content{position:relative;z-index:2;text-align:center;max-width:400px;}
+    .logo{font-family:'Rajdhani',sans-serif;font-size:2rem;font-weight:700;letter-spacing:3px;color:var(--white);text-decoration:none;display:block;margin-bottom:48px;}
+    .logo span{color:var(--blue);}
+    .key-icon{font-size:5rem;margin-bottom:28px;display:block;filter:drop-shadow(0 0 20px rgba(0,102,255,0.4));}
+    .left-content h2{font-family:'Rajdhani',sans-serif;font-size:1.8rem;font-weight:700;margin-bottom:14px;letter-spacing:1px;}
+    .left-content h2 span{color:var(--blue);}
+    .left-content p{color:var(--gray);font-size:0.88rem;line-height:1.8;margin-bottom:36px;}
+    .features{display:flex;flex-direction:column;gap:14px;text-align:left;}
+    .feature{display:flex;align-items:center;gap:12px;background:rgba(0,102,255,0.08);border:1px solid var(--border);border-radius:6px;padding:12px 16px;transition:background .3s;}
+    .feature-icon{font-size:1.2rem;}
+    .feature-text{font-size:0.82rem;color:var(--gray);}
+    .feature-text strong{color:var(--white);display:block;font-size:0.85rem;margin-bottom:2px;}
+    .right-panel{display:flex;flex-direction:column;justify-content:center;align-items:center;padding:60px;position:relative;}
+    .theme-toggle-wrap{position:absolute;top:20px;right:20px;}
+    #themeToggle{background:transparent;border:1px solid var(--border);border-radius:50%;width:36px;height:36px;font-size:1.1rem;cursor:pointer;display:flex;align-items:center;justify-content:center;transition:border-color .2s,background .2s;color:var(--white);}
+    #themeToggle:hover{border-color:var(--blue);background:rgba(0,102,255,0.1);}
+    .form-container{width:100%;max-width:420px;animation:fadeUp .6s ease both;}
+    .form-header{margin-bottom:36px;}
+    .form-tag{font-size:0.7rem;letter-spacing:3px;text-transform:uppercase;color:var(--blue);margin-bottom:10px;}
+    .form-header h1{font-family:'Rajdhani',sans-serif;font-size:2rem;font-weight:700;letter-spacing:1px;}
+    .form-header p{color:var(--gray);font-size:0.85rem;margin-top:8px;line-height:1.6;}
+    .form-header p a{color:var(--blue);text-decoration:none;transition:color .2s;}
+    .form-header p a:hover{color:var(--cyan);}
+    .form-group{margin-bottom:20px;}
+    .form-label{display:block;font-size:0.78rem;letter-spacing:1px;text-transform:uppercase;color:var(--gray);margin-bottom:8px;}
+    .input-wrapper{position:relative;}
+    .input-icon{position:absolute;left:14px;top:50%;transform:translateY(-50%);font-size:1rem;pointer-events:none;}
+    .form-input{width:100%;background:var(--card-bg);border:1px solid var(--border);color:var(--white);padding:13px 14px 13px 42px;border-radius:5px;font-size:0.88rem;font-family:'Inter',sans-serif;transition:border-color .2s,box-shadow .2s,background .3s,color .3s;}
+    .form-input:focus{outline:none;border-color:var(--blue);box-shadow:0 0 0 3px rgba(0,102,255,0.1);}
+    .form-input::placeholder{color:var(--gray);}
+    .form-input.error{border-color:var(--error);}
+    .toggle-password{position:absolute;right:14px;top:50%;transform:translateY(-50%);background:none;border:none;color:var(--gray);cursor:pointer;font-size:1rem;transition:color .2s;}
+    .toggle-password:hover{color:var(--white);}
+    .error-msg{font-size:0.72rem;color:var(--error);margin-top:6px;display:none;}
+    .alert{border-radius:5px;padding:12px 16px;font-size:0.82rem;margin-bottom:20px;}
+    .alert-error{background:rgba(230,57,70,0.1);border:1px solid rgba(230,57,70,0.3);color:var(--error);}
+    .alert-success{background:rgba(45,198,83,0.1);border:1px solid rgba(45,198,83,0.3);color:var(--success);}
+    .btn-submit{width:100%;background:var(--blue);color:#fff;border:none;padding:14px;border-radius:5px;font-size:0.88rem;letter-spacing:2px;text-transform:uppercase;cursor:pointer;font-family:'Inter',sans-serif;font-weight:500;transition:all .2s;margin-bottom:20px;}
+    .btn-submit:hover{background:var(--blue-glow);transform:translateY(-1px);box-shadow:0 8px 20px rgba(0,102,255,0.3);}
+    .back-link{text-align:center;font-size:0.83rem;color:var(--gray);}
+    .back-link a{color:var(--blue);text-decoration:none;font-weight:500;transition:color .2s;}
+    .back-link a:hover{color:var(--cyan);}
+    .password-strength{margin-top:8px;}
+    .strength-bar{height:3px;background:var(--border);border-radius:2px;overflow:hidden;margin-bottom:5px;}
+    .strength-fill{height:100%;width:0%;transition:width .3s,background .3s;border-radius:2px;}
+    .strength-text{font-size:0.7rem;color:var(--gray);}
+    @keyframes fadeUp{from{opacity:0;transform:translateY(20px);}to{opacity:1;transform:translateY(0);}}
+    @media(max-width:768px){body{grid-template-columns:1fr;}.left-panel{display:none;}.right-panel{padding:40px 24px;}}
   </style>
 </head>
 <body>
-
-  <!-- LADO IZQUIERDO -->
   <div class="left-panel">
     <div class="bg-grid"></div>
     <div class="left-content">
@@ -371,35 +77,15 @@
       <h2>Recupera tu <span>acceso</span></h2>
       <p>No te preocupes, te ayudamos a recuperar tu contraseña de forma segura y rápida.</p>
       <div class="features">
-        <div class="feature">
-          <span class="feature-icon">🔒</span>
-          <div class="feature-text">
-            <strong>Proceso seguro</strong>
-            Tu información está protegida
-          </div>
-        </div>
-        <div class="feature">
-          <span class="feature-icon">⚡</span>
-          <div class="feature-text">
-            <strong>Recuperación rápida</strong>
-            Solo necesitas tu correo electrónico
-          </div>
-        </div>
-        <div class="feature">
-          <span class="feature-icon">✅</span>
-          <div class="feature-text">
-            <strong>Acceso inmediato</strong>
-            Vuelve a iniciar sesión al instante
-          </div>
-        </div>
+        <div class="feature"><span class="feature-icon">🔒</span><div class="feature-text"><strong>Proceso seguro</strong>Tu información está protegida</div></div>
+        <div class="feature"><span class="feature-icon">⚡</span><div class="feature-text"><strong>Recuperación rápida</strong>Solo necesitas tu correo electrónico</div></div>
+        <div class="feature"><span class="feature-icon">✅</span><div class="feature-text"><strong>Acceso inmediato</strong>Vuelve a iniciar sesión al instante</div></div>
       </div>
     </div>
   </div>
-
-  <!-- LADO DERECHO -->
   <div class="right-panel">
+    <div class="theme-toggle-wrap"><button id="themeToggle" aria-label="Cambiar tema">🌙</button></div>
     <div class="form-container">
-
       <div class="form-header">
         <div class="form-tag">// Recuperación</div>
         {% if paso == 'nueva' %}
@@ -410,191 +96,57 @@
           <p>Ingresa tu correo electrónico y una contraseña para verificar tu identidad.</p>
         {% endif %}
       </div>
-
       {% with messages = get_flashed_messages(with_categories=true) %}
         {% for category, message in messages %}
-          <div class="alert {% if category == 'error' %}alert-error{% else %}alert-success{% endif %}">
-            {{ message }}
-          </div>
+          <div class="alert {% if category == 'error' %}alert-error{% else %}alert-success{% endif %}">{{ message }}</div>
         {% endfor %}
       {% endwith %}
-
       {% if paso == 'nueva' %}
-        <!-- PASO 2: Nueva contraseña -->
         <form id="changeForm" method="POST" action="/recuperar">
           <input type="hidden" name="accion" value="cambiar"/>
           <input type="hidden" name="email" value="{{ email }}"/>
-
-          <div class="form-group">
-            <label class="form-label">Nueva Contraseña</label>
-            <div class="input-wrapper">
-              <span class="input-icon">🔒</span>
-              <input type="password" class="form-input" id="newPassword" name="new_password" placeholder="Mínimo 8 caracteres" oninput="checkStrength()"/>
-              <button class="toggle-password" onclick="togglePass('newPassword')" type="button">👁️</button>
-            </div>
-            <div class="password-strength">
-              <div class="strength-bar">
-                <div class="strength-fill" id="strengthFill"></div>
-              </div>
-              <span class="strength-text" id="strengthText">Ingresa una contraseña</span>
-            </div>
-            <div class="error-msg" id="newPassError">Mínimo 8 caracteres</div>
-          </div>
-
-          <div class="form-group">
-            <label class="form-label">Confirmar Nueva Contraseña</label>
-            <div class="input-wrapper">
-              <span class="input-icon">🔒</span>
-              <input type="password" class="form-input" id="confirmPassword" placeholder="Repite tu nueva contraseña"/>
-              <button class="toggle-password" onclick="togglePass('confirmPassword')" type="button">👁️</button>
-            </div>
-            <div class="error-msg" id="confirmError">Las contraseñas no coinciden</div>
-          </div>
-
+          <div class="form-group"><label class="form-label">Nueva Contraseña</label><div class="input-wrapper"><span class="input-icon">🔒</span><input type="password" class="form-input" id="newPassword" name="new_password" placeholder="Mínimo 8 caracteres" oninput="checkStrength()"/><button class="toggle-password" onclick="togglePass('newPassword')" type="button">👁️</button></div><div class="password-strength"><div class="strength-bar"><div class="strength-fill" id="strengthFill"></div></div><span class="strength-text" id="strengthText">Ingresa una contraseña</span></div><div class="error-msg" id="newPassError">Mínimo 8 caracteres</div></div>
+          <div class="form-group"><label class="form-label">Confirmar Nueva Contraseña</label><div class="input-wrapper"><span class="input-icon">🔒</span><input type="password" class="form-input" id="confirmPassword" placeholder="Repite tu nueva contraseña"/><button class="toggle-password" onclick="togglePass('confirmPassword')" type="button">👁️</button></div><div class="error-msg" id="confirmError">Las contraseñas no coinciden</div></div>
           <button type="button" class="btn-submit" onclick="handleChange()">Actualizar Contraseña</button>
         </form>
-
       {% else %}
-        <!-- PASO 1: Verificar identidad -->
         <form id="recoverForm" method="POST" action="/recuperar">
           <input type="hidden" name="accion" value="verificar"/>
-
-          <div class="form-group">
-            <label class="form-label">Correo Electrónico</label>
-            <div class="input-wrapper">
-              <span class="input-icon">📧</span>
-              <input type="email" class="form-input" id="email" name="email" placeholder="tucorreo@ejemplo.com"/>
-            </div>
-            <div class="error-msg" id="emailError">Ingresa un correo válido</div>
-          </div>
-
-          <div class="form-group">
-            <label class="form-label">Contraseña Aproximada</label>
-            <div class="input-wrapper">
-              <span class="input-icon">🔒</span>
-              <input type="password" class="form-input" id="password" name="password" placeholder="Algo parecido a tu contraseña"/>
-              <button class="toggle-password" onclick="togglePass('password')" type="button">👁️</button>
-            </div>
-            <div class="error-msg" id="passError">La contraseña es requerida</div>
-          </div>
-
+          <div class="form-group"><label class="form-label">Correo Electrónico</label><div class="input-wrapper"><span class="input-icon">📧</span><input type="email" class="form-input" id="email" name="email" placeholder="tucorreo@ejemplo.com"/></div><div class="error-msg" id="emailError">Ingresa un correo válido</div></div>
+          <div class="form-group"><label class="form-label">Contraseña Aproximada</label><div class="input-wrapper"><span class="input-icon">🔒</span><input type="password" class="form-input" id="password" name="password" placeholder="Algo parecido a tu contraseña"/><button class="toggle-password" onclick="togglePass('password')" type="button">👁️</button></div><div class="error-msg" id="passError">La contraseña es requerida</div></div>
           <button type="button" class="btn-submit" onclick="handleRecover()">Verificar Identidad</button>
         </form>
       {% endif %}
-
-      <div class="back-link">
-        <a href="login.html">← Volver a Iniciar Sesión</a>
-      </div>
-
+      <div class="back-link"><a href="login.html">← Volver a Iniciar Sesión</a></div>
     </div>
   </div>
-
+  <script src="{{ url_for('static', filename='js/theme.js') }}"></script>
   <script>
-    function togglePass(id) {
-      const input = document.getElementById(id);
-      input.type = input.type === 'password' ? 'text' : 'password';
+    function togglePass(id){ const i=document.getElementById(id); i.type=i.type==='password'?'text':'password'; }
+    function checkStrength(){
+      const pass=document.getElementById('newPassword').value, fill=document.getElementById('strengthFill'), text=document.getElementById('strengthText');
+      let s=0; if(pass.length>=8)s++; if(/[A-Z]/.test(pass))s++; if(/[0-9]/.test(pass))s++; if(/[^A-Za-z0-9]/.test(pass))s++;
+      const lvl=[{w:'0%',c:'',l:'Ingresa una contraseña'},{w:'25%',c:'#e63946',l:'Débil'},{w:'50%',c:'#f4a261',l:'Regular'},{w:'75%',c:'#f4c430',l:'Buena'},{w:'100%',c:'#2dc653',l:'¡Excelente!'}];
+      const l=pass.length===0?0:s; fill.style.width=lvl[l].w; fill.style.background=lvl[l].c; text.textContent=lvl[l].l; text.style.color=lvl[l].c||'var(--gray)';
     }
-
-    function checkStrength() {
-      const pass = document.getElementById('newPassword').value;
-      const fill = document.getElementById('strengthFill');
-      const text = document.getElementById('strengthText');
-
-      let strength = 0;
-      if (pass.length >= 8) strength++;
-      if (/[A-Z]/.test(pass)) strength++;
-      if (/[0-9]/.test(pass)) strength++;
-      if (/[^A-Za-z0-9]/.test(pass)) strength++;
-
-      const levels = [
-        { width: '0%',   color: '',       label: 'Ingresa una contraseña' },
-        { width: '25%',  color: '#e63946', label: 'Débil' },
-        { width: '50%',  color: '#f4a261', label: 'Regular' },
-        { width: '75%',  color: '#f4c430', label: 'Buena' },
-        { width: '100%', color: '#2dc653', label: '¡Excelente!' },
-      ];
-
-      const level = pass.length === 0 ? 0 : strength;
-      fill.style.width = levels[level].width;
-      fill.style.background = levels[level].color;
-      text.textContent = levels[level].label;
-      text.style.color = levels[level].color || 'var(--gray)';
+    function handleRecover(){
+      let valid=true;
+      const email=document.getElementById('email').value, password=document.getElementById('password').value;
+      if(!email||!email.includes('@')||!email.includes('.')){ document.getElementById('email').classList.add('error'); document.getElementById('emailError').style.display='block'; valid=false; } else { document.getElementById('email').classList.remove('error'); document.getElementById('emailError').style.display='none'; }
+      if(!password){ document.getElementById('password').classList.add('error'); document.getElementById('passError').style.display='block'; valid=false; } else { document.getElementById('password').classList.remove('error'); document.getElementById('passError').style.display='none'; }
+      if(valid) document.getElementById('recoverForm').submit();
     }
-
-    function handleRecover() {
-      let valid = true;
-      const email = document.getElementById('email').value;
-      const password = document.getElementById('password').value;
-
-      if (!email || !email.includes('@') || !email.includes('.')) {
-        document.getElementById('email').classList.add('error');
-        document.getElementById('emailError').style.display = 'block';
-        valid = false;
-      } else {
-        document.getElementById('email').classList.remove('error');
-        document.getElementById('emailError').style.display = 'none';
-      }
-
-      if (!password) {
-        document.getElementById('password').classList.add('error');
-        document.getElementById('passError').style.display = 'block';
-        valid = false;
-      } else {
-        document.getElementById('password').classList.remove('error');
-        document.getElementById('passError').style.display = 'none';
-      }
-
-      if (valid) {
-        document.getElementById('recoverForm').submit();
-      }
+    function handleChange(){
+      let valid=true;
+      const newPass=document.getElementById('newPassword').value, confirmPass=document.getElementById('confirmPassword').value;
+      if(newPass.length<8){ document.getElementById('newPassword').classList.add('error'); document.getElementById('newPassError').style.display='block'; valid=false; } else { document.getElementById('newPassword').classList.remove('error'); document.getElementById('newPassError').style.display='none'; }
+      if(newPass!==confirmPass){ document.getElementById('confirmPassword').classList.add('error'); document.getElementById('confirmError').style.display='block'; valid=false; } else { document.getElementById('confirmPassword').classList.remove('error'); document.getElementById('confirmError').style.display='none'; }
+      if(valid) document.getElementById('changeForm').submit();
     }
-
-    function handleChange() {
-      let valid = true;
-      const newPass = document.getElementById('newPassword').value;
-      const confirmPass = document.getElementById('confirmPassword').value;
-
-      if (newPass.length < 8) {
-        document.getElementById('newPassword').classList.add('error');
-        document.getElementById('newPassError').style.display = 'block';
-        valid = false;
-      } else {
-        document.getElementById('newPassword').classList.remove('error');
-        document.getElementById('newPassError').style.display = 'none';
-      }
-
-      if (newPass !== confirmPass) {
-        document.getElementById('confirmPassword').classList.add('error');
-        document.getElementById('confirmError').style.display = 'block';
-        valid = false;
-      } else {
-        document.getElementById('confirmPassword').classList.remove('error');
-        document.getElementById('confirmError').style.display = 'none';
-      }
-
-      if (valid) {
-        document.getElementById('changeForm').submit();
-      }
-    }
-
-    document.addEventListener('keydown', e => {
-      if (e.key === 'Enter') {
-        const recoverForm = document.getElementById('recoverForm');
-        const changeForm = document.getElementById('changeForm');
-        if (recoverForm) handleRecover();
-        else if (changeForm) handleChange();
-      }
+    document.addEventListener('keydown', e=>{
+      if(e.key==='Enter'){ const rf=document.getElementById('recoverForm'), cf=document.getElementById('changeForm'); if(rf) handleRecover(); else if(cf) handleChange(); }
     });
-
-    // Auto-ocultar alertas
-    document.querySelectorAll('.alert').forEach(alert => {
-      setTimeout(() => {
-        alert.style.transition = 'opacity 0.5s ease';
-        alert.style.opacity = '0';
-        setTimeout(() => alert.remove(), 500);
-      }, 3000);
-    });
+    document.querySelectorAll('.alert').forEach(a=>{ setTimeout(()=>{ a.style.transition='opacity .5s ease'; a.style.opacity='0'; setTimeout(()=>a.remove(),500); },3000); });
   </script>
-
 </body>
 </html>

@@ -5,142 +5,105 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>Factura | SecureVision</title>
   <link href="https://fonts.googleapis.com/css2?family=Rajdhani:wght@400;600;700&family=Inter:wght@300;400;500&display=swap" rel="stylesheet"/>
+  <script>(function(){ document.documentElement.setAttribute('data-theme', localStorage.getItem('sv-theme')||'dark'); })();</script>
   <style>
-    :root {
-      --bg: #080810; --bg2: #0d0d1a; --blue: #0066ff; --blue-glow: #0044cc;
-      --cyan: #00cfff; --white: #f0f4ff; --gray: #8890aa; --card-bg: #10101e;
-      --border: rgba(0, 102, 255, 0.2); --success: #2dc653;
-    }
-
-    * { margin: 0; padding: 0; box-sizing: border-box; }
-    body { background: var(--bg); color: var(--white); font-family: 'Inter', sans-serif; }
-
-    nav { display: flex; align-items: center; justify-content: space-between; padding: 18px 60px; background: rgba(8,8,16,0.95); border-bottom: 1px solid var(--border); }
-    .logo { font-family: 'Rajdhani', sans-serif; font-size: 1.6rem; font-weight: 700; letter-spacing: 2px; color: var(--white); text-decoration: none; }
-    .logo span { color: var(--blue); }
-    .nav-actions { display: flex; gap: 12px; }
-
-    .btn-action { display: flex; align-items: center; gap: 8px; padding: 9px 20px; border-radius: 4px; font-size: 0.8rem; letter-spacing: 1px; text-transform: uppercase; cursor: pointer; font-family: 'Inter', sans-serif; transition: all 0.2s; text-decoration: none; }
-    .btn-print { background: var(--blue); color: #fff; border: none; }
-    .btn-print:hover { background: var(--blue-glow); }
-    .btn-secondary { background: transparent; color: var(--white); border: 1px solid var(--border); }
-    .btn-secondary:hover { border-color: var(--blue); color: var(--blue); }
-
-    .page-wrapper { padding: 40px 60px 80px; max-width: 1000px; margin: 0 auto; }
-
-    .order-status { background: rgba(45,198,83,0.08); border: 1px solid rgba(45,198,83,0.3); border-radius: 6px; padding: 16px 24px; display: flex; align-items: center; gap: 14px; margin-bottom: 32px; }
-    .status-icon { font-size: 1.8rem; }
-    .status-text strong { display: block; color: var(--success); font-size: 0.9rem; margin-bottom: 3px; }
-    .status-text span { font-size: 0.78rem; color: var(--gray); }
-
-    .invoice { background: var(--card-bg); border: 1px solid var(--border); border-radius: 8px; overflow: hidden; }
-
-    .invoice-header {
-      background: linear-gradient(135deg, #0a0a1a 0%, #0d1533 50%, #0a0a1a 100%);
-      border-bottom: 1px solid var(--border); padding: 40px;
-      display: flex; justify-content: space-between; align-items: flex-start;
-      position: relative; overflow: hidden;
-    }
-
-    .invoice-header::before { content: ''; position: absolute; top: -80px; right: -80px; width: 300px; height: 300px; background: radial-gradient(circle, rgba(0,102,255,0.12) 0%, transparent 70%); pointer-events: none; }
-
-    .invoice-brand .inv-logo { font-family: 'Rajdhani', sans-serif; font-size: 2rem; font-weight: 700; letter-spacing: 3px; color: var(--white); display: block; margin-bottom: 8px; }
-    .invoice-brand .inv-logo span { color: var(--blue); }
-    .invoice-brand p { font-size: 0.78rem; color: var(--gray); line-height: 1.7; }
-
-    .invoice-meta { text-align: right; }
-    .invoice-title { font-family: 'Rajdhani', sans-serif; font-size: 2.5rem; font-weight: 700; letter-spacing: 4px; color: var(--white); opacity: 0.15; margin-bottom: 16px; }
-    .invoice-number { font-family: 'Rajdhani', sans-serif; font-size: 1.4rem; font-weight: 700; color: var(--cyan); letter-spacing: 2px; margin-bottom: 8px; }
-    .invoice-date { font-size: 0.78rem; color: var(--gray); margin-bottom: 4px; }
-    .invoice-status-badge { display: inline-block; background: rgba(45,198,83,0.15); border: 1px solid rgba(45,198,83,0.4); color: var(--success); font-size: 0.68rem; letter-spacing: 2px; text-transform: uppercase; padding: 5px 14px; border-radius: 20px; margin-top: 10px; }
-
-    .invoice-parties { display: grid; grid-template-columns: 1fr 1fr; gap: 0; border-bottom: 1px solid var(--border); }
-    .party { padding: 28px 40px; }
-    .party:first-child { border-right: 1px solid var(--border); }
-    .party-label { font-size: 0.68rem; letter-spacing: 3px; text-transform: uppercase; color: var(--blue); margin-bottom: 14px; }
-    .party-name { font-family: 'Rajdhani', sans-serif; font-size: 1.1rem; font-weight: 600; margin-bottom: 8px; }
-    .party p { font-size: 0.8rem; color: var(--gray); line-height: 1.8; }
-
-    .invoice-table-wrapper { padding: 0 40px; border-bottom: 1px solid var(--border); }
-    table { width: 100%; border-collapse: collapse; }
-    thead tr { border-bottom: 1px solid var(--border); }
-    thead th { padding: 16px 12px; text-align: left; font-size: 0.68rem; letter-spacing: 2px; text-transform: uppercase; color: var(--gray); font-weight: 500; }
-    thead th:last-child { text-align: right; }
-    thead th:nth-child(3), thead th:nth-child(4) { text-align: center; }
-    tbody tr { border-bottom: 1px solid rgba(0,102,255,0.08); transition: background 0.15s; }
-    tbody tr:hover { background: rgba(0,102,255,0.04); }
-    tbody tr:last-child { border-bottom: none; }
-    tbody td { padding: 18px 12px; font-size: 0.84rem; vertical-align: middle; }
-    tbody td:last-child { text-align: right; }
-    tbody td:nth-child(3), tbody td:nth-child(4) { text-align: center; }
-
-    .product-cell { display: flex; align-items: center; gap: 14px; }
-    .product-thumb { width: 44px; height: 44px; background: var(--bg); border: 1px solid var(--border); border-radius: 4px; display: flex; align-items: center; justify-content: center; font-size: 1.4rem; flex-shrink: 0; }
-    .product-cell-name { font-weight: 500; margin-bottom: 3px; }
-    .price-cell { font-family: 'Rajdhani', sans-serif; font-size: 1rem; font-weight: 600; }
-    .total-cell { font-family: 'Rajdhani', sans-serif; font-size: 1.05rem; font-weight: 700; color: var(--cyan); }
-
-    .invoice-totals { display: flex; justify-content: flex-end; padding: 28px 40px; border-bottom: 1px solid var(--border); }
-    .totals-box { width: 320px; }
-    .totals-row { display: flex; justify-content: space-between; padding: 8px 0; font-size: 0.84rem; border-bottom: 1px solid rgba(0,102,255,0.08); }
-    .totals-row:last-child { border-bottom: none; }
-    .totals-row .label { color: var(--gray); }
-    .totals-row.grand-total { padding-top: 14px; margin-top: 6px; border-top: 2px solid var(--border); border-bottom: none; }
-    .totals-row.grand-total .label { font-family: 'Rajdhani', sans-serif; font-size: 1rem; font-weight: 700; letter-spacing: 1px; text-transform: uppercase; color: var(--white); }
-    .totals-row.grand-total .value { font-family: 'Rajdhani', sans-serif; font-size: 1.5rem; font-weight: 700; color: var(--cyan); }
-
-    .invoice-footer-section { display: grid; grid-template-columns: 1fr 1fr; gap: 0; border-bottom: 1px solid var(--border); }
-    .invoice-footer-col { padding: 28px 40px; }
-    .invoice-footer-col:first-child { border-right: 1px solid var(--border); }
-    .footer-col-title { font-size: 0.7rem; letter-spacing: 3px; text-transform: uppercase; color: var(--blue); margin-bottom: 14px; }
-
-    .payment-method-info { display: flex; align-items: center; gap: 12px; background: var(--bg); border: 1px solid var(--border); border-radius: 5px; padding: 14px; }
-    .payment-method-info .pm-icon { font-size: 1.5rem; }
-    .payment-method-info .pm-details strong { display: block; font-size: 0.85rem; margin-bottom: 2px; }
-    .payment-method-info .pm-details span { font-size: 0.72rem; color: var(--success); }
-
-    .notes-text { font-size: 0.8rem; color: var(--gray); line-height: 1.8; }
-
-    .invoice-stamp { padding: 28px 40px; display: flex; align-items: center; justify-content: space-between; }
-    .stamp-left p { font-size: 0.75rem; color: var(--gray); line-height: 1.8; max-width: 340px; }
-    .qr-placeholder { width: 80px; height: 80px; background: var(--bg); border: 1px solid var(--border); border-radius: 4px; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 4px; }
-    .qr-placeholder span { font-size: 2rem; }
-    .qr-placeholder p { font-size: 0.55rem; color: var(--gray); letter-spacing: 1px; }
-
-    .post-actions { display: flex; gap: 14px; margin-top: 32px; justify-content: center; flex-wrap: wrap; }
-    .post-action-btn { display: flex; align-items: center; gap: 8px; padding: 12px 24px; border-radius: 5px; font-size: 0.82rem; letter-spacing: 1px; text-transform: uppercase; cursor: pointer; font-family: 'Inter', sans-serif; transition: all 0.2s; text-decoration: none; }
-    .post-action-btn.primary { background: var(--blue); color: #fff; border: none; }
-    .post-action-btn.primary:hover { background: var(--blue-glow); }
-    .post-action-btn.secondary { background: transparent; color: var(--white); border: 1px solid var(--border); }
-    .post-action-btn.secondary:hover { border-color: var(--blue); color: var(--blue); }
-
-    @media print {
-      nav, .order-status, .post-actions { display: none !important; }
-      body { background: white; color: black; }
-      .invoice { border: 1px solid #ddd; }
-      .page-wrapper { padding: 0; }
-    }
-
-    @media (max-width: 768px) {
-      nav { padding: 14px 20px; }
-      .page-wrapper { padding: 20px; }
-      .invoice-header { flex-direction: column; gap: 20px; }
-      .invoice-meta { text-align: left; }
-      .invoice-parties { grid-template-columns: 1fr; }
-      .party:first-child { border-right: none; border-bottom: 1px solid var(--border); }
-      .invoice-table-wrapper { padding: 0 20px; overflow-x: auto; }
-      table { min-width: 500px; }
-      .invoice-footer-section { grid-template-columns: 1fr; }
-      .invoice-footer-col:first-child { border-right: none; border-bottom: 1px solid var(--border); }
-      .invoice-stamp { flex-direction: column; gap: 16px; padding: 20px; }
-    }
+    :root,[data-theme="dark"]{ --bg:#080810;--bg2:#0d0d1a;--blue:#0066ff;--blue-glow:#0044cc;--cyan:#00cfff;--white:#f0f4ff;--gray:#8890aa;--card-bg:#10101e;--border:rgba(0,102,255,0.2);--success:#2dc653; }
+    [data-theme="light"]{ --bg:#f0f4ff;--bg2:#e2e8f8;--blue:#0055dd;--blue-glow:#0044cc;--cyan:#0077cc;--white:#0a0a1a;--gray:#444e6a;--card-bg:#ffffff;--border:rgba(0,85,221,0.2);--success:#1a9e3f; }
+    [data-theme="light"] nav{ background:rgba(240,244,255,0.98)!important; }
+    [data-theme="light"] .invoice{ background:#ffffff;border-color:rgba(0,85,221,0.2); }
+    [data-theme="light"] .invoice-header{ background:linear-gradient(135deg,#e8eeff 0%,#d8e4f8 50%,#e8eeff 100%); }
+    [data-theme="light"] .product-thumb,[data-theme="light"] .payment-method-info{ background:#f0f4ff; }
+    [data-theme="light"] .qr-placeholder{ background:#f0f4ff; }
+    [data-theme="light"] .totals-box .totals-row{ border-bottom-color:rgba(0,85,221,0.1); }
+    *{margin:0;padding:0;box-sizing:border-box;}
+    body{background:var(--bg);color:var(--white);font-family:'Inter',sans-serif;transition:background .3s,color .3s;}
+    nav{display:flex;align-items:center;justify-content:space-between;padding:18px 60px;background:rgba(8,8,16,0.95);border-bottom:1px solid var(--border);transition:background .3s;}
+    .logo{font-family:'Rajdhani',sans-serif;font-size:1.6rem;font-weight:700;letter-spacing:2px;color:var(--white);text-decoration:none;}
+    .logo span{color:var(--blue);}
+    .nav-actions{display:flex;gap:12px;align-items:center;}
+    #themeToggle{background:transparent;border:1px solid var(--border);border-radius:50%;width:36px;height:36px;font-size:1.1rem;cursor:pointer;display:flex;align-items:center;justify-content:center;transition:border-color .2s,background .2s;color:var(--white);}
+    #themeToggle:hover{border-color:var(--blue);background:rgba(0,102,255,0.1);}
+    .btn-action{display:flex;align-items:center;gap:8px;padding:9px 20px;border-radius:4px;font-size:0.8rem;letter-spacing:1px;text-transform:uppercase;cursor:pointer;font-family:'Inter',sans-serif;transition:all .2s;text-decoration:none;}
+    .btn-print{background:var(--blue);color:#fff;border:none;}
+    .btn-print:hover{background:var(--blue-glow);}
+    .btn-secondary{background:transparent;color:var(--white);border:1px solid var(--border);}
+    .btn-secondary:hover{border-color:var(--blue);color:var(--blue);}
+    .page-wrapper{padding:40px 60px 80px;max-width:1000px;margin:0 auto;}
+    .order-status{background:rgba(45,198,83,0.08);border:1px solid rgba(45,198,83,0.3);border-radius:6px;padding:16px 24px;display:flex;align-items:center;gap:14px;margin-bottom:32px;}
+    .status-icon{font-size:1.8rem;}
+    .status-text strong{display:block;color:var(--success);font-size:0.9rem;margin-bottom:3px;}
+    .status-text span{font-size:0.78rem;color:var(--gray);}
+    .invoice{background:var(--card-bg);border:1px solid var(--border);border-radius:8px;overflow:hidden;transition:background .3s;}
+    .invoice-header{background:linear-gradient(135deg,#0a0a1a 0%,#0d1533 50%,#0a0a1a 100%);border-bottom:1px solid var(--border);padding:40px;display:flex;justify-content:space-between;align-items:flex-start;position:relative;overflow:hidden;transition:background .3s;}
+    .invoice-header::before{content:'';position:absolute;top:-80px;right:-80px;width:300px;height:300px;background:radial-gradient(circle,rgba(0,102,255,0.12) 0%,transparent 70%);pointer-events:none;}
+    .invoice-brand .inv-logo{font-family:'Rajdhani',sans-serif;font-size:2rem;font-weight:700;letter-spacing:3px;color:var(--white);display:block;margin-bottom:8px;}
+    .invoice-brand .inv-logo span{color:var(--blue);}
+    .invoice-brand p{font-size:0.78rem;color:var(--gray);line-height:1.7;}
+    .invoice-meta{text-align:right;}
+    .invoice-title{font-family:'Rajdhani',sans-serif;font-size:2.5rem;font-weight:700;letter-spacing:4px;color:var(--white);opacity:0.15;margin-bottom:16px;}
+    .invoice-number{font-family:'Rajdhani',sans-serif;font-size:1.4rem;font-weight:700;color:var(--cyan);letter-spacing:2px;margin-bottom:8px;}
+    .invoice-date{font-size:0.78rem;color:var(--gray);margin-bottom:4px;}
+    .invoice-status-badge{display:inline-block;background:rgba(45,198,83,0.15);border:1px solid rgba(45,198,83,0.4);color:var(--success);font-size:0.68rem;letter-spacing:2px;text-transform:uppercase;padding:5px 14px;border-radius:20px;margin-top:10px;}
+    .invoice-parties{display:grid;grid-template-columns:1fr 1fr;gap:0;border-bottom:1px solid var(--border);}
+    .party{padding:28px 40px;}
+    .party:first-child{border-right:1px solid var(--border);}
+    .party-label{font-size:0.68rem;letter-spacing:3px;text-transform:uppercase;color:var(--blue);margin-bottom:14px;}
+    .party-name{font-family:'Rajdhani',sans-serif;font-size:1.1rem;font-weight:600;margin-bottom:8px;}
+    .party p{font-size:0.8rem;color:var(--gray);line-height:1.8;}
+    .invoice-table-wrapper{padding:0 40px;border-bottom:1px solid var(--border);}
+    table{width:100%;border-collapse:collapse;}
+    thead tr{border-bottom:1px solid var(--border);}
+    thead th{padding:16px 12px;text-align:left;font-size:0.68rem;letter-spacing:2px;text-transform:uppercase;color:var(--gray);font-weight:500;}
+    thead th:last-child{text-align:right;}
+    thead th:nth-child(3),thead th:nth-child(4){text-align:center;}
+    tbody tr{border-bottom:1px solid rgba(0,102,255,0.08);transition:background .15s;}
+    tbody tr:hover{background:rgba(0,102,255,0.04);}
+    tbody tr:last-child{border-bottom:none;}
+    tbody td{padding:18px 12px;font-size:0.84rem;vertical-align:middle;}
+    tbody td:last-child{text-align:right;}
+    tbody td:nth-child(3),tbody td:nth-child(4){text-align:center;}
+    .product-cell{display:flex;align-items:center;gap:14px;}
+    .product-thumb{width:44px;height:44px;background:var(--bg);border:1px solid var(--border);border-radius:4px;display:flex;align-items:center;justify-content:center;font-size:1.4rem;flex-shrink:0;}
+    .product-cell-name{font-weight:500;margin-bottom:3px;}
+    .price-cell{font-family:'Rajdhani',sans-serif;font-size:1rem;font-weight:600;}
+    .total-cell{font-family:'Rajdhani',sans-serif;font-size:1.05rem;font-weight:700;color:var(--cyan);}
+    .invoice-totals{display:flex;justify-content:flex-end;padding:28px 40px;border-bottom:1px solid var(--border);}
+    .totals-box{width:320px;}
+    .totals-row{display:flex;justify-content:space-between;padding:8px 0;font-size:0.84rem;border-bottom:1px solid rgba(0,102,255,0.08);}
+    .totals-row:last-child{border-bottom:none;}
+    .totals-row .label{color:var(--gray);}
+    .totals-row.grand-total{padding-top:14px;margin-top:6px;border-top:2px solid var(--border);border-bottom:none;}
+    .totals-row.grand-total .label{font-family:'Rajdhani',sans-serif;font-size:1rem;font-weight:700;letter-spacing:1px;text-transform:uppercase;color:var(--white);}
+    .totals-row.grand-total .value{font-family:'Rajdhani',sans-serif;font-size:1.5rem;font-weight:700;color:var(--cyan);}
+    .invoice-footer-section{display:grid;grid-template-columns:1fr 1fr;gap:0;border-bottom:1px solid var(--border);}
+    .invoice-footer-col{padding:28px 40px;}
+    .invoice-footer-col:first-child{border-right:1px solid var(--border);}
+    .footer-col-title{font-size:0.7rem;letter-spacing:3px;text-transform:uppercase;color:var(--blue);margin-bottom:14px;}
+    .payment-method-info{display:flex;align-items:center;gap:12px;background:var(--bg);border:1px solid var(--border);border-radius:5px;padding:14px;transition:background .3s;}
+    .payment-method-info .pm-icon{font-size:1.5rem;}
+    .payment-method-info .pm-details strong{display:block;font-size:0.85rem;margin-bottom:2px;}
+    .payment-method-info .pm-details span{font-size:0.72rem;color:var(--success);}
+    .notes-text{font-size:0.8rem;color:var(--gray);line-height:1.8;}
+    .invoice-stamp{padding:28px 40px;display:flex;align-items:center;justify-content:space-between;}
+    .stamp-left p{font-size:0.75rem;color:var(--gray);line-height:1.8;max-width:340px;}
+    .qr-placeholder{width:80px;height:80px;background:var(--bg);border:1px solid var(--border);border-radius:4px;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:4px;transition:background .3s;}
+    .qr-placeholder span{font-size:2rem;}
+    .qr-placeholder p{font-size:0.55rem;color:var(--gray);letter-spacing:1px;}
+    .post-actions{display:flex;gap:14px;margin-top:32px;justify-content:center;flex-wrap:wrap;}
+    .post-action-btn{display:flex;align-items:center;gap:8px;padding:12px 24px;border-radius:5px;font-size:0.82rem;letter-spacing:1px;text-transform:uppercase;cursor:pointer;font-family:'Inter',sans-serif;transition:all .2s;text-decoration:none;}
+    .post-action-btn.primary{background:var(--blue);color:#fff;border:none;}
+    .post-action-btn.primary:hover{background:var(--blue-glow);}
+    .post-action-btn.secondary{background:transparent;color:var(--white);border:1px solid var(--border);}
+    .post-action-btn.secondary:hover{border-color:var(--blue);color:var(--blue);}
+    @media print{nav,.order-status,.post-actions{display:none!important;}body{background:white;color:black;}.invoice{border:1px solid #ddd;}.page-wrapper{padding:0;}}
+    @media(max-width:768px){nav{padding:14px 20px;}.page-wrapper{padding:20px;}.invoice-header{flex-direction:column;gap:20px;}.invoice-meta{text-align:left;}.invoice-parties{grid-template-columns:1fr;}.party:first-child{border-right:none;border-bottom:1px solid var(--border);}.invoice-table-wrapper{padding:0 20px;overflow-x:auto;}table{min-width:500px;}.invoice-footer-section{grid-template-columns:1fr;}.invoice-footer-col:first-child{border-right:none;border-bottom:1px solid var(--border);}.invoice-stamp{flex-direction:column;gap:16px;padding:20px;}}
   </style>
 </head>
 <body>
-
   <nav>
     <a href="{{ url_for('index') }}" class="logo">SECURE<span>VISION</span></a>
     <div class="nav-actions">
+      <button id="themeToggle" aria-label="Cambiar tema">🌙</button>
       <button class="btn-action btn-print" onclick="window.print()">🖨️ Imprimir</button>
       <a href="{{ url_for('catalogo') }}" class="btn-action btn-secondary">🛍️ Seguir Comprando</a>
       <a href="{{ url_for('index') }}" class="btn-action btn-secondary">🏠 Inicio</a>
@@ -148,7 +111,6 @@
   </nav>
 
   <div class="page-wrapper">
-
     <div class="order-status">
       <span class="status-icon">✅</span>
       <div class="status-text">
@@ -158,16 +120,10 @@
     </div>
 
     <div class="invoice" id="invoiceToPrint">
-
       <div class="invoice-header">
         <div class="invoice-brand">
           <span class="inv-logo">SECURE<span>VISION</span></span>
-          <p>
-            Soluciones de Seguridad Electrónica<br/>
-            www.securevision.com<br/>
-            soporte@securevision.com<br/>
-            +1 (800) 123-4567
-          </p>
+          <p>Soluciones de Seguridad Electrónica<br/>www.securevision.com<br/>soporte@securevision.com<br/>+1 (800) 123-4567</p>
         </div>
         <div class="invoice-meta">
           <div class="invoice-title">FACTURA</div>
@@ -181,46 +137,23 @@
         <div class="party">
           <div class="party-label">// Facturado por</div>
           <div class="party-name">SecureVision International</div>
-          <p>
-            1234 Security Blvd, Suite 500<br/>
-            Miami, Florida, USA 33101<br/>
-            soporte@securevision.com
-          </p>
+          <p>1234 Security Blvd, Suite 500<br/>Miami, Florida, USA 33101<br/>soporte@securevision.com</p>
         </div>
         <div class="party">
           <div class="party-label">// Facturado a</div>
           <div class="party-name">{{ pedido.nombre }}</div>
-          <p>
-            {{ pedido.direccion }}<br/>
-            {{ pedido.ciudad }}, {{ pedido.pais }}<br/>
-            {{ pedido.email }}
-          </p>
+          <p>{{ pedido.direccion }}<br/>{{ pedido.ciudad }}, {{ pedido.pais }}<br/>{{ pedido.email }}</p>
         </div>
       </div>
 
       <div class="invoice-table-wrapper">
         <table>
-          <thead>
-            <tr>
-              <th>#</th>
-              <th>Producto</th>
-              <th>Cantidad</th>
-              <th>Precio Unit.</th>
-              <th>Total</th>
-            </tr>
-          </thead>
+          <thead><tr><th>#</th><th>Producto</th><th>Cantidad</th><th>Precio Unit.</th><th>Total</th></tr></thead>
           <tbody>
             {% for item in pedido.carrito %}
             <tr>
               <td style="color:var(--gray);font-size:0.8rem;">{{ "%02d"|format(loop.index) }}</td>
-              <td>
-                <div class="product-cell">
-                  <div class="product-thumb">{{ item.emoji }}</div>
-                  <div>
-                    <div class="product-cell-name">{{ item.nombre }}</div>
-                  </div>
-                </div>
-              </td>
+              <td><div class="product-cell"><div class="product-thumb">{{ item.emoji }}</div><div><div class="product-cell-name">{{ item.nombre }}</div></div></div></td>
               <td>{{ item.cantidad }}</td>
               <td class="price-cell">${{ "%.2f"|format(item.precio) }}</td>
               <td class="total-cell">${{ "%.2f"|format(item.precio * item.cantidad) }}</td>
@@ -232,58 +165,28 @@
 
       <div class="invoice-totals">
         <div class="totals-box">
-          <div class="totals-row">
-            <span class="label">Subtotal</span>
-            <span>${{ "%.2f"|format(pedido.subtotal) }}</span>
-          </div>
-          <div class="totals-row">
-            <span class="label">Envío Internacional</span>
-            <span style="color:var(--success);">Gratis</span>
-          </div>
-          <div class="totals-row">
-            <span class="label">Impuesto (ISV 15%)</span>
-            <span>${{ "%.2f"|format(pedido.impuestos) }}</span>
-          </div>
-          <div class="totals-row grand-total">
-            <span class="label">Total</span>
-            <span class="value">${{ "%.2f"|format(pedido.total) }}</span>
-          </div>
+          <div class="totals-row"><span class="label">Subtotal</span><span>${{ "%.2f"|format(pedido.subtotal) }}</span></div>
+          <div class="totals-row"><span class="label">Envío Internacional</span><span style="color:var(--success);">Gratis</span></div>
+          <div class="totals-row"><span class="label">Impuesto (ISV 15%)</span><span>${{ "%.2f"|format(pedido.impuestos) }}</span></div>
+          <div class="totals-row grand-total"><span class="label">Total</span><span class="value">${{ "%.2f"|format(pedido.total) }}</span></div>
         </div>
       </div>
 
       <div class="invoice-footer-section">
         <div class="invoice-footer-col">
           <div class="footer-col-title">// Método de Pago</div>
-          <div class="payment-method-info">
-            <span class="pm-icon">💳</span>
-            <div class="pm-details">
-              <strong>Tarjeta de Crédito / PayPal</strong>
-              <span>✓ Pago verificado y aprobado</span>
-            </div>
-          </div>
+          <div class="payment-method-info"><span class="pm-icon">💳</span><div class="pm-details"><strong>Tarjeta de Crédito / PayPal</strong><span>✓ Pago verificado y aprobado</span></div></div>
         </div>
         <div class="invoice-footer-col">
           <div class="footer-col-title">// Notas</div>
-          <p class="notes-text">
-            Gracias por tu compra en SecureVision. Todos nuestros productos incluyen garantía de 12 meses.
-            Para soporte técnico contáctanos en soporte@securevision.com.
-          </p>
+          <p class="notes-text">Gracias por tu compra en SecureVision. Todos nuestros productos incluyen garantía de 12 meses. Para soporte técnico contáctanos en soporte@securevision.com.</p>
         </div>
       </div>
 
       <div class="invoice-stamp">
-        <div class="stamp-left">
-          <p>
-            Este documento es una factura electrónica válida generada por SecureVision International.<br/>
-            Número de verificación: <strong style="color:var(--blue);letter-spacing:1px;">{{ pedido.numero }}-VRF</strong>
-          </p>
-        </div>
-        <div class="qr-placeholder">
-          <span>▦</span>
-          <p>QR VERIFY</p>
-        </div>
+        <div class="stamp-left"><p>Este documento es una factura electrónica válida generada por SecureVision International.<br/>Número de verificación: <strong style="color:var(--blue);letter-spacing:1px;">{{ pedido.numero }}-VRF</strong></p></div>
+        <div class="qr-placeholder"><span>▦</span><p>QR VERIFY</p></div>
       </div>
-
     </div>
 
     <div class="post-actions">
@@ -291,8 +194,8 @@
       <a href="{{ url_for('catalogo') }}" class="post-action-btn secondary">🛍️ Seguir Comprando</a>
       <a href="{{ url_for('index') }}" class="post-action-btn secondary">🏠 Ir al Inicio</a>
     </div>
-
   </div>
 
+  <script src="{{ url_for('static', filename='js/theme.js') }}"></script>
 </body>
 </html>

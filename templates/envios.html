@@ -5,337 +5,111 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>Política de Envíos | SecureVision</title>
   <link href="https://fonts.googleapis.com/css2?family=Rajdhani:wght@400;600;700&family=Inter:wght@300;400;500&display=swap" rel="stylesheet"/>
+  <script>
+    (function() {
+      const saved = localStorage.getItem('sv-theme') || 'dark';
+      document.documentElement.setAttribute('data-theme', saved);
+    })();
+  </script>
   <style>
-    :root {
-      --bg: #080810;
-      --bg2: #0d0d1a;
-      --blue: #0066ff;
-      --blue-glow: #0044cc;
-      --cyan: #00cfff;
-      --white: #f0f4ff;
-      --gray: #8890aa;
-      --card-bg: #10101e;
+    :root,
+    [data-theme="dark"] {
+      --bg: #080810; --bg2: #0d0d1a; --blue: #0066ff; --blue-glow: #0044cc;
+      --cyan: #00cfff; --white: #f0f4ff; --gray: #8890aa; --card-bg: #10101e;
       --border: rgba(0, 102, 255, 0.2);
     }
+    [data-theme="light"] {
+      --bg: #f0f4ff; --bg2: #e2e8f8; --blue: #0055dd; --blue-glow: #0044cc;
+      --cyan: #0077cc; --white: #0a0a1a; --gray: #444e6a; --card-bg: #ffffff;
+      --border: rgba(0, 85, 221, 0.2);
+    }
+    [data-theme="light"] nav { background: rgba(240, 244, 255, 0.95) !important; }
+    [data-theme="light"] footer { background: #e2e8f8 !important; border-top-color: rgba(0,85,221,0.15) !important; }
+
     * { margin: 0; padding: 0; box-sizing: border-box; }
-    body {
-      background: var(--bg);
-      color: var(--white);
-      font-family: 'Inter', sans-serif;
-      overflow-x: hidden;
-    }
-    nav {
-      position: fixed;
-      top: 0; left: 0; right: 0;
-      z-index: 100;
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      padding: 18px 60px;
-      background: rgba(8, 8, 16, 0.85);
-      backdrop-filter: blur(12px);
-      border-bottom: 1px solid var(--border);
-    }
-    .logo {
-      font-family: 'Rajdhani', sans-serif;
-      font-size: 1.6rem;
-      font-weight: 700;
-      letter-spacing: 2px;
-      color: var(--white);
-      text-decoration: none;
-    }
+    body { background: var(--bg); color: var(--white); font-family: 'Inter', sans-serif; overflow-x: hidden; transition: background 0.3s, color 0.3s; }
+
+    nav { position: fixed; top: 0; left: 0; right: 0; z-index: 100; display: flex; align-items: center; justify-content: space-between; padding: 18px 60px; background: rgba(8, 8, 16, 0.85); backdrop-filter: blur(12px); border-bottom: 1px solid var(--border); transition: background 0.3s; }
+    .logo { font-family: 'Rajdhani', sans-serif; font-size: 1.6rem; font-weight: 700; letter-spacing: 2px; color: var(--white); text-decoration: none; }
     .logo span { color: var(--blue); }
-    .nav-links {
-      display: flex;
-      gap: 36px;
-      list-style: none;
-    }
-    .nav-links a {
-      text-decoration: none;
-      color: var(--gray);
-      font-size: 0.85rem;
-      letter-spacing: 1px;
-      text-transform: uppercase;
-      transition: color 0.2s;
-    }
-    .nav-links a:hover, .nav-links a.active { color: var(--white); }
-    .nav-actions {
-      display: flex;
-      align-items: center;
-      gap: 16px;
-    }
-    .btn-nav {
-      background: var(--blue);
-      color: #fff;
-      border: none;
-      padding: 9px 22px;
-      border-radius: 4px;
-      font-size: 0.82rem;
-      letter-spacing: 1px;
-      text-transform: uppercase;
-      cursor: pointer;
-      transition: background 0.2s;
-      text-decoration: none;
-    }
-    .btn-nav:hover { background: var(--blue-glow); }
-    .container {
-      max-width: 900px;
-      margin: 0 auto;
-      background: var(--card-bg);
-      border-radius: 8px;
-      box-shadow: 0 0 40px rgba(0,102,255,0.04);
-      padding: 60px 40px 40px 40px;
-      margin-top: 160px;
-      margin-bottom: 60px;
-    }
-    .img-top {
-      width: 100%;
-      max-height: 220px;
-      object-fit: cover;
-      margin-top: 80px;
-      margin-bottom: 0;
-      border-radius: 0 0 8px 8px;
-      box-shadow: 0 8px 32px rgba(0,102,255,0.08);
-      display: block;
-    }
-    h1 {
-      font-family: 'Rajdhani', sans-serif;
-      font-size: 2.3rem;
-      color: var(--blue);
-      margin-bottom: 32px;
-      margin-top: 0;
-      text-align: left;
-    }
-    .priv-section {
-      color: var(--gray);
-      font-size: 1.05rem;
-      line-height: 1.8;
-      margin-bottom: 32px;
-      text-align: justify;
-    }
-    .priv-section strong {
-      color: var(--cyan);
-      font-family: 'Rajdhani', sans-serif;
-      font-size: 1.08rem;
-      letter-spacing: 1px;
-    }
-    .priv-list {
-      margin: 12px 0 0 24px;
-      color: var(--gray);
-      font-size: 1.01rem;
-      line-height: 1.7;
-    }
-    .priv-list li {
-      margin-bottom: 8px;
-      text-align: justify;
-    }
+    .nav-links { display: flex; gap: 36px; list-style: none; }
+    .nav-links a { text-decoration: none; color: var(--gray); font-size: 0.85rem; letter-spacing: 1px; text-transform: uppercase; transition: color 0.2s; }
+    .nav-links a:hover { color: var(--white); }
+    .nav-actions { display: flex; align-items: center; gap: 16px; }
+
+    #themeToggle { background: transparent; border: 1px solid var(--border); border-radius: 50%; width: 36px; height: 36px; font-size: 1.1rem; cursor: pointer; display: flex; align-items: center; justify-content: center; transition: border-color 0.2s, background 0.2s; color: var(--white); }
+    #themeToggle:hover { border-color: var(--blue); background: rgba(0,102,255,0.1); }
+
+    .container { max-width: 900px; margin: 160px auto 60px; background: var(--card-bg); border-radius: 8px; box-shadow: 0 0 40px rgba(0,102,255,0.04); padding: 60px 40px 40px; transition: background 0.3s; }
+    h1 { font-family: 'Rajdhani', sans-serif; font-size: 2.3rem; color: var(--blue); margin-bottom: 32px; }
+    .priv-section { color: var(--gray); font-size: 1.05rem; line-height: 1.8; margin-bottom: 32px; text-align: justify; }
+    .priv-section strong { color: var(--cyan); font-family: 'Rajdhani', sans-serif; font-size: 1.08rem; letter-spacing: 1px; }
+    .priv-list { margin: 12px 0 0 24px; color: var(--gray); font-size: 1.01rem; line-height: 1.7; }
+    .priv-list li { margin-bottom: 8px; text-align: justify; }
     a { color: var(--cyan); text-decoration: none; }
     a:hover { text-decoration: underline; }
-    /* FOOTER */
-    footer {
-      background: var(--bg2);
-      border-top: 1px solid var(--border);
-      padding: 60px;
-    }
-    .footer-grid {
-      display: grid;
-      grid-template-columns: 2fr 1fr 1fr 1fr;
-      gap: 40px;
-      margin-bottom: 40px;
-    }
-    .footer-brand .logo {
-      font-size: 1.4rem;
-      margin-bottom: 16px;
-      display: block;
-    }
-    .footer-brand p {
-      color: var(--gray);
-      font-size: 0.82rem;
-      line-height: 1.8;
-      max-width: 260px;
-      text-align: left;
-      margin: 0;
-    }
-    .footer-col h4 {
-      font-family: 'Rajdhani', sans-serif;
-      font-size: 0.85rem;
-      letter-spacing: 2px;
-      text-transform: uppercase;
-      color: var(--white);
-      margin-bottom: 18px;
-    }
+
+    footer { background: var(--bg2); border-top: 1px solid var(--border); padding: 60px; transition: background 0.3s; }
+    .footer-grid { display: grid; grid-template-columns: 2fr 1fr 1fr 1fr; gap: 40px; margin-bottom: 40px; }
+    .footer-col h4 { font-family: 'Rajdhani', sans-serif; font-size: 0.85rem; letter-spacing: 2px; text-transform: uppercase; color: var(--white); margin-bottom: 18px; }
     .footer-col ul { list-style: none; }
     .footer-col ul li { margin-bottom: 10px; }
-    .footer-col ul li a {
-      color: var(--gray);
-      text-decoration: none;
-      font-size: 0.82rem;
-      transition: color 0.2s;
-    }
+    .footer-col ul li a { color: var(--gray); text-decoration: none; font-size: 0.82rem; transition: color 0.2s; }
     .footer-col ul li a:hover { color: var(--blue); }
-    .footer-bottom {
-      border-top: 1px solid var(--border);
-      padding-top: 24px;
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-    }
-    .footer-bottom p {
-      color: var(--gray);
-      font-size: 0.75rem;
-      letter-spacing: 1px;
-    }
-    @keyframes fadeUp {
-      from { opacity: 0; transform: translateY(30px); }
-      to   { opacity: 1; transform: translateY(0); }
-    }
+    .footer-bottom { border-top: 1px solid var(--border); padding-top: 24px; display: flex; justify-content: space-between; align-items: center; }
+    .footer-bottom p { color: var(--gray); font-size: 0.75rem; letter-spacing: 1px; }
+
     @media (max-width: 900px) {
-      nav { padding: 18px 24px; }
-      .nav-links { display: none; }
+      nav { padding: 18px 24px; } .nav-links { display: none; }
       .container { padding: 40px 12px; margin-top: 120px; }
-      .img-top { margin-top: 60px; }
-      .footer-grid { grid-template-columns: 1fr 1fr; }
-      footer { padding: 40px 24px; }
+      .footer-grid { grid-template-columns: 1fr 1fr; } footer { padding: 40px 24px; }
     }
   </style>
 </head>
 <body>
-
   <nav>
     <a href="index.html" class="logo">SECURE<span>VISION</span></a>
     <ul class="nav-links">
-        <li><a href="index.html">Inicio</a></li>
-        <li><a href="catalogo.html">Catálogo</a></li>
-        <li><a href="nosotros.html">¿Quiénes somos?</a></li>
-        <li><a href="contacto.html">Contáctanos</a></li>
+      <li><a href="index.html">Inicio</a></li>
+      <li><a href="catalogo.html">Catálogo</a></li>
+      <li><a href="nosotros.html">¿Quiénes somos?</a></li>
+      <li><a href="contacto.html">Contáctanos</a></li>
     </ul>
-    <div class="nav-actions"></div>
+    <div class="nav-actions">
+      <button id="themeToggle" aria-label="Cambiar tema">🌙</button>
+    </div>
   </nav>
+
   <div class="container">
     <h1>Política de Envíos - SecureVision</h1>
-    
-    <div class="priv-section">
-      <strong>1. Cobertura de Envíos</strong><br>
-      Realizamos envíos a nivel nacional. Para zonas de difícil acceso, el cliente será informado previamente sobre posibles cargos adicionales o puntos de entrega alternativos.
-    </div>
-
-    <div class="priv-section">
-      <strong>2. Tiempos de Procesamiento</strong><br>
-      <ul class="priv-list">
-        <li>Los pedidos se procesan dentro de un plazo de <strong>24 a 48 horas hábiles</strong> después de confirmado el pago.</li>
-        <li>Los pedidos realizados en fines de semana o días festivos se procesarán el siguiente día hábil.</li>
-      </ul>
-    </div>
-
-    <div class="priv-section">
-      <strong>3. Métodos de Envío</strong><br>
-      Trabajamos con empresas de mensajería confiables para garantizar la seguridad de su compra. El cliente podrá elegir entre:
-      <ul class="priv-list">
-        <li><strong>Envío Estándar:</strong> Opción económica con tiempos de entrega regulares.</li>
-        <li><strong>Envío Exprés:</strong> Opción premium con entrega acelerada (cuando esté disponible).</li>
-      </ul>
-    </div>
-
-    <div class="priv-section">
-      <strong>4. Tiempos de Entrega</strong><br>
-      <ul class="priv-list">
-        <li><strong>Envío Estándar:</strong> 2 a 5 días hábiles</li>
-        <li><strong>Envío Exprés:</strong> 1 a 2 días hábiles</li>
-      </ul>
-      Los tiempos pueden variar dependiendo de la ubicación del cliente y condiciones externas.
-    </div>
-
-    <div class="priv-section">
-      <strong>5. Costos de Envío</strong><br>
-      <ul class="priv-list">
-        <li>El costo de envío se calcula en función del peso, volumen y destino del pedido.</li>
-        <li>Ofrecemos <strong>envío gratuito</strong> en compras mayores a un monto definido por la empresa.</li>
-        <li>Los costos se mostrarán de manera clara antes de completar la compra.</li>
-      </ul>
-    </div>
-
-    <div class="priv-section">
-      <strong>6. Seguimiento de Pedidos</strong><br>
-      Una vez enviado el pedido, el cliente recibirá un <strong>número de guía</strong> para rastrear su envío en tiempo real a través de la plataforma de la empresa de mensajería.
-    </div>
-
-    <div class="priv-section">
-      <strong>7. Entrega del Pedido</strong><br>
-      <ul class="priv-list">
-        <li>Es responsabilidad del cliente proporcionar una <strong>dirección correcta y completa</strong>.</li>
-        <li>Si no hay nadie disponible para recibir el pedido, la empresa de mensajería realizará un segundo intento o dejará instrucciones de entrega.</li>
-        <li>SecureVision no se responsabiliza por direcciones incompletas o incorrectas proporcionadas por el cliente.</li>
-      </ul>
-    </div>
-
-    <div class="priv-section">
-      <strong>8. Daños o Pérdidas</strong><br>
-      <ul class="priv-list">
-        <li>Todos los productos son revisados y empacados cuidadosamente antes de su envío.</li>
-        <li>Si el producto llega <strong>dañado</strong>, el cliente debe notificar dentro de las primeras <strong>24 horas</strong> con evidencia fotográfica.</li>
-        <li>En caso de <strong>pérdida durante el transporte</strong>, se iniciará un proceso de reclamo con la empresa de mensajería.</li>
-        <li>SecureVision tramitará la reposición del producto o devolución del dinero según corresponda.</li>
-      </ul>
-    </div>
-
-    <div class="priv-section">
-      <strong>9. Restricciones</strong><br>
-      Algunos productos pueden estar sujetos a <strong>restricciones de envío</strong> debido a su tamaño, peso o regulaciones locales. En estos casos, el cliente será notificado inmediatamente al momento de realizar la compra.
-    </div>
-
-    <div class="priv-section">
-    <!--<strong>10. Contacto</strong><br> -->
-      Para cualquier duda sobre envíos, puede contactarse con nosotros.
-      <!-- <ul class="priv-list">
-        <li><strong>Teléfono:</strong> [Tu número de teléfono]</li>
-        <li><strong>Correo Electrónico:</strong> <a href="mailto:securevision@gmail.com">securevision@gmail.com</a></li>
-        <li><strong>WhatsApp:</strong> [Tu número de WhatsApp]</li>
-      </ul> -->
-    </div>
+    <div class="priv-section"><strong>1. Cobertura de Envíos</strong><br>Realizamos envíos a nivel nacional. Para zonas de difícil acceso, el cliente será informado previamente sobre posibles cargos adicionales o puntos de entrega alternativos.</div>
+    <div class="priv-section"><strong>2. Tiempos de Procesamiento</strong><br><ul class="priv-list"><li>Los pedidos se procesan dentro de un plazo de <strong>24 a 48 horas hábiles</strong> después de confirmado el pago.</li><li>Los pedidos realizados en fines de semana o días festivos se procesarán el siguiente día hábil.</li></ul></div>
+    <div class="priv-section"><strong>3. Métodos de Envío</strong><br>Trabajamos con empresas de mensajería confiables. El cliente podrá elegir entre:<ul class="priv-list"><li><strong>Envío Estándar:</strong> Opción económica con tiempos de entrega regulares.</li><li><strong>Envío Exprés:</strong> Opción premium con entrega acelerada (cuando esté disponible).</li></ul></div>
+    <div class="priv-section"><strong>4. Tiempos de Entrega</strong><br><ul class="priv-list"><li><strong>Envío Estándar:</strong> 2 a 5 días hábiles</li><li><strong>Envío Exprés:</strong> 1 a 2 días hábiles</li></ul>Los tiempos pueden variar dependiendo de la ubicación y condiciones externas.</div>
+    <div class="priv-section"><strong>5. Costos de Envío</strong><br><ul class="priv-list"><li>El costo se calcula en función del peso, volumen y destino del pedido.</li><li>Ofrecemos <strong>envío gratuito</strong> en compras mayores a un monto definido por la empresa.</li><li>Los costos se mostrarán claramente antes de completar la compra.</li></ul></div>
+    <div class="priv-section"><strong>6. Seguimiento de Pedidos</strong><br>Una vez enviado el pedido, el cliente recibirá un <strong>número de guía</strong> para rastrear su envío en tiempo real a través de la plataforma de la empresa de mensajería.</div>
+    <div class="priv-section"><strong>7. Entrega del Pedido</strong><br><ul class="priv-list"><li>Es responsabilidad del cliente proporcionar una <strong>dirección correcta y completa</strong>.</li><li>Si no hay nadie disponible, la empresa de mensajería realizará un segundo intento o dejará instrucciones.</li><li>SecureVision no se responsabiliza por direcciones incorrectas proporcionadas por el cliente.</li></ul></div>
+    <div class="priv-section"><strong>8. Daños o Pérdidas</strong><br><ul class="priv-list"><li>Todos los productos son revisados y empacados cuidadosamente antes del envío.</li><li>Si el producto llega <strong>dañado</strong>, notificar dentro de las primeras <strong>24 horas</strong> con evidencia fotográfica.</li><li>En caso de <strong>pérdida durante el transporte</strong>, se iniciará un proceso de reclamo con la empresa de mensajería.</li><li>SecureVision tramitará la reposición del producto o devolución según corresponda.</li></ul></div>
+    <div class="priv-section"><strong>9. Restricciones</strong><br>Algunos productos pueden estar sujetos a <strong>restricciones de envío</strong> por tamaño, peso o regulaciones locales. El cliente será notificado al momento de la compra.</div>
+    <div class="priv-section">Para cualquier duda sobre envíos, puede <a href="{{ url_for('contacto') }}">contactarse con nosotros</a>.</div>
   </div>
-  
-  <!-- FOOTER ESTILO INDEX -->
-  <footer style="background: #0d0d1a; border-top: 1px solid #1a1a2a; padding: 60px;">
-    <div class="footer-grid" style="display: grid; grid-template-columns: 2fr 1fr 1fr 1fr; gap: 40px; margin-bottom: 40px;">
-      <div class="footer-brand">
-        <span class="logo" style="font-size: 1.4rem; color: #f0f4ff; font-family: 'Rajdhani', sans-serif; font-weight: 700; display: block; margin-bottom: 16px;">SECURE<span style="color:#0066ff">VISION</span></span>
-        <p style="color: #8890aa; font-size: 0.82rem; line-height: 1.8; max-width: 260px; margin: 0;">Soluciones de seguridad electrónica profesional para hogares y empresas a nivel mundial.</p>
+
+  <footer>
+    <div class="footer-grid">
+      <div>
+        <span class="logo" style="display:block;margin-bottom:16px;">SECURE<span>VISION</span></span>
+        <p style="color:var(--gray);font-size:0.82rem;line-height:1.8;max-width:260px;margin:0;">Soluciones de seguridad electrónica profesional para hogares y empresas a nivel mundial.</p>
       </div>
-      <div class="footer-col">
-        <h4 style="font-family: 'Rajdhani', sans-serif; font-size: 0.85rem; letter-spacing: 2px; text-transform: uppercase; color: #f0f4ff; margin-bottom: 18px;">Productos</h4>
-        <ul style="list-style: none; padding: 0;">
-          <li><a href="#" style="color: #8890aa; text-decoration: none; font-size: 0.82rem;">Cámaras CCTV</a></li>
-          <li><a href="#" style="color: #8890aa; text-decoration: none; font-size: 0.82rem;">Monitores</a></li>
-          <li><a href="#" style="color: #8890aa; text-decoration: none; font-size: 0.82rem;">Alarmas</a></li>
-          <li><a href="#" style="color: #8890aa; text-decoration: none; font-size: 0.82rem;">Biométricos</a></li>
-          <li><a href="#" style="color: #8890aa; text-decoration: none; font-size: 0.82rem;">Cercas Eléctricas</a></li>
-        </ul>
-      </div>
-      <div class="footer-col">
-        <h4 style="font-family: 'Rajdhani', sans-serif; font-size: 0.85rem; letter-spacing: 2px; text-transform: uppercase; color: #f0f4ff; margin-bottom: 18px;">Empresa</h4>
-        <ul style="list-style: none; padding: 0;">
-          <li><a href="{{ url_for('nosotros') }}">¿Quiénes somos?</a></li>
-          <li><a href="#">Blog de noticias</a></li>
-          <li><a href="{{ url_for('contacto') }}">Contáctanos</a></li>
-          <li><a href="#">Preguntas frecuentes</a></li>
-        </ul>
-      </div>
-      <div class="footer-col">
-        <h4 style="font-family: 'Rajdhani', sans-serif; font-size: 0.85rem; letter-spacing: 2px; text-transform: uppercase; color: #f0f4ff; margin-bottom: 18px;">Políticas</h4>
-        <ul style="list-style: none; padding: 0;">
-          <li><a href="{{ url_for('terminos') }}" style="color: #8890aa; text-decoration: none; font-size: 0.82rem;">Términos generales</a></li>
-          <li><a href="{{ url_for('privacidad') }}" style="color: #8890aa; text-decoration: none; font-size: 0.82rem;">Privacidad</a></li>
-          <li><a href="{{ url_for('devoluciones') }}">Devoluciones y cambios</a></li>
-          <li><a href="{{ url_for('envios') }}" style="color: #8890aa; text-decoration: none; font-size: 0.82rem;">Envíos</a></li>
-          <li><a href="{{ url_for('garantia') }}" style="color: #8890aa; text-decoration: none; font-size: 0.82rem;">Garantía</a></li>
-        </ul>
-      </div>
+      <div class="footer-col"><h4>Productos</h4><ul><li><a href="#">Cámaras CCTV</a></li><li><a href="#">Monitores</a></li><li><a href="#">Alarmas</a></li><li><a href="#">Biométricos</a></li><li><a href="#">Cercas Eléctricas</a></li></ul></div>
+      <div class="footer-col"><h4>Empresa</h4><ul><li><a href="{{ url_for('nosotros') }}">¿Quiénes somos?</a></li><li><a href="#">Blog de noticias</a></li><li><a href="{{ url_for('contacto') }}">Contáctanos</a></li><li><a href="#">Preguntas frecuentes</a></li></ul></div>
+      <div class="footer-col"><h4>Políticas</h4><ul><li><a href="{{ url_for('terminos') }}">Términos generales</a></li><li><a href="{{ url_for('privacidad') }}">Privacidad</a></li><li><a href="{{ url_for('devoluciones') }}">Devoluciones y cambios</a></li><li><a href="{{ url_for('envios') }}">Envíos</a></li><li><a href="{{ url_for('garantia') }}">Garantía</a></li></ul></div>
     </div>
-    <div class="footer-bottom" style="border-top: 1px solid #1a1a2a; padding-top: 24px; display: flex; justify-content: space-between; align-items: center;">
-      <p style="color: #8890aa; font-size: 0.75rem; letter-spacing: 1px;">© 2026 SecureVision. Todos los derechos reservados.</p>
-      <p style="color: #8890aa; font-size: 0.75rem; letter-spacing: 1px;">Hecho con 💙 para proteger el mundo.</p>
+    <div class="footer-bottom">
+      <p>© 2026 SecureVision. Todos los derechos reservados.</p>
+      <p>Hecho con 💙 para proteger el mundo.</p>
     </div>
   </footer>
 
+  <script src="static/js/theme.js"></script>
 </body>
 </html>

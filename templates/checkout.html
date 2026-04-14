@@ -5,8 +5,16 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>Checkout | SecureVision</title>
   <link href="https://fonts.googleapis.com/css2?family=Rajdhani:wght@400;600;700&family=Inter:wght@300;400;500&display=swap" rel="stylesheet"/>
+  <!-- Aplica tema ANTES de pintar para evitar flash -->
+  <script>
+    (function() {
+      const saved = localStorage.getItem('sv-theme') || 'dark';
+      document.documentElement.setAttribute('data-theme', saved);
+    })();
+  </script>
   <style>
-    :root {
+    :root,
+    [data-theme="dark"] {
       --bg: #080810;
       --bg2: #0d0d1a;
       --blue: #0066ff;
@@ -20,9 +28,49 @@
       --success: #2dc653;
     }
 
+    [data-theme="light"] {
+      --bg: #f0f4ff;
+      --bg2: #e2e8f8;
+      --blue: #0055dd;
+      --blue-glow: #0044cc;
+      --cyan: #0077cc;
+      --white: #0a0a1a;
+      --gray: #444e6a;
+      --card-bg: #ffffff;
+      --border: rgba(0, 85, 221, 0.2);
+      --error: #cc2233;
+      --success: #1a9e3f;
+    }
+
+    [data-theme="light"] nav {
+      background: rgba(240, 244, 255, 0.95) !important;
+    }
+
+    [data-theme="light"] .form-input {
+      background: #f0f4ff;
+      color: #0a0a1a;
+    }
+
+    [data-theme="light"] .payment-option {
+      background: #f0f4ff;
+    }
+
+    [data-theme="light"] select.form-input option {
+      background: #e2e8f8;
+      color: #0a0a1a;
+    }
+
+    [data-theme="light"] footer {
+      background: #e2e8f8;
+    }
+
+    [data-theme="light"] .page-header {
+      background: #e2e8f8;
+    }
+
     * { margin: 0; padding: 0; box-sizing: border-box; }
 
-    body { background: var(--bg); color: var(--white); font-family: 'Inter', sans-serif; }
+    body { background: var(--bg); color: var(--white); font-family: 'Inter', sans-serif; transition: background 0.3s, color 0.3s; }
 
     nav {
       position: fixed; top: 0; left: 0; right: 0; z-index: 100;
@@ -31,33 +79,47 @@
       background: rgba(8, 8, 16, 0.95);
       backdrop-filter: blur(12px);
       border-bottom: 1px solid var(--border);
+      transition: background 0.3s;
     }
 
     .logo { font-family: 'Rajdhani', sans-serif; font-size: 1.6rem; font-weight: 700; letter-spacing: 2px; color: var(--white); text-decoration: none; }
     .logo span { color: var(--blue); }
 
     .checkout-steps { display: flex; align-items: center; gap: 0; }
-
     .step { display: flex; align-items: center; gap: 8px; font-size: 0.78rem; letter-spacing: 1px; text-transform: uppercase; color: var(--gray); }
     .step.active { color: var(--white); }
     .step.done { color: var(--success); }
-
     .step-num { width: 26px; height: 26px; border-radius: 50%; border: 1px solid var(--border); display: flex; align-items: center; justify-content: center; font-size: 0.72rem; font-weight: 600; }
     .step.active .step-num { background: var(--blue); border-color: var(--blue); color: #fff; }
     .step.done .step-num { background: var(--success); border-color: var(--success); color: #fff; }
-
     .step-divider { width: 40px; height: 1px; background: var(--border); margin: 0 8px; }
+
+    .nav-right { display: flex; align-items: center; gap: 14px; }
 
     .secure-badge { display: flex; align-items: center; gap: 6px; font-size: 0.75rem; color: var(--success); }
 
-    .page-header { padding: 110px 60px 40px; background: var(--bg2); border-bottom: 1px solid var(--border); }
+    /* Theme toggle */
+    #themeToggle {
+      background: transparent;
+      border: 1px solid var(--border);
+      border-radius: 50%;
+      width: 34px; height: 34px;
+      font-size: 1rem;
+      cursor: pointer;
+      display: flex; align-items: center; justify-content: center;
+      transition: border-color 0.2s, background 0.2s;
+      color: var(--white);
+    }
+    #themeToggle:hover { border-color: var(--blue); background: rgba(0,102,255,0.1); }
+
+    .page-header { padding: 110px 60px 40px; background: var(--bg2); border-bottom: 1px solid var(--border); transition: background 0.3s; }
     .page-header-tag { font-size: 0.72rem; letter-spacing: 3px; text-transform: uppercase; color: var(--blue); margin-bottom: 10px; }
     .page-header h1 { font-family: 'Rajdhani', sans-serif; font-size: 2.2rem; font-weight: 700; }
     .page-header h1 span { color: var(--blue); }
 
     .checkout-layout { display: grid; grid-template-columns: 1fr 400px; gap: 30px; padding: 40px 60px; max-width: 1400px; margin: 0 auto; }
 
-    .form-section { background: var(--card-bg); border: 1px solid var(--border); border-radius: 6px; padding: 28px; margin-bottom: 20px; }
+    .form-section { background: var(--card-bg); border: 1px solid var(--border); border-radius: 6px; padding: 28px; margin-bottom: 20px; transition: background 0.3s; }
 
     .section-header { display: flex; align-items: center; gap: 12px; margin-bottom: 24px; padding-bottom: 16px; border-bottom: 1px solid var(--border); }
     .section-num { width: 30px; height: 30px; background: var(--blue); border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 0.8rem; font-weight: 700; color: #fff; flex-shrink: 0; }
@@ -77,9 +139,8 @@
     .form-input {
       width: 100%; background: var(--bg); border: 1px solid var(--border); color: var(--white);
       padding: 12px 13px 12px 40px; border-radius: 5px; font-size: 0.86rem; font-family: 'Inter', sans-serif;
-      transition: border-color 0.2s, box-shadow 0.2s;
+      transition: border-color 0.2s, box-shadow 0.2s, background 0.3s, color 0.3s;
     }
-
     .form-input.no-icon { padding-left: 13px; }
     .form-input:focus { outline: none; border-color: var(--blue); box-shadow: 0 0 0 3px rgba(0,102,255,0.1); }
     .form-input::placeholder { color: var(--gray); }
@@ -90,19 +151,16 @@
       background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' fill='%238890aa' viewBox='0 0 16 16'%3E%3Cpath d='M7.247 11.14 2.451 5.658C1.885 5.013 2.345 4 3.204 4h9.592a1 1 0 0 1 .753 1.659l-4.796 5.48a1 1 0 0 1-1.506 0z'/%3E%3C/svg%3E");
       background-repeat: no-repeat; background-position: right 12px center;
     }
-
     select.form-input option { background: var(--bg2); }
 
     .error-msg { font-size: 0.7rem; color: var(--error); margin-top: 5px; display: none; }
 
     .payment-options { display: flex; flex-direction: column; gap: 12px; margin-bottom: 20px; }
-
     .payment-option {
       display: flex; align-items: center; gap: 14px;
       background: var(--bg); border: 1px solid var(--border); border-radius: 5px;
       padding: 16px; cursor: pointer; transition: all 0.2s;
     }
-
     .payment-option:hover { border-color: rgba(0,102,255,0.4); }
     .payment-option.selected { border-color: var(--blue); background: rgba(0,102,255,0.08); }
     .payment-option input[type="radio"] { accent-color: var(--blue); width: 16px; height: 16px; cursor: pointer; }
@@ -115,9 +173,8 @@
     .card-number-input { letter-spacing: 2px; }
 
     /* RESUMEN */
-    .summary-card { background: var(--card-bg); border: 1px solid var(--border); border-radius: 6px; padding: 28px; position: sticky; top: 100px; height: fit-content; }
+    .summary-card { background: var(--card-bg); border: 1px solid var(--border); border-radius: 6px; padding: 28px; position: sticky; top: 100px; height: fit-content; transition: background 0.3s; }
     .summary-title { font-family: 'Rajdhani', sans-serif; font-size: 1rem; letter-spacing: 2px; text-transform: uppercase; margin-bottom: 20px; padding-bottom: 14px; border-bottom: 1px solid var(--border); }
-
     .summary-item { display: flex; align-items: center; gap: 12px; margin-bottom: 14px; padding-bottom: 14px; border-bottom: 1px solid var(--border); }
     .summary-item:last-of-type { border-bottom: none; margin-bottom: 0; }
     .summary-item-img { width: 48px; height: 48px; background: var(--bg); border: 1px solid var(--border); border-radius: 4px; display: flex; align-items: center; justify-content: center; font-size: 1.4rem; flex-shrink: 0; }
@@ -125,12 +182,9 @@
     .summary-item-name { font-size: 0.82rem; font-weight: 500; margin-bottom: 3px; }
     .summary-item-qty { font-size: 0.72rem; color: var(--gray); }
     .summary-item-price { font-family: 'Rajdhani', sans-serif; font-size: 1rem; font-weight: 700; color: var(--cyan); white-space: nowrap; }
-
     .summary-divider { height: 1px; background: var(--border); margin: 18px 0; }
-
     .summary-row { display: flex; justify-content: space-between; font-size: 0.83rem; margin-bottom: 10px; }
     .summary-row .label { color: var(--gray); }
-
     .summary-total { display: flex; justify-content: space-between; align-items: center; margin: 18px 0 24px; }
     .total-label { font-family: 'Rajdhani', sans-serif; font-size: 1rem; letter-spacing: 1px; text-transform: uppercase; }
     .total-value { font-family: 'Rajdhani', sans-serif; font-size: 1.8rem; font-weight: 700; color: var(--cyan); }
@@ -141,14 +195,13 @@
       text-transform: uppercase; cursor: pointer; font-family: 'Inter', sans-serif;
       font-weight: 500; transition: all 0.2s; margin-bottom: 14px;
     }
-
     .btn-place-order:hover { background: var(--blue-glow); transform: translateY(-1px); box-shadow: 0 8px 20px rgba(0,102,255,0.3); }
 
     .secure-msg { display: flex; align-items: center; justify-content: center; gap: 6px; font-size: 0.72rem; color: var(--gray); margin-bottom: 16px; }
     .terms-note { font-size: 0.72rem; color: var(--gray); text-align: center; line-height: 1.6; }
     .terms-note a { color: var(--blue); text-decoration: none; }
 
-    footer { background: var(--bg2); border-top: 1px solid var(--border); padding: 30px 60px; text-align: center; margin-top: 60px; }
+    footer { background: var(--bg2); border-top: 1px solid var(--border); padding: 30px 60px; text-align: center; margin-top: 60px; transition: background 0.3s; }
     footer p { color: var(--gray); font-size: 0.78rem; }
 
     @media (max-width: 900px) {
@@ -173,7 +226,10 @@
       <div class="step-divider"></div>
       <div class="step"><div class="step-num">3</div><span>Confirmación</span></div>
     </div>
-    <div class="secure-badge">🔒 Pago Seguro</div>
+    <div class="nav-right">
+      <button id="themeToggle" aria-label="Cambiar tema">🌙</button>
+      <div class="secure-badge">🔒 Pago Seguro</div>
+    </div>
   </nav>
 
   <div class="page-header">
@@ -181,13 +237,10 @@
     <h1>Datos de <span>Pago</span></h1>
   </div>
 
-  <!-- ✅ FORM con POST real a Flask -->
   <form method="POST" action="{{ url_for('checkout') }}" id="checkoutForm">
   <div class="checkout-layout">
 
-    <!-- FORMULARIO -->
     <div>
-
       <!-- 1. Información personal -->
       <div class="form-section">
         <div class="section-header">
@@ -295,7 +348,6 @@
           <div class="section-num">3</div>
           <div class="section-title">Método de Pago</div>
         </div>
-
         <div class="payment-options">
           <label class="payment-option selected" onclick="selectPayment(this,'card')">
             <input type="radio" name="payment" value="card" checked/>
@@ -322,7 +374,6 @@
             </div>
           </label>
         </div>
-
         <div class="card-fields show" id="cardFields">
           <div class="form-group">
             <label class="form-label">Número de Tarjeta</label>
@@ -352,7 +403,6 @@
           </div>
         </div>
       </div>
-
     </div>
 
     <!-- RESUMEN -->
@@ -372,32 +422,17 @@
         {% endfor %}
 
         <div class="summary-divider"></div>
-
-        <div class="summary-row">
-          <span class="label">Subtotal</span>
-          <span>${{ "%.2f"|format(subtotal) }}</span>
-        </div>
-        <div class="summary-row">
-          <span class="label">Envío</span>
-          <span style="color: var(--success);">Gratis</span>
-        </div>
-        <div class="summary-row">
-          <span class="label">Impuestos (15%)</span>
-          <span>${{ "%.2f"|format(impuestos) }}</span>
-        </div>
+        <div class="summary-row"><span class="label">Subtotal</span><span>${{ "%.2f"|format(subtotal) }}</span></div>
+        <div class="summary-row"><span class="label">Envío</span><span style="color: var(--success);">Gratis</span></div>
+        <div class="summary-row"><span class="label">Impuestos (15%)</span><span>${{ "%.2f"|format(impuestos) }}</span></div>
 
         <div class="summary-total">
           <span class="total-label">Total</span>
           <span class="total-value">${{ "%.2f"|format(total) }}</span>
         </div>
 
-        <!-- ✅ Botón que valida y envía el formulario -->
-        <button type="button" class="btn-place-order" onclick="placeOrder()">
-          Confirmar Pedido 🔒
-        </button>
-
+        <button type="button" class="btn-place-order" onclick="placeOrder()">Confirmar Pedido 🔒</button>
         <div class="secure-msg">🔒 Tus datos están protegidos con SSL</div>
-
         <div class="terms-note">
           Al confirmar aceptas nuestros
           <a href="{{ url_for('terminos') }}">Términos de Servicio</a> y
@@ -412,6 +447,9 @@
   <footer>
     <p>© 2026 SecureVision. Todos los derechos reservados.</p>
   </footer>
+
+  <!-- theme.js -->
+  <script src="{{ url_for('static', filename='js/theme.js') }}"></script>
 
   <script>
     function selectPayment(el, type) {
@@ -431,7 +469,6 @@
       input.value = val;
     }
 
-    // ✅ Valida y envía el formulario a Flask
     function placeOrder() {
       const fields = [
         { id: 'nombre',    errorId: 'nombreError',    check: v => v.trim().length > 0 },
@@ -442,24 +479,17 @@
         { id: 'direccion', errorId: 'direccionError', check: v => v.trim().length > 0 },
         { id: 'ciudad',    errorId: 'ciudadError',    check: v => v.trim().length > 0 },
       ];
-
       let valid = true;
       fields.forEach(f => {
         const input = document.getElementById(f.id);
         const error = document.getElementById(f.errorId);
         if (!f.check(input.value)) {
-          input.classList.add('error');
-          error.style.display = 'block';
-          valid = false;
+          input.classList.add('error'); error.style.display = 'block'; valid = false;
         } else {
-          input.classList.remove('error');
-          error.style.display = 'none';
+          input.classList.remove('error'); error.style.display = 'none';
         }
       });
-
-      if (valid) {
-        document.getElementById('checkoutForm').submit();
-      }
+      if (valid) document.getElementById('checkoutForm').submit();
     }
   </script>
 

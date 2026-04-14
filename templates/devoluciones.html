@@ -5,240 +5,117 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>Políticas de Devoluciones y Cambios | SecureVision</title>
   <link href="https://fonts.googleapis.com/css2?family=Rajdhani:wght@400;600;700&family=Inter:wght@300;400;500&display=swap" rel="stylesheet"/>
+  <script>
+    (function() {
+      const saved = localStorage.getItem('sv-theme') || 'dark';
+      document.documentElement.setAttribute('data-theme', saved);
+    })();
+  </script>
   <style>
-    :root {
-      --bg: #080810;
-      --bg2: #0d0d1a;
-      --blue: #0066ff;
-      --blue-glow: #0044cc;
-      --cyan: #00cfff;
-      --white: #f0f4ff;
-      --gray: #8890aa;
-      --card-bg: #10101e;
+    :root,
+    [data-theme="dark"] {
+      --bg: #080810; --bg2: #0d0d1a; --blue: #0066ff; --blue-glow: #0044cc;
+      --cyan: #00cfff; --white: #f0f4ff; --gray: #8890aa; --card-bg: #10101e;
       --border: rgba(0, 102, 255, 0.2);
     }
+    [data-theme="light"] {
+      --bg: #f0f4ff; --bg2: #e2e8f8; --blue: #0055dd; --blue-glow: #0044cc;
+      --cyan: #0077cc; --white: #0a0a1a; --gray: #444e6a; --card-bg: #ffffff;
+      --border: rgba(0, 85, 221, 0.2);
+    }
+    [data-theme="light"] nav { background: rgba(240, 244, 255, 0.95) !important; }
+    [data-theme="light"] footer { background: #e2e8f8 !important; border-top-color: rgba(0,85,221,0.15) !important; }
+
     * { margin: 0; padding: 0; box-sizing: border-box; }
-    body {
-      background: var(--bg);
-      color: var(--white);
-      font-family: 'Inter', sans-serif;
-      overflow-x: hidden;
-    }
-    nav {
-      position: fixed;
-      top: 0; left: 0; right: 0;
-      z-index: 100;
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      padding: 18px 60px;
-      background: rgba(8, 8, 16, 0.85);
-      backdrop-filter: blur(12px);
-      border-bottom: 1px solid var(--border);
-    }
-    .logo {
-      font-family: 'Rajdhani', sans-serif;
-      font-size: 1.6rem;
-      font-weight: 700;
-      letter-spacing: 2px;
-      color: var(--white);
-      text-decoration: none;
-    }
+    body { background: var(--bg); color: var(--white); font-family: 'Inter', sans-serif; overflow-x: hidden; transition: background 0.3s, color 0.3s; }
+
+    nav { position: fixed; top: 0; left: 0; right: 0; z-index: 100; display: flex; align-items: center; justify-content: space-between; padding: 18px 60px; background: rgba(8, 8, 16, 0.85); backdrop-filter: blur(12px); border-bottom: 1px solid var(--border); transition: background 0.3s; }
+    .logo { font-family: 'Rajdhani', sans-serif; font-size: 1.6rem; font-weight: 700; letter-spacing: 2px; color: var(--white); text-decoration: none; }
     .logo span { color: var(--blue); }
-    .nav-links {
-      display: flex;
-      gap: 36px;
-      list-style: none;
-    }
-    .nav-links a {
-      text-decoration: none;
-      color: var(--gray);
-      font-size: 0.85rem;
-      letter-spacing: 1px;
-      text-transform: uppercase;
-      transition: color 0.2s;
-    }
-    .nav-links a:hover, .nav-links a.active { color: var(--white); }
-    .nav-actions {
-      display: flex;
-      align-items: center;
-      gap: 16px;
-    }
-    .btn-nav {
-      background: var(--blue);
-      color: #fff;
-      border: none;
-      padding: 9px 22px;
-      border-radius: 4px;
-      font-size: 0.82rem;
-      letter-spacing: 1px;
-      text-transform: uppercase;
-      cursor: pointer;
-      transition: background 0.2s;
-      text-decoration: none;
-    }
-    .btn-nav:hover { background: var(--blue-glow); }
-    .container {
-      max-width: 900px;
-      margin: 0 auto;
-      background: var(--card-bg);
-      border-radius: 8px;
-      box-shadow: 0 0 40px rgba(0,102,255,0.04);
-      padding: 60px 40px 40px 40px;
-      margin-top: 160px;
-      margin-bottom: 60px;
-    }
-    h1 {
-      font-family: 'Rajdhani', sans-serif;
-      font-size: 2.3rem;
-      color: var(--blue);
-      margin-bottom: 32px;
-      margin-top: 0;
-      text-align: left;
-    }
-    .devol-section {
-      color: var(--gray);
-      font-size: 1.05rem;
-      line-height: 1.8;
-      margin-bottom: 32px;
-      text-align: justify;
-    }
-    .devol-section strong {
-      color: var(--cyan);
-      font-family: 'Rajdhani', sans-serif;
-      font-size: 1.08rem;
-      letter-spacing: 1px;
-    }
-    .devol-list {
-      margin: 12px 0 0 24px;
-      color: var(--gray);
-      font-size: 1.01rem;
-      line-height: 1.7;
-    }
-    .devol-list li {
-      margin-bottom: 8px;
-      text-align: justify;
-    }
+    .nav-links { display: flex; gap: 36px; list-style: none; }
+    .nav-links a { text-decoration: none; color: var(--gray); font-size: 0.85rem; letter-spacing: 1px; text-transform: uppercase; transition: color 0.2s; }
+    .nav-links a:hover { color: var(--white); }
+    .nav-actions { display: flex; align-items: center; gap: 16px; }
+
+    #themeToggle { background: transparent; border: 1px solid var(--border); border-radius: 50%; width: 36px; height: 36px; font-size: 1.1rem; cursor: pointer; display: flex; align-items: center; justify-content: center; transition: border-color 0.2s, background 0.2s; color: var(--white); }
+    #themeToggle:hover { border-color: var(--blue); background: rgba(0,102,255,0.1); }
+
+    .container { max-width: 900px; margin: 160px auto 60px; background: var(--card-bg); border-radius: 8px; box-shadow: 0 0 40px rgba(0,102,255,0.04); padding: 60px 40px 40px; transition: background 0.3s; }
+    h1 { font-family: 'Rajdhani', sans-serif; font-size: 2.3rem; color: var(--blue); margin-bottom: 32px; }
+    .devol-section { color: var(--gray); font-size: 1.05rem; line-height: 1.8; margin-bottom: 32px; text-align: justify; }
+    .devol-section strong { color: var(--cyan); font-family: 'Rajdhani', sans-serif; font-size: 1.08rem; letter-spacing: 1px; }
+    .devol-list { margin: 12px 0 0 24px; color: var(--gray); font-size: 1.01rem; line-height: 1.7; }
+    .devol-list li { margin-bottom: 8px; text-align: justify; }
     a { color: var(--cyan); text-decoration: none; }
     a:hover { text-decoration: underline; }
-    /* FOOTER */
-    footer {
-      background: var(--bg2);
-      border-top: 1px solid var(--border);
-      padding: 60px;
-    }
-    .footer-grid {
-      display: grid;
-      grid-template-columns: 2fr 1fr 1fr 1fr;
-      gap: 40px;
-      margin-bottom: 40px;
-    }
-    .footer-brand .logo {
-      font-size: 1.4rem;
-      margin-bottom: 16px;
-      display: block;
-    }
-    .footer-brand p {
-      color: var(--gray);
-      font-size: 0.82rem;
-      line-height: 1.8;
-      max-width: 260px;
-      text-align: left;
-      margin: 0;
-    }
-    .footer-col h4 {
-      font-family: 'Rajdhani', sans-serif;
-      font-size: 0.85rem;
-      letter-spacing: 2px;
-      text-transform: uppercase;
-      color: var(--white);
-      margin-bottom: 18px;
-    }
+
+    footer { background: var(--bg2); border-top: 1px solid var(--border); padding: 60px; transition: background 0.3s; }
+    .footer-grid { display: grid; grid-template-columns: 2fr 1fr 1fr 1fr; gap: 40px; margin-bottom: 40px; }
+    .footer-col h4 { font-family: 'Rajdhani', sans-serif; font-size: 0.85rem; letter-spacing: 2px; text-transform: uppercase; color: var(--white); margin-bottom: 18px; }
     .footer-col ul { list-style: none; }
     .footer-col ul li { margin-bottom: 10px; }
-    .footer-col ul li a {
-      color: var(--gray);
-      text-decoration: none;
-      font-size: 0.82rem;
-      transition: color 0.2s;
-    }
+    .footer-col ul li a { color: var(--gray); text-decoration: none; font-size: 0.82rem; transition: color 0.2s; }
     .footer-col ul li a:hover { color: var(--blue); }
-    .footer-bottom {
-      border-top: 1px solid var(--border);
-      padding-top: 24px;
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-    }
-    .footer-bottom p {
-      color: var(--gray);
-      font-size: 0.75rem;
-      letter-spacing: 1px;
-    }
-    @keyframes fadeUp {
-      from { opacity: 0; transform: translateY(30px); }
-      to   { opacity: 1; transform: translateY(0); }
-    }
+    .footer-bottom { border-top: 1px solid var(--border); padding-top: 24px; display: flex; justify-content: space-between; align-items: center; }
+    .footer-bottom p { color: var(--gray); font-size: 0.75rem; letter-spacing: 1px; }
+
     @media (max-width: 900px) {
-      nav { padding: 18px 24px; }
-      .nav-links { display: none; }
+      nav { padding: 18px 24px; } .nav-links { display: none; }
       .container { padding: 40px 12px; margin-top: 120px; }
-      .footer-grid { grid-template-columns: 1fr 1fr; }
-      footer { padding: 40px 24px; }
+      .footer-grid { grid-template-columns: 1fr 1fr; } footer { padding: 40px 24px; }
     }
   </style>
 </head>
 <body>
-
   <nav>
     <a href="index.html" class="logo">SECURE<span>VISION</span></a>
     <ul class="nav-links">
-        <li><a href="index.html">Inicio</a></li>
-        <li><a href="catalogo.html">Catálogo</a></li>
-        <li><a href="nosotros.html">¿Quiénes somos?</a></li>
-        <li><a href="contacto.html">Contáctanos</a></li>
+      <li><a href="index.html">Inicio</a></li>
+      <li><a href="catalogo.html">Catálogo</a></li>
+      <li><a href="nosotros.html">¿Quiénes somos?</a></li>
+      <li><a href="contacto.html">Contáctanos</a></li>
     </ul>
-    <div class="nav-actions"></div>
+    <div class="nav-actions">
+      <button id="themeToggle" aria-label="Cambiar tema">🌙</button>
+    </div>
   </nav>
+
   <div class="container">
     <h1>Políticas de Devoluciones y Cambios - SecureVision</h1>
-    <div class="devol-section">
-      En SecureVision, nuestro compromiso es tu total satisfacción y la seguridad de tus espacios. Entendemos que la tecnología debe ser precisa; por ello, hemos diseñado una política de cambios y devoluciones justa, transparente y ágil.
-    </div>
+    <div class="devol-section">En SecureVision, nuestro compromiso es tu total satisfacción y la seguridad de tus espacios. Entendemos que la tecnología debe ser precisa; por ello, hemos diseñado una política de cambios y devoluciones justa, transparente y ágil.</div>
     <div class="devol-section">
       <strong>1. Garantía de Satisfacción (Cambios)</strong><br>
-      Si el equipo adquirido no se adapta a las necesidades técnicas de tu proyecto (por ejemplo: requieres una cámara con mayor alcance o un grabador con más canales), puedes solicitar un cambio bajo las siguientes condiciones:
+      Si el equipo adquirido no se adapta a las necesidades técnicas de tu proyecto, puedes solicitar un cambio bajo las siguientes condiciones:
       <ul class="devol-list">
         <li><strong>Plazo:</strong> Tienes hasta 7 días calendario a partir de la entrega.</li>
         <li><strong>Estado del Producto:</strong> El equipo debe estar nuevo, sin señales de instalación, con sus sellos de seguridad intactos y en su empaque original (incluyendo manuales, cables y accesorios).</li>
-        <li><strong>Ajuste de Precio:</strong> Si existe una diferencia de precio entre el producto devuelto y el nuevo, el cliente deberá cancelar el excedente o, en su defecto, se emitirá una nota de crédito a su favor.</li>
+        <li><strong>Ajuste de Precio:</strong> Si existe una diferencia de precio, el cliente deberá cancelar el excedente o se emitirá una nota de crédito a su favor.</li>
       </ul>
     </div>
     <div class="devol-section">
       <strong>2. Devoluciones por Defectos de Fábrica</strong><br>
       Nuestros equipos pasan por estrictos controles de calidad, pero si detectas una falla técnica:
       <ul class="devol-list">
-        <li><strong>Reporte Inmediato:</strong> Cuentas con 48 horas para reportar cualquier daño físico estético o falta de accesorios al recibir el producto.</li>
-        <li><strong>Diagnóstico Técnico:</strong> Para fallas de funcionamiento, el equipo será evaluado por nuestro departamento de soporte técnico en un plazo máximo de 3 a 5 días hábiles.</li>
-        <li><strong>Resolución:</strong> Si el diagnóstico confirma un defecto de fabricación, procederemos al cambio inmediato por un equipo nuevo o a la reparación bajo los términos de la garantía del fabricante.</li>
+        <li><strong>Reporte Inmediato:</strong> Cuentas con 48 horas para reportar cualquier daño físico al recibir el producto.</li>
+        <li><strong>Diagnóstico Técnico:</strong> El equipo será evaluado en un plazo de 3 a 5 días hábiles.</li>
+        <li><strong>Resolución:</strong> Si se confirma un defecto de fabricación, procederemos al cambio inmediato o reparación bajo garantía.</li>
       </ul>
     </div>
     <div class="devol-section">
       <strong>3. Condiciones para la Devolución de Dinero</strong><br>
       La devolución del importe pagado solo aplicará si:
       <ul class="devol-list">
-        <li>SecureVision no dispone de stock para sustituir un equipo defectuoso por garantía.</li>
-        <li>El producto presenta una falla de fábrica recurrente tras el primer intento de reparación técnica.</li>
+        <li>SecureVision no dispone de stock para sustituir un equipo defectuoso.</li>
+        <li>El producto presenta una falla de fábrica recurrente tras el primer intento de reparación.</li>
       </ul>
       <span style="color:var(--gray); font-size:0.98rem; display:block; margin-top:8px;">Nota: No se realizan reembolsos por "arrepentimiento de compra" si el equipo ha sido instalado, manipulado o si el empaque ha sido dañado.</span>
     </div>
     <div class="devol-section">
       <strong>4. Excepciones (No aplica devolución ni cambio)</strong><br>
-      No se aceptarán cambios ni devoluciones en los siguientes casos:
       <ul class="devol-list">
         <li>Equipos con daños causados por descargas eléctricas, variaciones de voltaje o desastres naturales.</li>
-        <li>Productos que presenten el firmware alterado o intentos de reparación por personal no autorizado por SecureVision.</li>
-        <li>Cables cortados, fuentes de poder quemadas por uso inadecuado o equipos con señales de exposición a condiciones extremas para las que no fueron diseñados (ej. equipo de interior colocado en exteriores).</li>
+        <li>Productos con firmware alterado o intentos de reparación por personal no autorizado.</li>
+        <li>Cables cortados, fuentes quemadas por uso inadecuado o equipos expuestos a condiciones extremas.</li>
       </ul>
     </div>
     <div class="devol-section">
@@ -247,53 +124,27 @@
       <ul class="devol-list">
         <li>Factura original de compra.</li>
         <li>Identificación vigente.</li>
-        <li>Contacto a través de nuestro canal oficial: <a href="#">info@securevision.hn</a> o visitando nuestra tienda física.</li>
+        <li>Contacto a través de: <a href="#">info@securevision.hn</a> o visitando nuestra tienda física.</li>
       </ul>
     </div>
   </div>
-  
-  <!-- FOOTER ESTILO INDEX -->
-  <footer style="background: #0d0d1a; border-top: 1px solid #1a1a2a; padding: 60px;">
-    <div class="footer-grid" style="display: grid; grid-template-columns: 2fr 1fr 1fr 1fr; gap: 40px; margin-bottom: 40px;">
-      <div class="footer-brand">
-        <span class="logo" style="font-size: 1.4rem; color: #f0f4ff; font-family: 'Rajdhani', sans-serif; font-weight: 700; display: block; margin-bottom: 16px;">SECURE<span style="color:#0066ff">VISION</span></span>
-        <p style="color: #8890aa; font-size: 0.82rem; line-height: 1.8; max-width: 260px; margin: 0;">Soluciones de seguridad electrónica profesional para hogares y empresas a nivel mundial.</p>
+
+  <footer>
+    <div class="footer-grid">
+      <div>
+        <span class="logo" style="display:block;margin-bottom:16px;">SECURE<span>VISION</span></span>
+        <p style="color:var(--gray);font-size:0.82rem;line-height:1.8;max-width:260px;margin:0;">Soluciones de seguridad electrónica profesional para hogares y empresas a nivel mundial.</p>
       </div>
-      <div class="footer-col">
-        <h4 style="font-family: 'Rajdhani', sans-serif; font-size: 0.85rem; letter-spacing: 2px; text-transform: uppercase; color: #f0f4ff; margin-bottom: 18px;">Productos</h4>
-        <ul style="list-style: none; padding: 0;">
-          <li><a href="#" style="color: #8890aa; text-decoration: none; font-size: 0.82rem;">Cámaras CCTV</a></li>
-          <li><a href="#" style="color: #8890aa; text-decoration: none; font-size: 0.82rem;">Monitores</a></li>
-          <li><a href="#" style="color: #8890aa; text-decoration: none; font-size: 0.82rem;">Alarmas</a></li>
-          <li><a href="#" style="color: #8890aa; text-decoration: none; font-size: 0.82rem;">Biométricos</a></li>
-          <li><a href="#" style="color: #8890aa; text-decoration: none; font-size: 0.82rem;">Cercas Eléctricas</a></li>
-        </ul>
-      </div>
-      <div class="footer-col">
-        <h4 style="font-family: 'Rajdhani', sans-serif; font-size: 0.85rem; letter-spacing: 2px; text-transform: uppercase; color: #f0f4ff; margin-bottom: 18px;">Empresa</h4>
-        <ul style="list-style: none; padding: 0;">
-          <li><a href="{{ url_for('nosotros') }}">¿Quiénes somos?</a></li>
-          <li><a href="#">Blog de noticias</a></li>
-          <li><a href="{{ url_for('contacto') }}">Contáctanos</a></li>
-          <li><a href="#">Preguntas frecuentes</a></li>
-        </ul>
-      </div>
-      <div class="footer-col">
-        <h4 style="font-family: 'Rajdhani', sans-serif; font-size: 0.85rem; letter-spacing: 2px; text-transform: uppercase; color: #f0f4ff; margin-bottom: 18px;">Políticas</h4>
-        <ul style="list-style: none; padding: 0;">
-          <li><a href="{{ url_for('terminos') }}" style="color: #8890aa; text-decoration: none; font-size: 0.82rem;">Términos generales</a></li>
-          <li><a href="{{ url_for('privacidad') }}" style="color: #8890aa; text-decoration: none; font-size: 0.82rem;">Privacidad</a></li>
-          <li><a href="{{ url_for('devoluciones') }}" style="color: #8890aa; text-decoration: none; font-size: 0.82rem;">Devoluciones y cambios</a></li>
-          <li><a href="{{ url_for('envios') }}" style="color: #8890aa; text-decoration: none; font-size: 0.82rem;">Envíos</a></li>
-          <li><a href="{{ url_for('garantia') }}" style="color: #8890aa; text-decoration: none; font-size: 0.82rem;">Garantía</a></li>
-        </ul>
-      </div>
+      <div class="footer-col"><h4>Productos</h4><ul><li><a href="#">Cámaras CCTV</a></li><li><a href="#">Monitores</a></li><li><a href="#">Alarmas</a></li><li><a href="#">Biométricos</a></li><li><a href="#">Cercas Eléctricas</a></li></ul></div>
+      <div class="footer-col"><h4>Empresa</h4><ul><li><a href="{{ url_for('nosotros') }}">¿Quiénes somos?</a></li><li><a href="#">Blog de noticias</a></li><li><a href="{{ url_for('contacto') }}">Contáctanos</a></li><li><a href="#">Preguntas frecuentes</a></li></ul></div>
+      <div class="footer-col"><h4>Políticas</h4><ul><li><a href="{{ url_for('terminos') }}">Términos generales</a></li><li><a href="{{ url_for('privacidad') }}">Privacidad</a></li><li><a href="{{ url_for('devoluciones') }}">Devoluciones y cambios</a></li><li><a href="{{ url_for('envios') }}">Envíos</a></li><li><a href="{{ url_for('garantia') }}">Garantía</a></li></ul></div>
     </div>
-    <div class="footer-bottom" style="border-top: 1px solid #1a1a2a; padding-top: 24px; display: flex; justify-content: space-between; align-items: center;">
-      <p style="color: #8890aa; font-size: 0.75rem; letter-spacing: 1px;">© 2026 SecureVision. Todos los derechos reservados.</p>
-      <p style="color: #8890aa; font-size: 0.75rem; letter-spacing: 1px;">Hecho con 💙 para proteger el mundo.</p>
+    <div class="footer-bottom">
+      <p>© 2026 SecureVision. Todos los derechos reservados.</p>
+      <p>Hecho con 💙 para proteger el mundo.</p>
     </div>
   </footer>
 
+  <script src="static/js/theme.js"></script>
 </body>
 </html>
