@@ -466,44 +466,45 @@
     </form>
   </main>
 
-  <footer>
-    <div class="footer-grid">
+  <footer style="background: #0d0d1a; border-top: 1px solid #1a1a2a; padding: 60px;">
+    <div class="footer-grid" style="display: grid; grid-template-columns: 2fr 1fr 1fr 1fr; gap: 40px; margin-bottom: 40px;">
       <div class="footer-brand">
-        <span class="logo">SECURE<span style="color:var(--blue)">VISION</span></span>
-        <p>Soluciones de seguridad electrónica profesional para hogares y empresas a nivel mundial.</p>
-        <div class="social-links">
-          <a href="https://www.facebook.com/share/1DSWHvcYjx/" class="social-link">f</a>
-          <a href="https://www.instagram.com/securevisionunah?igsh=MWtqMGJ0cGpwajdjOQ==" class="social-link">ig</a>
-          <a href="#" class="social-link">wa</a>
-        </div>
+        <span class="logo" style="font-size: 1.4rem; color: #f0f4ff; font-family: 'Rajdhani', sans-serif; font-weight: 700; display: block; margin-bottom: 16px;">SECURE<span style="color:#0066ff">VISION</span></span>
+        <p style="color: #8890aa; font-size: 0.82rem; line-height: 1.8; max-width: 260px; margin: 0;">Soluciones de seguridad electrónica profesional para hogares y empresas a nivel mundial.</p>
       </div>
       <div class="footer-col">
-        <h4>Productos</h4>
-        <ul>
-          <li><a href="#">Cámaras CCTV</a></li>
-          <li><a href="#">Alarmas</a></li>
-          <li><a href="#">Biométricos</a></li>
+        <h4 style="font-family: 'Rajdhani', sans-serif; font-size: 0.85rem; letter-spacing: 2px; text-transform: uppercase; color: #f0f4ff; margin-bottom: 18px;">Productos</h4>
+        <ul style="list-style: none; padding: 0;">
+          <li><a href="#" style="color: #8890aa; text-decoration: none; font-size: 0.82rem;">Cámaras CCTV</a></li>
+          <li><a href="#" style="color: #8890aa; text-decoration: none; font-size: 0.82rem;">Monitores</a></li>
+          <li><a href="#" style="color: #8890aa; text-decoration: none; font-size: 0.82rem;">Alarmas</a></li>
+          <li><a href="#" style="color: #8890aa; text-decoration: none; font-size: 0.82rem;">Biométricos</a></li>
+          <li><a href="#" style="color: #8890aa; text-decoration: none; font-size: 0.82rem;">Cercas Eléctricas</a></li>
         </ul>
       </div>
       <div class="footer-col">
-        <h4>Empresa</h4>
-        <ul>
-          <li><a href="{{ url_for('nosotros') }}">¿Quiénes somos?</a></li>
-          <li><a href="{{ url_for('blog') }}">Blog de noticias</a></li>
-          <li><a href="{{ url_for('contacto') }}">Contáctanos</a></li>
-          <li><a href="{{ url_for('FAQ') }}">Preguntas frecuentes</a></li>
-        </ul> 
+        <h4 style="font-family: 'Rajdhani', sans-serif; font-size: 0.85rem; letter-spacing: 2px; text-transform: uppercase; color: #f0f4ff; margin-bottom: 18px;">Empresa</h4>
+        <ul style="list-style: none; padding: 0;">
+          <li><a href="{{ url_for('nosotros') }}" style="color: #8890aa; text-decoration: none; font-size: 0.82rem;">¿Quiénes somos?</a></li>
+          <li><a href="{{ url_for('blog') }}" style="color: #8890aa; text-decoration: none; font-size: 0.82rem;">Blog de noticias</a></li>
+          <li><a href="{{ url_for('contacto') }}" style="color: #8890aa; text-decoration: none; font-size: 0.82rem;">Contáctanos</a></li>
+          <li><a href="{{ url_for('FAQ') }}" style="color: #8890aa; text-decoration: none; font-size: 0.82rem;">Preguntas frecuentes</a></li>
+        </ul>
       </div>
-      <div class="footer-col">  
-        <h4>Políticas</h4>
-        <ul>
-          <li><a href="https://www.facebook.com/profile.php?id=61573631955057" target="_blank">Facebook</a></li>
-          <li><a href="https://www.instagram.com/securevisionunah" target="_blank">Instagram</a></li>
+      <div class="footer-col">
+        <h4 style="font-family: 'Rajdhani', sans-serif; font-size: 0.85rem; letter-spacing: 2px; text-transform: uppercase; color: #f0f4ff; margin-bottom: 18px;">Políticas</h4>
+        <ul style="list-style: none; padding: 0;">
+          <li><a href="#" style="color: #8890aa; text-decoration: none; font-size: 0.82rem;">Términos generales</a></li>
+          <li><a href="{{ url_for('privacidad') }}" style="color: #8890aa; text-decoration: none; font-size: 0.82rem;">Privacidad</a></li>
+          <li><a href="{{ url_for('devoluciones') }}" style="color: #8890aa; text-decoration: none; font-size: 0.82rem;">Devoluciones y cambios</a></li>
+          <li><a href="{{ url_for('envios') }}" style="color: #8890aa; text-decoration: none; font-size: 0.82rem;">Envíos</a></li>
+          <li><a href="{{ url_for('garantia') }}" style="color: #8890aa; text-decoration: none; font-size: 0.82rem;">Garantía</a></li>
         </ul>
       </div>
     </div>
-    <div class="footer-bottom">
-      <p>© 2026 SecureVision. Todos los derechos reservados.</p>
+    <div class="footer-bottom" style="border-top: 1px solid #1a1a2a; padding-top: 24px; display: flex; justify-content: space-between; align-items: center;">
+      <p style="color: #8890aa; font-size: 0.75rem; letter-spacing: 1px;">© 2026 SecureVision. Todos los derechos reservados.</p>
+      <p style="color: #8890aa; font-size: 0.75rem; letter-spacing: 1px;">Hecho con 💙 para proteger el mundo.</p>
     </div>
   </footer>
 
