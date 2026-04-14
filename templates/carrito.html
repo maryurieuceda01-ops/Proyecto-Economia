@@ -13,13 +13,13 @@
     [data-theme="light"] .page-header{ background:#e2e8f8; }
     [data-theme="light"] .cart-item,[data-theme="light"] .summary-card,[data-theme="light"] .empty-cart{ background:#ffffff; }
     [data-theme="light"] .item-img{ background:#e8eeff; }
-    [data-theme="light"] .qty-btn{ background:#e2e8f8; }
+    [data-theme="light"] .qty-btn{ background:#e2e8f8;color:#0a0a1a; }
     [data-theme="light"] .qty-display{ background:#f0f4ff;color:#0a0a1a; }
-    [data-theme="light"] .modal-content{ background:#f0f4ff;border-color:var(--blue); }
+    [data-theme="light"] .modal-content{ background:#f0f4ff; }
     [data-theme="light"] .modal-header{ background:rgba(0,85,221,0.04); }
     [data-theme="light"] .form-control{ background:#ffffff;color:#0a0a1a;border-color:rgba(0,85,221,0.25); }
-    [data-theme="light"] .modal-footer{ background:rgba(0,0,0,0.04); }
     [data-theme="light"] #couponInput{ background:#ffffff;color:#0a0a1a; }
+    [data-theme="light"] .modal-footer{ background:rgba(0,0,0,0.04); }
     [data-theme="light"] footer{ background:#e2e8f8; }
     *{margin:0;padding:0;box-sizing:border-box;}
     body{background:var(--bg);color:var(--white);font-family:'Inter',sans-serif;transition:background .3s,color .3s;}
@@ -63,7 +63,6 @@
     .summary-row{display:flex;justify-content:space-between;align-items:center;margin-bottom:14px;font-size:0.85rem;}
     .summary-row .label{color:var(--gray);}
     .summary-row .value{color:var(--white);font-weight:500;}
-    .summary-row .value.free{color:var(--success);}
     .summary-divider{height:1px;background:var(--border);margin:18px 0;}
     .summary-total{display:flex;justify-content:space-between;align-items:center;margin-bottom:24px;}
     .total-label{font-family:'Rajdhani',sans-serif;font-size:1rem;letter-spacing:1px;text-transform:uppercase;}
@@ -86,15 +85,19 @@
     .form-control{width:100%;background:var(--bg);border:1px solid var(--border);color:var(--white);padding:12px;border-radius:4px;font-family:'Inter',sans-serif;transition:background .3s,color .3s,border-color .2s;}
     .form-control:focus{border-color:var(--blue);outline:none;}
     .modal-footer{padding:20px 30px;background:rgba(0,0,0,0.2);border-top:1px solid var(--border);display:flex;justify-content:space-between;align-items:center;transition:background .3s;}
-    .btn-confirm{background:var(--blue);color:white;border:none;padding:12px 30px;border-radius:4px;font-weight:600;text-transform:uppercase;cursor:pointer;}
+    .btn-confirm{background:var(--blue);color:white;border:none;padding:12px 30px;border-radius:4px;font-weight:600;text-transform:uppercase;cursor:pointer;transition:background .2s;}
+    .btn-confirm:hover{background:var(--blue-glow);}
     .empty-cart{text-align:center;padding:80px 40px;background:var(--card-bg);border:1px solid var(--border);border-radius:6px;transition:background .3s;}
     .empty-icon{font-size:4rem;margin-bottom:20px;}
+    .empty-cart h3{margin-bottom:10px;font-family:'Rajdhani',sans-serif;font-size:1.5rem;}
+    .empty-cart p{color:var(--gray);margin-bottom:24px;}
     .btn-shop{background:var(--blue);color:#fff;padding:12px 28px;border-radius:4px;font-size:0.82rem;letter-spacing:1px;text-transform:uppercase;text-decoration:none;display:inline-block;}
     .cart-actions{display:flex;justify-content:space-between;margin-top:20px;}
-    .btn-clear{background:transparent;border:1px solid rgba(230,57,70,0.3);color:var(--error);padding:10px 20px;border-radius:4px;font-size:0.8rem;text-transform:uppercase;cursor:pointer;}
+    .btn-clear{background:transparent;border:1px solid rgba(230,57,70,0.3);color:var(--error);padding:10px 20px;border-radius:4px;font-size:0.8rem;text-transform:uppercase;cursor:pointer;transition:all .2s;}
+    .btn-clear:hover{background:rgba(230,57,70,0.1);border-color:var(--error);}
     footer{background:var(--bg2);border-top:1px solid var(--border);padding:30px 60px;text-align:center;margin-top:60px;transition:background .3s;}
     footer p{color:var(--gray);font-size:0.78rem;}
-    @media(max-width:900px){nav{padding:16px 24px;}.cart-layout{grid-template-columns:1fr;padding:24px;}.modal-grid{grid-template-columns:1fr;}}
+    @media(max-width:900px){nav{padding:16px 24px;}.nav-links{display:none;}.cart-layout{grid-template-columns:1fr;padding:24px;}.modal-grid{grid-template-columns:1fr;}.summary-card{position:static;}footer{padding:24px;}}
   </style>
 </head>
 <body>
@@ -129,9 +132,15 @@
         <div class="summary-title">Resumen del Pedido</div>
         <div class="summary-row"><span class="label">Subtotal</span><span id="subtotalVal" class="value">0.00 HNL</span></div>
         <div class="summary-row"><span class="label">Impuestos (15%)</span><span id="taxVal" class="value">0.00 HNL</span></div>
-        <div id="promoRow" class="summary-row" style="display:none;"><span class="label">Descuento</span><span id="promoVal" class="value" style="color:var(--success);">0.00 HNL</span></div>
+        <div id="promoRow" class="summary-row" style="display:none;">
+          <span class="label">Descuento</span>
+          <span id="promoVal" class="value" style="color:var(--success);">0.00 HNL</span>
+        </div>
         <div class="summary-divider"></div>
-        <div class="summary-total"><span class="total-label">Total</span><span id="totalVal" class="total-value">0.00 HNL</span></div>
+        <div class="summary-total">
+          <span class="total-label">Total</span>
+          <span id="totalVal" class="total-value">0.00 HNL</span>
+        </div>
         <div style="margin-bottom:20px;">
           <div style="font-size:0.75rem;color:var(--gray);margin-bottom:8px;">CÓDIGO DE DESCUENTO</div>
           <div style="display:flex;gap:8px;">
@@ -170,7 +179,10 @@
               </div>
               <div style="margin-top:15px;padding:15px;border:1px dashed var(--border);border-radius:4px;">
                 <p style="font-size:0.7rem;color:var(--gray);text-transform:uppercase;">Resumen Final</p>
-                <div style="display:flex;justify-content:space-between;margin-top:5px;"><span>Total:</span><span id="modalTotal" style="color:var(--cyan);font-weight:700;">0.00 HNL</span></div>
+                <div style="display:flex;justify-content:space-between;margin-top:5px;">
+                  <span>Total:</span>
+                  <span id="modalTotal" style="color:var(--cyan);font-weight:700;">0.00 HNL</span>
+                </div>
               </div>
             </div>
           </div>
@@ -187,16 +199,19 @@
 
   <script src="{{ url_for('static', filename='js/theme.js') }}"></script>
   <script>
+    var _urlCatalogo = "{{ url_for('catalogo') }}";
+    var _urlFactura  = "{{ url_for('factura') }}";
+
     let cart = JSON.parse(localStorage.getItem('sc_cart')) || [];
     let discountPercent = 0;
 
     document.addEventListener('DOMContentLoaded', renderCartPage);
 
     function renderCartPage() {
-      const container = document.getElementById('cartContent');
+      const container   = document.getElementById('cartContent');
       const checkoutBtn = document.getElementById('checkoutBtn');
       if (cart.length === 0) {
-        container.innerHTML = `<div class="empty-cart"><div class="empty-icon">🛒</div><h3>Tu carrito está vacío</h3><p>Agrega productos para proteger tu hogar.</p><a href="{{ url_for('catalogo') }}" class="btn-shop">Ir al Catálogo</a></div>`;
+        container.innerHTML = `<div class="empty-cart"><div class="empty-icon">🛒</div><h3>Tu carrito está vacío</h3><p>Agrega productos para proteger tu hogar.</p><a href="${_urlCatalogo}" class="btn-shop">Ir al Catálogo</a></div>`;
         checkoutBtn.disabled = true; updatePrices(0); return;
       }
       checkoutBtn.disabled = false;
@@ -204,45 +219,90 @@
       let html = `<h2>Productos (${cart.length})</h2>`;
       cart.forEach(item => {
         const itemTotal = item.price * item.qty; subtotal += itemTotal;
-        html += `<div class="cart-item"><div class="item-img">${item.icon}</div><div class="item-details"><div class="item-category">${item.category}</div><div class="item-name">${item.name}</div><div class="item-controls"><button class="qty-btn" onclick="updateQty(${item.id}, -1)">-</button><div class="qty-display">${item.qty}</div><button class="qty-btn" onclick="updateQty(${item.id}, 1)">+</button><button class="btn-remove" onclick="removeItem(${item.id})">Eliminar</button></div></div><div class="item-price-col"><div class="item-unit-price">${item.price.toLocaleString()} HNL</div><div class="item-total-price">${itemTotal.toLocaleString()} HNL</div></div></div>`;
+        html += `<div class="cart-item">
+          <div class="item-img">${item.icon}</div>
+          <div class="item-details">
+            <div class="item-category">${item.category}</div>
+            <div class="item-name">${item.name}</div>
+            <div class="item-controls">
+              <button class="qty-btn" onclick="updateQty(${item.id},-1)">−</button>
+              <div class="qty-display">${item.qty}</div>
+              <button class="qty-btn" onclick="updateQty(${item.id},1)">+</button>
+              <button class="btn-remove" onclick="removeItem(${item.id})">Eliminar</button>
+            </div>
+          </div>
+          <div class="item-price-col">
+            <div class="item-unit-price">${item.price.toLocaleString()} HNL</div>
+            <div class="item-total-price">${itemTotal.toLocaleString()} HNL</div>
+          </div>
+        </div>`;
       });
-      html += `<div class="cart-actions"><a href="{{ url_for('catalogo') }}" style="text-decoration:none;color:var(--blue);font-size:0.8rem;">← Seguir Comprando</a><button class="btn-clear" onclick="clearCart()">Vaciar Carrito</button></div>`;
-      container.innerHTML = html; updatePrices(subtotal);
+      html += `<div class="cart-actions"><a href="${_urlCatalogo}" style="text-decoration:none;color:var(--blue);font-size:0.8rem;">← Seguir Comprando</a><button class="btn-clear" onclick="clearCart()">Vaciar Carrito</button></div>`;
+      container.innerHTML = html;
+      updatePrices(subtotal);
     }
 
     function updatePrices(subtotal) {
       const tax = subtotal * 0.15, discount = (subtotal + tax) * discountPercent, total = (subtotal + tax) - discount;
-      const format = v => v.toLocaleString('es-HN', {minimumFractionDigits:2, maximumFractionDigits:2});
-      document.getElementById('subtotalVal').textContent = format(subtotal) + ' HNL';
-      document.getElementById('taxVal').textContent = format(tax) + ' HNL';
-      if (discount > 0) { document.getElementById('promoRow').style.display='flex'; document.getElementById('promoVal').textContent='-'+format(discount)+' HNL'; } else { document.getElementById('promoRow').style.display='none'; }
-      const totalStr = format(total) + ' HNL';
-      document.getElementById('totalVal').textContent = totalStr;
+      const fmt = v => v.toLocaleString('es-HN', {minimumFractionDigits:2, maximumFractionDigits:2});
+      document.getElementById('subtotalVal').textContent  = fmt(subtotal) + ' HNL';
+      document.getElementById('taxVal').textContent       = fmt(tax) + ' HNL';
+      document.getElementById('promoRow').style.display   = discount > 0 ? 'flex' : 'none';
+      if (discount > 0) document.getElementById('promoVal').textContent = '-' + fmt(discount) + ' HNL';
+      const totalStr = fmt(total) + ' HNL';
+      document.getElementById('totalVal').textContent  = totalStr;
       document.getElementById('modalTotal').textContent = totalStr;
     }
 
-    function updateQty(id, delta) { const item=cart.find(i=>Number(i.id)===Number(id)); if(item){ item.qty+=delta; if(item.qty<=0) return removeItem(id); syncAndSave(); } }
-    function removeItem(id) { cart=cart.filter(i=>Number(i.id)!==Number(id)); syncAndSave(); }
-    function clearCart() { if(confirm('¿Vaciar todo el carrito?')){ cart=[]; syncAndSave(); } }
-    function syncAndSave() { localStorage.setItem('sc_cart',JSON.stringify(cart)); renderCartPage(); }
-    function applyCoupon() { const code=document.getElementById('couponInput').value.trim().toUpperCase(); if(code==='SECURE10'){ discountPercent=0.10; alert('✅ ¡Cupón de 10% aplicado!'); } else { discountPercent=0; alert('❌ Cupón inválido'); } renderCartPage(); }
-    function openCheckout() { document.getElementById('checkoutModal').style.display='flex'; }
-    function closeCheckout() { document.getElementById('checkoutModal').style.display='none'; }
+    function updateQty(id, delta) {
+      const item = cart.find(i => Number(i.id) === Number(id));
+      if (item) { item.qty += delta; if (item.qty <= 0) return removeItem(id); syncAndSave(); }
+    }
+    function removeItem(id)  { cart = cart.filter(i => Number(i.id) !== Number(id)); syncAndSave(); }
+    function clearCart()     { if(confirm('¿Vaciar todo el carrito?')) { cart = []; syncAndSave(); } }
+    function syncAndSave()   { localStorage.setItem('sc_cart', JSON.stringify(cart)); renderCartPage(); }
+
+    function applyCoupon() {
+      const code  = document.getElementById('couponInput').value.trim().toUpperCase();
+      const codes = {'PROMO20':0.20, 'SECURE10':0.10, 'GOLD15':0.15};
+      if (codes[code] !== undefined) { discountPercent = codes[code]; alert('✅ Cupón ' + code + ': ' + Math.round(discountPercent*100) + '% aplicado!'); }
+      else { discountPercent = 0; alert('❌ Cupón inválido'); }
+      renderCartPage();
+    }
+
+    function openCheckout()  { if (!cart.length) return; document.getElementById('checkoutModal').style.display = 'flex'; }
+    function closeCheckout() { document.getElementById('checkoutModal').style.display = 'none'; }
 
     async function handleCheckout(event) {
       event.preventDefault();
-      const btn = document.getElementById('btnFinalizar'); btn.disabled=true; btn.textContent="Procesando...";
-      const formData = new FormData(event.target), customerInfo = Object.fromEntries(formData);
-      const orderPayload = { customer: customerInfo, items: cart, summary: { subtotal: document.getElementById('subtotalVal').textContent, tax: document.getElementById('taxVal').textContent, total: document.getElementById('totalVal').textContent } };
+      const btn = document.getElementById('btnFinalizar');
+      btn.disabled = true; btn.textContent = 'Procesando...';
+      const orderPayload = {
+        customer: Object.fromEntries(new FormData(event.target)),
+        items: cart,
+        summary: {
+          subtotal: document.getElementById('subtotalVal').textContent,
+          tax:      document.getElementById('taxVal').textContent,
+          total:    document.getElementById('totalVal').textContent
+        }
+      };
       try {
         const response = await fetch('/crear_pedido', { method:'POST', headers:{'Content-Type':'application/json'}, body:JSON.stringify(orderPayload) });
-        const result = await response.json();
-        if (result.success) { localStorage.removeItem('sc_cart'); window.location.href=`/factura/${result.order_id}`; }
-        else { alert("Error: "+(result.message||"No se pudo procesar el pedido.")); btn.disabled=false; btn.textContent="Confirmar y Pagar"; }
-      } catch (error) { console.error("Error:",error); alert("Error de conexión."); btn.disabled=false; btn.textContent="Confirmar y Pagar"; }
+        const result   = await response.json();
+        if (result.success) {
+          localStorage.removeItem('sc_cart');
+          window.location.href = _urlFactura;   // ← usa la URL de Flask correcta
+        } else {
+          alert('Error: ' + (result.message || 'No se pudo procesar el pedido.'));
+          btn.disabled = false; btn.textContent = 'Confirmar y Pagar';
+        }
+      } catch(e) {
+        alert('Error de conexión con el servidor.');
+        btn.disabled = false; btn.textContent = 'Confirmar y Pagar';
+      }
     }
 
-    window.onclick = function(e){ if(e.target.className==='modal-overlay') closeCheckout(); }
+    window.onclick = function(e) { if (e.target.id === 'checkoutModal') closeCheckout(); };
   </script>
 </body>
 </html>
