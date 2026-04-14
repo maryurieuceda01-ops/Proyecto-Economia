@@ -390,9 +390,7 @@
             <div class="item-category">{{ item.categoria }}</div>
             <div class="item-name">{{ item.nombre }}</div>
             <div class="item-controls">
-              <a href="{{ url_for('actualizar_carrito', producto_id=item.id, accion='decrementar') }}" class="qty-btn">−</a>
               <div class="qty-display">{{ item.cantidad }}</div>
-              <a href="{{ url_for('actualizar_carrito', producto_id=item.id, accion='incrementar') }}" class="qty-btn">+</a>
               <a href="{{ url_for('eliminar_carrito', producto_id=item.id) }}" class="btn-remove">🗑 Eliminar</a>
             </div>
           </div>

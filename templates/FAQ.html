@@ -254,9 +254,6 @@
       <li><a href="{{ url_for('contacto') }}">Contáctanos</a></li>
     </ul>
     <div class="nav-actions">
-      <div class="cart-icon" onclick="window.location.href='{{ url_for('carrito') }}'" style="cursor:pointer;">
-        🛒 <span class="cart-badge">{{ session.get('carrito', [])|length }}</span>
-      </div>
       {% if session.get('usuario_nombre') %}
         <span style="color:var(--gray);font-size:0.85rem;">Hola, {{ session['usuario_nombre'] }}</span>
         <a href="{{ url_for('logout') }}" class="btn-nav">Cerrar Sesión</a>

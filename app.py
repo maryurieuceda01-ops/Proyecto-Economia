@@ -1,4 +1,5 @@
 
+
 from flask import Flask, render_template, request, redirect, url_for, session, flash
 import sqlite3
 import os
@@ -54,7 +55,7 @@ def init_db():
             telefono  TEXT,
             password  TEXT NOT NULL,
             fecha     TEXT DEFAULT CURRENT_TIMESTAMP
-        )
+        );
     ''')
 
     cursor.execute('''
@@ -84,7 +85,7 @@ def init_db():
             ciudad      TEXT,
             pais        TEXT,
             FOREIGN KEY (usuario_id) REFERENCES usuarios(id)
-        )
+        );
     ''')
 
     cursor.execute('''
@@ -277,11 +278,19 @@ def agregar_carrito(producto_id):
     return redirect(request.referrer or url_for('catalogo'))
 
 
+
+# Ruta para eliminar producto del carrito
 @app.route('/eliminar_carrito/<int:producto_id>')
 def eliminar_carrito(producto_id):
     carrito = session.get('carrito', [])
     carrito = [item for item in carrito if item['id'] != producto_id]
     session['carrito'] = carrito
+    return redirect(url_for('carrito'))
+
+# Ruta para vaciar el carrito completamente
+@app.route('/vaciar_carrito')
+def vaciar_carrito():
+    session['carrito'] = []
     return redirect(url_for('carrito'))
 
 
