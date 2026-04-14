@@ -90,25 +90,23 @@
     }
     .btn-nav:hover { background: var(--blue-glow); transform: translateY(-1px); }
 
-    /* ── HERO SIDE PANEL (like image 1 left red panel) ── */
+    /* ── HERO SIDE PANEL ── */
     .blog-hero {
       display: flex;
       margin-top: 74px;
       min-height: 520px;
     }
     .hero-side {
-      width: 300px;
-      min-width: 300px;
-      background: var(--blue);
+      width: calc(300px + 3cm);
+      min-width: calc(300px + 3cm);
+      background: linear-gradient(160deg, #0d0d2a 0%, #0a1240 50%, #0d1a3a 100%);
+      border-right: 1px solid rgba(0, 102, 255, 0.35);
       display: flex;
       flex-direction: column;
       justify-content: center;
       padding: 60px 40px;
       position: relative;
       overflow: hidden;
-      margin-left: 0;
-      width: calc(300px + 3cm);
-      min-width: calc(300px + 3cm);
     }
     .hero-side::before {
       content: '';
@@ -116,7 +114,8 @@
       bottom: -60px; right: -60px;
       width: 220px; height: 220px;
       border-radius: 50%;
-      border: 2px solid rgba(255,255,255,0.15);
+      border: 2px solid rgba(0, 102, 255, 0.3);
+      box-shadow: 0 0 40px rgba(0, 102, 255, 0.15);
       animation: pulsering 4s ease-in-out infinite;
     }
     .hero-side::after {
@@ -125,7 +124,7 @@
       bottom: -100px; right: -100px;
       width: 320px; height: 320px;
       border-radius: 50%;
-      border: 1px solid rgba(255,255,255,0.08);
+      border: 1px solid rgba(0, 102, 255, 0.15);
       animation: pulsering 4s ease-in-out infinite 1s;
     }
     @keyframes pulsering {
@@ -164,8 +163,8 @@
     }
     .hero-subscribe input {
       flex: 1;
-      background: rgba(255,255,255,0.15);
-      border: 1px solid rgba(255,255,255,0.3);
+      background: rgba(0, 80, 255, 0.12);
+      border: 1px solid rgba(0, 102, 255, 0.4);
       border-right: none;
       color: #fff;
       padding: 10px 14px;
@@ -175,11 +174,11 @@
       transition: background 0.2s;
     }
     .hero-subscribe input::placeholder { color: rgba(255,255,255,0.5); }
-    .hero-subscribe input:focus { background: rgba(255,255,255,0.25); }
+    .hero-subscribe input:focus { background: rgba(0, 102, 255, 0.22); }
     .hero-subscribe button {
-      background: #0a4cff;
+      background: var(--blue);
       color: #fff;
-      border: 1px solid rgba(255,255,255,0.3);
+      border: 1px solid rgba(0, 102, 255, 0.5);
       padding: 10px 18px;
       border-radius: 0 4px 4px 0;
       font-size: 0.98rem;
@@ -201,7 +200,7 @@
       left: 100%;
       top: 50%;
       transform: translateY(-50%) translateX(18px);
-      background: #0066ff;
+      background: #0044cc;
       color: #fff;
       padding: 12px 22px;
       border-radius: 6px;
@@ -235,28 +234,27 @@
       width: 100%;
       height: 100%;
       min-height: 320px;
-      background: linear-gradient(135deg, #0d0d2a 0%, #0a1628 50%, #050510 100%);
       position: relative;
       transition: transform 0.5s ease;
       display: flex;
       align-items: flex-end;
+      overflow: hidden;
     }
-    .featured-main:hover .featured-main-img { transform: scale(1.03); }
+    .featured-main-img img {
+      position: absolute;
+      inset: 0;
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      transition: transform 0.5s ease;
+    }
+    .featured-main:hover .featured-main-img img { transform: scale(1.03); }
     .featured-main-img::before {
       content: '';
       position: absolute;
       inset: 0;
-      background: linear-gradient(0deg, rgba(0,0,0,0.8) 0%, rgba(0,0,0,0.2) 60%, transparent 100%);
+      background: linear-gradient(0deg, rgba(0,0,0,0.85) 0%, rgba(0,0,0,0.2) 60%, transparent 100%);
       z-index: 1;
-    }
-    .cam-icon {
-      position: absolute;
-      top: 50%;
-      left: 50%;
-      transform: translate(-50%, -60%);
-      font-size: 5rem;
-      opacity: 0.12;
-      filter: blur(1px);
     }
     .featured-main-content {
       position: relative;
@@ -329,11 +327,18 @@
     .featured-sub-img {
       width: 100%;
       height: 100%;
-      background: linear-gradient(135deg, #0a1a2e 0%, #0d0d1a 100%);
-      transition: transform 0.5s ease;
       position: relative;
+      overflow: hidden;
     }
-    .featured-sub:hover .featured-sub-img { transform: scale(1.04); }
+    .featured-sub-img img {
+      position: absolute;
+      inset: 0;
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      transition: transform 0.5s ease;
+    }
+    .featured-sub:hover .featured-sub-img img { transform: scale(1.04); }
     .featured-sub-img::before {
       content: '';
       position: absolute;
@@ -355,10 +360,7 @@
       line-height: 1.3;
       transition: transform 0.5s cubic-bezier(.4,1.4,.6,1.1);
     }
-
-    .featured-sub:hover .featured-sub-content h3 {
-      transform: scale(1.03);
-    }
+    .featured-sub:hover .featured-sub-content h3 { transform: scale(1.03); }
 
     /* ── SECTION TITLE ── */
     .section-title {
@@ -421,24 +423,17 @@
     }
     .news-card-img {
       height: 160px;
-      background: linear-gradient(135deg, #0a1628 0%, #0d1a30 100%);
       position: relative;
       overflow: hidden;
     }
-    .news-card-img-inner {
+    .news-card-img img {
       width: 100%;
       height: 100%;
+      object-fit: cover;
+      display: block;
       transition: transform 0.5s ease;
-      display: flex;
-      align-items: center;
-      justify-content: center;
     }
-    .news-card:hover .news-card-img-inner { transform: scale(1.08); }
-    .news-card-img-inner .card-icon {
-      font-size: 3.5rem;
-      opacity: 0.18;
-      filter: blur(0.5px);
-    }
+    .news-card:hover .news-card-img img { transform: scale(1.08); }
     .news-card-meta {
       display: flex;
       align-items: center;
@@ -499,7 +494,6 @@
     }
     .btn-blue:active { transform: scale(0.97); }
 
-    /* stagger animation delays */
     .news-card:nth-child(1) { animation-delay: 0.05s; }
     .news-card:nth-child(2) { animation-delay: 0.12s; }
     .news-card:nth-child(3) { animation-delay: 0.19s; }
@@ -594,9 +588,7 @@
       padding: 48px 24px 80px;
       align-items: flex-start;
     }
-    .article-main {
-      flex: 1;
-    }
+    .article-main { flex: 1; }
     .article-content-box {
       background: var(--card-bg);
       border: 1px solid var(--border);
@@ -612,15 +604,16 @@
     .article-img-placeholder {
       width: 100%;
       height: 280px;
-      background: linear-gradient(135deg, #0a1628 0%, #0d1a30 100%);
       border-radius: 6px;
       margin: 20px 0;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      font-size: 4rem;
-      opacity: 0.35;
+      overflow: hidden;
       border: 1px solid var(--border);
+    }
+    .article-img-placeholder img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      display: block;
     }
     .article-quote {
       border-left: 4px solid var(--blue);
@@ -717,10 +710,7 @@
       align-items: center;
       justify-content: center;
     }
-    .scroll-top.visible {
-      opacity: 1;
-      pointer-events: auto;
-    }
+    .scroll-top.visible { opacity: 1; pointer-events: auto; }
     .scroll-top:hover {
       transform: translateY(-3px);
       box-shadow: 0 8px 28px rgba(0,102,255,0.5);
@@ -822,7 +812,7 @@
         <p>Todo lo que necesitas saber sobre seguridad electrónica, tendencias y tecnología.</p>
         <div class="hero-subscribe">
           <label>Suscríbete y recibe las últimas noticias de seguridad</label>
-          <div class="sub-row">
+          <div class="sub-row" style="position:relative;">
             <input type="email" placeholder="Email *" id="sub-email"/>
             <button id="subscribeBtn" type="button">ENVIAR</button>
             <span id="subscribeToast" class="subscribe-toast">Gracias, te tendremos al día con las noticias!</span>
@@ -834,6 +824,7 @@
         <!-- Main featured article -->
         <div class="featured-main" onclick="showArticle(0)">
           <div class="featured-main-img">
+            <img src="https://images.unsplash.com/photo-1557597774-9d273605dfa9?w=900&h=400&fit=crop&auto=format" alt="Cámara de seguridad nocturna"/>
             <div class="featured-main-content">
               <span class="featured-tag">Destacado</span>
               <span class="featured-meta">12/4/26</span>
@@ -847,8 +838,8 @@
         <!-- Sub articles -->
         <div class="featured-sub-grid">
           <div class="featured-sub" onclick="showArticle(3)">
-            <div class="featured-sub-img" style="background: linear-gradient(135deg, #0a0a20, #0d1a30);">
-              <div style="position:absolute;inset:0;display:flex;align-items:center;justify-content:center;font-size:3rem;opacity:0.15;z-index:0;"></div>
+            <div class="featured-sub-img">
+              <img src="https://images.unsplash.com/photo-1558618666-fcd25c85cd64?w=500&h=220&fit=crop&auto=format" alt="Seguridad perimetral"/>
             </div>
             <div class="featured-sub-content">
               <span class="featured-tag" style="font-size:0.68rem;">Innovación</span>
@@ -858,8 +849,8 @@
             </div>
           </div>
           <div class="featured-sub" onclick="showArticle(1)">
-            <div class="featured-sub-img" style="background: linear-gradient(135deg, #0d0020, #1a0a30);">
-              <div style="position:absolute;inset:0;display:flex;align-items:center;justify-content:center;font-size:3rem;opacity:0.15;z-index:0;"></div>
+            <div class="featured-sub-img">
+              <img src="https://images.unsplash.com/photo-1528698827591-e19ccd7bc23d?w=500&h=220&fit=crop&auto=format" alt="Puntos ciegos en negocio"/>
             </div>
             <div class="featured-sub-content">
               <span class="featured-tag" style="font-size:0.68rem;">Seguridad</span>
@@ -880,11 +871,10 @@
 
     <div class="news-grid">
 
+      <!-- Artículo 1: Cámaras Full-Color -->
       <article class="news-card" onclick="showArticle(0)">
         <div class="news-card-img">
-          <div class="news-card-img-inner" style="min-height:160px;height:160px;display:flex;align-items:center;justify-content:center;">
-            <img src="/static/img/camara_en_mano.jpg" style="width:100%;height:100%;object-fit:cover;display:block;"/>
-          </div>
+          <img src="https://images.unsplash.com/photo-1557597774-9d273605dfa9?w=400&h=160&fit=crop&auto=format" alt="Cámara de seguridad nocturna"/>
         </div>
         <div class="news-card-meta">
           <span class="news-card-tag">Tecnología</span>
@@ -897,11 +887,10 @@
         </div>
       </article>
 
+      <!-- Artículo 2: Puntos ciegos -->
       <article class="news-card" onclick="showArticle(1)">
         <div class="news-card-img">
-          <div class="news-card-img-inner" style="background:linear-gradient(135deg,#0d0020,#1a0a30);">
-            <span class="card-icon"></span>
-          </div>
+          <img src="https://images.unsplash.com/photo-1528698827591-e19ccd7bc23d?w=400&h=160&fit=crop&auto=format" alt="Vigilancia en negocio"/>
         </div>
         <div class="news-card-meta">
           <span class="news-card-tag">Seguridad</span>
@@ -914,11 +903,10 @@
         </div>
       </article>
 
+      <!-- Artículo 3: Biometría -->
       <article class="news-card" onclick="showArticle(2)">
         <div class="news-card-img">
-          <div class="news-card-img-inner" style="background:linear-gradient(135deg,#001a0d,#0a2010);">
-            <span class="card-icon"></span>
-          </div>
+          <img src="https://images.unsplash.com/photo-1550751827-4bd374c3f58b?w=400&h=160&fit=crop&auto=format" alt="Control de acceso biométrico"/>
         </div>
         <div class="news-card-meta">
           <span class="news-card-tag">Innovación</span>
@@ -931,11 +919,10 @@
         </div>
       </article>
 
+      <!-- Artículo 4: Cerca eléctrica -->
       <article class="news-card" onclick="showArticle(3)">
         <div class="news-card-img">
-          <div class="news-card-img-inner" style="background:linear-gradient(135deg,#1a1000,#2a1a00);">
-            <span class="card-icon"></span>
-          </div>
+          <img src="https://images.unsplash.com/photo-1558618666-fcd25c85cd64?w=400&h=160&fit=crop&auto=format" alt="Cerca eléctrica perimetral"/>
         </div>
         <div class="news-card-meta">
           <span class="news-card-tag">Perimetral</span>
@@ -948,11 +935,10 @@
         </div>
       </article>
 
+      <!-- Artículo 5: Analítica de video -->
       <article class="news-card" onclick="showArticle(4)">
         <div class="news-card-img">
-          <div class="news-card-img-inner" style="background:linear-gradient(135deg,#001a1a,#0a2030);">
-            <span class="card-icon"></span>
-          </div>
+          <img src="https://images.unsplash.com/photo-1485827404703-89b55fcc595e?w=400&h=160&fit=crop&auto=format" alt="Inteligencia artificial en seguridad"/>
         </div>
         <div class="news-card-meta">
           <span class="news-card-tag">IA & Video</span>
@@ -965,11 +951,10 @@
         </div>
       </article>
 
+      <!-- Artículo 6: Alarmas inteligentes -->
       <article class="news-card" onclick="showArticle(5)">
         <div class="news-card-img">
-          <div class="news-card-img-inner" style="background:linear-gradient(135deg,#0a001a,#150a2e);">
-            <span class="card-icon"></span>
-          </div>
+          <img src="https://images.unsplash.com/photo-1558002038-1055907df827?w=400&h=160&fit=crop&auto=format" alt="Alarma inteligente desde celular"/>
         </div>
         <div class="news-card-meta">
           <span class="news-card-tag">Alarmas</span>
@@ -1047,7 +1032,9 @@
       <div class="article-main">
         <div class="article-content-box">
           <p id="article-p1"></p>
-          <div class="article-img-placeholder" id="article-icon">📷</div>
+          <div class="article-img-placeholder" id="article-img-wrap">
+            <img id="article-img" src="" alt=""/>
+          </div>
           <p id="article-p2"></p>
           <blockquote class="article-quote" id="article-quote"></blockquote>
           <p id="article-p3"></p>
@@ -1079,7 +1066,8 @@
         date: "12/4/26",
         author: "Equipo SecureVision",
         tag: "Tecnología",
-        icon: "📷",
+        img: "https://images.unsplash.com/photo-1557597774-9d273605dfa9?w=800&h=280&fit=crop&auto=format",
+        imgAlt: "Cámara de seguridad nocturna",
         p1: "¿Sabías que la mayoría de los incidentes ocurren durante la noche, pero las pruebas suelen ser en blanco y negro y borrosas? En SecureVision hemos introducido la tecnología Full-Color, que permite capturar imágenes con colores vibrantes incluso en condiciones de oscuridad total. Esta innovación representa un cambio fundamental en la forma en que los sistemas de seguridad recopilan evidencia.",
         p2: "La tecnología Full-Color utiliza sensores de imagen de última generación combinados con iluminadores LED de alta intensidad que son imperceptibles para el ojo humano. Esto significa que las cámaras pueden producir video en color completo sin importar las condiciones de iluminación del entorno.",
         quote: '"Una imagen en color puede ser la diferencia entre identificar a un sospechoso y no tener ninguna pista. Es el avance más importante en CCTV de la última década."',
@@ -1091,7 +1079,8 @@
         date: "10/4/26",
         author: "Carlos Mendoza",
         tag: "Seguridad",
-        icon: "🏪",
+        img: "https://images.unsplash.com/photo-1528698827591-e19ccd7bc23d?w=800&h=280&fit=crop&auto=format",
+        imgAlt: "Vigilancia en negocio",
         p1: "Instalar cámaras es fácil; instalarlas estratégicamente es un arte. Muchos dueños de negocios cometen el error de vigilar solo la caja registradora, olvidando áreas críticas que los delincuentes conocen de memoria y explotan sin dudar. Un análisis de seguridad exhaustivo revela que el 78% de los robos en comercios aprovechan zonas sin cobertura.",
         p2: "Los cinco puntos ciegos más comunes son: las esquinas traseras de los pasillos, las zonas de carga y descarga, los baños y áreas de personal, los estacionamientos adyacentes al local, y las áreas alrededor de los sistemas de alarma y cajas fuertes. Cada uno de estos puntos requiere una solución específica.",
         quote: '"Los delincuentes estudian las tiendas durante días antes de actuar. Ellos saben dónde están las cámaras mejor que el propio dueño del negocio."',
@@ -1103,7 +1092,8 @@
         date: "8/4/26",
         author: "Ana González",
         tag: "Innovación",
-        icon: "👁",
+        img: "https://images.unsplash.com/photo-1550751827-4bd374c3f58b?w=800&h=280&fit=crop&auto=format",
+        imgAlt: "Control de acceso biométrico",
         p1: "¿Alguna vez has tenido que cambiar todas las cerraduras porque un empleado perdió una llave o fue despedido en malos términos? El control de acceso biométrico elimina este dolor de cabeza de forma permanente. Con reconocimiento de huella dactilar, facial o del iris, el acceso queda vinculado a la identidad biológica única de cada persona.",
         p2: "Los sistemas biométricos modernos ofrecen múltiples ventajas sobre las llaves tradicionales: no se pueden perder, copiar o transferir sin autorización. Cada acceso queda registrado automáticamente con hora, fecha e identidad del usuario, creando un historial de auditoría detallado que es invaluable tanto para la seguridad como para la gestión del personal.",
         quote: '"La biometría no es el futuro de la seguridad, es el presente. Cualquier empresa que todavía use llaves físicas para accesos críticos está asumiendo riesgos innecesarios."',
@@ -1115,7 +1105,8 @@
         date: "6/4/26",
         author: "Roberto Díaz",
         tag: "Perimetral",
-        icon: "⚡",
+        img: "https://images.unsplash.com/photo-1558618666-fcd25c85cd64?w=800&h=280&fit=crop&auto=format",
+        imgAlt: "Seguridad perimetral",
         p1: "La seguridad perimetral es la primera línea de defensa de cualquier propiedad, y elegir el sistema correcto puede marcar la diferencia entre una propiedad segura y una vulnerable. Las cercas eléctricas y las concertinas son dos opciones populares, pero tienen características muy diferentes que las hacen adecuadas para distintos contextos.",
         p2: "Las cercas eléctricas ofrecen detección activa: cuando alguien las toca, generan una descarga no letal que alerta inmediatamente al sistema de monitoreo. Son invisibles a distancia, pueden cubrir grandes perímetros y se integran perfectamente con sistemas de alarma. Su principal ventaja es la capacidad de generar alertas en tiempo real antes de que un intruso logre penetrar el perímetro.",
         quote: '"La mejor cerca es aquella que detecta la intrusión antes de que ocurra, no después. La cerca eléctrica moderna hace exactamente eso gracias a sus sensores inteligentes."',
@@ -1127,7 +1118,8 @@
         date: "4/4/26",
         author: "Laura Vargas",
         tag: "IA & Video",
-        icon: "🤖",
+        img: "https://images.unsplash.com/photo-1485827404703-89b55fcc595e?w=800&h=280&fit=crop&auto=format",
+        imgAlt: "Inteligencia artificial en seguridad",
         p1: "La analítica de video es la aplicación de inteligencia artificial al análisis de las transmisiones de cámaras de seguridad en tiempo real. En lugar de depender de un guardia que monitorea múltiples pantallas, los algoritmos de IA analizan continuamente el video en busca de comportamientos sospechosos, objetos abandonados o situaciones que requieren atención.",
         p2: "Los sistemas modernos de analítica de video pueden detectar una amplia gama de eventos: personas merodeando en zonas restringidas, vehículos estacionados por períodos inusuales, objetos abandonados, aglomeraciones anormales de personas, o movimientos que coinciden con patrones conocidos de comportamiento pre-delictivo.",
         quote: '"La IA no se cansa, no se distrae y no parpadea. Puede monitorear 1,000 cámaras simultáneamente con la misma precisión que monitora una sola."',
@@ -1139,7 +1131,8 @@
         date: "2/4/26",
         author: "Miguel Torres",
         tag: "Alarmas",
-        icon: "📱",
+        img: "https://images.unsplash.com/photo-1558002038-1055907df827?w=800&h=280&fit=crop&auto=format",
+        imgAlt: "Alarma inteligente desde celular",
         p1: "Las alarmas de seguridad han evolucionado radicalmente en los últimos años. Los sistemas modernos no solo emiten una señal sonora cuando detectan una intrusión: se conectan directamente a tu smartphone, a una central de monitoreo profesional, y pueden coordinar respuestas con múltiples dispositivos de seguridad de forma automática.",
         p2: "Con la aplicación móvil de SecureVision, tienes control total sobre tu sistema de seguridad desde cualquier parte del mundo. Puedes armar y desarmar la alarma, ver las cámaras en tiempo real, recibir notificaciones push instantáneas ante cualquier evento, revisar el historial de actividad y generar reportes detallados, todo desde la palma de tu mano.",
         quote: '"La tranquilidad que da saber que puedes ver tu casa o negocio en tiempo real desde cualquier parte del mundo no tiene precio. La tecnología finalmente nos da ese control."',
@@ -1157,7 +1150,8 @@
       document.getElementById('article-title').textContent = a.title;
       document.getElementById('article-byline').innerHTML = `${a.date} &nbsp;|&nbsp; Por: <span>${a.author}</span>`;
       document.getElementById('article-p1').textContent = a.p1;
-      document.getElementById('article-icon').textContent = a.icon;
+      document.getElementById('article-img').src = a.img;
+      document.getElementById('article-img').alt = a.imgAlt;
       document.getElementById('article-p2').textContent = a.p2;
       document.getElementById('article-quote').textContent = a.quote;
       document.getElementById('article-p3').textContent = a.p3;
@@ -1180,7 +1174,6 @@
         sidebarEl.appendChild(div);
       });
 
-      // Toggle views
       document.getElementById('blog-view').style.display = 'none';
       const av = document.getElementById('article-view');
       av.style.display = 'block';
@@ -1197,47 +1190,40 @@
     }
 
     function prevArticle() {
-      const prev = (currentArticleIndex - 1 + articles.length) % articles.length;
-      showArticle(prev);
+      showArticle((currentArticleIndex - 1 + articles.length) % articles.length);
     }
 
     function nextArticle() {
-      const next = (currentArticleIndex + 1) % articles.length;
-      showArticle(next);
+      showArticle((currentArticleIndex + 1) % articles.length);
     }
 
-      // Notificación para el botón ENVIAR
-      document.addEventListener('DOMContentLoaded', function() {
-        const subscribeBtn = document.getElementById('subscribeBtn');
-        const subscribeToast = document.getElementById('subscribeToast');
-        const subEmail = document.getElementById('sub-email');
-        console.log('subscribeBtn:', subscribeBtn);
-        console.log('subscribeToast:', subscribeToast);
-        console.log('subEmail:', subEmail);
-        if (subscribeBtn && subscribeToast && subEmail) {
-          subscribeBtn.addEventListener('click', function() {
-            console.log('Botón ENVIAR clickeado');
-            // Validación simple de email
-            const email = subEmail.value;
-            if (!email || !email.includes('@')) {
-              subscribeToast.textContent = 'Por favor ingresa un correo válido.';
-              subscribeToast.classList.add('visible');
-              setTimeout(() => {
-                subscribeToast.classList.remove('visible');
-                subscribeToast.textContent = 'Gracias, te tendremos al día con las noticias!';
-              }, 1800);
-              return;
-            }
-            subscribeToast.textContent = '¡Gracias! Te has suscrito exitosamente.';
+    // ── SUSCRIPCIÓN ──
+    document.addEventListener('DOMContentLoaded', function() {
+      const subscribeBtn = document.getElementById('subscribeBtn');
+      const subscribeToast = document.getElementById('subscribeToast');
+      const subEmail = document.getElementById('sub-email');
+      if (subscribeBtn && subscribeToast && subEmail) {
+        subscribeBtn.addEventListener('click', function() {
+          const email = subEmail.value;
+          if (!email || !email.includes('@')) {
+            subscribeToast.textContent = 'Por favor ingresa un correo válido.';
             subscribeToast.classList.add('visible');
             setTimeout(() => {
               subscribeToast.classList.remove('visible');
               subscribeToast.textContent = 'Gracias, te tendremos al día con las noticias!';
-            }, 2200);
-            subEmail.value = '';
-          });
-        }
-      });
+            }, 1800);
+            return;
+          }
+          subscribeToast.textContent = '¡Gracias! Te has suscrito exitosamente.';
+          subscribeToast.classList.add('visible');
+          setTimeout(() => {
+            subscribeToast.classList.remove('visible');
+            subscribeToast.textContent = 'Gracias, te tendremos al día con las noticias!';
+          }, 2200);
+          subEmail.value = '';
+        });
+      }
+    });
   </script>
 
 </body>
