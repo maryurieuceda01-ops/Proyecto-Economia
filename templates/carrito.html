@@ -98,6 +98,98 @@
     footer{background:var(--bg2);border-top:1px solid var(--border);padding:30px 60px;text-align:center;margin-top:60px;transition:background .3s;}
     footer p{color:var(--gray);font-size:0.78rem;}
     @media(max-width:900px){nav{padding:16px 24px;}.nav-links{display:none;}.cart-layout{grid-template-columns:1fr;padding:24px;}.modal-grid{grid-template-columns:1fr;}.summary-card{position:static;}footer{padding:24px;}}
+
+    /* ── Toast de cupón ── */
+    .sv-toast{
+      position:fixed;top:82px;right:24px;z-index:9999;
+      display:flex;align-items:flex-start;gap:14px;
+      padding:18px 22px;border-radius:8px;border:1px solid;
+      font-family:'Inter',sans-serif;min-width:300px;max-width:380px;
+      animation:svSlideIn .35s ease-out;transition:opacity .4s;
+      box-shadow:0 8px 32px rgba(0,0,0,0.5);
+    }
+    .sv-toast.sv-toast-out{opacity:0;}
+    @keyframes svSlideIn{from{opacity:0;transform:translateY(-12px);}to{opacity:1;transform:translateY(0);}}
+
+    /* Éxito: fondo verde oscuro sólido, borde verde brillante */
+    .sv-toast-success{background:#071a0f;border-color:#2dc653;border-width:1.5px;}
+    /* Error: fondo rojo oscuro sólido, borde rojo brillante */
+    .sv-toast-error{background:#1a0508;border-color:#e63946;border-width:1.5px;}
+
+    .sv-toast-icon{width:38px;height:38px;border-radius:50%;display:flex;align-items:center;justify-content:center;flex-shrink:0;}
+    .sv-toast-success .sv-toast-icon{background:rgba(45,198,83,0.2);border:1px solid rgba(45,198,83,0.4);}
+    .sv-toast-error .sv-toast-icon{background:rgba(230,57,70,0.2);border:1px solid rgba(230,57,70,0.4);}
+    .sv-toast-success .sv-toast-icon svg{stroke:#4dea74;}
+    .sv-toast-error .sv-toast-icon svg{stroke:#f07077;}
+    .sv-toast-icon svg{width:18px;height:18px;}
+
+    .sv-toast-tag{font-size:10px;letter-spacing:2px;text-transform:uppercase;font-family:'Rajdhani',sans-serif;font-weight:700;margin-bottom:3px;}
+    .sv-toast-success .sv-toast-tag{color:#4dea74;}
+    .sv-toast-error .sv-toast-tag{color:#f07077;}
+
+    .sv-toast-big{font-family:'Rajdhani',sans-serif;font-size:26px;font-weight:700;line-height:1.1;}
+    .sv-toast-success .sv-toast-big{color:#00ffaa;}
+    .sv-toast-error .sv-toast-big{color:#ff6b74;}
+
+    .sv-toast-msg{font-size:13px;line-height:1.4;margin-top:3px;}
+    .sv-toast-success .sv-toast-msg{color:#a8d8b8;}
+    .sv-toast-error .sv-toast-msg{color:#d8a8a8;}
+    .sv-toast-msg strong{color:#ffffff;}
+
+    /* Light mode */
+    [data-theme="light"] .sv-toast-success{background:#e8fdf0;border-color:#1a9e3f;}
+    [data-theme="light"] .sv-toast-error{background:#fdecea;border-color:#cc2233;}
+    [data-theme="light"] .sv-toast-success .sv-toast-tag{color:#1a7a32;}
+    [data-theme="light"] .sv-toast-error .sv-toast-tag{color:#aa1122;}
+    [data-theme="light"] .sv-toast-success .sv-toast-big{color:#0d6e28;}
+    [data-theme="light"] .sv-toast-error .sv-toast-big{color:#aa1122;}
+    [data-theme="light"] .sv-toast-success .sv-toast-msg{color:#1a3d24;}
+    [data-theme="light"] .sv-toast-error .sv-toast-msg{color:#3d1a1a;}
+    [data-theme="light"] .sv-toast-msg strong{color:#0a0a1a;}
+    [data-theme="light"] .sv-toast-success .sv-toast-icon{background:rgba(26,158,63,0.15);border-color:rgba(26,158,63,0.4);}
+    [data-theme="light"] .sv-toast-success .sv-toast-icon svg{stroke:#1a9e3f;}
+    [data-theme="light"] .sv-toast-error .sv-toast-icon{background:rgba(204,34,51,0.15);border-color:rgba(204,34,51,0.4);}
+    [data-theme="light"] .sv-toast-error .sv-toast-icon svg{stroke:#cc2233;}
+
+    /* ── Modal confirmar vaciar carrito ── */
+    #svConfirmOverlay{
+      position:fixed;inset:0;background:rgba(4,4,8,0.92);
+      backdrop-filter:blur(8px);display:flex;justify-content:center;
+      align-items:center;z-index:1001;padding:20px;
+    }
+    .sv-confirm-box{
+      background:#16050a;
+      border:1px solid #e63946;
+      border-radius:10px;padding:30px;width:100%;max-width:420px;
+      font-family:'Inter',sans-serif;
+      box-shadow:0 0 0 1px rgba(230,57,70,0.1), 0 24px 64px rgba(230,57,70,0.3);
+      animation:svSlideIn .3s ease-out;
+    }
+    [data-theme="light"] .sv-confirm-box{
+      background:#fff5f6;border-color:#cc2233;
+      box-shadow:0 0 0 1px rgba(204,34,51,0.1), 0 24px 64px rgba(204,34,51,0.18);
+    }
+    .sv-confirm-head{display:flex;align-items:center;gap:14px;margin-bottom:14px;}
+    .sv-confirm-icon{
+      width:44px;height:44px;border-radius:50%;
+      background:rgba(230,57,70,0.18);
+      border:1px solid rgba(230,57,70,0.5);
+      display:flex;align-items:center;justify-content:center;flex-shrink:0;
+    }
+    .sv-confirm-icon svg{width:20px;height:20px;stroke:#f07077;}
+    .sv-confirm-title{font-family:'Rajdhani',sans-serif;font-size:19px;font-weight:700;color:#ffffff;}
+    [data-theme="light"] .sv-confirm-title{color:#1a0005;}
+    .sv-confirm-sub{font-size:11px;color:#f07077;letter-spacing:1px;text-transform:uppercase;margin-top:2px;}
+    [data-theme="light"] .sv-confirm-sub{color:#aa1122;}
+    .sv-confirm-body{font-size:13px;color:#c8a8b0;line-height:1.6;margin-bottom:24px;padding-left:58px;}
+    [data-theme="light"] .sv-confirm-body{color:#4a2030;}
+    .sv-confirm-foot{display:flex;justify-content:flex-end;gap:10px;}
+    .sv-btn{border:none;padding:10px 22px;border-radius:4px;font-size:11px;letter-spacing:1.5px;text-transform:uppercase;font-family:'Inter',sans-serif;font-weight:600;cursor:pointer;transition:all .2s;}
+    .sv-btn-cancel{background:transparent;border:1px solid rgba(200,168,176,0.25);color:#8890aa;}
+    .sv-btn-cancel:hover{border-color:#8890aa;color:#ffffff;}
+    [data-theme="light"] .sv-btn-cancel:hover{color:#0a0a1a;}
+    .sv-btn-danger{background:#e63946;color:#fff;box-shadow:0 4px 16px rgba(230,57,70,0.45);}
+    .sv-btn-danger:hover{background:#c9303c;box-shadow:0 4px 20px rgba(230,57,70,0.65);}
   </style>
 </head>
 <body>
@@ -144,7 +236,7 @@
         <div style="margin-bottom:20px;">
           <div style="font-size:0.75rem;color:var(--gray);margin-bottom:8px;">CÓDIGO DE DESCUENTO</div>
           <div style="display:flex;gap:8px;">
-            <input type="text" id="couponInput" class="form-control" style="background:var(--bg);" placeholder="SECURE10">
+            <input type="text" id="couponInput" class="form-control" style="background:var(--bg);" placeholder="Ingresa tu código">
             <button onclick="applyCoupon()" style="background:transparent;border:1px solid var(--blue);color:var(--blue);padding:10px;border-radius:4px;cursor:pointer;">OK</button>
           </div>
         </div>
@@ -259,15 +351,92 @@
       if (item) { item.qty += delta; if (item.qty <= 0) return removeItem(id); syncAndSave(); }
     }
     function removeItem(id)  { cart = cart.filter(i => Number(i.id) !== Number(id)); syncAndSave(); }
-    function clearCart()     { if(confirm('¿Vaciar todo el carrito?')) { cart = []; syncAndSave(); } }
     function syncAndSave()   { localStorage.setItem('sc_cart', JSON.stringify(cart)); renderCartPage(); }
 
+    /* ── Notificación toast ── */
+    function showToast(type, tag, big, msg) {
+      const existing = document.getElementById('svToast');
+      if (existing) existing.remove();
+      const icons = {
+        success: '<polyline points="20 6 9 17 4 12"/>',
+        error:   '<line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/>'
+      };
+      const t = document.createElement('div');
+      t.id = 'svToast';
+      t.className = 'sv-toast sv-toast-' + type;
+      t.innerHTML =
+        '<div class="sv-toast-icon">' +
+          '<svg viewBox="0 0 24 24" fill="none" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">' + icons[type] + '</svg>' +
+        '</div>' +
+        '<div>' +
+          '<div class="sv-toast-tag">' + tag + '</div>' +
+          (big ? '<div class="sv-toast-big">' + big + '</div>' : '') +
+          '<div class="sv-toast-msg">' + msg + '</div>' +
+        '</div>';
+      document.body.appendChild(t);
+      setTimeout(function() { if (t.parentNode) t.classList.add('sv-toast-out'); }, 3500);
+      setTimeout(function() { if (t.parentNode) t.remove(); }, 4000);
+    }
+
+    /* ── Modal confirmar vaciar carrito ── */
+    function showConfirm(title, sub, body, onConfirm) {
+      const existing = document.getElementById('svConfirmOverlay');
+      if (existing) existing.remove();
+      const ov = document.createElement('div');
+      ov.id = 'svConfirmOverlay';
+      ov.innerHTML =
+        '<div class="sv-confirm-box">' +
+          '<div class="sv-confirm-head">' +
+            '<div class="sv-confirm-icon">' +
+              '<svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">' +
+                '<polyline points="3 6 5 6 21 6"/>' +
+                '<path d="M19 6l-1 14H6L5 6"/>' +
+                '<path d="M10 11v6M14 11v6"/>' +
+                '<path d="M9 6V4h6v2"/>' +
+              '</svg>' +
+            '</div>' +
+            '<div>' +
+              '<div class="sv-confirm-title">' + title + '</div>' +
+              '<div class="sv-confirm-sub">' + sub + '</div>' +
+            '</div>' +
+          '</div>' +
+          '<div class="sv-confirm-body">' + body + '</div>' +
+          '<div class="sv-confirm-foot">' +
+            '<button class="sv-btn sv-btn-cancel" id="svConfirmCancel">Cancelar</button>' +
+            '<button class="sv-btn sv-btn-danger" id="svConfirmOk">Vaciar carrito</button>' +
+          '</div>' +
+        '</div>';
+      document.body.appendChild(ov);
+      document.getElementById('svConfirmCancel').onclick = function() { ov.remove(); };
+      document.getElementById('svConfirmOk').onclick = function() { ov.remove(); onConfirm(); };
+      ov.onclick = function(e) { if (e.target === ov) ov.remove(); };
+    }
+
+    /* ── Cupón con toast ── */
     function applyCoupon() {
-      const code  = document.getElementById('couponInput').value.trim().toUpperCase();
+      const input = document.getElementById('couponInput');
+      const code  = input.value.trim().toUpperCase();
       const codes = {'PROMO20':0.20, 'SECURE10':0.10, 'GOLD15':0.15};
-      if (codes[code] !== undefined) { discountPercent = codes[code]; alert('✅ Cupón ' + code + ': ' + Math.round(discountPercent*100) + '% aplicado!'); }
-      else { discountPercent = 0; alert('❌ Cupón inválido'); }
+      if (codes[code] !== undefined) {
+        discountPercent = codes[code];
+        showToast('success', 'Cupón aplicado', Math.round(discountPercent * 100) + '% OFF',
+          'Código <strong>' + code + '</strong> activado correctamente.');
+      } else {
+        discountPercent = 0;
+        showToast('error', 'Cupón inválido', null,
+          'El código ingresado no existe o ha expirado. Verifica e inténtalo de nuevo.');
+      }
       renderCartPage();
+    }
+
+    /* ── Vaciar carrito con modal ── */
+    function clearCart() {
+      showConfirm(
+        'Vaciar carrito',
+        'Esta acción no se puede deshacer',
+        'Se eliminarán todos los productos de tu carrito. ¿Deseas continuar?',
+        function() { cart = []; syncAndSave(); }
+      );
     }
 
     function openCheckout()  { if (!cart.length) return; document.getElementById('checkoutModal').style.display = 'flex'; }
@@ -278,28 +447,27 @@
       const btn = document.getElementById('btnFinalizar');
       btn.disabled = true; btn.textContent = 'Procesando...';
       const subtotalNum = cart.reduce((s, i) => s + i.price * i.qty, 0);
-const taxNum      = subtotalNum * 0.15;
-const discountNum = (subtotalNum + taxNum) * discountPercent;
-const totalNum    = (subtotalNum + taxNum) - discountNum;
-const couponCode  = document.getElementById('couponInput').value.trim().toUpperCase();
-
-const orderPayload = {
-  customer: Object.fromEntries(new FormData(event.target)),
-  items: cart,
-  summary: {
-    subtotal:  subtotalNum,
-    tax:       taxNum,
-    discount:  discountNum,
-    total:     totalNum,
-    coupon:    couponCode
-  }
-};
+      const taxNum      = subtotalNum * 0.15;
+      const discountNum = (subtotalNum + taxNum) * discountPercent;
+      const totalNum    = (subtotalNum + taxNum) - discountNum;
+      const couponCode  = document.getElementById('couponInput').value.trim().toUpperCase();
+      const orderPayload = {
+        customer: Object.fromEntries(new FormData(event.target)),
+        items: cart,
+        summary: {
+          subtotal:  subtotalNum,
+          tax:       taxNum,
+          discount:  discountNum,
+          total:     totalNum,
+          coupon:    couponCode
+        }
+      };
       try {
         const response = await fetch('/crear_pedido', { method:'POST', headers:{'Content-Type':'application/json'}, body:JSON.stringify(orderPayload) });
         const result   = await response.json();
         if (result.success) {
           localStorage.removeItem('sc_cart');
-          window.location.href = _urlFactura;   // ← usa la URL de Flask correcta
+          window.location.href = _urlFactura;
         } else {
           alert('Error: ' + (result.message || 'No se pudo procesar el pedido.'));
           btn.disabled = false; btn.textContent = 'Confirmar y Pagar';
