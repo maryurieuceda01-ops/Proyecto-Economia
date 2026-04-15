@@ -573,52 +573,56 @@
   </main>
 </div>
 
-<footer>
-  <div class="footer-grid">
-    <div class="footer-brand">
-      <span class="logo">SECURE<span style="color:var(--blue)">VISION</span></span>
-      <p>Soluciones de seguridad electrónica profesional para hogares y empresas a nivel mundial.</p>
-      <div class="social-links">
-        <a href="https://www.facebook.com/share/1DSWHvcYjx/" class="social-link">f</a>
-        <a href="https://www.instagram.com/securevisionunah?igsh=MWtqMGJ0cGpwajdjOQ==" class="social-link">ig</a>
-          <a href="#" class="social-link">wa</a>
+  <!-- FOOTER -->
+  <footer>
+    <div class="footer-grid">
+      <div class="footer-brand">
+        <span class="logo">SECURE<span style="color:var(--blue)">VISION</span></span>
+        <p>Soluciones de seguridad electrónica profesional para hogares y empresas a nivel mundial.</p>
+        <div class="social-links">
+          <!--<a href="https://www.facebook.com/share/1DSWHvcYjx/" class="social-link">f</a>
+          <a href="https://www.instagram.com/securevisionunah?igsh=MWtqMGJ0cGpwajdjOQ==" class="social-link">ig</a>
+          <a href="#" class="social-link">wa</a> -->
+           <a href="social-link" target="_blank"><i class="fab fa-whatsapp"></i></a>
+           <a href="https://www.instagram.com/securevisionunah?igsh=MWtqMGJ0cGpwajdjOQ==" target="_blank"><i class="fab fa-instagram"></i></a>
+           <a href="https://www.facebook.com/share/1DSWHvcYjx/" target="_blank"><i class="fab fa-facebook"></i></a>
+        </div>
+      </div>
+      <div class="footer-col">
+        <h4>Productos</h4>
+        <ul>
+          <li><a href="{{ url_for('catalogo') }}?categoria=camaras">Cámaras CCTV</a></li>
+          <li><a href="{{ url_for('catalogo') }}?categoria=monitores">Monitores</a></li>
+          <li><a href="{{ url_for('catalogo') }}?categoria=alarmas">Alarmas</a></li>
+          <li><a href="{{ url_for('catalogo') }}?categoria=biometricos">Biométricos</a></li>
+          <li><a href="{{ url_for('catalogo') }}?categoria=cercas">Cercas Eléctricas</a></li>
+        </ul>
+      </div>
+      <div class="footer-col">
+        <h4>Empresa</h4>
+        <ul>
+          <li><a href="{{ url_for('nosotros') }}">¿Quiénes somos?</a></li>
+          <li><a href="{{ url_for('blog') }}">Blog de noticias</a></li>
+          <li><a href="{{ url_for('contacto') }}">Contáctanos</a></li>
+          <li><a href="{{ url_for('FAQ') }}">Preguntas frecuentes</a></li>
+        </ul>
+      </div>
+      <div class="footer-col">
+        <h4>Políticas</h4>
+        <ul>
+          <li><a href="{{ url_for('terminos') }}">Términos generales</a></li>
+          <li><a href="{{ url_for('privacidad') }}">Privacidad</a></li>
+          <li><a href="{{ url_for('devoluciones') }}">Devoluciones</a></li>
+          <li><a href="{{ url_for('envios') }}">Envíos</a></li>
+          <li><a href="{{ url_for('garantia') }}">Garantía</a></li>
+        </ul>
       </div>
     </div>
-    <div class="footer-col">
-      <h4>Productos</h4>
-      <ul>
-        <li><a href="{{ url_for('catalogo') }}?categoria=camaras">Cámaras CCTV</a></li>
-        <li><a href="{{ url_for('catalogo') }}?categoria=monitores">Monitores</a></li>
-        <li><a href="{{ url_for('catalogo') }}?categoria=alarmas">Alarmas</a></li>
-        <li><a href="{{ url_for('catalogo') }}?categoria=biometricos">Biométricos</a></li>
-        <li><a href="{{ url_for('catalogo') }}?categoria=cercas">Cercas Eléctricas</a></li>
-      </ul>
+    <div class="footer-bottom">
+      <p>© 2026 SecureVision. Todos los derechos reservados.</p>
+      <p>Hecho con 💙 para la seguridad de tu familia</p>
     </div>
-    <div class="footer-col">
-      <h4>Empresa</h4>
-      <ul>
-        <li><a href="{{ url_for('nosotros') }}">¿Quiénes somos?</a></li>
-        <li><a href="{{ url_for('blog') }}">Blog de noticias</a></li>
-        <li><a href="{{ url_for('contacto') }}">Contáctanos</a></li>
-        <li><a href="{{ url_for('FAQ') }}">Preguntas frecuentes</a></li>
-      </ul> 
-    </div>
-    <div class="footer-col">  
-      <h4>Políticas</h4>
-      <ul>
-        <li><a href="{{ url_for('terminos') }}">Términos generales</a></li>
-        <li><a href="{{ url_for('privacidad') }}">Privacidad</a></li>
-        <li><a href="{{ url_for('devoluciones') }}">Devoluciones</a></li>
-        <li><a href="{{ url_for('envios') }}">Envíos</a></li>
-        <li><a href="{{ url_for('garantia') }}">Garantía</a></li>
-      </ul>
-    </div>
-  </div>
-  <div class="footer-bottom">
-    <p>© 2026 SecureVision. Todos los derechos reservados.</p>
-    <p>Hecho con 💙 para la seguridad de tu familia</p>
-  </div>
-</footer>
+  </footer>
 
 <script>
   // --- CONFIGURACIÓN DE DATOS INICIALES Y PERSISTENCIA ---

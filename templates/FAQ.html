@@ -218,9 +218,9 @@
   <footer>
     <div class="footer-grid">
       <div><span class="logo" style="display:block;margin-bottom:16px;">SECURE<span>VISION</span></span><p style="color:var(--gray);font-size:0.82rem;line-height:1.8;max-width:260px;margin:0;">Soluciones de seguridad electrónica profesional para hogares y empresas a nivel mundial.</p></div>
-      <div class="footer-col"><h4>Productos</h4><ul><li><a href="#">Cámaras CCTV</a></li><li><a href="#">Monitores</a></li><li><a href="#">Alarmas</a></li><li><a href="#">Biométricos</a></li><li><a href="#">Cercas Eléctricas</a></li></ul></div>
-      <div class="footer-col"><h4>Empresa</h4><ul><li><a href="{{ url_for('nosotros') }}">¿Quiénes somos?</a></li><li><a href="#">Blog de noticias</a></li><li><a href="{{ url_for('contacto') }}">Contáctanos</a></li><li><a href="#">Preguntas frecuentes</a></li></ul></div>
-      <div class="footer-col"><h4>Políticas</h4><ul><li><a href="#">Términos generales</a></li><li><a href="{{ url_for('privacidad') }}">Privacidad</a></li><li><a href="{{ url_for('devoluciones') }}">Devoluciones y cambios</a></li><li><a href="#">Envíos</a></li><li><a href="#">Garantía</a></li></ul></div>
+      <div class="footer-col"><h4>Productos</h4><ul><li><a href="{{ url_for('catalogo') }}?categoria=camaras">Cámaras CCTV</a></li><li><a href="{{ url_for('catalogo') }}?categoria=monitores">Monitores</a></li><li><a href="{{ url_for('catalogo') }}?categoria=alarmas">Alarmas</a></li><li><a href="{{ url_for('catalogo') }}?categoria=biometricos">Biométricos</a></li><li><a href="{{ url_for('catalogo') }}?categoria=cercas">Cercas Eléctricas</a></li></ul></div>
+      <div class="footer-col"><h4>Empresa</h4><ul><li><a href="{{ url_for('nosotros') }}">¿Quiénes somos?</a></li><li><a href="{{ url_for('blog') }}">Blog de noticias</a></li><li><a href="{{ url_for('contacto') }}">Contáctanos</a></li><li><a href="{{ url_for('FAQ') }}">Preguntas frecuentes</a></li></ul></div>
+      <div class="footer-col"><h4>Políticas</h4><ul><li><a href="{{ url_for('terminos') }}">Términos generales</a></li><li><a href="{{ url_for('privacidad') }}">Privacidad</a></li><li><a href="{{ url_for('devoluciones') }}">Devoluciones y cambios</a></li><li><a href="{{ url_for('envios') }}">Envíos</a></li><li><a href="{{ url_for('garantia') }}">Garantía</a></li></ul></div>
     </div>
     <div class="footer-bottom"><p>© 2026 SecureVision. Todos los derechos reservados.</p><p>Hecho con 💙 para proteger el mundo.</p></div>
   </footer>
