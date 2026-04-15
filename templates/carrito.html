@@ -277,15 +277,23 @@
       event.preventDefault();
       const btn = document.getElementById('btnFinalizar');
       btn.disabled = true; btn.textContent = 'Procesando...';
-      const orderPayload = {
-        customer: Object.fromEntries(new FormData(event.target)),
-        items: cart,
-        summary: {
-          subtotal: document.getElementById('subtotalVal').textContent,
-          tax:      document.getElementById('taxVal').textContent,
-          total:    document.getElementById('totalVal').textContent
-        }
-      };
+      const subtotalNum = cart.reduce((s, i) => s + i.price * i.qty, 0);
+const taxNum      = subtotalNum * 0.15;
+const discountNum = (subtotalNum + taxNum) * discountPercent;
+const totalNum    = (subtotalNum + taxNum) - discountNum;
+const couponCode  = document.getElementById('couponInput').value.trim().toUpperCase();
+
+const orderPayload = {
+  customer: Object.fromEntries(new FormData(event.target)),
+  items: cart,
+  summary: {
+    subtotal:  subtotalNum,
+    tax:       taxNum,
+    discount:  discountNum,
+    total:     totalNum,
+    coupon:    couponCode
+  }
+};
       try {
         const response = await fetch('/crear_pedido', { method:'POST', headers:{'Content-Type':'application/json'}, body:JSON.stringify(orderPayload) });
         const result   = await response.json();
