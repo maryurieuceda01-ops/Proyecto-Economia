@@ -337,6 +337,9 @@ def crear_pedido():
     conn.commit()
     conn.close()
 
+    descuento = data.get('summary', {}).get('discount', 0)
+    cupon     = data.get('summary', {}).get('coupon', '')
+
     # Guardar en sesión para la factura
     session['ultimo_pedido'] = {
         'numero':    numero_pedido,
@@ -350,7 +353,10 @@ def crear_pedido():
         'subtotal':  round(subtotal, 2),
         'impuestos': round(impuestos, 2),
         'total':     round(total, 2),
-        'fecha':     datetime.now().strftime('%d de %B, %Y')
+        'fecha':     datetime.now().strftime('%d de %B, %Y'),
+        'descuento': round(float(descuento), 2),
+        'cupon':     cupon,
+        'total':     round(float(data['summary']['total']), 2),
     }
     session['carrito'] = []
     session.modified = True
