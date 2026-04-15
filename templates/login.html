@@ -88,9 +88,9 @@
       <h2>Bienvenido de <span>vuelta</span></h2>
       <p>Accede a tu cuenta para gestionar tus pedidos, ver tu historial de compras y más.</p>
       <div class="features">
-        <div class="feature"><span class="feature-icon">📦</span><div class="feature-text"><strong>Seguimiento de pedidos</strong>Rastrea tus compras en tiempo real</div></div>
-        <div class="feature"><span class="feature-icon">⭐</span><div class="feature-text"><strong>Lista de favoritos</strong>Guarda los productos que te interesan</div></div>
-        <div class="feature"><span class="feature-icon">🔒</span><div class="feature-text"><strong>Compras seguras</strong>Tus datos siempre protegidos</div></div>
+        <div class="feature"><div class="feature-text"><strong>Seguimiento de pedidos</strong>Rastrea tus compras en tiempo real</div></div>
+        <div class="feature"><div class="feature-text"><strong>Lista de favoritos</strong>Guarda los productos que te interesan</div></div>
+        <div class="feature"><div class="feature-text"><strong>Compras seguras</strong>Tus datos siempre protegidos</div></div>
       </div>
     </div>
   </div>
@@ -110,12 +110,12 @@
       <form id="loginForm" method="POST" action="/login">
         <div class="form-group">
           <label class="form-label">Correo Electrónico</label>
-          <div class="input-wrapper"><span class="input-icon">📧</span><input type="email" class="form-input" id="email" name="email" placeholder="tucorreo@ejemplo.com"/></div>
+          <div class="input-wrapper"><input type="email" class="form-input" id="email" name="email" placeholder="tucorreo@ejemplo.com"/></div>
           <div class="error-msg" id="emailError">Ingresa un correo válido</div>
         </div>
         <div class="form-group">
           <label class="form-label">Contraseña</label>
-          <div class="input-wrapper"><span class="input-icon">🔒</span><input type="password" class="form-input" id="password" name="password" placeholder="Tu contraseña"/><button class="toggle-password" onclick="togglePassword()" type="button">👁️</button></div>
+          <div class="input-wrapper"><input type="password" class="form-input" id="password" name="password" placeholder="Tu contraseña"/><button class="toggle-password" onclick="togglePassword()" type="button">👁️</button></div>
           <div class="error-msg" id="passError">La contraseña es requerida</div>
         </div>
         <div class="form-options">
